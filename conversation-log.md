@@ -53,3 +53,11 @@
 - eliminarRecorridos — [Enlace a los archivos creados por Gemini](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/0-Administrador/eliminarRecorrido-analisis.puml)
 
 **Decisión:** Aceptado. Tuvo menos errores, pero tuve que corregir la semántica.
+
+## [1:20] Casos de uso (Visitante)
+
+**Prompt:** Ahora vamos a hacer los casos de uso de Visitante; quiero que me des una propuesta de todos los casos de uso de Visitante basada en la nomenclatura de la carpeta de Administrador.
+
+**Resultado:** Investigué los casos de uso del Visitante y su diagrama de contexto. A partir de esto, generé los diagramas de análisis MVC en formato PlantUML para los 9 casos de uso principales ([`iniciarVisita`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/iniciarVisita-analisis.puml ), [`listarRecorridos`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/listarRecorridos-analisis.puml ), [`seleccionarRecorrido`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/seleccionarRecorrido-analisis.puml ), [`verEspacio`]( https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/verEspacio-analisis.puml), [`buscarEspacio`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/buscarEspacio-analisis.puml ), [`verDetalles`]( https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/verDetalles-analisis.puml), [`verEspaciosCercanos`]( https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/verEspaciosCercanos-analisis.puml), [`verEspaciosPlanta`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/verEspaciosPlanta-analisis.puml ) y [`cambiarDeEspacio`](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/1-Visitante/cambiarDeEspacio-analisis.puml )). Los diagramas respetan el patrón de robustez, las transiciones de estados del contexto (con nomenclatura en PascalCase) y las interacciones correctas entre vistas, controladores y repositorios.
+
+**Decisión:** Aceptado. Tuvo menos errores por tener una fuerte referencia con Administrador; sin embargo, tuve que intervenir en los casos de "Ver" y el resto fueron cambios de nomenclatura para estandarizar.
