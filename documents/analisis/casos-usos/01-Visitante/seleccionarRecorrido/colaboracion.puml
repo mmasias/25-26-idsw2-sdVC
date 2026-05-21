@@ -1,0 +1,28 @@
+@startuml seleccionarRecorrido
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Recorridos Abiertos" as RecorridosAbiertos
+package seleccionarRecorrido as "seleccionarRecorrido()" {
+    rectangle #629EF9 RecorridoView
+    rectangle #b5bd68 RecorridoController
+    rectangle #F2AC4E RecorridoRepository
+    rectangle #F2AC4E Recorrido
+}
+
+rectangle #CDEBA5 ":Recorrido Abierto" as RecorridoAbierto
+rectangle #CDEBA5 ":Recorridos Abiertos" as RecorridosAbiertosSalida
+
+RecorridosAbiertos -r-> RecorridoView: seleccionarRecorrido(recorridoId)
+
+RecorridoView -d-> RecorridoController: obtenerDetalles(recorridoId) : Recorrido
+
+RecorridoController --> RecorridoRepository: findById(recorridoId) : Recorrido
+
+RecorridoRepository -- Recorrido
+
+RecorridoView -d-> RecorridoController: iniciarRecorrido(recorridoId) : boolean
+
+RecorridoView ..> RecorridoAbierto: mostrarRecorrido()
+RecorridoView ..> RecorridosAbiertosSalida: cancelar()
+
+@enduml
