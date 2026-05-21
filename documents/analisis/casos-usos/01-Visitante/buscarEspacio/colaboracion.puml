@@ -1,4 +1,4 @@
-@startuml buscarEspacio-analisis
+@startuml buscarEspacio
 skinparam linetype polyline
 
 rectangle #CDEBA5 ":Recorrido Abierto" as RecorridoAbierto

@@ -1,4 +1,4 @@
-@startuml iniciarVisita-analisis
+@startuml iniciarVisita
 skinparam linetype polyline
 
 actor Visitante
