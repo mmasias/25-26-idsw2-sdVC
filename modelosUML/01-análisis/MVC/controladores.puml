@@ -1,0 +1,21 @@
+@startuml Controladores
+
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundCorner 5
+skinparam class {
+    BackgroundColor white
+    BorderColor #555555
+    ArrowColor #333333
+}
+
+package "Controladores"{
+
+    control "EspacioController"
+    control "IniciarSesionController"
+    control "RecorridoController"
+    control "VisitaController"
+}
+
+@enduml
