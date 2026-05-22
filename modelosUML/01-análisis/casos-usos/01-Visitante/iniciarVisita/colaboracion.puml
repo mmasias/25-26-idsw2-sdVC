@@ -1,0 +1,20 @@
+@startuml iniciarVisita
+skinparam linetype polyline
+
+actor Visitante
+package iniciarVisita as "iniciarVisita()" {
+    rectangle #629EF9 BienvenidaView
+    rectangle #b5bd68 VisitaController
+    rectangle #F2AC4E Visita
+}
+rectangle #CDEBA5 ":Universidad Disponible" as UniversidadDisponible
+
+Visitante -r-> BienvenidaView: iniciarVisita()
+
+BienvenidaView -d-> VisitaController: iniciar() : Visita
+
+VisitaController --> Visita: new()
+
+BienvenidaView -r-> UniversidadDisponible: mostrarMenuPrincipal()
+
+@enduml
