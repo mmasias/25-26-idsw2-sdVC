@@ -106,3 +106,13 @@
 
 **Decisión:** Aceptado. Se establece `spec.md` como el contrato técnico definitivo para la implementación en Java, eliminando la deriva de artefactos previa.
 
+---
+
+## [20:45] Refinamiento Arquitectónico: MVC + Service/Repository
+
+**Prompt:** Quiero añadir a la estructura del proyecto los servicios y respostorios
+
+**Resultado:** Se evolucionó la arquitectura en `documents/spec.md` hacia un patrón de capas técnicas puras. Se introdujeron las capas de **Servicio** (para encapsular la lógica de negocio y validaciones) y **Repositorio** (para abstraer la persistencia JSON). Se reorganizó la estructura de paquetes de Java para reflejar estas capas (`controllers`, `services`, `repositories`, `views`, `models`), asegurando un desacoplamiento total entre la interfaz de usuario y el manejo de datos.
+
+**Decisión:** Aceptado. Se consolida esta estructura como el estándar final para el desarrollo, garantizando que cada componente cumpla una única responsabilidad técnica.
+
