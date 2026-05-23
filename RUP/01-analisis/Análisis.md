@@ -32,3 +32,12 @@ Esta carpeta contiene el análisis MVC (Model-View-Controller) de cada caso de u
 - [verEspacio](/images/01-análisis/casos-uso/01-Visitante/verEspacio/verEspacio.svg) - Análisis MVC de visualización de la información de un espacio
 - [verEspaciosCercanos](/images/01-análisis/casos-uso/01-Visitante/verEspaciosCercanos/verEspaciosCercanos.svg) - Análisis MVC de visualización de espacios próximos
 - [verEspaciosPlanta](/images/01-análisis/casos-uso/01-Visitante/verEspaciosPlanta/verEspaciosPlanta.svg) - Análisis MVC de visualización de espacios organizados por planta
+
+
+## Resumen de MVC
+
+- [Modelos](/images/01-análisis/MVC/modelos.svg) - Análisis MVC de visualización de espacios organizados por planta
+
+- [Vistas](/images/01-análisis/MVC/vistas.svg) - Análisis MVC de visualización de espacios organizados por planta
+
+- [Controladores](/images/01-análisis/MVC/controladores.svg) - Análisis MVC de visualización de espacios organizados por planta
