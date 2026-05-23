@@ -96,6 +96,13 @@
 
 **Resultado:** Se analizaron los 18 casos de uso detallados para extraer todas las clases de frontera/vistas (bloques azul-celeste `#629EF9`) y sus respectivos flujos de navegación. Se identificaron 18 vistas distribuidas de manera organizada en 3 paquetes de negocio (`Auth`, `Administrator` y `Visitor`). Se generó el archivo PlantUML `modelosUML/analisis/vistas.puml` utilizando el formato y estereotipo RUP de frontera estándar (`boundary`) para modelar correctamente los enlaces de navegación y las dependencias de las interfaces. Asimismo, se documentaron las responsabilidades y el flujo de navegación de cada una de estas vistas en `documents/analisis/vistas.md`, incorporando un mapa de interacción interactivo en Mermaid.
 
-[Enlace a los archivos creados por Gemini](https://github.com/Camila-Lesly/prompt/blob/main/myUniverse/02-analisis/mvc/vistas.puml)
+---
 
-**Decisión:** Aceptado. Se hicieron modificaciones y se eliminaron estructuras innecesarias.
+## [19:15] Especificación de Interfaz CLI y Alineación MVC
+
+**Prompt:** Genera el contenido completo de un archivo docs/spec.md que defina la arquitectura de una aplicación CLI en Java siguiendo el patrón MVC de forma estricta, basándote en los casos de uso analizados previamente y en los requisitos del proyecto myUniverse (tour interactivo por terminal del edificio de la Universidad Europea del Atlántico, con mapa 3D en consola y panel de administrador).
+
+**Resultado:** Se creó y refinó el archivo `documents/spec.md`. Se definió una arquitectura MVC pura organizada por capas técnicas (`controllers`, `views`, `models`). Se reintegró el mecanismo de entrada por flags (`--admin`, `--visitante`) y se aseguraron todos los grupos CRUD (Universidad, Edificio, Planta, Espacio, Recorrido). Se diseñaron prototipos ASCII para la visualización en terminal y se estableció la trazabilidad con los estereotipos RUP (Boundary, Control, Entity).
+
+**Decisión:** Aceptado. Se establece `spec.md` como el contrato técnico definitivo para la implementación en Java, eliminando la deriva de artefactos previa.
+
