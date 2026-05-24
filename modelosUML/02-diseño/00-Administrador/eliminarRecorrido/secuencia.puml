@@ -1,0 +1,31 @@
+@startuml
+title "Diagrama de Secuencia - Eliminar Recorrido"
+
+actor "Administrador" as admin
+boundary "RecorridoDialog" as view
+control "RecorridoController" as controller
+control "GestionEspacioService" as service
+control "RecorridoRepository" as repository
+database "JSON" as db
+
+admin -> view: Selecciona recorrido y pulsa "Eliminar"
+activate view
+view --> admin: Pide confirmación
+admin -> view: Confirma
+view -> controller: eliminarRecorrido(id)
+activate controller
+controller -> service: eliminarRecorrido(id)
+activate service
+service -> repository: delete(id)
+activate repository
+repository -> db: Actualizar recorridos.json
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Refrescar lista de recorridos
+deactivate view
+
+@enduml

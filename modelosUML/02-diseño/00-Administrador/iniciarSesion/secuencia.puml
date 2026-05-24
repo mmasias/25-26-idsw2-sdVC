@@ -1,0 +1,38 @@
+@startuml
+title "Diagrama de Secuencia - Iniciar Sesión"
+
+actor "Administrador" as admin
+boundary "LoginDialog" as view
+control "AuthController" as controller
+control "AuthService" as service
+control "AdministradorRepository" as repository
+entity "Administrador" as entity
+database "JSON" as db
+
+admin -> view: Ingresa credenciales y pulsa "Login"
+activate view
+view -> controller: iniciarSesion(usuario, clave)
+activate controller
+controller -> service: login(usuario, clave)
+activate service
+service -> repository: findByUsername(usuario)
+activate repository
+repository -> db: Leer administradores.json
+activate db
+db --> repository: Datos JSON
+deactivate db
+repository --> service: Optional<Administrador>
+deactivate repository
+service -> service: Validar contraseña
+service --> controller: boolean (autenticado)
+deactivate service
+controller --> view: Resultado de autenticación
+deactivate controller
+alt Autenticación exitosa
+    view --> admin: Ocultar diálogo, mostrar MapaView
+else Autenticación fallida
+    view --> admin: Mostrar mensaje de error
+end
+deactivate view
+
+@enduml

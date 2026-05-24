@@ -1,0 +1,27 @@
+@startuml
+title "Diagrama de Secuencia - Buscar Espacio"
+
+actor "Visitante" as visitor
+boundary "DialogForm" as view
+control "EspacioController" as controller
+control "VisitaService" as service
+control "EspacioRepository" as repository
+
+visitor -> view: Introduce término de búsqueda y pulsa "Buscar"
+activate view
+view -> controller: buscarEspacios(termino)
+activate controller
+controller -> service: buscarEspacios(termino)
+activate service
+service -> repository: findByTerm(termino)
+activate repository
+repository --> service: List<Espacio>
+deactivate repository
+service --> controller: List<Espacio>
+deactivate service
+controller --> view: Lista de resultados
+deactivate controller
+view --> visitor: Muestra la lista de espacios encontrados
+deactivate view
+
+@enduml

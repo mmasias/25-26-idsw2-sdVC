@@ -1,0 +1,22 @@
+@startuml
+title "Diagrama de Secuencia - Iniciar Visita"
+
+actor "Visitante" as visitor
+boundary "TerminalApp" as view
+control "VisitaController" as controller
+control "VisitaService" as service
+
+visitor -> view: Inicia la aplicación
+activate view
+view -> controller: iniciarVisita()
+activate controller
+controller -> service: iniciarVisita()
+activate service
+service --> controller: Visita
+deactivate service
+controller --> view: Visita
+deactivate controller
+view --> visitor: Mostrar pantalla de bienvenida
+deactivate view
+
+@enduml

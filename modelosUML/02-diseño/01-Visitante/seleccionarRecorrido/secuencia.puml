@@ -1,0 +1,27 @@
+@startuml
+title "Diagrama de Secuencia - Seleccionar Recorrido"
+
+actor "Visitante" as visitor
+boundary "RecorridoDialog" as view
+control "RecorridoController" as controller
+control "VisitaService" as service
+control "RecorridoRepository" as repository
+
+visitor -> view: Selecciona un recorrido de la lista
+activate view
+view -> controller: seleccionarRecorrido(id)
+activate controller
+controller -> service: seleccionarRecorrido(id)
+activate service
+service -> repository: findById(id)
+activate repository
+repository --> service: Recorrido
+deactivate repository
+service --> controller: Recorrido
+deactivate service
+controller --> view: Recorrido
+deactivate controller
+view --> visitor: Muestra detalles y pide iniciar
+deactivate view
+
+@enduml

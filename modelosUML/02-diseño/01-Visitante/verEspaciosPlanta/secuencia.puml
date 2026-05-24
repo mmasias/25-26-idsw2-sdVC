@@ -1,0 +1,27 @@
+@startuml
+title "Diagrama de Secuencia - Ver Espacios por Planta"
+
+actor "Visitante" as visitor
+boundary "MapaView" as view
+control "EspacioController" as controller
+control "VisitaService" as service
+control "EspacioRepository" as repository
+
+visitor -> view: Pulsa "Tab" para cambiar de planta
+activate view
+view -> controller: obtenerEspaciosPlanta(idPlanta)
+activate controller
+controller -> service: obtenerEspaciosPorPlanta(idPlanta)
+activate service
+service -> repository: findById(idPlanta)
+activate repository
+repository --> service: Planta
+deactivate repository
+service --> controller: List<Espacio>
+deactivate service
+controller --> view: Lista de espacios
+deactivate controller
+view --> visitor: Renderiza la nueva planta con sus espacios
+deactivate view
+
+@enduml

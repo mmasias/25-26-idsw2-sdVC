@@ -1,0 +1,31 @@
+@startuml
+title "Diagrama de Secuencia - Eliminar Espacio"
+
+actor "Administrador" as admin
+boundary "MapaView" as view
+control "EspacioController" as controller
+control "GestionEspacioService" as service
+control "EspacioRepository" as repository
+database "JSON" as db
+
+admin -> view: Selecciona espacio y pulsa "D" (Delete)
+activate view
+view --> admin: Pide confirmación
+admin -> view: Confirma con "Enter"
+view -> controller: eliminarEspacio(id)
+activate controller
+controller -> service: eliminarEspacio(id)
+activate service
+service -> repository: save(universidad)
+activate repository
+repository -> db: Sobrescribir universidad.json (con espacio eliminado)
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Refrescar mapa sin el espacio
+deactivate view
+
+@enduml

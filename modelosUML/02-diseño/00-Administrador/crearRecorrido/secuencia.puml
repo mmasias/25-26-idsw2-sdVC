@@ -1,0 +1,30 @@
+@startuml
+title "Diagrama de Secuencia - Crear Recorrido"
+
+actor "Administrador" as admin
+boundary "DialogForm" as view
+control "RecorridoController" as controller
+control "GestionEspacioService" as service
+control "RecorridoRepository" as repository
+database "JSON" as db
+
+admin -> view: Rellena datos y pulsa "Guardar"
+activate view
+view -> controller: crearRecorrido(datos)
+activate controller
+controller -> service: crearRecorrido(datos)
+activate service
+service -> service: Validar nombre único
+service -> repository: save(recorrido)
+activate repository
+repository -> db: Escribir en recorridos.json
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Cerrar diálogo y refrescar lista
+deactivate view
+
+@enduml

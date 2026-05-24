@@ -1,79 +1,79 @@
-# Arquitectura de Software: Patrón MVC + Service/Repository (myUniverse)
+# Especificación Técnica: Interfaz de Línea de Comandos (spec-cli)
 
-Este documento detalla la implementación del patrón **Modelo-Vista-Controlador (MVC)**, extendido con capas de **Servicio** y **Repositorio**, para la aplicación CLI myUniverse en Java. Esta arquitectura asegura una separación estricta entre la interfaz, la lógica de negocio y la persistencia.
+Este documento define la arquitectura técnica, el stack tecnológico y el protocolo de interacción de la interfaz de terminal (TUI) para el sistema **myUniverse**, integrando el plan de actualización visual.
 
----
+## 1. Objetivos Técnicos
+- **Interfaz Basada en Rejilla (Grid-Based):** Transicionar de una salida de texto plana a una interfaz visual dirigida por datos donde cada `Espacio` ocupa dimensiones reales en un mapa ASCII.
+- **Interactividad en Tiempo Real:** Implementar un bucle de eventos que permita la manipulación directa de objetos (mover, redimensionar) con retroalimentación visual inmediata.
+- **Gestión de Diálogos Modales:** Utilizar ventanas superpuestas para la entrada de datos, evitando la ruptura del flujo visual del mapa.
 
-## 1. Definición de Capas
+## 2. Stack Tecnológico
+- **Runtime:** Java 11 o superior.
+- **Motor de Terminal (Lanterna 3.1.x):**
+    - `TerminalScreen`: Gestión de buffers y control de parpadeo.
+    - `WindowBasedTextGUI`: Entorno para la gestión de ventanas lógicas y diálogos.
+    - `TextGraphics`: Dibujo de primitivas (bordes, fondos y caracteres).
+- **Persistencia:** Google Gson para la sincronización del modelo de datos jerárquico.
 
-### 1.1 Vista (View)
-- **Responsabilidad:** Interfaz de consola. Captura la entrada (`Scanner`) y muestra la salida (`System.out`).
-- **Restricción:** Solo se comunica con el **Controlador**.
+## 3. Arquitectura de la Interfaz (View Layer)
 
-### 1.2 Controlador (Controller)
-- **Responsabilidad:** Orquestador de la UI. Recibe órdenes de la Vista, invoca al Servicio correspondiente y actualiza la Vista con el resultado.
-- **Restricción:** No contiene lógica de negocio pesada, solo flujo de navegación y manejo de peticiones.
+### 3.1 Componentes de Visualización
+- **GridMapaRenderer:** Motor de renderizado que transforma la lista de `Espacio` en una rejilla 2D. 
+    - Representa espacios mediante sus iniciales coloreadas.
+    - Renderiza celdas vacías con puntos tenues (`·`).
+- **MapaView:** Componente principal (State Machine) que gestiona los modos de operación (`NAVIGATE`, `MOVE`, `RESIZE`, `RECORRIDO_EDIT`).
+- **Panel de Detalles:** Sección lateral que deserializa los atributos del objeto bajo el cursor en tiempo real.
 
-### 1.3 Servicio (Service)
-- **Responsabilidad:** Contiene la **Lógica de Negocio**. Validaciones, cálculos, y coordinación de múltiples operaciones.
-- **Componentes:** `GestionEspacioService`, `VisitaService`, `AuthService`.
+### 3.2 Gestión de Diálogos
+- **EspacioEditorDialog / EspacioCreatorDialog:** Diálogos modales para la captura de `nombre`, `tipo` (vía dropdown) y `descripcion`.
+- **PlantaManagerDialog:** Interfaz dedicada a la gestión de la jerarquía del edificio (añadir/eliminar/renombrar plantas).
 
-### 1.4 Repositorio (Repository)
-- **Responsabilidad:** Abstracción de la persistencia. Gestiona la lectura/escritura de los datos en archivos JSON.
-- **Componentes:** `EspacioRepository`, `RecorridoRepository`.
+## 4. Protocolo de Comandos y Teclado
 
-### 1.5 Modelo/Entidad (Entity)
-- **Responsabilidad:** Representación de los datos del dominio (POJOs).
+| Tecla | Acción en Modo Admin | Acción en Modo Visitante |
+| :--- | :--- | :--- |
+| `↑ ↓ ← →` | Desplazar cursor / Mover objeto (en modo Move) | Desplazar cursor / Navegación |
+| `Enter` | Confirmar Acción / Abrir Editor | Ver Detalles del Espacio |
+| `N` | Crear nuevo `Espacio` en posición actual | — |
+| `E` | Editar `Espacio` seleccionado | — |
+| `D` | Eliminar `Espacio` seleccionado (Confirmación) | — |
+| `M` | Iniciar Modo Movimiento (Drag) | — |
+| `R` | Iniciar Modo Redimensión | — |
+| `+ / -` | Ajustar Ancho/Alto (solo en modo Resize) | — |
+| `Tab` | Alternar entre Plantas | Alternar entre Plantas |
+| `A / D` | Paso Anterior / Siguiente en Recorrido | Paso Anterior / Siguiente en Recorrido |
+| `Q / Esc` | Salir / Cancelar | Salir / Cancelar |
 
----
+## 5. Modelo de Datos Extendido
+Para soportar la renderización espacial, el modelo `Espacio` debe integrar:
+- **Atributos Geométricos:**
+    - `coordenadaX`: Posición en el eje horizontal.
+    - `coordenadaY`: Posición en el eje vertical.
+    - `ancho`: Extensión horizontal (mínimo 1).
+    - `alto`: Extensión vertical (mínimo 1).
+- **Jerarquía:** Todo espacio debe pertenecer a una `Planta`, que a su vez reside en un `Edificio` dentro de la `Universidad`.
 
-## 2. Estructura de Paquetes (Organización por Capas)
+## 6. Lógica de Negocio y Validación Visual
 
-```text
-src/main/java/com/myuniverse/
-├── controllers/              # Orquestadores de UI
-│   ├── AuthController.java
-│   ├── EspacioController.java
-│   └── ...
-├── services/                 # Lógica de negocio y validaciones
-│   ├── AuthService.java
-│   ├── EspacioService.java
-│   └── ...
-├── repositories/             # Persistencia de datos (JSON)
-│   ├── IRepository.java      # Interfaz base
-│   ├── EspacioRepository.java
-│   └── ...
-├── views/                    # Interfaces de consola
-│   ├── LoginView.java
-│   ├── admin/
-│   └── visitor/
-├── models/                   # Entidades de dominio (POJOs)
-│   ├── Universidad.java
-│   ├── Edificio.java
-│   ├── Planta.java
-│   ├── Espacio.java
-│   └── Recorrido.java
-└── Main.java                 # Bootstrap
-```
+### 6.1 Detección de Colisiones (Collision Detection)
+El sistema impedirá la creación, movimiento o redimensión de un espacio si este solapa el área de otro espacio existente en la misma planta. La validación se realiza mediante la intersección de rectángulos:
+`A.x < B.x + B.w && A.x + A.w > B.x && A.y < B.y + B.h && A.y + A.h > B.y`
 
----
+### 6.2 Esquema de Colores por Tipo
+Para facilitar la identificación visual, se establece el siguiente mapeo ANSI:
+- **AULA:** Azul (Blue)
+- **LABORATORIO:** Cian (Cyan)
+- **BIBLIOTECA:** Verde (Green)
+- **CAFETERIA:** Amarillo (Yellow)
+- **AUDITORIO:** Magenta (Magenta)
+- **OFICINA:** Blanco (White)
+- **BAÑO:** Gris (Gray)
+- **OTRO:** Blanco tenue (Dim White)
 
-## 3. Flujo de Control Extendido
-
-1.  **Vista:** El usuario solicita una acción (ej. "Crear Espacio").
-2.  **Controlador:** Recibe los datos y los envía al **Servicio**.
-3.  **Servicio:** Valida que el nombre no esté duplicado y que la planta exista. Si todo es correcto, llama al **Repositorio**.
-4.  **Repositorio:** Serializa el objeto y lo guarda en el archivo JSON.
-5.  **Retorno:** El Repositorio confirma al Servicio, el Servicio al Controlador, y el Controlador ordena a la Vista mostrar un mensaje de éxito.
-
----
-
-## 4. Trazabilidad con Análisis (BCE)
-
-| Componente Java           | Capa Arquitectónica | Estereotipo RUP |
-|--------------------------|---------------------|-----------------|
-| `com.myuniverse.views`    | Vista               | `boundary`      |
-| `com.myuniverse.controllers`| Controlador         | `control`       |
-| `com.myuniverse.services` | Servicio (Lógica)   | `control`       |
-| `com.myuniverse.repositories`| Repositorio (Datos) | `control`       |
-| `com.myuniverse.models`   | Entidad             | `entity`        |
+## 7. Flujo de Usuario (Admin)
+1. **Navegación:** El admin explora el mapa con las flechas.
+2. **Creación:** Al pulsar `N`, se hereda la posición del cursor y se abre el diálogo de creación.
+3. **Ajuste Espacial:** 
+    - Con `M`, el espacio se "ancla" al cursor para reposicionarlo.
+    - Con `R`, el admin ajusta los límites con `+/-` viendo una previsualización dinámica.
+4. **Sincronización:** Cada cambio exitoso actualiza el buffer de la terminal y dispara una escritura atómica en el archivo JSON.

@@ -1,0 +1,30 @@
+@startuml
+title "Diagrama de Secuencia - Crear Espacio"
+
+actor "Administrador" as admin
+boundary "DialogForm" as view
+control "EspacioController" as controller
+control "GestionEspacioService" as service
+control "EspacioRepository" as repository
+database "JSON" as db
+
+admin -> view: Rellena datos del nuevo espacio y guarda
+activate view
+view -> controller: crearEspacio(datos)
+activate controller
+controller -> service: crearEspacio(datos)
+activate service
+service -> service: Validar datos (ej. nombre único)
+service -> repository: save(espacio)
+activate repository
+repository -> db: Escribir en universidad.json
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Cerrar diálogo y refrescar mapa
+deactivate view
+
+@enduml

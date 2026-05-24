@@ -1,0 +1,30 @@
+@startuml
+title "Diagrama de Secuencia - Editar Espacio"
+
+actor "Administrador" as admin
+boundary "DialogForm" as view
+control "EspacioController" as controller
+control "GestionEspacioService" as service
+control "EspacioRepository" as repository
+database "JSON" as db
+
+admin -> view: Modifica datos y pulsa "Guardar"
+activate view
+view -> controller: actualizarEspacio(id, datos)
+activate controller
+controller -> service: actualizarEspacioCompleto(id, datos)
+activate service
+service -> service: Validar datos
+service -> repository: save(universidad)
+activate repository
+repository -> db: Sobrescribir universidad.json
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Cerrar diálogo y refrescar mapa
+deactivate view
+
+@enduml

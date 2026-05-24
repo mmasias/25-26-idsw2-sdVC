@@ -17,31 +17,23 @@ Se utiliza una arquitectura de **N-Capas** basada en el patrón **MVC**, con una
 ## 2. Diagramas de Secuencia por Caso de Uso
 
 ### 2.1 Gestión (Administrador)
-- **Iniciar Sesión** ()
-- **Configurar Universidad** ()
-- **Abrir Espacios** ()
-- **Abrir Recorridos** ()
-- **Crear Espacio** ()
-- **Crear Recorrido** ()
-- **Editar Espacio** ()
-- **Editar Recorrido** ()
-- **Eliminar Espacio** ()
-- **Eliminar Recorrido** ()
+- [**Iniciar Sesión**](/images/02-diseño/00-Administrador/iniciarSesion/iniciarSesion.svg)
+- [**Abrir Espacios**](/images/02-diseño/00-Administrador/abrirEspacios/abrirEspacios.svg)
+- [**Abrir Recorridos**](/images/02-diseño/00-Administrador/abrirRecorridos/abrirRecorridos.svg)
+- [**Crear Espacio**](/images/02-diseño/00-Administrador/crearEspacio/crearEspacio.svg)
+- [**Crear Recorrido**](/images/02-diseño/00-Administrador/crearRecorrido/crearRecorrido.svg)
+- [**Editar Espacio**](/images/02-diseño/00-Administrador/editarEspacio/editarEspacio.svg)
+- [**Editar Recorrido**](/images/02-diseño/00-Administrador/editarRecorrido/editarRecorrido.svg)
+- [**Eliminar Espacio**](/images/02-diseño/00-Administrador/eliminarEspacio/eliminarEspacio.svg)
+- [**Eliminar Recorrido**](/images/02-diseño/00-Administrador/eliminarRecorrido/eliminarRecorrido.svg)
 
 ### 2.2 Consultas y Navegación (Visitante)
-- **Iniciar Visita** ()
-- **Listar Recorridos** ()
-- **Seleccionar Recorrido** ()
-- **Ver Espacio** ()
-- **Ver Detalles** ()
-- **Ver Espacios Cercanos** ()
-- **Ver Espacios por Planta** ()
-- **Buscar Espacio** ()
-- **Cambiar de Espacio** ()
-
----
-
-## 3. Decisiones de Diseño
-- **Inyección de Dependencias:** Los controladores reciben sus servicios y los servicios sus repositorios a través del constructor.
-- **Manejo de Errores:** Las excepciones se capturan en el controlador para delegar el mensaje de error adecuado a la vista.
-- **Persistencia:** Se utiliza la interfaz `IRepository` para permitir el intercambio de sistemas de persistencia sin afectar la lógica de negocio.
+- [**Iniciar Visita**](/images/02-diseño/01-Visitante/iniciarVisita/iniciarVisita.svg)
+- [**Listar Recorridos**](/images/02-diseño/01-Visitante/listarRecorridos/listarRecorridos.svg)
+- [**Seleccionar Recorrido**](/images/02-diseño/01-Visitante/seleccionarRecorrido/seleccionarRecorrido.svg)
+- [**Ver Espacio**](/images/02-diseño/01-Visitante/verEspacio/verEspacio.svg)
+- [**Ver Detalles**](/images/02-diseño/01-Visitante/verDetalles/verDetalles.svg)
+- [**Ver Espacios Cercanos**](/images/02-diseño/01-Visitante/verEspaciosCercanos/verEspaciosCercanos.svg)
+- [**Ver Espacios por Planta**](/images/02-diseño/01-Visitante/verEspaciosPlanta/verEspaciosPlanta.svg)
+- [**Buscar Espacio**](/images/02-diseño/01-Visitante/buscarEspacio/buscarEspacio.svg)
+- [**Cambiar de Espacio**](/images/02-diseño/01-Visitante/cambiarDeEspacio/cambiarDeEspacio.svg)

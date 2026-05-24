@@ -1,0 +1,30 @@
+@startuml
+title "Diagrama de Secuencia - Editar Recorrido"
+
+actor "Administrador" as admin
+boundary "DialogForm" as view
+control "RecorridoController" as controller
+control "GestionEspacioService" as service
+control "RecorridoRepository" as repository
+database "JSON" as db
+
+admin -> view: Modifica datos y pulsa "Guardar"
+activate view
+view -> controller: actualizarRecorrido(id, datos)
+activate controller
+controller -> service: actualizarRecorrido(id, datos)
+activate service
+service -> service: Validar datos
+service -> repository: save(recorrido)
+activate repository
+repository -> db: Sobrescribir recorridos.json
+repository --> service: boolean (éxito)
+deactivate repository
+service --> controller: boolean (éxito)
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Cerrar diálogo y refrescar lista
+deactivate view
+
+@enduml
