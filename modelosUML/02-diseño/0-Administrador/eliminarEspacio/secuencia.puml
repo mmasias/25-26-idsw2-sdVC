@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de Secuencia - Eliminar Espacio
+
+actor "Administrador" as Admin
+participant "SpaceCrudConsole" as Console
+participant "DeleteSpaceUseCase" as UC
+participant "SpaceRepository" as Repo
+database "JSON (spaces.json)" as DB
+
+Admin -> Console: Seleccionar espacio para eliminar
+activate Console
+Console --> Admin: ¿Está seguro de eliminar el espacio?
+Admin --> Console: Sí
+Console -> UC: execute(id)
+activate UC
+UC -> Repo: deleteById(id)
+activate Repo
+Repo -> DB: Eliminar registro
+activate DB
+DB --> Repo: success
+deactivate DB
+Repo --> UC: success
+deactivate Repo
+UC --> Console: success
+deactivate UC
+Console --> Admin: Mostrar confirmación de eliminación
+deactivate Console
+
+@enduml

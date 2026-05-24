@@ -1,0 +1,43 @@
+@startuml
+title Diagrama de Secuencia - Crear Recorrido
+
+actor "Administrador" as Admin
+participant "RouteCrudConsole" as Console
+participant "CreateRouteUseCase" as UC
+participant "RouteRepository" as Repo
+participant "Route" as Entity
+database "JSON (routes.json)" as DB
+
+Admin -> Console: Seleccionar "Crear Recorrido"
+activate Console
+Console -> Admin: Solicitar nombre
+Admin --> Console: nombre
+Console -> UC: validate(nombre)
+activate UC
+UC -> Repo: existsByName(nombre)
+activate Repo
+Repo --> UC: false
+deactivate Repo
+UC --> Console: valid
+deactivate UC
+
+Console -> UC: execute(nombre)
+activate UC
+UC -> Entity: new Route(nombre)
+activate Entity
+Entity --> UC: route
+deactivate Entity
+UC -> Repo: save(route)
+activate Repo
+Repo -> DB: Escribir recorrido
+activate DB
+DB --> Repo: success
+deactivate DB
+Repo --> UC: success
+deactivate Repo
+UC --> Console: route
+deactivate UC
+Console --> Admin: Mostrar éxito y redirigir a edición
+deactivate Console
+
+@enduml

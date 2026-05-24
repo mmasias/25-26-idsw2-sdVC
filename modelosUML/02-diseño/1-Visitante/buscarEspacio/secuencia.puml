@@ -1,0 +1,27 @@
+@startuml
+title Diagrama de Secuencia - Buscar Espacio
+
+actor "Visitante" as Visitor
+participant "VisitorConsole" as Console
+participant "SearchSpacesUseCase" as UC
+participant "SpaceRepository" as Repo
+database "JSON (spaces.json)" as DB
+
+Visitor -> Console: Seleccionar "Buscar" e ingresar término
+activate Console
+Console -> UC: execute(term)
+activate UC
+UC -> Repo: search(term)
+activate Repo
+Repo -> DB: Filtrar datos
+activate DB
+DB --> Repo: JSON matching data
+deactivate DB
+Repo --> UC: List<Space>
+deactivate Repo
+UC --> Console: List<Space>
+deactivate UC
+Console --> Visitor: Mostrar resultados de búsqueda
+deactivate Console
+
+@enduml

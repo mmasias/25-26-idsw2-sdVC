@@ -1,0 +1,22 @@
+@startuml
+title Diagrama de Secuencia - Ver Espacios Cercanos
+
+actor "Visitante" as Visitor
+participant "FloorMapConsole" as Console
+participant "SearchSpacesUseCase" as UC
+participant "SpaceRepository" as Repo
+
+Visitor -> Console: Seleccionar "Espacios Cercanos"
+activate Console
+Console -> UC: executeProximity(currentCoords)
+activate UC
+UC -> Repo: findNearby(coords, radius)
+activate Repo
+Repo --> UC: List<Space>
+deactivate Repo
+UC --> Console: List<Space>
+deactivate UC
+Console --> Visitor: Mostrar lista de espacios cercanos y resaltar en mapa
+deactivate Console
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+title Diagrama de Secuencia - Seleccionar Recorrido
+
+actor "Visitante" as Visitor
+participant "MenuVisitor" as Menu
+participant "GetRouteUseCase" as UC
+participant "RouteRepository" as Repo
+participant "FloorMapConsole" as Map
+
+Visitor -> Menu: Seleccionar recorrido (id)
+activate Menu
+Menu -> UC: execute(id)
+activate UC
+UC -> Repo: findById(id)
+activate Repo
+Repo --> UC: route
+deactivate Repo
+UC --> Menu: route
+deactivate UC
+Menu --> Visitor: Mostrar detalle del recorrido
+
+Visitor -> Menu: Iniciar Recorrido
+Menu -> Map: start(route.getFirstSpace())
+activate Map
+Map --> Visitor: Mostrar mapa de la primera parada
+deactivate Map
+deactivate Menu
+
+@enduml

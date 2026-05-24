@@ -1,0 +1,30 @@
+@startuml
+title Diagrama de Secuencia - Cambiar de Espacio
+
+actor "Visitante" as Visitor
+participant "FloorMapConsole" as Console
+participant "GetNextSpaceUseCase" as UC
+participant "Route" as RouteEntity
+participant "Space" as SpaceEntity
+
+Visitor -> Console: Presionar "Siguiente" o comando de dirección
+activate Console
+Console -> UC: execute(currentSpaceId, direction)
+activate UC
+alt Navegación por Recorrido
+    UC -> RouteEntity: getNext(currentSpaceId)
+    activate RouteEntity
+    RouteEntity --> UC: nextSpaceId
+    deactivate RouteEntity
+else Navegación Libre
+    UC -> SpaceEntity: getAdjacent(direction)
+    activate SpaceEntity
+    SpaceEntity --> UC: nextSpaceId
+    deactivate SpaceEntity
+end
+UC --> Console: nextSpace
+deactivate UC
+Console --> Visitor: Actualizar mapa y mostrar nuevo espacio
+deactivate Console
+
+@enduml

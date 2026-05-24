@@ -1,0 +1,43 @@
+@startuml
+title Diagrama de Secuencia - Crear Espacio
+
+actor "Administrador" as Admin
+participant "SpaceCrudConsole" as Console
+participant "CreateSpaceUseCase" as UC
+participant "SpaceRepository" as Repo
+participant "Space" as Entity
+database "JSON (spaces.json)" as DB
+
+Admin -> Console: Seleccionar "Crear Espacio"
+activate Console
+Console -> Admin: Solicitar nombre
+Admin --> Console: nombre
+Console -> UC: validate(nombre)
+activate UC
+UC -> Repo: existsByName(nombre)
+activate Repo
+Repo --> UC: false
+deactivate Repo
+UC --> Console: valid
+deactivate UC
+
+Console -> UC: execute(nombre)
+activate UC
+UC -> Entity: new Space(nombre)
+activate Entity
+Entity --> UC: space
+deactivate Entity
+UC -> Repo: save(space)
+activate Repo
+Repo -> DB: Escribir espacio
+activate DB
+DB --> Repo: success
+deactivate DB
+Repo --> UC: success
+deactivate Repo
+UC --> Console: space
+deactivate UC
+Console --> Admin: Mostrar éxito y redirigir a edición
+deactivate Console
+
+@enduml

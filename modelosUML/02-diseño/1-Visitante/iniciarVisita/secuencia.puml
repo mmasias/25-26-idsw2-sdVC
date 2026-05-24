@@ -1,0 +1,26 @@
+@startuml
+title Diagrama de Secuencia - Iniciar Visita
+
+actor "Visitante" as Visitor
+participant "CliController" as CLI
+participant "VisitorConsole" as Console
+participant "MenuVisitor" as Menu
+participant "GetUniversityUseCase" as UC
+
+Visitor -> CLI: Iniciar aplicación
+activate CLI
+CLI -> Console: start()
+activate Console
+Console -> UC: execute()
+activate UC
+UC --> Console: universityData
+deactivate UC
+Console --> Visitor: Mostrar mensaje de bienvenida
+Console -> Menu: showMain()
+activate Menu
+Menu --> Visitor: Mostrar menú principal
+deactivate Menu
+deactivate Console
+deactivate CLI
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+title Diagrama de Secuencia - Editar Recorrido
+
+actor "Administrador" as Admin
+participant "RouteCrudConsole" as Console
+participant "GetRouteUseCase" as UCGet
+participant "UpdateRouteUseCase" as UCUpdate
+participant "RouteRepository" as Repo
+participant "Route" as Entity
+database "JSON (routes.json)" as DB
+
+Admin -> Console: Seleccionar recorrido para editar
+activate Console
+Console -> UCGet: execute(id)
+activate UCGet
+UCGet -> Repo: findById(id)
+activate Repo
+Repo --> UCGet: route
+deactivate Repo
+UCGet --> Console: route
+deactivate UCGet
+Console --> Admin: Mostrar formulario con datos actuales
+
+Admin -> Console: Modificar campos y guardar
+Console -> UCUpdate: execute(id, data)
+activate UCUpdate
+UCUpdate -> Repo: findById(id)
+activate Repo
+Repo --> UCUpdate: route
+deactivate Repo
+UCUpdate -> Entity: updateAttributes(data)
+activate Entity
+Entity --> UCUpdate: updatedRoute
+deactivate Entity
+UCUpdate -> Repo: update(updatedRoute)
+activate Repo
+Repo -> DB: Sobrescribir datos
+activate DB
+DB --> Repo: success
+deactivate DB
+Repo --> UCUpdate: success
+deactivate Repo
+UCUpdate --> Console: success
+deactivate UCUpdate
+Console --> Admin: Mostrar confirmación
+deactivate Console
+
+@enduml
