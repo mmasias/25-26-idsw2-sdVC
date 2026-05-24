@@ -1,0 +1,273 @@
+{
+  "id": "uni-1",
+  "nombre": "Universidad Europea del Atlántico",
+  "edificios": [
+    {
+      "id": "edif-1",
+      "nombre": "Edificio Principal",
+      "plantas": [
+        {
+          "id": "planta-0",
+          "nombre": "Planta Baja",
+          "numero": 0,
+          "espacios": [
+            {
+              "id": "esp-aula101",
+              "nombre": "Aula 101",
+              "tipo": "AULA",
+              "descripcion": "Aula principal de la planta baja con capacidad para 60 estudiantes.",
+              "coordenadaX": 19,
+              "coordenadaY": 0,
+              "ancho": 14,
+              "alto": 6
+            },
+            {
+              "id": "esp-lab01",
+              "nombre": "Laboratorio Informática",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de informática con 30 puestos de trabajo.",
+              "coordenadaX": 114,
+              "coordenadaY": 0,
+              "ancho": 17,
+              "alto": 6
+            },
+            {
+              "id": "esp-bano-pb",
+              "nombre": "Baño Planta Baja",
+              "tipo": "BAÑO",
+              "descripcion": "Baños para estudiantes y personal.",
+              "coordenadaX": 47,
+              "coordenadaY": 0,
+              "ancho": 9,
+              "alto": 6
+            },
+            {
+              "id": "esp-biblio",
+              "nombre": "Biblioteca Central",
+              "tipo": "BIBLIOTECA",
+              "descripcion": "Biblioteca con sala de lectura y fondo documental.",
+              "coordenadaX": 0,
+              "coordenadaY": 0,
+              "ancho": 19,
+              "alto": 15
+            },
+            {
+              "id": "esp-cafeteria",
+              "nombre": "Cafetería",
+              "tipo": "CAFETERÍA",
+              "descripcion": "Cafetería y zona de descanso para estudiantes.",
+              "coordenadaX": 56,
+              "coordenadaY": 0,
+              "ancho": 28,
+              "alto": 6
+            },
+            {
+              "id": "esp-auditorio",
+              "nombre": "Auditorio",
+              "tipo": "BAÑO",
+              "descripcion": "Auditorio con capacidad para 200 personas.",
+              "coordenadaX": 131,
+              "coordenadaY": 0,
+              "ancho": 29,
+              "alto": 31
+            },
+            {
+              "id": "esp-0c6ec162",
+              "nombre": "Pasillo",
+              "tipo": "OTRO",
+              "descripcion": "Pasillo, tal cual",
+              "coordenadaX": 19,
+              "coordenadaY": 6,
+              "ancho": 112,
+              "alto": 3
+            },
+            {
+              "id": "esp-bf7b6e12",
+              "nombre": "Laboratorio",
+              "tipo": "LABORATORIO",
+              "descripcion": "Pues eso",
+              "coordenadaX": 19,
+              "coordenadaY": 9,
+              "ancho": 37,
+              "alto": 6
+            },
+            {
+              "id": "esp-6132de4d",
+              "nombre": "Aula",
+              "tipo": "AULA",
+              "descripcion": "",
+              "coordenadaX": 33,
+              "coordenadaY": 0,
+              "ancho": 14,
+              "alto": 6
+            },
+            {
+              "id": "esp-03a49186",
+              "nombre": "Pasillo",
+              "tipo": "OTRO",
+              "descripcion": "Otro mas",
+              "coordenadaX": 56,
+              "coordenadaY": 9,
+              "ancho": 9,
+              "alto": 19
+            },
+            {
+              "id": "esp-f5489da2",
+              "nombre": "Laboratorio Informatica 2",
+              "tipo": "LABORATORIO",
+              "descripcion": "",
+              "coordenadaX": 97,
+              "coordenadaY": 0,
+              "ancho": 17,
+              "alto": 6
+            },
+            {
+              "id": "esp-47c267b0",
+              "nombre": "Aula",
+              "tipo": "AULA",
+              "descripcion": "",
+              "coordenadaX": 84,
+              "coordenadaY": 0,
+              "ancho": 13,
+              "alto": 6
+            },
+            {
+              "id": "esp-160df3ce",
+              "nombre": "Ascensores",
+              "tipo": "OTRO",
+              "descripcion": "",
+              "coordenadaX": 65,
+              "coordenadaY": 9,
+              "ancho": 28,
+              "alto": 4
+            },
+            {
+              "id": "esp-820e1e5b",
+              "nombre": "Escaleras",
+              "tipo": "OTRO",
+              "descripcion": "",
+              "coordenadaX": 93,
+              "coordenadaY": 9,
+              "ancho": 22,
+              "alto": 10
+            },
+            {
+              "id": "esp-89a2c5f3",
+              "nombre": "Plató TV",
+              "tipo": "OTRO",
+              "descripcion": "",
+              "coordenadaX": 115,
+              "coordenadaY": 9,
+              "ancho": 16,
+              "alto": 10
+            }
+          ]
+        },
+        {
+          "id": "planta-1",
+          "nombre": "Primera Planta",
+          "numero": 1,
+          "espacios": [
+            {
+              "id": "esp-aula201",
+              "nombre": "Aula 201",
+              "tipo": "AULA",
+              "descripcion": "Aula de mediano tamaño con proyector.",
+              "coordenadaX": 1,
+              "coordenadaY": 1,
+              "ancho": 4,
+              "alto": 3
+            },
+            {
+              "id": "esp-aula202",
+              "nombre": "Aula 202",
+              "tipo": "AULA",
+              "descripcion": "Aula seminario para grupos reducidos.",
+              "coordenadaX": 6,
+              "coordenadaY": 1,
+              "ancho": 3,
+              "alto": 3
+            },
+            {
+              "id": "esp-lab02",
+              "nombre": "Laboratorio Ciencias",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de ciencias experimentales.",
+              "coordenadaX": 10,
+              "coordenadaY": 1,
+              "ancho": 4,
+              "alto": 3
+            },
+            {
+              "id": "esp-bano-p1",
+              "nombre": "Baño Primera Planta",
+              "tipo": "BAÑO",
+              "descripcion": "Baños de la primera planta.",
+              "coordenadaX": 15,
+              "coordenadaY": 1,
+              "ancho": 2,
+              "alto": 2
+            },
+            {
+              "id": "esp-oficina2",
+              "nombre": "Oficina Decanato",
+              "tipo": "OFICINA",
+              "descripcion": "Oficina del decano y equipo directivo.",
+              "coordenadaX": 1,
+              "coordenadaY": 5,
+              "ancho": 3,
+              "alto": 2
+            },
+            {
+              "id": "esp-aula203",
+              "nombre": "Aula 203",
+              "tipo": "AULA",
+              "descripcion": "Aula grande con equipamiento multimedia.",
+              "coordenadaX": 5,
+              "coordenadaY": 5,
+              "ancho": 5,
+              "alto": 3
+            }
+          ]
+        },
+        {
+          "id": "planta-2",
+          "nombre": "Segunda Planta",
+          "numero": 2,
+          "espacios": [
+            {
+              "id": "esp-aula301",
+              "nombre": "Aula 301",
+              "tipo": "AULA",
+              "descripcion": "Aula de posgrado.",
+              "coordenadaX": 1,
+              "coordenadaY": 1,
+              "ancho": 4,
+              "alto": 3
+            },
+            {
+              "id": "esp-lab03",
+              "nombre": "Laboratorio Investigación",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de investigación avanzada.",
+              "coordenadaX": 6,
+              "coordenadaY": 1,
+              "ancho": 5,
+              "alto": 3
+            },
+            {
+              "id": "esp-bano-p2",
+              "nombre": "Baño Segunda Planta",
+              "tipo": "BAÑO",
+              "descripcion": "Baños de la segunda planta.",
+              "coordenadaX": 12,
+              "coordenadaY": 1,
+              "ancho": 2,
+              "alto": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
