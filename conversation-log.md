@@ -116,3 +116,32 @@
 
 **Decisión:** Aceptado. Se consolida esta estructura como el estándar final para el desarrollo, garantizando que cada componente cumpla una única responsabilidad técnica.
 
+---
+
+## [10:38] Fase Diseño de MyUniverse
+
+**Prompt:** Ahora vamos enfocarnos en el diseño, quiero que cada caso de uso quiero que te bases enn la carptea RUP del repostorio propmt y luego crees una carpeta con los diagramas puml 
+
+**Resultado:** La integración técnica en spec-cli.md, incluyendo los casos de uso de administrador y visitante fueron creados y generados en puml, alineados con los casos de uso analizados previamente.
+
+**Decisión:** Aceptado. Para tener una base de diagramas de secuencias por cada caso de uso.
+
+---
+
+## [20:05] Fase Diseño de MyUniverse
+
+**Prompt:** No me convence el documento spec.md para su implementación te he añadido nuevas especificaciones para que mejores la documentación técnica, reesctructuralo correctamente y mejora el formato.
+
+**Resultado:** Se ha realizado una reestructuración integral del archivo documents/spec.md para integrar con precisión las nuevas especificaciones técnicas aportadas. Se refinó el formato aplicando una jerarquía visual más limpia, eliminando ambigüedades de diseño e incorporando secciones detalladas para las reglas de negocio y restricciones. El documento ahora funciona como un contrato técnico riguroso y de alta fidelidad, proporcionando una guía clara, modular y directamente accionable para el equipo de desarrollo.
+
+**Decisión:** Aceptado. Las correcciones aplicadas y la reorganización del formato han elevado sustancialmente la madurez del plan de implementación. Con este documento de especificaciones robusto y depurado, se minimizan los riesgos de desvío arquitectónico durante la codificación y se garantiza una base sólida para el desarrollo del programa.
+
+---
+
+## [22:40] Actualización de Diagramas de Secuencia de Diseño
+
+**Prompt:** Con el archivo spec.md quiero que actualices todos los casos de uso en diseño manteniendo el formato y todo lo que veas necesario.
+
+**Resultado:** Se actualizaron los 18 diagramas de secuencia de diseño en `modelosUML/02-diseño/` para alinearlos con la arquitectura definitiva (Vista -> Controlador -> Servicio -> Repositorio) especificada en `spec.md`. Se reemplazó la capa `UseCase` obsoleta y se utilizaron los nombres de componentes correctos (`MapaView`, `AuthController`, `GestionEspacioService`, etc.), asegurando que cada diagrama refleje con precisión el flujo de interacción entre las capas de la aplicación.
+
+**Decisión:** Aceptado. Porque gemini logró captar detallademente 
