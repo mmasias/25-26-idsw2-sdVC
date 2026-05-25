@@ -5,18 +5,21 @@ actor "Visitante" as visitor
 boundary "MapaView" as view
 control "VisitaController" as controller
 control "VisitaService" as service
+entity "Visita" as visit
 
-visitor -> view: Pulsa "A" (anterior) o "D" (siguiente)
+visitor -> view: Pulsa "Flecha Izquierda" o "Flecha Derecha"
 activate view
-view -> controller: cambiarEspacioRecorrido(direccion)
+view -> controller: cambiarEspacio(direccion)
 activate controller
-controller -> service: navegarRecorrido(direccion)
+controller -> service: cambiarEspacio(direccion)
 activate service
+service -> visit: getCurrentRecorridoId()
+service -> visit: setCurrentEspacioId(nuevoId)
 service --> controller: Espacio
 deactivate service
 controller --> view: Nuevo espacio actual
 deactivate controller
-view --> visitor: Actualiza mapa y panel de detalles
+view --> visitor: Actualiza cursor del mapa al nuevo espacio
 deactivate view
 
 @enduml

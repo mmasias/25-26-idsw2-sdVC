@@ -4,7 +4,7 @@ title "Diagrama de Secuencia - Eliminar Recorrido"
 actor "Administrador" as admin
 boundary "RecorridoDialog" as view
 control "RecorridoController" as controller
-control "GestionEspacioService" as service
+control "RecorridoService" as service
 control "RecorridoRepository" as repository
 database "JSON" as db
 
@@ -16,16 +16,16 @@ view -> controller: eliminarRecorrido(id)
 activate controller
 controller -> service: eliminarRecorrido(id)
 activate service
-service -> repository: delete(id)
+service -> repository: eliminarPorId(id)
 activate repository
 repository -> db: Actualizar recorridos.json
-repository --> service: boolean (éxito)
+repository --> service: boolean
 deactivate repository
-service --> controller: boolean (éxito)
+service --> controller: boolean
 deactivate service
 controller --> view: Resultado
 deactivate controller
-view --> admin: Refrescar lista de recorridos
+view --> admin: Refrescar lista
 deactivate view
 
 @enduml

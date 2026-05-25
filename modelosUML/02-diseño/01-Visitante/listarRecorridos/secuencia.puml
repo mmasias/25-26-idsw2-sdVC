@@ -1,29 +1,27 @@
 @startuml
-title "Diagrama de Secuencia - Listar Recorridos (Visitante)"
+title "Diagrama de Secuencia - Listar Recorridos"
 
 actor "Visitante" as visitor
-boundary "RecorridoDialog" as view
-control "RecorridoController" as controller
+boundary "MapaView" as view
+control "VisitaController" as controller
 control "VisitaService" as service
 control "RecorridoRepository" as repository
-database "JSON" as db
 
-visitor -> view: Pulsa "T" para ver tours
+visitor -> view: Pulsa "T" (Tours)
 activate view
 view -> controller: obtenerRecorridos()
 activate controller
 controller -> service: obtenerRecorridos()
 activate service
-service -> repository: findAll()
+service -> repository: obtenerTodos()
 activate repository
-repository -> db: Leer recorridos.json
 repository --> service: List<Recorrido>
 deactivate repository
 service --> controller: List<Recorrido>
 deactivate service
-controller --> view: Lista de recorridos
+controller --> view: List<Recorrido>
 deactivate controller
-view --> visitor: Muestra lista para seleccionar
+view --> visitor: Muestra lista de recorridos disponibles
 deactivate view
 
 @enduml

@@ -6,26 +6,37 @@ boundary "MapaView" as view
 control "EspacioController" as controller
 control "GestionEspacioService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
 database "JSON" as db
 
-admin -> view: Selecciona espacio y pulsa "D" (Delete)
+admin -> view: Selecciona espacio y pulsa "D"
 activate view
 view --> admin: Pide confirmación
-admin -> view: Confirma con "Enter"
+admin -> view: Confirma
 view -> controller: eliminarEspacio(id)
 activate controller
 controller -> service: eliminarEspacio(id)
 activate service
-service -> repository: save(universidad)
+service -> repository: eliminarEspacioPorId(id)
 activate repository
-repository -> db: Sobrescribir universidad.json (con espacio eliminado)
-repository --> service: boolean (éxito)
+repository -> repository: cargarDatosUniversidad()
+repository -> uni: getRegiones()
+activate uni
+uni --> repository: List<Region>
+deactivate uni
+repository -> reg: obtenerPlantas()
+activate reg
+reg --> repository: List<Planta>
+deactivate reg
+repository -> db: Sobrescribir universidad.json
+repository --> service: boolean
 deactivate repository
-service --> controller: boolean (éxito)
+service --> controller: boolean
 deactivate service
 controller --> view: Resultado
 deactivate controller
-view --> admin: Refrescar mapa sin el espacio
+view --> admin: Refrescar mapa
 deactivate view
 
 @enduml

@@ -3,26 +3,27 @@ title "Diagrama de Secuencia - Ver Espacios Cercanos"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "EspacioController" as controller
+control "VisitaController" as controller
 control "VisitaService" as service
 control "EspacioRepository" as repository
 
-visitor -> view: Pulsa tecla para ver cercanos
+visitor -> view: Solicita ver espacios cercanos (tecla 'C')
 activate view
-view -> controller: obtenerEspaciosCercanos(idEspacioActual)
+view -> controller: obtenerEspaciosCercanos()
 activate controller
-controller -> service: obtenerEspaciosCercanos(idEspacioActual)
+controller -> service: obtenerEspaciosCercanos()
 activate service
-service -> repository: findAll()
+service -> service: obtenerEspacioActual()
+service -> repository: obtenerTodosLosEspacios()
 activate repository
 repository --> service: List<Espacio>
 deactivate repository
-service -> service: Calcular distancias y ordenar
-service --> controller: List<Espacio> (cercanos)
+service -> service: Calcular distancias y filtrar top 5
+service --> controller: List<Espacio>
 deactivate service
-controller --> view: Lista de espacios cercanos
+controller --> view: List<Espacio>
 deactivate controller
-view --> visitor: Muestra la lista de espacios
+view --> visitor: Resalta los espacios cercanos en el mapa/lista
 deactivate view
 
 @enduml

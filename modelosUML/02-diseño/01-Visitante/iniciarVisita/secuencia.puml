@@ -2,21 +2,23 @@
 title "Diagrama de Secuencia - Iniciar Visita"
 
 actor "Visitante" as visitor
-boundary "TerminalApp" as view
+boundary "TerminalApp" as app
 control "VisitaController" as controller
 control "VisitaService" as service
+entity "Visita" as visit
 
-visitor -> view: Inicia la aplicación
-activate view
-view -> controller: iniciarVisita()
+visitor -> app: Inicia aplicación (modo visitante)
+activate app
+app -> controller: iniciar()
 activate controller
 controller -> service: iniciarVisita()
 activate service
+service -> visit: new()
 service --> controller: Visita
 deactivate service
-controller --> view: Visita
+controller --> app: Visita
 deactivate controller
-view --> visitor: Mostrar pantalla de bienvenida
-deactivate view
+app --> visitor: Muestra menú de bienvenida
+deactivate app
 
 @enduml

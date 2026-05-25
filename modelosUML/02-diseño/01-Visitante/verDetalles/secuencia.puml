@@ -1,27 +1,27 @@
 @startuml
-title "Diagrama de Secuencia - Ver Detalles de Espacio"
+title "Diagrama de Secuencia - Ver Detalles"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "EspacioController" as controller
+control "VisitaController" as controller
 control "VisitaService" as service
 control "EspacioRepository" as repository
 
-visitor -> view: Mueve cursor a un espacio de interés
+visitor -> view: Pulsa "Enter" sobre un espacio
 activate view
-view -> controller: obtenerInfoEspacio(id)
+view -> controller: obtenerDetallesEspacio(id)
 activate controller
-controller -> service: obtenerEspacio(id)
+controller -> service: obtenerDetallesEspacio(id)
 activate service
-service -> repository: findById(id)
+service -> repository: buscarEspacioPorId(id)
 activate repository
 repository --> service: Espacio
 deactivate repository
 service --> controller: Espacio
 deactivate service
-controller --> view: Datos del Espacio
+controller --> view: Espacio (detalles completos)
 deactivate controller
-view --> visitor: Renderiza nombre, tipo, descripción en panel lateral
+view --> visitor: Muestra diálogo con descripción y tipo detallado
 deactivate view
 
 @enduml

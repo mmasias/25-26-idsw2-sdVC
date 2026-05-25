@@ -2,29 +2,28 @@
 title "Diagrama de Secuencia - Editar Recorrido"
 
 actor "Administrador" as admin
-boundary "DialogForm" as view
+boundary "RecorridoDialog" as view
 control "RecorridoController" as controller
-control "GestionEspacioService" as service
+control "RecorridoService" as service
 control "RecorridoRepository" as repository
 database "JSON" as db
 
-admin -> view: Modifica datos y pulsa "Guardar"
+admin -> view: Modifica nombre/desc de un recorrido
 activate view
-view -> controller: actualizarRecorrido(id, datos)
+view -> controller: actualizarRecorrido(recorrido)
 activate controller
-controller -> service: actualizarRecorrido(id, datos)
+controller -> service: actualizarRecorrido(recorrido)
 activate service
-service -> service: Validar datos
-service -> repository: save(recorrido)
+service -> repository: actualizar(recorrido)
 activate repository
 repository -> db: Sobrescribir recorridos.json
-repository --> service: boolean (éxito)
+repository --> service: boolean
 deactivate repository
-service --> controller: boolean (éxito)
+service --> controller: boolean
 deactivate service
 controller --> view: Resultado
 deactivate controller
-view --> admin: Cerrar diálogo y refrescar lista
+view --> admin: Refrescar lista
 deactivate view
 
 @enduml

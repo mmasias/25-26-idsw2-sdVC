@@ -4,25 +4,35 @@ title "Diagrama de Secuencia - Listar/Abrir Espacios"
 actor "Administrador" as admin
 boundary "MapaView" as view
 control "EspacioController" as controller
-control "VisitaService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
 database "JSON" as db
 
 admin -> view: Cargar vista del mapa
 activate view
-view -> controller: obtenerEspaciosPlantaActual()
+view -> controller: obtenerUniversidad()
 activate controller
-controller -> service: obtenerEspaciosPorPlanta(...)
-activate service
-service -> repository: findUniversidad()
+controller -> repository: cargarUniversidad()
 activate repository
 repository -> db: Leer universidad.json
-repository --> service: Universidad
+repository --> controller: Universidad
 deactivate repository
-service --> controller: List<Espacio>
-deactivate service
-controller --> view: Espacios para renderizar
+controller --> view: Universidad
 deactivate controller
+
+view -> view: cargarDatos()
+activate view
+view -> uni: getRegiones()
+activate uni
+uni --> view: List<Region>
+deactivate uni
+view -> reg: obtenerPlantas()
+activate reg
+reg --> view: List<Planta>
+deactivate reg
+deactivate view
+
 view --> admin: Mostrar mapa con espacios
 deactivate view
 

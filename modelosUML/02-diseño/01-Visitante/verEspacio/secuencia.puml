@@ -3,25 +3,32 @@ title "Diagrama de Secuencia - Ver Espacio"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "EspacioController" as controller
+control "VisitaController" as controller
 control "VisitaService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
 
-visitor -> view: Mueve cursor sobre un espacio
+visitor -> view: Selecciona un espacio en el mapa
 activate view
-view -> controller: obtenerInfoEspacio(id)
+view -> controller: obtenerDetallesEspacio(id)
 activate controller
-controller -> service: obtenerEspacio(id)
+controller -> service: obtenerDetallesEspacio(id)
 activate service
-service -> repository: findById(id)
+service -> repository: buscarEspacioPorId(id)
 activate repository
+repository -> uni: buscarEspacioPorId(id)
+activate uni
+uni -> reg: buscarPlantaPorId(...)
+uni --> repository: Espacio
+deactivate uni
 repository --> service: Espacio
 deactivate repository
 service --> controller: Espacio
 deactivate service
-controller --> view: Datos del Espacio
+controller --> view: Espacio (detalles)
 deactivate controller
-view --> visitor: Muestra detalles en el panel lateral
+view --> visitor: Muestra panel con nombre y tipo del espacio
 deactivate view
 
 @enduml

@@ -2,29 +2,39 @@
 title "Diagrama de Secuencia - Crear Recorrido"
 
 actor "Administrador" as admin
-boundary "DialogForm" as view
+boundary "RecorridoDialog" as view
 control "RecorridoController" as controller
-control "GestionEspacioService" as service
+control "RecorridoService" as service
 control "RecorridoRepository" as repository
 database "JSON" as db
 
-admin -> view: Rellena datos y pulsa "Guardar"
+admin -> view: Selecciona "Crear" e ingresa nombre/desc
 activate view
-view -> controller: crearRecorrido(datos)
+view -> controller: crearRecorrido(nombre, desc, idsEspacios)
 activate controller
-controller -> service: crearRecorrido(datos)
+controller -> service: crearRecorrido(nombre, desc, idsEspacios)
 activate service
-service -> service: Validar nombre único
-service -> repository: save(recorrido)
+service -> repository: existePorNombre(nombre)
 activate repository
-repository -> db: Escribir en recorridos.json
-repository --> service: boolean (éxito)
+repository --> service: boolean
 deactivate repository
-service --> controller: boolean (éxito)
+
+alt Nombre único
+    service -> repository: guardar(nuevoRecorrido)
+    activate repository
+    repository -> db: Actualizar recorridos.json
+    repository --> service: Recorrido
+    deactivate repository
+    service --> controller: Recorrido
+    controller --> view: Éxito
+else Nombre duplicado
+    service --> controller: Error
+    controller --> view: Mostrar error
+end
+
 deactivate service
-controller --> view: Resultado
 deactivate controller
-view --> admin: Cerrar diálogo y refrescar lista
+view --> admin: Refrescar lista de recorridos
 deactivate view
 
 @enduml

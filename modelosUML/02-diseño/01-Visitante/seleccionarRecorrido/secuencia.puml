@@ -2,26 +2,29 @@
 title "Diagrama de Secuencia - Seleccionar Recorrido"
 
 actor "Visitante" as visitor
-boundary "RecorridoDialog" as view
-control "RecorridoController" as controller
+boundary "MapaView" as view
+control "VisitaController" as controller
 control "VisitaService" as service
 control "RecorridoRepository" as repository
+entity "Visita" as visit
 
 visitor -> view: Selecciona un recorrido de la lista
 activate view
-view -> controller: seleccionarRecorrido(id)
+view -> controller: iniciarRecorrido(idRecorrido)
 activate controller
-controller -> service: seleccionarRecorrido(id)
+controller -> service: iniciarRecorrido(idRecorrido)
 activate service
-service -> repository: findById(id)
+service -> repository: obtenerPorId(idRecorrido)
 activate repository
 repository --> service: Recorrido
 deactivate repository
+service -> visit: setCurrentRecorridoId(idRecorrido)
+service -> visit: setCurrentEspacioId(primerEspacioId)
 service --> controller: Recorrido
 deactivate service
-controller --> view: Recorrido
+controller --> view: Recorrido seleccionado
 deactivate controller
-view --> visitor: Muestra detalles y pide iniciar
+view --> visitor: Muestra el primer espacio del recorrido en el mapa
 deactivate view
 
 @enduml

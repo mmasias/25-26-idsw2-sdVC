@@ -6,6 +6,8 @@ boundary "MapaView" as view
 control "EspacioController" as controller
 control "VisitaService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
 
 visitor -> view: Pulsa "Tab" para cambiar de planta
 activate view
@@ -13,8 +15,16 @@ view -> controller: obtenerEspaciosPlanta(idPlanta)
 activate controller
 controller -> service: obtenerEspaciosPorPlanta(idPlanta)
 activate service
-service -> repository: findById(idPlanta)
+service -> repository: buscarPlantaPorId(idPlanta)
 activate repository
+repository -> uni: buscarPlantaPorId(idPlanta)
+activate uni
+uni -> reg: buscarPlantaPorId(idPlanta)
+activate reg
+reg --> uni: Planta
+deactivate reg
+uni --> repository: Planta
+deactivate uni
 repository --> service: Planta
 deactivate repository
 service --> controller: List<Espacio>

@@ -2,29 +2,79 @@
 title "Diagrama de Secuencia - Crear Espacio"
 
 actor "Administrador" as admin
-boundary "DialogForm" as view
+boundary "MapaView" as view
+boundary "DialogForm" as form
 control "EspacioController" as controller
 control "GestionEspacioService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
+entity "Planta" as floor
 database "JSON" as db
 
-admin -> view: Rellena datos del nuevo espacio y guarda
+admin -> view: Pulsa "N" en posición (x,y)
 activate view
-view -> controller: crearEspacio(datos)
+view -> form: mostrarForm()
+activate form
+form --> admin: Solicita datos del espacio
+admin -> form: Ingresa datos y confirma
+form --> view: datos
+deactivate form
+
+view -> controller: comprobarSolapamiento(...)
 activate controller
-controller -> service: crearEspacio(datos)
+controller -> service: tieneSolapamiento(...)
 activate service
-service -> service: Validar datos (ej. nombre único)
-service -> repository: save(espacio)
-activate repository
-repository -> db: Escribir en universidad.json
-repository --> service: boolean (éxito)
-deactivate repository
-service --> controller: boolean (éxito)
+service --> controller: boolean
 deactivate service
-controller --> view: Resultado
+controller --> view: boolean
 deactivate controller
-view --> admin: Cerrar diálogo y refrescar mapa
+
+alt Sin Solapamiento
+    view -> controller: crear(nombre, tipo, desc, x, y, ancho, alto, idPlanta)
+    activate controller
+    controller -> service: crearEspacio(...)
+    activate service
+    
+    service -> repository: existeNombreEspacioEnPlanta(nombre, idPlanta)
+    activate repository
+    repository -> uni: buscarPlantaPorId(idPlanta)
+    activate uni
+    uni -> reg: buscarPlantaPorId(idPlanta)
+    activate reg
+    reg --> uni: Planta
+    deactivate reg
+    uni --> repository: Planta
+    deactivate uni
+    repository --> service: boolean
+    deactivate repository
+    
+    service -> repository: guardarEspacio(nuevoEspacio, idPlanta)
+    activate repository
+    repository -> uni: getRegiones()
+    activate uni
+    uni --> repository: List<Region>
+    deactivate uni
+    repository -> reg: obtenerPlantas()
+    activate reg
+    reg --> repository: List<Planta>
+    deactivate reg
+    repository -> floor: setEspacios(...)
+    repository -> db: Actualizar universidad.json
+    repository --> service: Espacio guardado
+    deactivate repository
+    
+    service --> controller: Espacio
+    deactivate service
+    controller --> view: Resultado éxito
+    deactivate controller
+    
+    view -> view: cargarDatos()
+    view --> admin: Refresca mapa con nuevo espacio
+else Con Solapamiento
+    view --> admin: Mostrar error "Se solapa con un espacio"
+end
+
 deactivate view
 
 @enduml

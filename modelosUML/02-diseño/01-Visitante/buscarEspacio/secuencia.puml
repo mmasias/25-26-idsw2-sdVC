@@ -4,24 +4,30 @@ title "Diagrama de Secuencia - Buscar Espacio"
 actor "Visitante" as visitor
 boundary "DialogForm" as view
 control "EspacioController" as controller
-control "VisitaService" as service
 control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
 
-visitor -> view: Introduce término de búsqueda y pulsa "Buscar"
+visitor -> view: Introduce término de búsqueda
 activate view
 view -> controller: buscarEspacios(termino)
 activate controller
-controller -> service: buscarEspacios(termino)
-activate service
-service -> repository: findByTerm(termino)
+controller -> repository: obtenerTodosLosEspacios()
 activate repository
-repository --> service: List<Espacio>
+repository -> uni: obtenerTodosLosEspacios()
+activate uni
+uni -> reg: obtenerPlantas()
+activate reg
+reg --> uni: List<Planta>
+deactivate reg
+uni --> repository: List<Espacio>
+deactivate uni
+repository --> controller: List<Espacio>
 deactivate repository
-service --> controller: List<Espacio>
-deactivate service
+controller -> controller: filtrarPorTermino(termino)
 controller --> view: Lista de resultados
 deactivate controller
-view --> visitor: Muestra la lista de espacios encontrados
+view --> visitor: Muestra espacios encontrados
 deactivate view
 
 @enduml

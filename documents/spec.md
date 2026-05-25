@@ -1,79 +1,64 @@
-# Especificación Técnica: Interfaz de Línea de Comandos (spec-cli)
+# Especificación Técnica: myUniverse (spec-cli)
 
-Este documento define la arquitectura técnica, el stack tecnológico y el protocolo de interacción de la interfaz de terminal (TUI) para el sistema **myUniverse**, integrando el plan de actualización visual.
+Este documento define la arquitectura técnica, el stack tecnológico y el protocolo de interacción de la interfaz de terminal (TUI) para el sistema **myUniverse**, alineado con la implementación final en español.
 
 ## 1. Objetivos Técnicos
-- **Interfaz Basada en Rejilla (Grid-Based):** Transicionar de una salida de texto plana a una interfaz visual dirigida por datos donde cada `Espacio` ocupa dimensiones reales en un mapa ASCII.
-- **Interactividad en Tiempo Real:** Implementar un bucle de eventos que permita la manipulación directa de objetos (mover, redimensionar) con retroalimentación visual inmediata.
-- **Gestión de Diálogos Modales:** Utilizar ventanas superpuestas para la entrada de datos, evitando la ruptura del flujo visual del mapa.
+- **Interfaz Basada en Rejilla (Grid-Based):** Transición a una interfaz visual dirigida por datos donde cada `Espacio` ocupa dimensiones reales (coordenadas, ancho, alto) en un mapa ASCII.
+- **Arquitectura N-Capas (MVC):** Separación estricta entre Vista (Terminal), Controlador, Servicio (Lógica de Negocio) y Repositorio (Persistencia).
+- **Patrón de Estados (State Pattern):** Gestión de la interactividad del mapa mediante estados intercambiables para evitar lógica condicional compleja en la vista.
 
 ## 2. Stack Tecnológico
-- **Runtime:** Java 11 o superior.
-- **Motor de Terminal (Lanterna 3.1.x):**
-    - `TerminalScreen`: Gestión de buffers y control de parpadeo.
-    - `WindowBasedTextGUI`: Entorno para la gestión de ventanas lógicas y diálogos.
-    - `TextGraphics`: Dibujo de primitivas (bordes, fondos y caracteres).
-- **Persistencia:** Google Gson para la sincronización del modelo de datos jerárquico.
+- **Lenguaje:** Java 11.
+- **Motor de Terminal (Lanterna 3.1.x):** Gestión de buffers, capas de texto y captura de eventos de teclado.
+- **Persistencia:** Google Gson para la serialización de objetos a archivos JSON con mapeo de nombres (`@SerializedName`).
 
-## 3. Arquitectura de la Interfaz (View Layer)
+## 3. Arquitectura del Sistema
 
-### 3.1 Componentes de Visualización
-- **GridMapaRenderer:** Motor de renderizado que transforma la lista de `Espacio` en una rejilla 2D. 
-    - Representa espacios mediante sus iniciales coloreadas.
-    - Renderiza celdas vacías con puntos tenues (`·`).
-- **MapaView:** Componente principal (State Machine) que gestiona los modos de operación (`NAVIGATE`, `MOVE`, `RESIZE`, `RECORRIDO_EDIT`).
-- **Panel de Detalles:** Sección lateral que deserializa los atributos del objeto bajo el cursor en tiempo real.
+### 3.1 Capa de Vista (Terminal)
+- **MapaView:** Componente central que coordina el renderizado y la captura de entrada.
+- **GridMapaRenderer:** Motor encargado de dibujar la rejilla 2D, los bordes de los espacios y las etiquetas de nombre.
+- **MapaModoEstado (Interface):** Define el comportamiento para los diferentes modos:
+    - `ModoNavegarEstado`: Navegación estándar del cursor.
+    - `ModoMoverEstado`: Desplazamiento de un espacio seleccionado.
+    - `ModoRedimensionarEstado`: Ajuste de ancho y alto de un espacio.
+    - `ModoEditarRecorridoEstado`: Selección secuencial de espacios para un tour.
+- **Componentes de Diálogo:** `DialogForm`, `PlantaDialog`, `RecorridoDialog` y `LoginDialog`.
 
-### 3.2 Gestión de Diálogos
-- **EspacioEditorDialog / EspacioCreatorDialog:** Diálogos modales para la captura de `nombre`, `tipo` (vía dropdown) y `descripcion`.
-- **PlantaManagerDialog:** Interfaz dedicada a la gestión de la jerarquía del edificio (añadir/eliminar/renombrar plantas).
+### 3.2 Capa de Negocio (Servicios)
+- **GestionEspacioService:** Centraliza la validación de solapamientos geométrica y la integridad de la jerarquía.
+- **VisitaService:** Gestiona el estado de la visita actual y la navegación entre los puntos de un recorrido.
+- **AuthService:** Maneja la autenticación y la creación del objeto `Sesion`.
 
-## 4. Protocolo de Comandos y Teclado
+### 3.3 Capa de Datos (Modelos y Repositorios)
+- **Jerarquía de Datos:** `Universidad` > `Region` > `Planta` > `Espacio`.
+- **Repositorios:** Implementan `IRepository<T>` utilizando `JsonUtil` para el acceso atómico a los archivos `.json`.
 
-| Tecla | Acción en Modo Admin | Acción en Modo Visitante |
-| :--- | :--- | :--- |
-| `↑ ↓ ← →` | Desplazar cursor / Mover objeto (en modo Move) | Desplazar cursor / Navegación |
-| `Enter` | Confirmar Acción / Abrir Editor | Ver Detalles del Espacio |
-| `N` | Crear nuevo `Espacio` en posición actual | — |
-| `E` | Editar `Espacio` seleccionado | — |
-| `D` | Eliminar `Espacio` seleccionado (Confirmación) | — |
-| `M` | Iniciar Modo Movimiento (Drag) | — |
-| `R` | Iniciar Modo Redimensión | — |
-| `+ / -` | Ajustar Ancho/Alto (solo en modo Resize) | — |
-| `Tab` | Alternar entre Plantas | Alternar entre Plantas |
-| `A / D` | Paso Anterior / Siguiente en Recorrido | Paso Anterior / Siguiente en Recorrido |
-| `Q / Esc` | Salir / Cancelar | Salir / Cancelar |
+## 4. Lógica de Negocio Crítica
 
-## 5. Modelo de Datos Extendido
-Para soportar la renderización espacial, el modelo `Espacio` debe integrar:
-- **Atributos Geométricos:**
-    - `coordenadaX`: Posición en el eje horizontal.
-    - `coordenadaY`: Posición en el eje vertical.
-    - `ancho`: Extensión horizontal (mínimo 1).
-    - `alto`: Extensión vertical (mínimo 1).
-- **Jerarquía:** Todo espacio debe pertenecer a una `Planta`, que a su vez reside en un `Edificio` dentro de la `Universidad`.
+### 4.1 Detección de Solapamientos (Collision Detection)
+El sistema valida que ningún espacio ocupe el mismo área que otro en la misma planta antes de confirmar una creación, movimiento o redimensión:
+`A.x < B.x + B.ancho && A.x + A.ancho > B.x && A.y < B.y + B.alto && A.y + A.alto > B.y`
 
-## 6. Lógica de Negocio y Validación Visual
+### 4.2 Integridad de Recorridos
+No se permite la eliminación de un `Espacio` si este forma parte de un `Recorrido` activo. El servicio lanza una `ExcepcionReglaNegocio` en caso de violación.
 
-### 6.1 Detección de Colisiones (Collision Detection)
-El sistema impedirá la creación, movimiento o redimensión de un espacio si este solapa el área de otro espacio existente en la misma planta. La validación se realiza mediante la intersección de rectángulos:
-`A.x < B.x + B.w && A.x + A.w > B.x && A.y < B.y + B.h && A.y + A.h > B.y`
+### 4.3 Gestión de Sesión
+Tras una autenticación exitosa, el sistema genera un objeto `Sesion` que contiene:
+- `Administrador` autenticado.
+- `fechaInicio` (timestamp).
+- `activa` (boolean).
 
-### 6.2 Esquema de Colores por Tipo
-Para facilitar la identificación visual, se establece el siguiente mapeo ANSI:
-- **AULA:** Azul (Blue)
-- **LABORATORIO:** Cian (Cyan)
-- **BIBLIOTECA:** Verde (Green)
-- **CAFETERIA:** Amarillo (Yellow)
-- **AUDITORIO:** Magenta (Magenta)
-- **OFICINA:** Blanco (White)
-- **BAÑO:** Gris (Gray)
-- **OTRO:** Blanco tenue (Dim White)
+## 5. Protocolo de Comandos
 
-## 7. Flujo de Usuario (Admin)
-1. **Navegación:** El admin explora el mapa con las flechas.
-2. **Creación:** Al pulsar `N`, se hereda la posición del cursor y se abre el diálogo de creación.
-3. **Ajuste Espacial:** 
-    - Con `M`, el espacio se "ancla" al cursor para reposicionarlo.
-    - Con `R`, el admin ajusta los límites con `+/-` viendo una previsualización dinámica.
-4. **Sincronización:** Cada cambio exitoso actualiza el buffer de la terminal y dispara una escritura atómica en el archivo JSON.
+| Tecla | Acción |
+| :--- | :--- |
+| `Flechas` | Movimiento del cursor o del objeto (según modo). |
+| `Enter` | Confirmar cambios / Ver detalles. |
+| `N` | Crear nuevo espacio. |
+| `E` | Editar espacio seleccionado. |
+| `D` | Eliminar espacio (con confirmación). |
+| `M` | Activar modo mover. |
+| `R` | Activar modo redimensionar. |
+| `T` | Listar / Gestionar recorridos. |
+| `P` | Abrir gestor de plantas. |
+| `Esc` | Cancelar modo actual / Salir. |
