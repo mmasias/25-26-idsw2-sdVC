@@ -179,7 +179,7 @@
 
 ---
 
-## [18:20] Documentación Técnica y Justificació
+## [18:20] Documentación Técnica y Justificación
 
 **Prompt:** Documenta los aspectos que consideres relevantes del proyecto.
 
