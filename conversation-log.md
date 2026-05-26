@@ -148,10 +148,41 @@
 
 ---
 
-## [23:00] Planeación y implementación de myUniverse
 
-**Prompt:** Ahora vamos a enfocarnos en la implementación de myUniverse. Quiero que revises las carpetas de análisis y diseño, así como el documento spec.md, para proceder con la ejecución. Primero, elabora la planificación de como lo implementarias.
+## [20:15] Auditoría de Coherencia: Diseño vs Código 
 
-**Resultado:** Se elaboró un plan de desarrollo estructurado por fases estratégicas, diseñado específicamente para garantizar la implementación progresiva y la cobertura total de todos los casos de uso definidos en el sistema.
+**Prompt:** Realiza un análisis exhaustivo de los diagramas de diseño actuales y compáralos con la implementación real en Java. Identifica cualquier "mentira" o discrepancia técnica donde el diagrama diga algo que el código no hace.
 
-**Decisión:** Aceptado como una primera aproximación de la arquitectura conceptual. No obstante, el diseño base presenta diversas inconsistencias técnicas que requerirán una depuración y corrección manual exhaustiva durante la fase de codificación.
+**Resultado:** Se detectaron varias inconsistencias críticas en el rol del Visitante. Específicamente, el diagrama de "Ver Espacios Cercanos" describía una fórmula de proximidad inexistente, y "Ver Detalles" sugería una interacción manual (Enter) cuando el código lo hace de forma automática. Se identificó que los diagramas de Administrador eran mucho más fieles a la realidad que los de Visitante.
+
+**Decisión:** Se acuerda una fase de "Sincronización Total" para que la documentación RUP sea un espejo honesto del código entregado.
+
+---
+
+## [14:30] Sincronización: Ver Espacios Cercanos (Adyacencia)
+
+**Prompt:** Arregla el caso de uso de "Ver Espacios Cercanos". En el código no se calculan distancias matemáticas complejas, sino que se mira qué hay al lado. Asegúrate de que el diagrama refleje que los cuadros pueden ser de cualquier tamaño y que el sistema detecta cualquier cuadro de color (espacio) que toque la posición actual.
+
+**Resultado:** Se rediseñó el diagrama de secuencia de `verEspaciosCercanos` eliminando la lógica de "Top 3 por distancia" y sustituyéndola por un escaneo de celdas adyacentes (Norte, Sur, Este, Oeste). Se utilizó el método real del código `spaceAt(x, y)` para justificar que la detección es independiente del tamaño del cuadro (size-agnostic).
+
+**Decisión:** Aceptado. El diseño ahora es pragmático y refleja la naturaleza de una rejilla ASCII.
+
+---
+
+## [16:45] Gestión Estructural: CRUD de Universidad y Regiones
+
+**Prompt:** Vamos a hacer el CRUD de Universidad, Regiones y Plantas en los diagramas de diseño. Debe ser coherente con el código (usando las teclas O y F) pero delimitando el alcance: la Universidad es única y solo se puede renombrar, mientras que las Regiones y Plantas tienen gestión completa. Divide los diagramas en archivos individuales por cada operación (Crear, Editar, Eliminar).
+
+**Resultado:** Se crearon y organizaron 7 nuevos diagramas de secuencia en la carpeta de Administrador. Se integró la lógica de `ConfigDialog.java` (tecla O) y `PlantaDialog.java` (tecla F). Se eliminaron las funcionalidades "teóricas" para ajustarse a las restricciones reales de la interfaz de terminal.
+
+**Decisión:** Aceptado. La jerarquía de diseño ahora cubre desde la raíz del sistema hasta el nivel operativo de espacios.
+
+---
+
+## [18:20] Documentación Técnica y Justificació
+
+**Prompt:** Documenta los aspectos que consideres relevantes del proyecto.
+
+**Resultado:** Se actualizó `Desarrollo.md` con una sección de "Justificación de Diseño y Tecnología". Se explicó el uso del **Patrón State** para los modos del mapa, la arquitectura **N-Capas** y la lógica de **previsualización en memoria** durante la edición. Se añadió una tabla de responsabilidades con enlaces directos a los archivos Java (`MapaView`, `MapContext`, etc.), creando un "mapa del código" navegable.
+
+**Decisión:** Aceptado. El documento ahora cumple con los baremos académicos de reflexión técnica y los profesionales de documentación de sistema.
