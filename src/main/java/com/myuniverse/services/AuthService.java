@@ -5,16 +5,16 @@ import com.myuniverse.models.Sesion;
 import com.myuniverse.repositories.AdministradorRepository;
 
 public class AuthService {
-    private final AdministradorRepository adminRepo;
+    private final AdministradorRepository repositorioAdministrador;
     private Sesion sesionActual;
 
-    public AuthService(AdministradorRepository adminRepo) {
-        this.adminRepo = adminRepo;
+    public AuthService(AdministradorRepository repositorioAdministrador) {
+        this.repositorioAdministrador = repositorioAdministrador;
     }
 
-    public Sesion autenticar(String usuario, String contraseña) {
-        Administrador admin = adminRepo.findById(usuario);
-        if (admin == null || !admin.validarContraseña(contraseña)) {
+    public Sesion autenticar(String nombreUsuario, String contrasena) {
+        Administrador admin = repositorioAdministrador.obtenerPorId(nombreUsuario);
+        if (admin == null || !admin.validarContrasena(contrasena)) {
             return null;
         }
         sesionActual = new Sesion(admin);
@@ -28,11 +28,11 @@ public class AuthService {
         }
     }
 
-    public Sesion getSesionActual() {
+    public Sesion obtenerSesionActual() {
         return sesionActual;
     }
 
-    public boolean haySesionActiva() {
-        return sesionActual != null && sesionActual.isActiva();
+    public boolean tieneSesionActiva() {
+        return sesionActual != null && sesionActual.estaActiva();
     }
 }

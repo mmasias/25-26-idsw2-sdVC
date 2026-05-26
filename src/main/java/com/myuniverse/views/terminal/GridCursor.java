@@ -28,9 +28,9 @@ public class GridCursor {
     public void moveLeft()  { if (x > 0) x--; }
     public void moveRight() { x++; }
 
-    public void setGridBounds(int width, int height) {
-        this.gridWidth = width;
-        this.gridHeight = height;
+    public void setGridBounds(int ancho, int alto) {
+        this.gridWidth = ancho;
+        this.gridHeight = alto;
     }
 
     public void ensureVisible(int viewportWidth, int viewportHeight) {

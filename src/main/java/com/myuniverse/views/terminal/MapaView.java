@@ -3,209 +3,146 @@ package com.myuniverse.views.terminal;
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.myuniverse.controllers.AuthController;
-import com.myuniverse.controllers.EspacioController;
 import com.myuniverse.controllers.RecorridoController;
-import com.myuniverse.models.*;
-import com.myuniverse.services.GestionEspacioService;
+import com.myuniverse.controllers.EspacioController;
+import com.myuniverse.models.Espacio;
+import com.myuniverse.models.Planta;
+import com.myuniverse.models.Region;
+import com.myuniverse.models.TipoEspacio;
+import com.myuniverse.models.Recorrido;
+import com.myuniverse.models.Universidad;
+import com.myuniverse.exceptions.ExcepcionReglaNegocio;
 
 import java.io.IOException;
 import java.util.*;
 
 public class MapaView {
-    private final TerminalScreen screen;
-    private final boolean isAdmin;
-    private final EspacioController espacioCtrl;
-    private final AuthController authCtrl;
-    private final GestionEspacioService gestionService;
-    private final GridMapaRenderer renderer;
-    private RecorridoController recorridoCtrl;
+    private final MapContext context;
+    private final PanelDetallesComponente detailsPanel;
 
-    private Universidad universidad;
-    private Edificio edificioActual;
-    private int plantaIndex;
-    private GridCursor cursor;
-    private Espacio selectedEspacio;
-    private Mode mode;
-    private String statusMessage;
-    private int resizeAncho;
-    private int resizeAlto;
-    private int movePreviewX;
-    private int movePreviewY;
-    private boolean running;
-
-    private Recorrido activeRecorrido;
-    private Map<String, Integer> recorridoOverlay;
-    private int recorridoStepIndex;
-    private boolean editandoRecorrido;
-    private List<String> recorridoEditIds;
-
-    private int mapOffsetX;
-    private int mapOffsetY;
-    private int vpW;
-    private int vpH;
-
-    private enum Mode {
-        NAVIGATE, RESIZE, MOVE, CONFIRM_DELETE, RECORRIDO_EDIT
-    }
-
-    private static final int DETAIL_PANEL_WIDTH = 38;
     private static final int MIN_GRID_COLS = 30;
 
-    public MapaView(TerminalScreen screen, boolean isAdmin, EspacioController espacioCtrl,
-                    AuthController authCtrl, GestionEspacioService gestionService) {
-        this.screen = screen;
-        this.isAdmin = isAdmin;
-        this.espacioCtrl = espacioCtrl;
-        this.authCtrl = authCtrl;
-        this.gestionService = gestionService;
-        this.renderer = new GridMapaRenderer();
-        this.mode = Mode.NAVIGATE;
-        this.statusMessage = "";
-        this.running = true;
-        this.recorridoOverlay = null;
-        this.recorridoStepIndex = -1;
-        this.editandoRecorrido = false;
-        this.recorridoEditIds = new ArrayList<>();
+    public MapaView(TerminalScreen screen, boolean isAdmin, EspacioController controladorEspacio,
+            AuthController controladorAutenticacion) {
+        IMapRenderer renderer = new GridMapaRenderer();
+        this.context = new MapContext(screen, isAdmin, controladorEspacio, controladorAutenticacion, renderer);
+        this.detailsPanel = new PanelDetallesComponente();
+        this.context.setCursor(new GridCursor(0, 0));
+        this.context.setCurrentMode(new ModoNavegarEstado());
     }
 
-    public void setRecorridoController(RecorridoController ctrl) {
-        this.recorridoCtrl = ctrl;
+    public void setRecorridoController(RecorridoController controladorRecorrido) {
+        context.setRecorridoController(controladorRecorrido);
     }
 
-    public void run() throws IOException {
-        loadData();
-        TerminalSize size = screen.getTerminalSize();
-        cursor = new GridCursor(0, 0);
-        updateGridBounds();
+    public void ejecutar() throws IOException {
+        context.cargarDatos();
+        TerminalSize size = context.getScreen().getTerminalSize();
+        context.actualizarLimitesGrilla();
 
-        while (running) {
-            size = screen.doResizeIfNecessary() != null ? screen.getTerminalSize() : size;
-            render(size);
-            screen.refresh();
-            KeyStroke key = screen.readInput();
+        while (context.isRunning()) {
+            size = context.getScreen().doResizeIfNecessary() != null ? context.getScreen().getTerminalSize() : size;
+            renderizar(size);
+            context.getScreen().refresh();
+            KeyStroke key = context.getScreen().readInput();
             if (key != null) {
-                size = screen.getTerminalSize();
-                handleInput(key, size);
+                size = context.getScreen().getTerminalSize();
+                manejarEntrada(key, size);
             }
         }
     }
 
-    private void loadData() {
-        universidad = gestionService.obtenerUniversidad();
-        if (universidad == null) universidad = new Universidad();
-        if (universidad.getEdificios().isEmpty()) return;
-        edificioActual = universidad.getEdificios().get(0);
-        if (plantaIndex < 0 || plantaIndex >= edificioActual.getPlantas().size()) plantaIndex = 0;
-    }
+    private void manejarEntrada(KeyStroke key, TerminalSize size) {
+        context.setStatusMessage("");
+        MapaModoEstado mode = context.getCurrentMode();
 
-    private Planta getPlantaActual() {
-        if (edificioActual == null || plantaIndex >= edificioActual.getPlantas().size()) return null;
-        return edificioActual.getPlantas().get(plantaIndex);
-    }
-
-    private List<Espacio> getEspaciosActuales() {
-        Planta p = getPlantaActual();
-        return (p != null) ? p.getEspacios() : Collections.emptyList();
-    }
-
-    private void updateGridBounds() {
-        int[] size = renderer.computeGridSize(getEspaciosActuales());
-        cursor.setGridBounds(size[0], size[1]);
-        cursor.clampToGrid();
-    }
-
-    private Espacio refreshSelectedEspacio() {
-        if (selectedEspacio == null) return null;
-        for (Espacio e : getEspaciosActuales()) {
-            if (e.getId().equals(selectedEspacio.getId())) return e;
+        if (mode instanceof ModoNavegarEstado) {
+            ((ModoNavegarEstado) mode).handleNavigation(key, size, context, this);
+        } else if (mode instanceof ModoRedimensionarEstado) {
+            ((ModoRedimensionarEstado) mode).handleResize(key, size, context);
+        } else if (mode instanceof ModoMoverEstado) {
+            ((ModoMoverEstado) mode).handleMove(key, size, context);
+        } else if (mode instanceof ModoConfirmarEliminarEstado) {
+            ((ModoConfirmarEliminarEstado) mode).handleConfirmDelete(key, size, context);
+        } else if (mode instanceof ModoEditarRecorridoEstado) {
+            ((ModoEditarRecorridoEstado) mode).handleRecorridoEdit(key, size, context);
         }
-        return null;
     }
 
-    private void buildRecorridoOverlay() {
-        recorridoOverlay = null;
-        if (activeRecorrido == null) return;
-        Map<String, Integer> map = new LinkedHashMap<>();
-        List<String> ids = editandoRecorrido ? recorridoEditIds : activeRecorrido.getEspacioIds();
-        for (int i = 0; i < ids.size(); i++) {
-            map.put(ids.get(i), i + 1);
-        }
-        recorridoOverlay = map;
-    }
-
-    private void render(TerminalSize termSize) {
-        TextGraphics g = screen.newTextGraphics();
+    private void renderizar(TerminalSize termSize) {
+        TextGraphics g = context.getScreen().newTextGraphics();
         int cols = termSize.getColumns();
         int rows = termSize.getRows();
-        if (cols < 40 || rows < 10) return;
+        if (cols < 40 || rows < 10)
+            return;
 
         g.fillRectangle(new TerminalPosition(0, 0), termSize, ' ');
 
-        // Title bar
-        g.setForegroundColor(ColorScheme.TITLE_FG);
-        g.setBackgroundColor(ColorScheme.TITLE_BG);
-        Planta planta = getPlantaActual();
-        String floorName = planta != null ? planta.getNombre() : "—";
-        String modeLabel = getModeLabel();
-        String title = " myUniverse " + (isAdmin ? "[ADMIN]" : "") + " ─ " + (edificioActual != null ? edificioActual.getNombre() : "") + " ─ " + floorName + " ";
-        if (!modeLabel.isEmpty()) title += " ─ " + modeLabel + " ";
-        if (activeRecorrido != null) title += " ─ ⟫ " + activeRecorrido.getNombre() + " ";
-        if (title.length() < cols) {
-            title = title + String.format("%" + (cols - title.length()) + "s", "");
-        } else {
-            title = title.substring(0, cols);
-        }
-        g.putString(0, 0, title, SGR.BOLD);
+        renderTitleBar(g, cols);
 
-        boolean showDetail = cols > MIN_GRID_COLS + DETAIL_PANEL_WIDTH;
-        int mapW = showDetail ? cols - DETAIL_PANEL_WIDTH : cols;
+        boolean showDetail = cols > MIN_GRID_COLS + detailsPanel.getPanelWidth();
+        int mapW = showDetail ? cols - detailsPanel.getPanelWidth() : cols;
         int mapH = rows - 3;
-        if (mapW < 10) { mapW = cols; showDetail = false; }
-        if (mapH < 5) mapH = 5;
+        if (mapW < 10) {
+            mapW = cols;
+            showDetail = false;
+        }
+        if (mapH < 5)
+            mapH = 5;
 
-        vpW = Math.max(1, mapW - 2);
-        vpH = Math.max(1, mapH - 2);
+        int vpW = Math.max(1, mapW - 2);
+        int vpH = Math.max(1, mapH - 2);
+        context.setViewportWidth(vpW);
+        context.setViewportHeight(vpH);
 
-        cursor.ensureVisible(vpW, vpH);
-        cursor.clampToGrid();
+        context.getCursor().ensureVisible(vpW, vpH);
+        context.getCursor().clampToGrid();
 
-        List<Espacio> espaciosParaRender = getEspaciosActuales();
-        Espacio detailEspacio = selectedEspacio;
-        if (mode == Mode.MOVE && selectedEspacio != null) {
-            espaciosParaRender = new ArrayList<>(espaciosParaRender);
-            for (int i = 0; i < espaciosParaRender.size(); i++) {
-                if (espaciosParaRender.get(i).getId().equals(selectedEspacio.getId())) {
-                    Espacio preview = new Espacio(
-                            selectedEspacio.getId(), selectedEspacio.getNombre(),
-                            selectedEspacio.getTipo(), selectedEspacio.getDescripcion(),
-                            movePreviewX, movePreviewY, selectedEspacio.getAncho(), selectedEspacio.getAlto());
-                    espaciosParaRender.set(i, preview);
-                    detailEspacio = preview;
-                    break;
+        List<Espacio> spacesToRender = context.getCurrentEspacios();
+        Espacio detailEspacio = context.getSelectedEspacio();
+
+        if (context.getCurrentMode() instanceof ModoMoverEstado) {
+            ModoMoverEstado moveMode = (ModoMoverEstado) context.getCurrentMode();
+            if (detailEspacio != null) {
+                spacesToRender = new ArrayList<>(spacesToRender);
+                for (int i = 0; i < spacesToRender.size(); i++) {
+                    if (spacesToRender.get(i).getId().equals(detailEspacio.getId())) {
+                        Espacio preview = new Espacio(
+                                detailEspacio.getId(), detailEspacio.getNombre(),
+                                detailEspacio.getTipo(), detailEspacio.getDescripcion(),
+                                moveMode.getMovePreviewX(), moveMode.getMovePreviewY(),
+                                detailEspacio.getAncho(), detailEspacio.getAlto());
+                        spacesToRender.set(i, preview);
+                        detailEspacio = preview;
+                        break;
+                    }
                 }
             }
         }
-        if (mode == Mode.RESIZE && selectedEspacio != null) {
-            espaciosParaRender = new ArrayList<>(espaciosParaRender);
-            for (int i = 0; i < espaciosParaRender.size(); i++) {
-                if (espaciosParaRender.get(i).getId().equals(selectedEspacio.getId())) {
-                    Espacio preview = new Espacio(
-                            selectedEspacio.getId(), selectedEspacio.getNombre(),
-                            selectedEspacio.getTipo(), selectedEspacio.getDescripcion(),
-                            selectedEspacio.getCoordenadaX(), selectedEspacio.getCoordenadaY(),
-                            resizeAncho, resizeAlto);
-                    espaciosParaRender.set(i, preview);
-                    detailEspacio = preview;
-                    break;
+        if (context.getCurrentMode() instanceof ModoRedimensionarEstado) {
+            ModoRedimensionarEstado resizeMode = (ModoRedimensionarEstado) context.getCurrentMode();
+            if (detailEspacio != null) {
+                spacesToRender = new ArrayList<>(spacesToRender);
+                for (int i = 0; i < spacesToRender.size(); i++) {
+                    if (spacesToRender.get(i).getId().equals(detailEspacio.getId())) {
+                        Espacio preview = new Espacio(
+                                detailEspacio.getId(), detailEspacio.getNombre(),
+                                detailEspacio.getTipo(), detailEspacio.getDescripcion(),
+                                detailEspacio.getCoordenadaX(), detailEspacio.getCoordenadaY(),
+                                resizeMode.getResizeWidth(), resizeMode.getResizeHeight());
+                        spacesToRender.set(i, preview);
+                        detailEspacio = preview;
+                        break;
+                    }
                 }
             }
         }
 
         GridMapaRenderer.TextGraphicsAdapter adapter = (x, y, ch, fg, bg) -> {
-            if (x < 0 || y < 0 || x >= cols || y >= rows) return;
+            if (x < 0 || y < 0 || x >= cols || y >= rows)
+                return;
             g.setForegroundColor(fg);
             g.setBackgroundColor(bg);
             g.putString(x, y, String.valueOf(ch));
@@ -213,576 +150,330 @@ public class MapaView {
 
         g.setForegroundColor(ColorScheme.BORDER);
         g.setBackgroundColor(ColorScheme.BG);
-        String coordLabel = String.format(" %d,%d ", cursor.getX(), cursor.getY());
+        String coordLabel = String.format(" %d,%d ", context.getCursor().getX(), context.getCursor().getY());
         g.putString(1, 1, coordLabel);
 
-        mapOffsetX = showDetail ? 1 : Math.max(0, (cols - vpW) / 2);
-        mapOffsetY = 2;
+        int mapOffsetX = showDetail ? 1 : Math.max(0, (cols - vpW) / 2);
+        int mapOffsetY = 2;
+        context.setMapOffsetX(mapOffsetX);
+        context.setMapOffsetY(mapOffsetY);
 
-        renderer.render(adapter, planta, espaciosParaRender, cursor, detailEspacio,
-                mapOffsetX, mapOffsetY, vpW, vpH, recorridoOverlay, recorridoStepIndex >= 0 ? recorridoStepIndex : null);
+        context.getRenderer().renderizar(adapter, context.getCurrentPlanta(), spacesToRender,
+                context.getCursor(), detailEspacio,
+                mapOffsetX, mapOffsetY, vpW, vpH,
+                context.getRecorridoOverlay(),
+                context.getRecorridoStepIndex() >= 0 ? context.getRecorridoStepIndex() : null);
 
-        renderer.renderNameOverlay(adapter, espaciosParaRender, cursor, detailEspacio,
-                mapOffsetX, mapOffsetY, vpW, vpH, recorridoOverlay);
+        context.getRenderer().renderNameOverlay(adapter, spacesToRender,
+                context.getCursor(), detailEspacio,
+                mapOffsetX, mapOffsetY, vpW, vpH,
+                context.getRecorridoOverlay());
 
         if (showDetail) {
-            int detailX = cols - DETAIL_PANEL_WIDTH;
-            renderDetailPanel(g, detailX, 1, DETAIL_PANEL_WIDTH, rows - 3, detailEspacio);
+            detailsPanel.renderizar(g, rows, context);
         }
 
         g.setForegroundColor(ColorScheme.BORDER);
         g.setBackgroundColor(ColorScheme.BG);
-        String sepStr = repeat('─', cols);
+        String sepStr = UIUtils.repeat('─', cols);
         g.putString(0, rows - 2, sepStr.substring(0, Math.min(cols, sepStr.length())));
 
-        String status = buildStatusBar();
+        String status = construirBarraEstado();
         g.setForegroundColor(ColorScheme.STATUS_FG);
         g.setBackgroundColor(ColorScheme.STATUS_BG);
         String padded = String.format("%-" + cols + "s", status);
-        if (padded.length() > cols) padded = padded.substring(0, cols);
+        if (padded.length() > cols)
+            padded = padded.substring(0, cols);
         g.putString(0, rows - 1, padded);
     }
 
-    private String getModeLabel() {
-        switch (mode) {
-            case RESIZE: return "RESIZE";
-            case MOVE: return "MOVE";
-            case CONFIRM_DELETE: return "DELETE?";
-                       case RECORRIDO_EDIT: return "ROUTE EDIT";
-            default: return "";
-        }
-    }
-
-    private String buildStatusBar() {
-        if (!statusMessage.isEmpty()) return " " + statusMessage;
-
-        switch (mode) {
-            case RESIZE:
-                return " ←→ width | ↑↓ height | Enter=confirm | Esc=cancel";
-            case MOVE:
-                return " ←↑↓→ move | Enter=confirm | Esc=cancel";
-            case CONFIRM_DELETE:
-                return " Enter=confirm delete | Esc=cancel";
-            case RECORRIDO_EDIT:
-                return " [S]Add space | [X]Remove last | Enter=save | Esc=cancel";
-            default:
-                StringBuilder sb = new StringBuilder(" ↑↓←→ Navigate | Tab:Floor");
-                if (activeRecorrido != null) {
-                    sb.append(" | A/D prev/next");
-                }
-                if (isAdmin) {
-                    sb.append(" | [E]dit [D]el [R]esize [M]ove [N]ew [F]loors [G]Routes");
-                } else {
-                    sb.append(" | [T]ours");
-                }
-                return sb.toString();
-        }
-    }
-
-    private void renderDetailPanel(TextGraphics g, int x, int y, int w, int h, Espacio esp) {
-        g.setForegroundColor(ColorScheme.BORDER);
-        g.setBackgroundColor(ColorScheme.BG);
-        String border = "┌" + repeat('─', w - 2) + "┐";
-        g.putString(x, y, border);
-        for (int row = 1; row < h - 1; row++) {
-            if (y + row < screen.getTerminalSize().getRows() - 2) {
-                g.putString(x, y + row, "│" + String.format("%-" + (w - 2) + "s", "") + "│");
-            }
-        }
-        g.putString(x, Math.min(y + h - 1, screen.getTerminalSize().getRows() - 3),
-                "└" + repeat('─', w - 2) + "┘");
-
-        int innerX = x + 2;
-        int innerY = y + 1;
-        int maxLen = w - 4;
-
+    private void renderTitleBar(TextGraphics g, int cols) {
         g.setForegroundColor(ColorScheme.TITLE_FG);
-        g.setBackgroundColor(ColorScheme.BG);
-        String header = (esp != null) ? "Space Details" : "Cell Info";
-        g.putString(innerX, innerY, truncate(header, maxLen));
-        innerY += 2;
-
-        if (esp != null) {
-            g.setForegroundColor(ColorScheme.FG);
-            g.putString(innerX, innerY, truncate("Name:", maxLen)); innerY++;
-            g.setForegroundColor(ColorScheme.SELECTED_FG);
-            g.putString(innerX + 2, innerY, truncate(esp.getNombre(), maxLen - 2)); innerY++;
-
-            g.setForegroundColor(ColorScheme.FG);
-            g.putString(innerX, innerY, truncate("Type:", maxLen)); innerY++;
-            g.setForegroundColor(ColorScheme.fgForType(esp.getTipo()));
-            g.putString(innerX + 2, innerY, truncate(ColorScheme.labelForType(esp.getTipo()), maxLen - 2)); innerY++;
-
-            g.setForegroundColor(ColorScheme.FG);
-            g.putString(innerX, innerY, truncate("Floor:", maxLen)); innerY++;
-            Planta p = getPlantaActual();
-            g.putString(innerX + 2, innerY, truncate(p != null ? p.getNombre() : "—", maxLen - 2)); innerY++;
-
-            g.setForegroundColor(ColorScheme.FG);
-            g.putString(innerX, innerY, truncate("Position:", maxLen)); innerY++;
-            g.putString(innerX + 2, innerY, truncate(String.format("(%d, %d)", esp.getCoordenadaX(), esp.getCoordenadaY()), maxLen - 2)); innerY++;
-
-            g.setForegroundColor(ColorScheme.FG);
-            g.putString(innerX, innerY, truncate("Size:", maxLen)); innerY++;
-            g.putString(innerX + 2, innerY, truncate(String.format("%d × %d", esp.getAncho(), esp.getAlto()), maxLen - 2)); innerY++;
-
-            if (esp.getDescripcion() != null && !esp.getDescripcion().isEmpty()) {
-                innerY++;
-                g.setForegroundColor(ColorScheme.FG);
-                g.putString(innerX, innerY, truncate("Description:", maxLen));
-                String desc = esp.getDescripcion();
-                int lineNum = 0;
-                while (!desc.isEmpty() && innerY + 1 + lineNum < y + h - 3) {
-                    int end = Math.min(maxLen, desc.length());
-                    g.putString(innerX, innerY + 1 + lineNum, truncate(desc.substring(0, end), maxLen));
-                    desc = desc.substring(end);
-                    lineNum++;
-                }
-            }
-
-            if (recorridoOverlay != null && recorridoOverlay.containsKey(esp.getId())) {
-                innerY = y + h - 8;
-                if (innerY > y + 4) {
-                    g.setForegroundColor(ColorScheme.RECORRIDO_FG);
-                    g.putString(innerX, innerY, truncate("Route step: " + recorridoOverlay.get(esp.getId()), maxLen));
-                    innerY++;
-                }
-            }
-
-            if (isAdmin && mode == Mode.NAVIGATE) {
-                innerY = y + h - 6;
-                if (innerY < y + h - 2) {
-                    g.setForegroundColor(ColorScheme.STATUS_FG);
-                    g.putString(innerX, innerY, "[E]dit  [D]elete"); innerY++;
-                    g.putString(innerX, innerY, "[R]esize [M]ove");  innerY++;
-                }
-            }
+        g.setBackgroundColor(ColorScheme.TITLE_BG);
+        Planta planta = context.getCurrentPlanta();
+        String floorName = planta != null ? planta.getNombre() : "—";
+        String modeLabel = context.getCurrentMode() != null ? context.getCurrentMode().obtenerEtiquetaModo() : "";
+        String uniName = context.obtenerUniversidad() != null && context.obtenerUniversidad().getNombre() != null
+                ? context.obtenerUniversidad().getNombre() : "myUniverse";
+        String title = " " + uniName + " " + (context.isAdmin() ? "[ADMIN]" : "")
+                + " ─ " + (context.getCurrentRegion() != null ? context.getCurrentRegion().getNombre() : "")
+                + " ─ " + floorName + " ";
+        if (!modeLabel.isEmpty())
+            title += " ─ " + modeLabel + " ";
+        if (context.getActiveRecorrido() != null)
+            title += " ─ ⟫ " + context.getActiveRecorrido().getNombre() + " ";
+        if (title.length() < cols) {
+            title = title + String.format("%" + (cols - title.length()) + "s", "");
         } else {
-            g.setForegroundColor(ColorScheme.FG_DIM);
-            g.putString(innerX, innerY, "Empty cell");
-            innerY++;
-            g.putString(innerX, innerY + 1, truncate(String.format("(%d, %d)", cursor.getX(), cursor.getY()), maxLen));
-            if (isAdmin && mode == Mode.NAVIGATE) {
-                innerY += 3;
-                g.setForegroundColor(ColorScheme.STATUS_FG);
-                g.putString(innerX, innerY, "[N]ew space");
-            }
+            title = title.substring(0, cols);
         }
+        g.putString(0, 0, title, SGR.BOLD);
     }
 
-    private void handleInput(KeyStroke key, TerminalSize size) {
-        statusMessage = "";
-        switch (mode) {
-            case NAVIGATE:
-                handleNavigate(key, size);
-                break;
-            case RESIZE:
-                handleResize(key, size);
-                break;
-            case MOVE:
-                handleMove(key, size);
-                break;
-            case CONFIRM_DELETE:
-                handleConfirmDelete(key, size);
-                break;
-            case RECORRIDO_EDIT:
-                handleRecorridoEdit(key, size);
-                break;
+    private String construirBarraEstado() {
+        if (!context.getStatusMessage().isEmpty()) {
+            return " " + context.getStatusMessage();
         }
-        if (mode == Mode.NAVIGATE || mode == Mode.RECORRIDO_EDIT) {
-            Espacio atCursor = renderer.espacioEn(getEspaciosActuales(), cursor.getX(), cursor.getY());
-            selectedEspacio = atCursor;
+        if (context.getCurrentMode() instanceof ModoNavegarEstado) {
+            return ((ModoNavegarEstado) context.getCurrentMode()).construirBarraEstado(context);
         }
-        updateGridBounds();
+        return context.getCurrentMode().construirBarraEstado();
     }
 
-    private void handleNavigate(KeyStroke key, TerminalSize size) {
-        switch (key.getKeyType()) {
-            case ArrowUp:    cursor.moveUp(); break;
-            case ArrowDown:  cursor.moveDown(); break;
-            case ArrowLeft:  cursor.moveLeft(); break;
-            case ArrowRight: cursor.moveRight(); break;
-            case Tab:
-                if (edificioActual != null && !edificioActual.getPlantas().isEmpty()) {
-                    plantaIndex = (plantaIndex + 1) % edificioActual.getPlantas().size();
-                    selectedEspacio = null;
-                    cursor.setX(0); cursor.setY(0);
-                    activeRecorrido = null;
-                    recorridoOverlay = null;
-                    recorridoStepIndex = -1;
-                    loadData();
-                    updateGridBounds();
-                }
-                break;
-            case Escape:
-                if (activeRecorrido != null) {
-                    activeRecorrido = null;
-                    recorridoOverlay = null;
-                    recorridoStepIndex = -1;
-                    statusMessage = "Route view ended";
-                } else {
-                    running = false;
-                }
-                break;
-            default:
-                if (key.getCharacter() != null) {
-                    char ch = Character.toLowerCase(key.getCharacter());
-                    if (isAdmin) {
-                        switch (ch) {
-                            case 'n': showCreateDialog(size); break;
-                            case 'e': showEditDialog(size); break;
-                            case 'd':
-                                if (selectedEspacio != null) {
-                                    mode = Mode.CONFIRM_DELETE;
-                                    statusMessage = "Delete '" + selectedEspacio.getNombre() + "'? Enter=Yes Esc=No";
-                                }
-                                break;
-                            case 'r':
-                                if (selectedEspacio != null) {
-                                    mode = Mode.RESIZE;
-                                    resizeAncho = selectedEspacio.getAncho();
-                                    resizeAlto = selectedEspacio.getAlto();
-                                    statusMessage = "Resizing...";
-                                }
-                                break;
-                            case 'm':
-                                if (selectedEspacio != null) {
-                                    mode = Mode.MOVE;
-                                    movePreviewX = selectedEspacio.getCoordenadaX();
-                                    movePreviewY = selectedEspacio.getCoordenadaY();
-                                    statusMessage = "Moving...";
-                                }
-                                break;
-                            case 'f': showFloorManagerDialog(size); break;
-                            case 'g': showRecorridoManager(size); break;
-                            case 'q': running = false; break;
-                        }
-                    }
-                    switch (ch) {
-                        case 't': showRecorridoList(size); break;
-                        case 'a': navigateRecorrido(-1); break;
-                        case 'd': navigateRecorrido(1); break;
-                        case 'q':
-                            if (!isAdmin) running = false;
-                            break;
-                    }
-                }
-                break;
+    public void mostrarDialogoCrear(TerminalSize size) {
+        DialogForm form = new DialogForm(context.getScreen());
+        String[] labels = { "Name", "Type", "Description", "Width", "Height" };
+        String[] defaults = { "", "CLASSROOM", "", "1", "1" };
+        TipoEspacio[] types = TipoEspacio.values();
+        String[] typeNames = new String[types.length];
+        for (int i = 0; i < types.length; i++) {
+            typeNames[i] = types[i].getDisplayName();
         }
-    }
-
-    private void handleResize(KeyStroke key, TerminalSize size) {
-        switch (key.getKeyType()) {
-            case ArrowRight: resizeAncho++; break;
-            case ArrowLeft:  if (resizeAncho > 1) resizeAncho--; break;
-            case ArrowDown:  resizeAlto++; break;
-            case ArrowUp:    if (resizeAlto > 1) resizeAlto--; break;
-            case Enter:
-                if (selectedEspacio != null) {
-                    boolean overlap = renderer.haySolapamiento(
-                            getEspaciosActuales(),
-                            selectedEspacio.getCoordenadaX(), selectedEspacio.getCoordenadaY(),
-                            resizeAncho, resizeAlto, selectedEspacio.getId());
-                    if (overlap) {
-                        statusMessage = "Cannot resize: overlaps another space";
-                    } else {
-                        boolean ok = gestionService.actualizarEspacioCompleto(
-                                selectedEspacio.getId(), selectedEspacio.getNombre(),
-                                selectedEspacio.getTipo(), selectedEspacio.getDescripcion(),
-                                selectedEspacio.getCoordenadaX(), selectedEspacio.getCoordenadaY(),
-                                resizeAncho, resizeAlto);
-                        if (ok) {
-                            loadData();
-                            statusMessage = "Space resized";
-                        } else {
-                            statusMessage = "Error resizing space";
-                        }
-                    }
-                }
-                mode = Mode.NAVIGATE;
-                selectedEspacio = refreshSelectedEspacio();
-                break;
-            case Escape:
-                mode = Mode.NAVIGATE;
-                statusMessage = "Resize cancelled";
-                selectedEspacio = refreshSelectedEspacio();
-                break;
-            default: break;
-        }
-    }
-
-    private void handleMove(KeyStroke key, TerminalSize size) {
-        if (selectedEspacio == null) { mode = Mode.NAVIGATE; return; }
-        int newX = movePreviewX;
-        int newY = movePreviewY;
-
-        switch (key.getKeyType()) {
-            case ArrowRight: newX++; break;
-            case ArrowLeft:  newX = Math.max(0, newX - 1); break;
-            case ArrowDown:  newY++; break;
-            case ArrowUp:    newY = Math.max(0, newY - 1); break;
-            case Enter:
-                boolean overlap = renderer.haySolapamiento(
-                        getEspaciosActuales(), newX, newY,
-                        selectedEspacio.getAncho(), selectedEspacio.getAlto(), selectedEspacio.getId());
-                if (overlap) {
-                    statusMessage = "Cannot move: overlaps another space";
-                } else {
-                    boolean ok = gestionService.actualizarEspacio(
-                            selectedEspacio.getId(), selectedEspacio.getNombre(),
-                            selectedEspacio.getTipo(), selectedEspacio.getDescripcion(),
-                            newX, newY);
-                    if (ok) {
-                        loadData();
-                        statusMessage = "Space moved";
-                    } else {
-                        statusMessage = "Error moving space";
-                    }
-                }
-                mode = Mode.NAVIGATE;
-                selectedEspacio = refreshSelectedEspacio();
-                break;
-            case Escape:
-                mode = Mode.NAVIGATE;
-                statusMessage = "Move cancelled";
-                selectedEspacio = refreshSelectedEspacio();
-                break;
-            default: break;
-        }
-
-        if (key.getKeyType() != KeyType.Enter && key.getKeyType() != KeyType.Escape) {
-            movePreviewX = newX;
-            movePreviewY = newY;
-            boolean overl = renderer.haySolapamiento(
-                    getEspaciosActuales(), newX, newY,
-                    selectedEspacio.getAncho(), selectedEspacio.getAlto(), selectedEspacio.getId());
-            if (overl) {
-                statusMessage = "OVERLAP! Press Esc to cancel";
-            } else {
-                statusMessage = "New pos: (" + newX + "," + newY + ") Enter=confirm Esc=cancel";
-            }
-            cursor.setX(newX);
-            cursor.setY(newY);
-        }
-    }
-
-    private void handleConfirmDelete(KeyStroke key, TerminalSize size) {
-        switch (key.getKeyType()) {
-            case Enter:
-                if (selectedEspacio != null) {
-                    boolean ok = gestionService.eliminarEspacio(selectedEspacio.getId());
-                    if (ok) {
-                        statusMessage = "Space deleted";
-                        selectedEspacio = null;
-                        loadData();
-                    } else {
-                        statusMessage = "Error deleting space";
-                    }
-                }
-                mode = Mode.NAVIGATE;
-                break;
-            case Escape:
-                mode = Mode.NAVIGATE;
-                statusMessage = "Delete cancelled";
-                break;
-            default: break;
-        }
-    }
-
-    private void handleRecorridoEdit(KeyStroke key, TerminalSize size) {
-        switch (key.getKeyType()) {
-            case ArrowUp:    cursor.moveUp(); break;
-            case ArrowDown:  cursor.moveDown(); break;
-            case ArrowLeft:  cursor.moveLeft(); break;
-            case ArrowRight: cursor.moveRight(); break;
-            case Escape:
-                editandoRecorrido = false;
-                recorridoEditIds = null;
-                activeRecorrido = null;
-                recorridoOverlay = null;
-                mode = Mode.NAVIGATE;
-                statusMessage = "Route edit cancelled";
-                break;
-            case Enter:
-                if (activeRecorrido != null && recorridoEditIds != null) {
-                    boolean ok = gestionService.actualizarRecorrido(
-                            activeRecorrido.getId(), activeRecorrido.getNombre(),
-                            activeRecorrido.getDescripcion(), new ArrayList<>(recorridoEditIds));
-                    if (ok) {
-                        loadData();
-                        statusMessage = "Route saved (" + recorridoEditIds.size() + " spaces)";
-                    } else {
-                        statusMessage = "Error saving route";
-                    }
-                }
-                editandoRecorrido = false;
-                recorridoEditIds = null;
-                activeRecorrido = null;
-                recorridoOverlay = null;
-                mode = Mode.NAVIGATE;
-                break;
-            default:
-                if (key.getCharacter() != null) {
-                    char ch = Character.toLowerCase(key.getCharacter());
-                    if (ch == 's' && selectedEspacio != null) {
-                        if (!recorridoEditIds.contains(selectedEspacio.getId())) {
-                            recorridoEditIds.add(selectedEspacio.getId());
-                            buildRecorridoOverlay();
-                            statusMessage = "Added: " + selectedEspacio.getNombre() + " (step " + recorridoEditIds.size() + ")";
-                        } else {
-                            statusMessage = "Already in route";
-                        }
-                    } else if (ch == 'x' && !recorridoEditIds.isEmpty()) {
-                        String removed = recorridoEditIds.remove(recorridoEditIds.size() - 1);
-                        buildRecorridoOverlay();
-                        statusMessage = "Removed last step";
-                    }
-                }
-                break;
-        }
-    }
-
-    private void navigateRecorrido(int direction) {
-        if (activeRecorrido == null) return;
-        List<String> ids = editandoRecorrido ? recorridoEditIds : activeRecorrido.getEspacioIds();
-        if (ids.isEmpty()) return;
-        if (recorridoStepIndex < 0) {
-            recorridoStepIndex = 0;
-        } else {
-            recorridoStepIndex = (recorridoStepIndex + direction + ids.size()) % ids.size();
-        }
-        String espacioId = ids.get(recorridoStepIndex);
-        Espacio esp = null;
-        for (Espacio e : getEspaciosActuales()) {
-            if (e.getId().equals(espacioId)) { esp = e; break; }
-        }
-        if (esp != null) {
-            cursor.setX(esp.getCoordenadaX());
-            cursor.setY(esp.getCoordenadaY());
-            selectedEspacio = esp;
-        }
-        statusMessage = "Step " + (recorridoStepIndex + 1) + "/" + ids.size() + (esp != null ? " - " + esp.getNombre() : "");
-    }
-
-    private void showCreateDialog(TerminalSize size) {
-        DialogForm form = new DialogForm(screen);
-        String[] labels = {"Name", "Type", "Description", "Width", "Height"};
-        String[] defaults = {"", "AULA", "", "1", "1"};
-        String[] types = {"AULA", "LABORATORIO", "BIBLIOTECA", "CAFETERÍA", "AUDITORIO", "OFICINA", "BAÑO", "OTRO"};
-        int cursorX = cursor.getX();
-        int cursorY = cursor.getY();
-        form.showForm("Create Space (" + cursorX + "," + cursorY + ")", labels, defaults, types, 1);
+        int cursorX = context.getCursor().getX();
+        int cursorY = context.getCursor().getY();
+        form.showForm("Create Espacio (" + cursorX + "," + cursorY + ")", labels, defaults, typeNames, 1);
         String[] result = form.getValues();
-        if (result == null) return;
+        if (result == null)
+            return;
         try {
             int ancho = Integer.parseInt(result[3].trim());
             int alto = Integer.parseInt(result[4].trim());
-            if (ancho < 1) ancho = 1;
-            if (alto < 1) alto = 1;
-            boolean overlap = renderer.haySolapamiento(getEspaciosActuales(), cursorX, cursorY, ancho, alto, null);
-            if (overlap) { showStatusMessage("Cannot create: overlaps existing space", size); return; }
-            Planta planta = getPlantaActual();
-            if (planta == null) return;
-            Espacio nuevo = gestionService.crearEspacio(
-                    result[0].trim(), result[1].trim(), result[2].trim(),
+            if (ancho < 1)
+                ancho = 1;
+            if (alto < 1)
+                alto = 1;
+            boolean overlap = context.getEspacioController().comprobarSolapamiento(
+                    context.getCurrentEspacios(), cursorX, cursorY, ancho, alto, null);
+            if (overlap) {
+                mostrarMensajeEstado("No se puede crear: se solapa con un espacio", size);
+                return;
+            }
+            Planta planta = context.getCurrentPlanta();
+            if (planta == null)
+                return;
+
+            TipoEspacio tipo = TipoEspacio.fromPersistedName(result[1].trim());
+            Espacio nuevo = context.getEspacioController().crear(
+                    result[0].trim(), tipo, result[2].trim(),
                     cursorX, cursorY, ancho, alto, planta.getId());
             if (nuevo != null) {
-                loadData();
-                statusMessage = "Space created";
+                context.cargarDatos();
+                context.setStatusMessage("Espacio creado");
             } else {
-                showStatusMessage("Error creating space", size);
+                mostrarMensajeEstado("Error al crear espacio", size);
             }
         } catch (NumberFormatException e) {
-            showStatusMessage("Invalid number for width/height", size);
+            mostrarMensajeEstado("Número inválido para ancho/alto", size);
+        } catch (ExcepcionReglaNegocio e) {
+            mostrarMensajeEstado(e.getMessage(), size);
         }
     }
 
-    private void showEditDialog(TerminalSize size) {
-        if (selectedEspacio == null) return;
-        Espacio esp = selectedEspacio;
-        DialogForm form = new DialogForm(screen);
-        String[] labels = {"Name", "Type", "Description"};
-        String[] types = {"AULA", "LABORATORIO", "BIBLIOTECA", "CAFETERÍA", "AUDITORIO", "OFICINA", "BAÑO", "OTRO"};
-        String[] defaults = {esp.getNombre(), esp.getTipo(), esp.getDescripcion()};
-        form.showForm("Edit Space", labels, defaults, types, 1);
+    public void mostrarDialogoEditar(TerminalSize size) {
+        if (context.getSelectedEspacio() == null)
+            return;
+        Espacio espacio = context.getSelectedEspacio();
+        DialogForm form = new DialogForm(context.getScreen());
+        String[] labels = { "Name", "Type", "Description" };
+        TipoEspacio[] types = TipoEspacio.values();
+        String[] typeNames = new String[types.length];
+        for (int i = 0; i < types.length; i++) {
+            typeNames[i] = types[i].getDisplayName();
+        }
+        String[] defaults = { espacio.getNombre(), espacio.getTipo().getDisplayName(), espacio.getDescripcion() };
+        form.showForm("Edit Espacio", labels, defaults, typeNames, 1);
         String[] result = form.getValues();
-        if (result == null) return;
-        boolean ok = gestionService.actualizarEspacioCompleto(esp.getId(), result[0].trim(), result[1].trim(),
-                result[2].trim(), esp.getCoordenadaX(), esp.getCoordenadaY(),
-                esp.getAncho(), esp.getAlto());
-        if (ok) { loadData(); statusMessage = "Space updated"; }
-        else { showStatusMessage("Error updating space", size); }
-    }
-
-    private void showFloorManagerDialog(TerminalSize size) {
-        FloorDialog dialog = new FloorDialog(screen, gestionService);
-        dialog.show(edificioActual, plantaIndex);
-        loadData();
-        plantaIndex = Math.min(plantaIndex, edificioActual.getPlantas().size() - 1);
-        if (plantaIndex < 0) plantaIndex = 0;
-        cursor.setX(0); cursor.setY(0);
-        updateGridBounds();
-    }
-
-    private void showRecorridoManager(TerminalSize size) {
-        if (recorridoCtrl == null) return;
-        RecorridoDialog dialog = new RecorridoDialog(screen, recorridoCtrl, gestionService);
-        RecorridoDialog.Action action = dialog.showAdminList();
-        if (action == null) return;
-        if (action.type == RecorridoDialog.Action.ActionType.SELECT) {
-            activeRecorrido = action.recorrido;
-            editandoRecorrido = true;
-            recorridoEditIds = new ArrayList<>(activeRecorrido.getEspacioIds());
-            recorridoStepIndex = -1;
-            buildRecorridoOverlay();
-            mode = Mode.RECORRIDO_EDIT;
-            statusMessage = "Editing route: " + activeRecorrido.getNombre();
-        } else if (action.type == RecorridoDialog.Action.ActionType.CREATE) {
-            activeRecorrido = action.recorrido;
-            editandoRecorrido = true;
-            recorridoEditIds = new ArrayList<>();
-            recorridoStepIndex = -1;
-            buildRecorridoOverlay();
-            mode = Mode.RECORRIDO_EDIT;
-            statusMessage = "New route: add spaces with [S]";
+        if (result == null)
+            return;
+        TipoEspacio tipo = TipoEspacio.fromPersistedName(result[1].trim());
+        boolean ok = context.getEspacioController().actualizarCompleto(
+                espacio.getId(), result[0].trim(), tipo, result[2].trim(),
+                espacio.getCoordenadaX(), espacio.getCoordenadaY(),
+                espacio.getAncho(), espacio.getAlto());
+        if (ok) {
+            context.cargarDatos();
+            context.setStatusMessage("Espacio actualizado");
+        } else {
+            mostrarMensajeEstado("Error al actualizar espacio", size);
         }
-        loadData();
     }
 
-    private void showRecorridoList(TerminalSize size) {
-        if (recorridoCtrl == null) return;
-        if (activeRecorrido != null) {
-            activeRecorrido = null;
-            recorridoOverlay = null;
-            recorridoStepIndex = -1;
-            statusMessage = "Route view ended";
+    public void mostrarDialogoGestionPlantas(TerminalSize size) {
+        PlantaDialog dialog = new PlantaDialog(context.getScreen(), context.getEspacioController());
+        dialog.show(context.getCurrentRegion(), context.getPlantaIndex());
+        context.cargarDatos();
+        int maxIndex = context.getCurrentRegion().obtenerPlantas().size() - 1;
+        if (context.getPlantaIndex() > maxIndex)
+            context.setPlantaIndex(Math.max(0, maxIndex));
+        context.getCursor().setX(0);
+        context.getCursor().setY(0);
+        context.actualizarLimitesGrilla();
+    }
+
+    public void mostrarGestionRecorridos(TerminalSize size) {
+        if (context.getRecorridoController() == null)
+            return;
+        RecorridoDialog dialog = new RecorridoDialog(context.getScreen(), context.getRecorridoController());
+        RecorridoDialog.Action action = dialog.mostrarListaAdmin();
+        if (action == null)
+            return;
+        if (action.tipo == RecorridoDialog.Action.ActionType.SELECT) {
+            context.setActiveRecorrido(action.recorrido);
+            context.setEditingRecorrido(true);
+            context.setRecorridoEditEspacioIds(new ArrayList<>(action.recorrido.getEspacioIds()));
+            context.setRecorridoStepIndex(-1);
+            context.construirCapaRecorrido();
+            context.cambiarModo(new ModoEditarRecorridoEstado());
+            context.setStatusMessage("Editando recorrido: " + action.recorrido.getNombre());
+        } else if (action.tipo == RecorridoDialog.Action.ActionType.CREATE) {
+            context.setActiveRecorrido(action.recorrido);
+            context.setEditingRecorrido(true);
+            context.setRecorridoEditEspacioIds(new ArrayList<>());
+            context.setRecorridoStepIndex(-1);
+            context.construirCapaRecorrido();
+            context.cambiarModo(new ModoEditarRecorridoEstado());
+            context.setStatusMessage("Nuevo recorrido: agrega espacios con [S]");
+        }
+        context.cargarDatos();
+    }
+
+    public void mostrarListaRecorridos(TerminalSize size) {
+        if (context.getRecorridoController() == null)
+            return;
+        if (context.getActiveRecorrido() != null) {
+            context.setActiveRecorrido(null);
+            context.setRecorridoOverlay(null);
+            context.setRecorridoStepIndex(-1);
+            context.setStatusMessage("Vista de recorrido finalizada");
             return;
         }
-        RecorridoDialog dialog = new RecorridoDialog(screen, recorridoCtrl, gestionService);
-        Recorrido recorrido = dialog.showVisitorList();
+        RecorridoDialog dialog = new RecorridoDialog(context.getScreen(), context.getRecorridoController());
+        Recorrido recorrido = dialog.mostrarListaVisitante();
         if (recorrido != null) {
-            activeRecorrido = recorrido;
-            recorridoStepIndex = 0;
-            buildRecorridoOverlay();
-            navigateRecorrido(0);
-            statusMessage = "Viewing route: " + recorrido.getNombre();
+            context.setActiveRecorrido(recorrido);
+            context.setRecorridoStepIndex(0);
+            context.construirCapaRecorrido();
+            context.navegarRecorrido(0);
+            context.setStatusMessage("Viendo recorrido: " + recorrido.getNombre());
         }
     }
 
-    private void showStatusMessage(String msg, TerminalSize size) {
-        statusMessage = msg;
-        try { render(size); screen.refresh(); Thread.sleep(1500); } catch (Exception e) { /* ignore */ }
-        statusMessage = "";
+    public void mostrarBuscarEspacio() {
+        BuscarEspacioDialog dialog = new BuscarEspacioDialog(context.getScreen(), context.getEspacioController());
+        Espacio seleccionado = dialog.mostrar();
+        if (seleccionado == null)
+            return;
+
+        Universidad uni = context.obtenerUniversidad();
+        if (uni == null)
+            return;
+
+        Planta plantaDestino = uni.findPlantaContainingEspacio(seleccionado.getId());
+        if (plantaDestino != null) {
+            boolean changedPlanta = false;
+            Region regionDestino = null;
+            for (Region r : uni.getRegiones()) {
+                for (Planta p : r.obtenerPlantas()) {
+                    if (p.getId().equals(plantaDestino.getId())) {
+                        regionDestino = r;
+                        break;
+                    }
+                }
+                if (regionDestino != null) break;
+            }
+
+            if (regionDestino != null) {
+                context.setCurrentRegion(regionDestino);
+            }
+
+            List<Planta> plantas = context.getCurrentRegion().obtenerPlantas();
+            for (int i = 0; i < plantas.size(); i++) {
+                if (plantas.get(i).getId().equals(plantaDestino.getId())) {
+                    if (i != context.getPlantaIndex()) {
+                        context.setPlantaIndex(i);
+                        changedPlanta = true;
+                    }
+                    break;
+                }
+            }
+
+            if (changedPlanta) {
+                context.cargarDatos();
+            }
+        }
+
+        context.cargarDatos();
+        context.getCursor().setX(seleccionado.getCoordenadaX());
+        context.getCursor().setY(seleccionado.getCoordenadaY());
+
+        Espacio refreshed = null;
+        for (Espacio e : context.getCurrentEspacios()) {
+            if (e.getId().equals(seleccionado.getId())) {
+                refreshed = e;
+                break;
+            }
+        }
+        context.setSelectedEspacio(refreshed);
+        context.actualizarLimitesGrilla();
+        context.setStatusMessage(refreshed != null ? "Found: " + refreshed.getNombre() : "Espacio not on this floor");
     }
 
-    private String repeat(char c, int count) {
+    public void verEspaciosCercanos() {
+        Espacio actual = context.getSelectedEspacio();
+        if (actual == null) {
+            context.setStatusMessage("Cerca: (nada)");
+            return;
+        }
+        LinkedHashMap<String, Espacio> adyacentes = context.getRenderer().spacesAdyacentes(
+                context.getCurrentEspacios(), actual);
+        if (adyacentes.isEmpty()) {
+            context.setStatusMessage("Cerca: (nada)");
+        } else {
+            List<String> etiquetas = new ArrayList<>();
+            for (Map.Entry<String, Espacio> entry : adyacentes.entrySet()) {
+                Espacio vecino = entry.getValue();
+                etiquetas.add(vecino.getNombre() + " (" + direccionRelativa(actual, vecino) + ")");
+            }
+            context.setStatusMessage("Cerca: " + String.join(", ", etiquetas));
+        }
+    }
+
+    private String direccionRelativa(Espacio centro, Espacio vecino) {
+        int cx = centro.getCoordenadaX() + centro.getAncho() / 2;
+        int cy = centro.getCoordenadaY() + centro.getAlto() / 2;
+        int vx = vecino.getCoordenadaX() + vecino.getAncho() / 2;
+        int vy = vecino.getCoordenadaY() + vecino.getAlto() / 2;
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < count; i++) sb.append(c);
-        return sb.toString();
+        if (vy < cy) sb.append("N");
+        else if (vy > cy) sb.append("S");
+        if (vx < cx) sb.append("O");
+        else if (vx > cx) sb.append("E");
+        return sb.length() > 0 ? sb.toString() : "?";
     }
 
-    private String truncate(String s, int maxLen) {
-        if (s == null) return "";
-        return s.length() <= maxLen ? s : s.substring(0, maxLen);
+    private void mostrarMensajeEstado(String message, TerminalSize size) {
+        context.setStatusMessage(message);
+        try {
+            renderizar(size);
+            context.getScreen().refresh();
+            Thread.sleep(1500);
+        } catch (Exception e) {
+            // ignore
+        }
+        context.setStatusMessage("");
+    }
+
+    public void mostrarDialogoConfig(TerminalSize size) {
+        ConfigDialog dialog = new ConfigDialog(context.getScreen(), context.getEspacioController());
+        dialog.show();
+        context.cargarDatos();
+        Universidad uni = context.obtenerUniversidad();
+        if (uni != null && !uni.getRegiones().isEmpty()) {
+            context.setCurrentRegion(uni.getRegiones().get(0));
+            if (context.getPlantaIndex() >= context.getCurrentRegion().obtenerPlantas().size()) {
+                context.setPlantaIndex(0);
+            }
+        }
+        context.actualizarLimitesGrilla();
     }
 }

@@ -1,45 +1,45 @@
 package com.myuniverse.repositories;
 
-import com.google.gson.reflect.TypeToken;
 import com.myuniverse.models.Administrador;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdministradorRepository implements IRepository<Administrador> {
-    private static final String ARCHIVO = "administradores.json";
-    private static final Type TIPO_LISTA = new TypeToken<List<Administrador>>() {}.getType();
+    private static final String FILE_NAME = "administradores.json";
+    private static final Type LIST_TYPE = new TypeToken<List<Administrador>>() {}.getType();
 
     @Override
-    public List<Administrador> findAll() {
-        List<Administrador> lista = JsonUtil.leer(ARCHIVO, TIPO_LISTA);
-        return lista != null ? lista : new ArrayList<>();
+    public List<Administrador> obtenerTodos() {
+        List<Administrador> list = JsonUtil.read(FILE_NAME, LIST_TYPE, true);
+        return list != null ? list : new ArrayList<>();
     }
 
     @Override
-    public Administrador findById(String usuario) {
-        return findAll().stream()
-                .filter(a -> a.getUsuario().equals(usuario))
+    public Administrador obtenerPorId(String id) {
+        return obtenerTodos().stream()
+                .filter(a -> a.getNombreUsuario().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
     @Override
-    public Administrador save(Administrador admin) {
-        List<Administrador> lista = findAll();
-        lista.add(admin);
-        JsonUtil.escribir(ARCHIVO, lista, TIPO_LISTA);
+    public Administrador guardar(Administrador admin) {
+        List<Administrador> list = obtenerTodos();
+        list.add(admin);
+        JsonUtil.write(FILE_NAME, list, LIST_TYPE);
         return admin;
     }
 
     @Override
-    public boolean update(Administrador admin) {
-        List<Administrador> lista = findAll();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getUsuario().equals(admin.getUsuario())) {
-                lista.set(i, admin);
-                JsonUtil.escribir(ARCHIVO, lista, TIPO_LISTA);
+    public boolean actualizar(Administrador admin) {
+        List<Administrador> list = obtenerTodos();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getNombreUsuario().equals(admin.getNombreUsuario())) {
+                list.set(i, admin);
+                JsonUtil.write(FILE_NAME, list, LIST_TYPE);
                 return true;
             }
         }
@@ -47,10 +47,12 @@ public class AdministradorRepository implements IRepository<Administrador> {
     }
 
     @Override
-    public boolean deleteById(String usuario) {
-        List<Administrador> lista = findAll();
-        boolean eliminado = lista.removeIf(a -> a.getUsuario().equals(usuario));
-        if (eliminado) JsonUtil.escribir(ARCHIVO, lista, TIPO_LISTA);
-        return eliminado;
+    public boolean eliminarPorId(String id) {
+        List<Administrador> list = obtenerTodos();
+        boolean removed = list.removeIf(a -> a.getNombreUsuario().equals(id));
+        if (removed) {
+            JsonUtil.write(FILE_NAME, list, LIST_TYPE);
+        }
+        return removed;
     }
 }

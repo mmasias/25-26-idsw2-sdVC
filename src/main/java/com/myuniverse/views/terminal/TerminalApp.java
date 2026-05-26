@@ -6,13 +6,13 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.myuniverse.controllers.AuthController;
 import com.myuniverse.controllers.EspacioController;
 import com.myuniverse.controllers.RecorridoController;
-import com.myuniverse.controllers.VisitaController;
+import com.myuniverse.models.Universidad;
 import com.myuniverse.repositories.AdministradorRepository;
 import com.myuniverse.repositories.EspacioRepository;
 import com.myuniverse.repositories.RecorridoRepository;
 import com.myuniverse.services.AuthService;
 import com.myuniverse.services.GestionEspacioService;
-import com.myuniverse.services.VisitaService;
+import com.myuniverse.services.RecorridoService;
 
 import java.io.IOException;
 
@@ -23,9 +23,27 @@ public class TerminalApp {
         this.adminMode = adminMode;
     }
 
-    public void start() {
+    public void iniciar() {
+        EspacioRepository spaceRepository = new EspacioRepository();
+        RecorridoRepository routeRepository = new RecorridoRepository();
+        AdministradorRepository repositorioAdministrador = new AdministradorRepository();
+
+        GestionEspacioService servicioEspacio = new GestionEspacioService(spaceRepository, routeRepository);
+        RecorridoService servicioRecorrido = new RecorridoService(routeRepository);
+        AuthService servicioAutenticacion = new AuthService(repositorioAdministrador);
+
+        AuthController controladorAutenticacion = new AuthController(servicioAutenticacion);
+        EspacioController controladorEspacio = new EspacioController(servicioEspacio);
+        RecorridoController controladorRecorrido = new RecorridoController(servicioRecorrido);
+
+        String uniName = "myUniverse";
+        Universidad uni = controladorEspacio.obtenerUniversidad();
+        if (uni != null && uni.getNombre() != null && !uni.getNombre().isBlank()) {
+            uniName = uni.getNombre();
+        }
+
         DefaultTerminalFactory factory = new DefaultTerminalFactory()
-                .setTerminalEmulatorTitle("myUniverse");
+                .setTerminalEmulatorTitle(uniName);
         Terminal terminal = null;
         TerminalScreen screen = null;
 
@@ -34,24 +52,11 @@ public class TerminalApp {
             screen = new TerminalScreen(terminal);
             screen.startScreen();
 
-            EspacioRepository espacioRepo = new EspacioRepository();
-            RecorridoRepository recorridoRepo = new RecorridoRepository();
-            AdministradorRepository adminRepo = new AdministradorRepository();
-
-            AuthService authService = new AuthService(adminRepo);
-            GestionEspacioService gestionService = new GestionEspacioService(espacioRepo, recorridoRepo);
-            VisitaService visitaService = new VisitaService(espacioRepo, recorridoRepo);
-
-            AuthController authCtrl = new AuthController(authService);
-            EspacioController espacioCtrl = new EspacioController(gestionService, visitaService);
-            RecorridoController recorridoCtrl = new RecorridoController(gestionService, visitaService);
-            VisitaController visitaCtrl = new VisitaController(visitaService);
-
-            MapaView mapaView = new MapaView(screen, adminMode, espacioCtrl, authCtrl, gestionService);
-            mapaView.setRecorridoController(recorridoCtrl);
+            MapaView mapView = new MapaView(screen, adminMode, controladorEspacio, controladorAutenticacion);
+            mapView.setRecorridoController(controladorRecorrido);
 
             if (adminMode) {
-                LoginDialog loginDialog = new LoginDialog(screen, authCtrl);
+                LoginDialog loginDialog = new LoginDialog(screen, controladorAutenticacion);
                 boolean authenticated = loginDialog.show();
                 if (!authenticated) {
                     screen.stopScreen();
@@ -59,7 +64,7 @@ public class TerminalApp {
                 }
             }
 
-            mapaView.run();
+            mapView.ejecutar();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,73 +1,81 @@
 package com.myuniverse.controllers;
 
-import com.myuniverse.models.Espacio;
 import com.myuniverse.models.Planta;
-import com.myuniverse.services.GestionEspacioService;
-import com.myuniverse.services.VisitaService;
+import com.myuniverse.models.Espacio;
+import com.myuniverse.models.Region;
+import com.myuniverse.models.TipoEspacio;
+import com.myuniverse.models.Universidad;
+import com.myuniverse.services.IGestionEspacioService;
 
 import java.util.List;
 
 public class EspacioController {
-    private final GestionEspacioService gestionService;
-    private final VisitaService visitaService;
+    private final IGestionEspacioService servicioEspacio;
 
-    public EspacioController(GestionEspacioService gestionService, VisitaService visitaService) {
-        this.gestionService = gestionService;
-        this.visitaService = visitaService;
+    public EspacioController(IGestionEspacioService servicioEspacio) {
+        this.servicioEspacio = servicioEspacio;
+    }
+
+    public Universidad obtenerUniversidad() {
+        return servicioEspacio.obtenerUniversidad();
+    }
+
+    public void guardarUniversidad(Universidad universidad) {
+        servicioEspacio.guardarUniversidad(universidad);
     }
 
     public List<Espacio> obtenerTodos() {
-        return gestionService.obtenerTodosEspacios();
+        return servicioEspacio.obtenerTodosLosEspacios();
     }
 
     public List<Espacio> filtrar(String criterio) {
-        return gestionService.filtrarEspacios(criterio);
+        return servicioEspacio.filtrarEspacios(criterio);
     }
 
     public List<Planta> obtenerPlantas() {
-        return gestionService.obtenerTodasPlantas();
+        return servicioEspacio.obtenerTodasLasPlantas();
     }
 
-    public boolean validarDatosMinimos(String nombre, String plantaId) {
+    public boolean validarDatosMinimos(String nombre, String idPlanta) {
         if (nombre == null || nombre.isBlank()) return false;
-        return !gestionService.verificarUnicidadEspacio(nombre, plantaId);
+        return servicioEspacio.esNombreEspacioUnicoEnPlanta(nombre, idPlanta);
     }
 
-    public Espacio crear(String nombre, String tipo, String descripcion,
-                         int coordenadaX, int coordenadaY, String plantaId) {
-        return gestionService.crearEspacio(nombre, tipo, descripcion, coordenadaX, coordenadaY, plantaId);
+    public Espacio crear(String nombre, TipoEspacio tipo, String descripcion,
+                        int x, int y, int ancho, int alto, String idPlanta) {
+        return servicioEspacio.crearEspacio(nombre, tipo, descripcion, x, y, ancho, alto, idPlanta);
     }
 
     public Espacio obtenerPorId(String id) {
-        return gestionService.obtenerEspacioPorId(id);
+        return servicioEspacio.obtenerEspacioPorId(id);
     }
 
-    public boolean actualizar(String id, String nombre, String tipo, String descripcion,
-                               int coordenadaX, int coordenadaY) {
-        return gestionService.actualizarEspacio(id, nombre, tipo, descripcion, coordenadaX, coordenadaY);
+    public boolean actualizarCompleto(String id, String nombre, TipoEspacio tipo, String descripcion,
+                              int x, int y, int ancho, int alto) {
+        return servicioEspacio.actualizarEspacioCompleto(id, nombre, tipo, descripcion, x, y, ancho, alto);
+    }
+
+    public boolean mover(String id, int newX, int newY) {
+        return servicioEspacio.moverEspacio(id, newX, newY);
     }
 
     public boolean eliminar(String id) {
-        return gestionService.eliminarEspacio(id);
+        return servicioEspacio.eliminarEspacio(id);
     }
 
-    public List<Espacio> buscar(String criterio) {
-        return visitaService.buscarEspacios(criterio);
+    public boolean comprobarSolapamiento(List<Espacio> espacios, int x, int y, int ancho, int alto, String excludeId) {
+        return servicioEspacio.tieneSolapamiento(espacios, x, y, ancho, alto, excludeId);
     }
 
-    public Espacio obtenerUbicacionActual() {
-        return visitaService.obtenerEspacioActual();
+    public void actualizarNombreUniversidad(String nombre) {
+        servicioEspacio.actualizarNombreUniversidad(nombre);
     }
 
-    public Espacio obtenerDetalles(String id) {
-        return visitaService.obtenerDetallesEspacio(id);
+    public void actualizarNombreRegion(String idRegion, String nombre) {
+        servicioEspacio.actualizarNombreRegion(idRegion, nombre);
     }
 
-    public List<Espacio> obtenerCercanos() {
-        return visitaService.obtenerEspaciosCercanos();
-    }
-
-    public List<Espacio> obtenerPorPlanta(String plantaId) {
-        return visitaService.obtenerEspaciosPorPlanta(plantaId);
+    public Region agregarRegion(String nombre) {
+        return servicioEspacio.agregarRegion(nombre);
     }
 }

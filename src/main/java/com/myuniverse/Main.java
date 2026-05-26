@@ -1,17 +1,15 @@
 package com.myuniverse;
 
-import com.myuniverse.repositories.AdministradorRepository;
-import com.myuniverse.repositories.EspacioRepository;
-import com.myuniverse.repositories.RecorridoRepository;
 import com.myuniverse.views.terminal.TerminalApp;
 
 public class Main {
     public static void main(String[] args) {
-        boolean modoAdmin = false;
+        boolean adminMode = false;
         for (String arg : args) {
-            if ("--admin".equals(arg)) modoAdmin = true;
+            if ("--admin".equals(arg))
+                adminMode = true;
         }
-        TerminalApp app = new TerminalApp(modoAdmin);
-        app.start();
+        TerminalApp app = new TerminalApp(adminMode);
+        app.iniciar();
     }
 }

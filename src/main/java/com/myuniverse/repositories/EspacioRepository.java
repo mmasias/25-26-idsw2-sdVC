@@ -1,130 +1,112 @@
 package com.myuniverse.repositories;
 
-import com.google.gson.reflect.TypeToken;
-import com.myuniverse.models.*;
+import com.myuniverse.models.Region;
+import com.myuniverse.models.Planta;
+import com.myuniverse.models.Espacio;
+import com.myuniverse.models.Universidad;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class EspacioRepository {
-    private static final String ARCHIVO = "universidad.json";
-    private static final Type TIPO_UNIVERSIDAD = new TypeToken<Universidad>() {}.getType();
+public class EspacioRepository implements IEspacioRepository {
+    private static final String FILE_NAME = "universidad.json";
 
-    private Universidad cargarUniversidad() {
-        Universidad uni = JsonUtil.leer(ARCHIVO, TIPO_UNIVERSIDAD);
-        if (uni == null) {
-            uni = crearUniversidadPorDefecto();
-            guardarUniversidad(uni);
+    private Universidad cargarDatosUniversidad() {
+        Universidad universidad = JsonUtil.read(FILE_NAME, Universidad.class);
+        if (universidad == null) {
+            universidad = crearUniversidadPorDefecto();
+            guardarUniversidad(universidad);
         }
-        return uni;
-    }
-
-    public void guardarUniversidad(Universidad uni) {
-        JsonUtil.escribir(ARCHIVO, uni, TIPO_UNIVERSIDAD);
+        return universidad;
     }
 
     private Universidad crearUniversidadPorDefecto() {
-        Universidad uni = new Universidad();
-        uni.setId("uni-1");
-        uni.setNombre("Universidad Europea del Atlántico");
-        uni.setEdificios(new ArrayList<>());
+        Universidad universidad = new Universidad();
+        universidad.setId("uni-1");
+        universidad.setNombre("My University");
+        universidad.setRegiones(new ArrayList<>());
 
-        Edificio edif = new Edificio();
-        edif.setId("edif-1");
-        edif.setNombre("Edificio Principal");
-        edif.setPlantas(new ArrayList<>());
+        Region region = new Region();
+        region.setId("region-1");
+        region.setNombre("Main Campus");
+        region.setPlantas(new ArrayList<>());
 
-        Planta pb = new Planta();
-        pb.setId("planta-0");
-        pb.setNombre("Planta Baja");
-        pb.setNumero(0);
-        pb.setEspacios(new ArrayList<>());
+        Planta groundPlanta = new Planta();
+        groundPlanta.setId("planta-0");
+        groundPlanta.setNombre("Ground Floor");
+        groundPlanta.setNumero(0);
+        groundPlanta.setEspacios(new ArrayList<>());
 
-        Planta p1 = new Planta();
-        p1.setId("planta-1");
-        p1.setNombre("Primera Planta");
-        p1.setNumero(1);
-        p1.setEspacios(new ArrayList<>());
+        Planta firstPlanta = new Planta();
+        firstPlanta.setId("planta-1");
+        firstPlanta.setNombre("First Floor");
+        firstPlanta.setNumero(1);
+        firstPlanta.setEspacios(new ArrayList<>());
 
-        edif.getPlantas().add(pb);
-        edif.getPlantas().add(p1);
-        uni.getEdificios().add(edif);
-        return uni;
+        region.agregarPlanta(groundPlanta);
+        region.agregarPlanta(firstPlanta);
+        universidad.addRegion(region);
+        return universidad;
     }
 
-    public Universidad obtenerUniversidad() {
-        return cargarUniversidad();
+    @Override
+    public Universidad cargarUniversidad() {
+        return cargarDatosUniversidad();
     }
 
-    public List<Espacio> obtenerTodosEspacios() {
-        Universidad uni = cargarUniversidad();
-        List<Espacio> todos = new ArrayList<>();
-        for (Edificio e : uni.getEdificios()) {
-            for (Planta p : e.getPlantas()) {
-                todos.addAll(p.getEspacios());
-            }
-        }
-        return todos;
+    @Override
+    public void guardarUniversidad(Universidad universidad) {
+        JsonUtil.write(FILE_NAME, universidad);
     }
 
-    public Espacio obtenerPorId(String id) {
-        return obtenerTodosEspacios().stream()
-                .filter(esp -> esp.getId().equals(id))
+    @Override
+    public List<Espacio> obtenerTodosLosEspacios() {
+        Universidad universidad = cargarDatosUniversidad();
+        return universidad.obtenerTodosLosEspacios();
+    }
+
+    @Override
+    public Espacio buscarEspacioPorId(String id) {
+        return obtenerTodosLosEspacios().stream()
+                .filter(espacio -> espacio.getId().equals(id))
                 .findFirst()
                 .orElse(null);
     }
 
-    public List<Espacio> filtrarPorCriterio(String criterio) {
-        String lower = criterio.toLowerCase();
-        return obtenerTodosEspacios().stream()
-                .filter(esp -> esp.getNombre().toLowerCase().contains(lower)
-                        || esp.getTipo().toLowerCase().contains(lower))
-                .collect(Collectors.toList());
+    @Override
+    public List<Espacio> obtenerEspaciosPorIdPlanta(String idPlanta) {
+        Universidad universidad = cargarDatosUniversidad();
+        Planta planta = universidad.buscarPlantaPorId(idPlanta);
+        return planta != null ? planta.getEspacios() : Collections.emptyList();
     }
 
-    public List<Espacio> obtenerPorPlanta(String plantaId) {
-        Universidad uni = cargarUniversidad();
-        for (Edificio e : uni.getEdificios()) {
-            for (Planta p : e.getPlantas()) {
-                if (p.getId().equals(plantaId)) {
-                    return p.getEspacios();
-                }
-            }
-        }
-        return Collections.emptyList();
+    @Override
+    public Planta buscarPlantaPorId(String idPlanta) {
+        return cargarDatosUniversidad().buscarPlantaPorId(idPlanta);
     }
 
-    public List<Planta> obtenerTodasPlantas() {
-        Universidad uni = cargarUniversidad();
-        List<Planta> todas = new ArrayList<>();
-        for (Edificio e : uni.getEdificios()) {
-            todas.addAll(e.getPlantas());
-        }
-        return todas;
+    @Override
+    public List<Planta> obtenerTodasLasPlantas() {
+        return cargarDatosUniversidad().obtenerTodasLasPlantas();
     }
 
-    public Planta obtenerPlantaPorId(String plantaId) {
-        return obtenerTodasPlantas().stream()
-                .filter(p -> p.getId().equals(plantaId))
-                .findFirst()
-                .orElse(null);
+    @Override
+    public boolean existeNombreEspacioEnPlanta(String nombre, String idPlanta) {
+        return obtenerEspaciosPorIdPlanta(idPlanta).stream()
+                .anyMatch(espacio -> espacio.getNombre().equalsIgnoreCase(nombre));
     }
 
-    public boolean existeNombreEnPlanta(String nombre, String plantaId) {
-        return obtenerPorPlanta(plantaId).stream()
-                .anyMatch(esp -> esp.getNombre().equalsIgnoreCase(nombre));
-    }
-
-    public Espacio crearEspacio(Espacio espacio, String plantaId) {
-        Universidad uni = cargarUniversidad();
-        for (Edificio e : uni.getEdificios()) {
-            for (Planta p : e.getPlantas()) {
-                if (p.getId().equals(plantaId)) {
-                    p.getEspacios().add(espacio);
-                    guardarUniversidad(uni);
+    @Override
+    public Espacio guardarEspacio(Espacio espacio, String idPlanta) {
+        Universidad universidad = cargarDatosUniversidad();
+        for (Region region : universidad.getRegiones()) {
+            for (Planta planta : region.obtenerPlantas()) {
+                if (planta.getId().equals(idPlanta)) {
+                    List<Espacio> mutableEspacios = new ArrayList<>(planta.getEspacios());
+                    mutableEspacios.add(espacio);
+                    planta.setEspacios(mutableEspacios);
+                    guardarUniversidad(universidad);
                     return espacio;
                 }
             }
@@ -132,14 +114,18 @@ public class EspacioRepository {
         return null;
     }
 
+    @Override
     public boolean actualizarEspacio(Espacio espacio) {
-        Universidad uni = cargarUniversidad();
-        for (Edificio e : uni.getEdificios()) {
-            for (Planta p : e.getPlantas()) {
-                for (int i = 0; i < p.getEspacios().size(); i++) {
-                    if (p.getEspacios().get(i).getId().equals(espacio.getId())) {
-                        p.getEspacios().set(i, espacio);
-                        guardarUniversidad(uni);
+        Universidad universidad = cargarDatosUniversidad();
+        for (Region region : universidad.getRegiones()) {
+            for (Planta planta : region.obtenerPlantas()) {
+                List<Espacio> espacios = planta.getEspacios();
+                for (int i = 0; i < espacios.size(); i++) {
+                    if (espacios.get(i).getId().equals(espacio.getId())) {
+                        List<Espacio> mutableEspacios = new ArrayList<>(espacios);
+                        mutableEspacios.set(i, espacio);
+                        planta.setEspacios(mutableEspacios);
+                        guardarUniversidad(universidad);
                         return true;
                     }
                 }
@@ -148,13 +134,14 @@ public class EspacioRepository {
         return false;
     }
 
-    public boolean eliminarEspacio(String id) {
-        Universidad uni = cargarUniversidad();
-        for (Edificio e : uni.getEdificios()) {
-            for (Planta p : e.getPlantas()) {
-                boolean eliminado = p.getEspacios().removeIf(esp -> esp.getId().equals(id));
-                if (eliminado) {
-                    guardarUniversidad(uni);
+    @Override
+    public boolean eliminarEspacioPorId(String id) {
+        Universidad universidad = cargarDatosUniversidad();
+        for (Region region : universidad.getRegiones()) {
+            for (Planta planta : region.obtenerPlantas()) {
+                boolean removed = planta.eliminarEspacio(id);
+                if (removed) {
+                    guardarUniversidad(universidad);
                     return true;
                 }
             }

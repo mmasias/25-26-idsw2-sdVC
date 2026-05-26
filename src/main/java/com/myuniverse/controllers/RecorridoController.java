@@ -1,63 +1,48 @@
 package com.myuniverse.controllers;
 
-import com.myuniverse.models.Espacio;
 import com.myuniverse.models.Recorrido;
-import com.myuniverse.services.GestionEspacioService;
-import com.myuniverse.services.VisitaService;
+import com.myuniverse.services.IRecorridoService;
 
 import java.util.List;
 
 public class RecorridoController {
-    private final GestionEspacioService gestionService;
-    private final VisitaService visitaService;
+    private final IRecorridoService servicioRecorrido;
 
-    public RecorridoController(GestionEspacioService gestionService, VisitaService visitaService) {
-        this.gestionService = gestionService;
-        this.visitaService = visitaService;
+    public RecorridoController(IRecorridoService servicioRecorrido) {
+        this.servicioRecorrido = servicioRecorrido;
     }
 
     public List<Recorrido> obtenerTodos() {
-        return gestionService.obtenerTodosRecorridos();
+        return servicioRecorrido.obtenerTodosLosRecorridos();
     }
 
     public List<Recorrido> filtrar(String criterio) {
-        return gestionService.filtrarRecorridos(criterio);
+        return servicioRecorrido.filtrarRecorridos(criterio);
     }
 
     public boolean validarDatosMinimos(String nombre) {
-        if (nombre == null || nombre.isBlank()) return false;
-        return !gestionService.verificarUnicidadRecorrido(nombre);
+        if (nombre == null || nombre.isBlank())
+            return false;
+        return servicioRecorrido.esNombreRecorridoUnico(nombre);
     }
 
     public Recorrido crear(String nombre, String descripcion) {
-        return gestionService.crearRecorrido(nombre, descripcion);
+        return servicioRecorrido.crearRecorrido(nombre, descripcion);
     }
 
     public Recorrido obtenerPorId(String id) {
-        return gestionService.obtenerRecorridoPorId(id);
+        return servicioRecorrido.obtenerRecorridoPorId(id);
     }
 
-    public boolean actualizar(String id, String nombre, String descripcion, List<String> espacioIds) {
-        return gestionService.actualizarRecorrido(id, nombre, descripcion, espacioIds);
+    public boolean actualizar(String id, String nombre, String descripcion, List<String> idsEspacios) {
+        return servicioRecorrido.actualizarRecorrido(id, nombre, descripcion, idsEspacios);
     }
 
     public boolean eliminar(String id) {
-        return gestionService.eliminarRecorrido(id);
+        return servicioRecorrido.eliminarRecorrido(id);
     }
 
-    public List<Recorrido> obtenerRecorridosVisitante() {
-        return visitaService.obtenerRecorridos();
-    }
-
-    public Recorrido obtenerDetallesRecorrido(String id) {
-        return visitaService.obtenerRecorrido(id);
-    }
-
-    public Recorrido iniciarRecorrido(String recorridoId) {
-        return visitaService.iniciarRecorrido(recorridoId);
-    }
-
-    public Espacio cambiarDeEspacio(String direccion) {
-        return visitaService.cambiarDeEspacio(direccion);
+    public boolean estaEspacioReferenciadoEnAlgunRecorrido(String idEspacio) {
+        return servicioRecorrido.estaEspacioReferenciadoEnAlgunRecorrido(idEspacio);
     }
 }

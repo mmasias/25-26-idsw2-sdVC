@@ -3,55 +3,55 @@ package com.myuniverse.views.terminal;
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
-import com.myuniverse.models.Edificio;
+import com.myuniverse.models.Region;
 import com.myuniverse.models.Planta;
 import com.myuniverse.models.Universidad;
-import com.myuniverse.services.GestionEspacioService;
+import com.myuniverse.controllers.EspacioController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FloorDialog {
+public class PlantaDialog {
     private final TerminalScreen screen;
-    private final GestionEspacioService service;
+    private final EspacioController controladorEspacio;
     private int selected;
 
-    public FloorDialog(TerminalScreen screen, GestionEspacioService service) {
+    public PlantaDialog(TerminalScreen screen, EspacioController controladorEspacio) {
         this.screen = screen;
-        this.service = service;
+        this.controladorEspacio = controladorEspacio;
         this.selected = 0;
     }
 
-    public void show(Edificio edificio, int currentFloorIndex) {
-        if (edificio == null) return;
+    public void show(Region region, int currentPlantaIndex) {
+        if (region == null) return;
         boolean running = true;
 
         while (running) {
-            List<Planta> plantas = edificio.getPlantas();
+            List<Planta> plantas = region.obtenerPlantas();
 
             TerminalSize size = screen.getTerminalSize();
             TextGraphics g = screen.newTextGraphics();
-g.fillRectangle(new TerminalPosition(0, 0), size, ' ');
+            g.fillRectangle(new TerminalPosition(0, 0), size, ' ');
 
             int boxW = 50;
             int boxH = Math.max(8, plantas.size() * 2 + 6);
             int boxX = Math.max(0, (size.getColumns() - boxW) / 2);
             int boxY = Math.max(0, (size.getRows() - boxH) / 2);
 
-            drawBox(g, boxX, boxY, boxW, boxH, "Floor Manager");
+            UIUtils.drawBox(g, boxX, boxY, boxW, boxH, "Planta Manager");
 
             g.setForegroundColor(ColorScheme.FG);
             g.setBackgroundColor(ColorScheme.BG);
-            g.putString(boxX + 2, boxY + 2, "Floors:");
+            g.putString(boxX + 2, boxY + 2, "Plantas:");
 
             for (int i = 0; i < plantas.size(); i++) {
                 int row = boxY + 3 + i;
-                Planta p = plantas.get(i);
-                String line = String.format("%d. %s (Planta %d) - %d spaces",
-                        i, p.getNombre(), p.getNumero(), p.getEspacios().size());
+                Planta planta = plantas.get(i);
+                String line = String.format("%d. %s (Planta %d) - %d espacios",
+                        i, planta.getNombre(), planta.getNumero(), planta.getEspacios().size());
                 if (i == selected) {
                     g.setForegroundColor(ColorScheme.CURSOR_FG);
                     g.setBackgroundColor(ColorScheme.CURSOR_BG);
@@ -86,18 +86,10 @@ g.fillRectangle(new TerminalPosition(0, 0), size, ' ');
                         if (key.getCharacter() != null) {
                             char ch = Character.toLowerCase(key.getCharacter());
                             switch (ch) {
-                                case 'a':
-                                    addFloor(edificio);
-                                    break;
-                                case 'd':
-                                    deleteFloor(edificio);
-                                    break;
-                                case 'r':
-                                    renameFloor(edificio);
-                                    break;
-                                case 'q':
-                                    running = false;
-                                    break;
+                                case 'a': agregarPlanta(region); break;
+                                case 'd': deletePlanta(region); break;
+                                case 'r': renamePlanta(region); break;
+                                case 'q': running = false; break;
                             }
                         }
                         break;
@@ -115,107 +107,89 @@ g.fillRectangle(new TerminalPosition(0, 0), size, ' ');
         screen.setCursorPosition(null);
     }
 
-    private void addFloor(Edificio edificio) {
+    private void agregarPlanta(Region region) {
         DialogForm form = new DialogForm(screen);
         String[] labels = {"Name"};
-        String[] defaults = {"Nueva Planta"};
-        form.showForm("Add Floor", labels, defaults, null, -1);
+        String[] defaults = {"New Planta"};
+        form.showForm("Add Planta", labels, defaults, null, -1);
         String[] result = form.getValues();
         if (result == null || result[0].trim().isEmpty()) return;
 
         int maxNum = -1;
-        for (Planta p : edificio.getPlantas()) {
-            if (p.getNumero() > maxNum) maxNum = p.getNumero();
+        for (Planta f : region.obtenerPlantas()) {
+            if (f.getNumero() > maxNum) maxNum = f.getNumero();
         }
 
-        Planta nueva = new Planta(
+        Planta newPlanta = new Planta(
                 "planta-" + UUID.randomUUID().toString().substring(0, 8),
                 result[0].trim(),
                 maxNum + 1,
-                new java.util.ArrayList<>()
-        );
-        edificio.getPlantas().add(nueva);
-        saveEdificio(edificio);
+                new ArrayList<>());
+        region.agregarPlanta(newPlanta);
+        saveRegion(region);
     }
 
-    private void deleteFloor(Edificio edificio) {
-        List<Planta> plantas = edificio.getPlantas();
+    private void deletePlanta(Region region) {
+        List<Planta> plantas = region.obtenerPlantas();
         if (plantas.isEmpty() || selected >= plantas.size()) return;
         Planta target = plantas.get(selected);
         if (!target.getEspacios().isEmpty()) {
-            showMessage("Cannot delete: floor has spaces");
+            showMessage("Cannot eliminar: planta has espacios");
             return;
         }
-        plantas.remove(selected);
-        saveEdificio(edificio);
+        region.eliminarPlanta(target.getId());
+        saveRegion(region);
         if (selected > 0) selected--;
     }
 
-    private void renameFloor(Edificio edificio) {
-        List<Planta> plantas = edificio.getPlantas();
+    private void renamePlanta(Region region) {
+        List<Planta> plantas = region.obtenerPlantas();
         if (plantas.isEmpty() || selected >= plantas.size()) return;
         Planta target = plantas.get(selected);
 
         DialogForm form = new DialogForm(screen);
         String[] labels = {"Name"};
         String[] defaults = {target.getNombre()};
-        form.showForm("Rename Floor", labels, defaults, null, -1);
+        form.showForm("Rename Planta", labels, defaults, null, -1);
         String[] result = form.getValues();
         if (result == null || result[0].trim().isEmpty()) return;
 
         target.setNombre(result[0].trim());
-        saveEdificio(edificio);
+        saveRegion(region);
     }
 
-    private void saveEdificio(Edificio edificio) {
-        Universidad uni = service.obtenerUniversidad();
-        for (int i = 0; i < uni.getEdificios().size(); i++) {
-            if (uni.getEdificios().get(i).getId().equals(edificio.getId())) {
-                uni.getEdificios().set(i, edificio);
+    private void saveRegion(Region region) {
+        Universidad universidad = controladorEspacio.obtenerUniversidad();
+        List<Region> regiones = new ArrayList<>(universidad.getRegiones());
+        for (int i = 0; i < regiones.size(); i++) {
+            if (regiones.get(i).getId().equals(region.getId())) {
+                regiones.set(i, region);
                 break;
             }
         }
-        service.guardarUniversidad(uni);
-    }
+        universidad.setRegiones(regiones);
+        controladorEspacio.guardarUniversidad(universidad);    }
 
-    private void showMessage(String msg) {
+    private void showMessage(String message) {
         TerminalSize size = screen.getTerminalSize();
         TextGraphics g = screen.newTextGraphics();
         g.fillRectangle(new TerminalPosition(0, 0), size, ' ');
 
-        int boxW = Math.max(msg.length() + 6, 20);
+        int boxW = Math.max(message.length() + 6, 20);
         int boxH = 5;
         int boxX = Math.max(0, (size.getColumns() - boxW) / 2);
         int boxY = Math.max(0, (size.getRows() - boxH) / 2);
 
-        drawBox(g, boxX, boxY, boxW, boxH, "Attention");
+        UIUtils.drawBox(g, boxX, boxY, boxW, boxH, "Attention");
         g.setForegroundColor(ColorScheme.SELECTED_FG);
         g.setBackgroundColor(ColorScheme.BG);
-        g.putString(boxX + 3, boxY + 2, msg);
+        g.putString(boxX + 3, boxY + 2, message);
 
-try { screen.refresh(); } catch (IOException e) { return; }
+        try { screen.refresh(); } catch (IOException e) { return; }
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-    }
-
-    private void drawBox(TextGraphics g, int x, int y, int w, int h, String title) {
-        g.setForegroundColor(ColorScheme.BORDER);
-        g.setBackgroundColor(ColorScheme.BG);
-        StringBuilder topSb = new StringBuilder("┌");
-        for (int i = 0; i < w - 2; i++) topSb.append('─');
-        topSb.append('┐');
-        g.putString(x, y, topSb.toString());
-        for (int i = 1; i < h - 1; i++) {
-            g.putString(x, y + i, "│" + String.format("%" + (w - 2) + "s", "") + "│");
-        }
-        StringBuilder botSb = new StringBuilder("└");
-        for (int i = 0; i < w - 2; i++) botSb.append('─');
-        botSb.append('┘');
-        g.putString(x, y + h - 1, botSb.toString());
-        g.setForegroundColor(ColorScheme.TITLE_FG);
-        g.putString(x + 2, y, " " + title + " ");
     }
 }

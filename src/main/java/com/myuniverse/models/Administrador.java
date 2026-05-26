@@ -1,23 +1,39 @@
 package com.myuniverse.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Administrador {
-    private String usuario;
-    private String contraseña;
+    @SerializedName("usuario")
+    private String nombreUsuario;
 
-    public Administrador() {}
+    @SerializedName("contraseña")
+    private String contrasena;
 
-    public Administrador(String usuario, String contraseña) {
-        this.usuario = usuario;
-        this.contraseña = contraseña;
+    public Administrador() {
     }
 
-    public String getUsuario() { return usuario; }
-    public void setUsuario(String usuario) { this.usuario = usuario; }
+    public Administrador(String nombreUsuario, String contrasena) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
 
-    public String getContraseña() { return contraseña; }
-    public void setContraseña(String contraseña) { this.contraseña = contraseña; }
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
-    public boolean validarContraseña(String contraseña) {
-        return this.contraseña != null && this.contraseña.equals(contraseña);
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public boolean validarContrasena(String contrasenaEntrada) {
+        return this.contrasena != null && this.contrasena.equals(contrasenaEntrada);
     }
 }

@@ -1,26 +1,49 @@
 package com.myuniverse.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Sesion {
-    private Administrador administrador;
+    @SerializedName("administrador")
+    private Administrador administrator;
+
+    @SerializedName("activa")
     private boolean activa;
-    private LocalDateTime fechaInicio;
 
-    public Sesion() {}
+    @SerializedName("fechaInicio")
+    private LocalDateTime startDate;
 
-    public Sesion(Administrador administrador) {
-        this.administrador = administrador;
-        this.activa = true;
-        this.fechaInicio = LocalDateTime.now();
+    public Sesion() {
     }
 
-    public Administrador getAdministrador() { return administrador; }
-    public void setAdministrador(Administrador administrador) { this.administrador = administrador; }
+    public Sesion(Administrador administrator) {
+        this.administrator = administrator;
+        this.activa = true;
+        this.startDate = LocalDateTime.now();
+    }
 
-    public boolean isActiva() { return activa; }
-    public void setActiva(boolean activa) { this.activa = activa; }
+    public Administrador getAdministrador() {
+        return administrator;
+    }
 
-    public LocalDateTime getFechaInicio() { return fechaInicio; }
-    public void setFechaInicio(LocalDateTime fechaInicio) { this.fechaInicio = fechaInicio; }
+    public void setAdministrador(Administrador administrator) {
+        this.administrator = administrator;
+    }
+
+    public boolean estaActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
 }

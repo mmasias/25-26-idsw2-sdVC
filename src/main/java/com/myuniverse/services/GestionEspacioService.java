@@ -1,79 +1,103 @@
 package com.myuniverse.services;
 
-import com.myuniverse.models.*;
-import com.myuniverse.repositories.EspacioRepository;
-import com.myuniverse.repositories.RecorridoRepository;
+import com.myuniverse.exceptions.ExcepcionReglaNegocio;
+import com.myuniverse.models.Planta;
+import com.myuniverse.models.Region;
+import com.myuniverse.models.Recorrido;
+import com.myuniverse.models.Espacio;
+import com.myuniverse.models.TipoEspacio;
+import com.myuniverse.models.Universidad;
+import com.myuniverse.repositories.IEspacioRepository;
+import com.myuniverse.repositories.IRecorridoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class GestionEspacioService {
-    private final EspacioRepository espacioRepo;
-    private final RecorridoRepository recorridoRepo;
+public class GestionEspacioService implements IGestionEspacioService {
+    private final IEspacioRepository repositorioEspacio;
+    private final IRecorridoRepository repositorioRecorrido;
 
-    public GestionEspacioService(EspacioRepository espacioRepo, RecorridoRepository recorridoRepo) {
-        this.espacioRepo = espacioRepo;
-        this.recorridoRepo = recorridoRepo;
+    public GestionEspacioService(IEspacioRepository repositorioEspacio, IRecorridoRepository repositorioRecorrido) {
+        this.repositorioEspacio = repositorioEspacio;
+        this.repositorioRecorrido = repositorioRecorrido;
     }
 
+    @Override
     public Universidad obtenerUniversidad() {
-        return espacioRepo.obtenerUniversidad();
+        return repositorioEspacio.cargarUniversidad();
     }
 
+    @Override
     public void guardarUniversidad(Universidad universidad) {
-        espacioRepo.guardarUniversidad(universidad);
+        repositorioEspacio.guardarUniversidad(universidad);
     }
 
-    public List<Espacio> obtenerTodosEspacios() {
-        return espacioRepo.obtenerTodosEspacios();
+    @Override
+    public List<Espacio> obtenerTodosLosEspacios() {
+        return repositorioEspacio.obtenerTodosLosEspacios();
     }
 
-    public List<Espacio> filtrarEspacios(String criterio) {
-        return espacioRepo.filtrarPorCriterio(criterio);
-    }
-
+    @Override
     public Espacio obtenerEspacioPorId(String id) {
-        return espacioRepo.obtenerPorId(id);
+        return repositorioEspacio.buscarEspacioPorId(id);
     }
 
-    public List<Planta> obtenerTodasPlantas() {
-        return espacioRepo.obtenerTodasPlantas();
+    @Override
+    public List<Espacio> filtrarEspacios(String criterio) {
+        return repositorioEspacio.obtenerTodosLosEspacios().stream()
+                .filter(s -> s.getNombre().toLowerCase().contains(criterio.toLowerCase())
+                        || s.getTipo().getPersistedName().toLowerCase().contains(criterio.toLowerCase()))
+                .collect(java.util.stream.Collectors.toList());
     }
 
-    public boolean verificarUnicidadEspacio(String nombre, String plantaId) {
-        return espacioRepo.existeNombreEnPlanta(nombre, plantaId);
+    @Override
+    public List<Planta> obtenerTodasLasPlantas() {
+        return repositorioEspacio.obtenerTodasLasPlantas();
     }
 
-public Espacio crearEspacio(String nombre, String tipo, String descripcion,
-                                  int coordenadaX, int coordenadaY, String plantaId) {
-        return crearEspacio(nombre, tipo, descripcion, coordenadaX, coordenadaY, 1, 1, plantaId);
+    @Override
+    public boolean esNombreEspacioUnicoEnPlanta(String nombre, String idPlanta) {
+        return !repositorioEspacio.existeNombreEspacioEnPlanta(nombre, idPlanta);
     }
 
-    public Espacio crearEspacio(String nombre, String tipo, String descripcion,
-                                  int coordenadaX, int coordenadaY, int ancho, int alto, String plantaId) {
-        String id = "esp-" + UUID.randomUUID().toString().substring(0, 8);
+    private Planta findPlantaForEspacio(String idEspacio) {
+        return repositorioEspacio.obtenerTodasLasPlantas().stream()
+                .filter(f -> f.contieneEspacio(idEspacio))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public Espacio crearEspacio(String nombre, TipoEspacio tipo, String descripcion,
+                            int coordenadaX, int coordenadaY, int ancho, int alto, String idPlanta) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new ExcepcionReglaNegocio("BR-02", "El nombre del espacio no puede estar vacío.");
+        }
+        if (!esNombreEspacioUnicoEnPlanta(nombre, idPlanta)) {
+            throw new ExcepcionReglaNegocio("BR-02",
+                    "Un espacio con el nombre '" + nombre + "' ya existe en esta planta.");
+        }
+        List<Espacio> floorEspacios = repositorioEspacio.obtenerEspaciosPorIdPlanta(idPlanta);
+        if (tieneSolapamiento(floorEspacios, coordenadaX, coordenadaY, ancho, alto, null)) {
+            throw new ExcepcionReglaNegocio("BR-05", "No se puede crear el espacio: se solapa con uno existente.");
+        }
+        String id = "espacio-" + UUID.randomUUID().toString().substring(0, 8);
         Espacio espacio = new Espacio(id, nombre, tipo, descripcion, coordenadaX, coordenadaY, ancho, alto);
-        espacioRepo.crearEspacio(espacio, plantaId);
-        return espacio;
+        return repositorioEspacio.guardarEspacio(espacio, idPlanta);
     }
 
-    public boolean actualizarEspacio(String id, String nombre, String tipo, String descripcion,
-                                       int coordenadaX, int coordenadaY) {
-        Espacio espacio = espacioRepo.obtenerPorId(id);
-        if (espacio == null) return false;
-        espacio.setNombre(nombre);
-        espacio.setTipo(tipo);
-        espacio.setDescripcion(descripcion);
-        espacio.setCoordenadaX(coordenadaX);
-        espacio.setCoordenadaY(coordenadaY);
-        return espacioRepo.actualizarEspacio(espacio);
-    }
-
-    public boolean actualizarEspacioCompleto(String id, String nombre, String tipo, String descripcion,
-                                               int coordenadaX, int coordenadaY, int ancho, int alto) {
-        Espacio espacio = espacioRepo.obtenerPorId(id);
-        if (espacio == null) return false;
+    @Override
+    public boolean actualizarEspacioCompleto(String id, String nombre, TipoEspacio tipo, String descripcion,
+                                  int coordenadaX, int coordenadaY, int ancho, int alto) {
+        Espacio espacio = repositorioEspacio.buscarEspacioPorId(id);
+        if (espacio == null) {
+            return false;
+        }
+        Planta planta = findPlantaForEspacio(id);
+        if (planta != null && tieneSolapamiento(planta.getEspacios(), coordenadaX, coordenadaY, ancho, alto, id)) {
+            throw new ExcepcionReglaNegocio("BR-05", "No se puede actualizar el espacio: se solapa con uno existente.");
+        }
         espacio.setNombre(nombre);
         espacio.setTipo(tipo);
         espacio.setDescripcion(descripcion);
@@ -81,48 +105,91 @@ public Espacio crearEspacio(String nombre, String tipo, String descripcion,
         espacio.setCoordenadaY(coordenadaY);
         espacio.setAncho(ancho);
         espacio.setAlto(alto);
-        return espacioRepo.actualizarEspacio(espacio);
+        return repositorioEspacio.actualizarEspacio(espacio);
     }
 
+    @Override
+    public boolean moverEspacio(String id, int newX, int newY) {
+        Espacio espacio = repositorioEspacio.buscarEspacioPorId(id);
+        if (espacio == null) {
+            return false;
+        }
+        Planta planta = findPlantaForEspacio(id);
+        if (planta != null && tieneSolapamiento(planta.getEspacios(), newX, newY, espacio.getAncho(), espacio.getAlto(), id)) {
+            throw new ExcepcionReglaNegocio("BR-05", "No se puede mover el espacio: se solapa con uno existente.");
+        }
+        espacio.setCoordenadaX(newX);
+        espacio.setCoordenadaY(newY);
+        return repositorioEspacio.actualizarEspacio(espacio);
+    }
+
+    @Override
     public boolean eliminarEspacio(String id) {
-        return espacioRepo.eliminarEspacio(id);
+        if (estaEspacioReferenciadoEnAlgunRecorrido(id)) {
+            throw new ExcepcionReglaNegocio("BR-04",
+                    "No se puede eliminar el espacio: está referenciado en un recorrido. Elimínalo del recorrido primero.");
+        }
+        return repositorioEspacio.eliminarEspacioPorId(id);
     }
 
-    public List<Recorrido> obtenerTodosRecorridos() {
-        return recorridoRepo.findAll();
+    @Override
+    public boolean tieneSolapamiento(List<Espacio> espacios, int x, int y, int ancho, int alto, String excludeId) {
+        for (Espacio espacio : espacios) {
+            if (espacio.seSolapaCon(x, y, ancho, alto, excludeId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public List<Recorrido> filtrarRecorridos(String criterio) {
-        return recorridoRepo.filtrarPorCriterio(criterio);
+    @Override
+    public boolean estaEspacioReferenciadoEnAlgunRecorrido(String idEspacio) {
+        List<Recorrido> routes = repositorioRecorrido.obtenerTodos();
+        for (Recorrido recorrido : routes) {
+            if (recorrido.getEspacioIds().contains(idEspacio)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public boolean verificarUnicidadRecorrido(String nombre) {
-        return recorridoRepo.existeNombre(nombre);
+    @Override
+    public void actualizarNombreUniversidad(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new ExcepcionReglaNegocio("BR-06", "El nombre de la universidad no puede estar vacío.");
+        }
+        Universidad universidad = repositorioEspacio.cargarUniversidad();
+        universidad.setNombre(nombre);
+        repositorioEspacio.guardarUniversidad(universidad);
     }
 
-    public Recorrido crearRecorrido(String nombre, String descripcion) {
-        String id = "rec-" + UUID.randomUUID().toString().substring(0, 8);
-        Recorrido recorrido = new Recorrido(id, nombre, descripcion, new ArrayList<>());
-        recorridoRepo.save(recorrido);
-        return recorrido;
+    @Override
+    public void actualizarNombreRegion(String idRegion, String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new ExcepcionReglaNegocio("BR-06", "El nombre de la región no puede estar vacío.");
+        }
+        Universidad universidad = repositorioEspacio.cargarUniversidad();
+        for (Region region : universidad.getRegiones()) {
+            if (region.getId().equals(idRegion)) {
+                region.setNombre(nombre);
+                break;
+            }
+        }
+        repositorioEspacio.guardarUniversidad(universidad);
     }
 
-    public Recorrido obtenerRecorridoPorId(String id) {
-        return recorridoRepo.findById(id);
-    }
-
-    public boolean actualizarRecorrido(String id, String nombre, String descripcion, List<String> espacioIds) {
-        Recorrido recorrido = recorridoRepo.findById(id);
-        if (recorrido == null) return false;
-
-        recorrido.setNombre(nombre);
-        recorrido.setDescripcion(descripcion);
-        recorrido.setEspacioIds(espacioIds);
-
-        return recorridoRepo.update(recorrido);
-    }
-
-    public boolean eliminarRecorrido(String id) {
-        return recorridoRepo.deleteById(id);
+    @Override
+    public Region agregarRegion(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new ExcepcionReglaNegocio("BR-06", "El nombre de la región no puede estar vacío.");
+        }
+        Universidad universidad = repositorioEspacio.cargarUniversidad();
+        Region region = new Region();
+        region.setId("region-" + UUID.randomUUID().toString().substring(0, 8));
+        region.setNombre(nombre);
+        region.setPlantas(new ArrayList<>());
+        universidad.addRegion(region);
+        repositorioEspacio.guardarUniversidad(universidad);
+        return region;
     }
 }
