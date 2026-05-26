@@ -1,37 +1,41 @@
 @startuml
-title "Diagrama de Secuencia - Ver Espacios por Planta"
+title "Diagrama de Secuencia - Ver Espacios por Planta (Visitante)"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
+entity "MapContext" as context
 control "EspacioController" as controller
-control "VisitaService" as service
-control "EspacioRepository" as repository
-entity "Universidad" as uni
-entity "Region" as reg
+participant "GestionEspacioService" as service
 
-visitor -> view: Pulsa "Tab" para cambiar de planta
+visitor -> view : Pulsa Tecla 'Tab'
 activate view
-view -> controller: obtenerEspaciosPlanta(idPlanta)
+
+view -> context : setPlantaIndex(next)
+view -> context : cargarDatos()
+activate context
+
+context -> controller : obtenerUniversidad()
 activate controller
-controller -> service: obtenerEspaciosPorPlanta(idPlanta)
+
+controller -> service : obtenerUniversidad()
 activate service
-service -> repository: buscarPlantaPorId(idPlanta)
-activate repository
-repository -> uni: buscarPlantaPorId(idPlanta)
-activate uni
-uni -> reg: buscarPlantaPorId(idPlanta)
-activate reg
-reg --> uni: Planta
-deactivate reg
-uni --> repository: Planta
-deactivate uni
-repository --> service: Planta
-deactivate repository
-service --> controller: List<Espacio>
+
+' El servicio llama al Repositorio para cargar universidad.json
+service --> controller : Universidad
 deactivate service
-controller --> view: Lista de espacios
+
+controller --> context : Universidad
 deactivate controller
-view --> visitor: Renderiza la nueva planta con sus espacios
+
+context --> view : (datos cargados)
+deactivate context
+
+view -> context : getCurrentEspacios()
+activate context
+context --> view : List<Espacio>
+deactivate context
+
+view --> visitor : Renderiza la nueva planta con sus espacios
 deactivate view
 
 @enduml

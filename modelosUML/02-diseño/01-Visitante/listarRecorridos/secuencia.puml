@@ -3,22 +3,17 @@ title "Diagrama de Secuencia - Listar Recorridos"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "VisitaController" as controller
-control "VisitaService" as service
+control "RecorridoController" as controller
 control "RecorridoRepository" as repository
 
 visitor -> view: Pulsa "T" (Tours)
 activate view
-view -> controller: obtenerRecorridos()
+view -> controller: obtenerTodos()
 activate controller
-controller -> service: obtenerRecorridos()
-activate service
-service -> repository: obtenerTodos()
+controller -> repository: obtenerTodos()
 activate repository
-repository --> service: List<Recorrido>
+repository --> controller: List<Recorrido>
 deactivate repository
-service --> controller: List<Recorrido>
-deactivate service
 controller --> view: List<Recorrido>
 deactivate controller
 view --> visitor: Muestra lista de recorridos disponibles

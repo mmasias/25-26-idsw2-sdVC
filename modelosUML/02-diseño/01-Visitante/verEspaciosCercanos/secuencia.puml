@@ -1,29 +1,28 @@
 @startuml
-title "Diagrama de Secuencia - Ver Espacios Cercanos"
+title "Diagrama de Secuencia - Ver Espacios Cercanos (Adyacencia)"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "VisitaController" as controller
-control "VisitaService" as service
-control "EspacioRepository" as repository
+control "MapContext" as context
+entity "GridMapaRenderer" as renderer
 
-visitor -> view: Solicita ver espacios cercanos (tecla 'C')
+visitor -> view: Pulsa tecla "C"
 activate view
-view -> controller: obtenerEspaciosCercanos()
-activate controller
-controller -> service: obtenerEspaciosCercanos()
-activate service
-service -> service: obtenerEspacioActual()
-service -> repository: obtenerTodosLosEspacios()
-activate repository
-repository --> service: List<Espacio>
-deactivate repository
-service -> service: Calcular distancias y filtrar top 5
-service --> controller: List<Espacio>
-deactivate service
-controller --> view: List<Espacio>
-deactivate controller
-view --> visitor: Resalta los espacios cercanos en el mapa/lista
+
+view -> context: getCursor()
+note right: Obtiene (x, y) actual
+
+view -> renderer: spaceAt(x, y-1) [Norte]
+activate renderer
+renderer --> view: Espacio (si existe)
+view -> renderer: spaceAt(x, y+1) [Sur]
+view -> renderer: spaceAt(x-1, y) [Oeste]
+view -> renderer: spaceAt(x+1, y) [Este]
+deactivate renderer
+
+view -> view: Recolectar nombres de espacios únicos
+view -> context: setStatusMessage("Al lado: [Nombres...]")
+view --> visitor: Muestra adyacentes en la barra de estado
 deactivate view
 
 @enduml

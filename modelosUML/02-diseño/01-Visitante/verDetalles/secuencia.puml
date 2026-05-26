@@ -3,24 +3,20 @@ title "Diagrama de Secuencia - Ver Detalles"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "VisitaController" as controller
-control "VisitaService" as service
+control "EspacioController" as controller
 control "EspacioRepository" as repository
 
 visitor -> view: Pulsa "Enter" sobre un espacio
 activate view
-view -> controller: obtenerDetallesEspacio(id)
+view -> controller: obtenerUniversidad()
 activate controller
-controller -> service: obtenerDetallesEspacio(id)
-activate service
-service -> repository: buscarEspacioPorId(id)
+controller -> repository: obtenerUniversidad()
 activate repository
-repository --> service: Espacio
+repository --> controller: Universidad
 deactivate repository
-service --> controller: Espacio
-deactivate service
-controller --> view: Espacio (detalles completos)
+controller --> view: Universidad (con datos de espacios)
 deactivate controller
+view -> view: Buscar detalles del espacio seleccionado
 view --> visitor: Muestra diálogo con descripción y tipo detallado
 deactivate view
 
