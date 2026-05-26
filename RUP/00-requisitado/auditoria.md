@@ -11,6 +11,8 @@ Este documento justifica los cambios estructurales realizados en el diseño del 
 
 ## 1. Justificación: Cambio en el Diagrama de Contexto (Visitante)
 
+[Diagrama de contexto de visitante](/RUP/00-requisitado/diagramaDecontextoVisitante.svg)
+
 El diagrama de contexto original trataba las acciones del visitante como estados aislados y secuenciales. Se ha rediseñado hacia un modelo **operativo y circular** por las siguientes razones:
 
 - **Centralidad del Mapa:** En la implementación real, el estado `ESPACIO_ABIERTO` (el Mapa) es el núcleo de la experiencia. Casi todas las acciones (`verDetalles`, `verCercanos`, `cambiarEspacio`) ocurren sin salir de este estado visual.
