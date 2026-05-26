@@ -1,0 +1,31 @@
+@startuml
+title "Diagrama de Secuencia - Editar Región (Renombrar)"
+
+actor "Administrador" as admin
+boundary "MapaView" as view
+boundary "ConfigDialog" as config
+boundary "DialogForm" as form
+control "EspacioController" as controller
+
+admin -> view: Pulsa tecla "O" (Config)
+activate view
+view -> config: show()
+activate config
+
+admin -> config: Selecciona región y pulsa "R" (Rename Reg)
+config -> form: showForm("Rename Region")
+activate form
+form --> config: [Nuevo Nombre]
+deactivate form
+
+config -> controller: actualizarNombreRegion(id, nuevoNombre)
+activate controller
+controller -> controller: Buscar región, setNombre() y Guardar
+controller --> config: ok
+deactivate controller
+
+config --> admin: Nombre de región actualizado
+deactivate config
+deactivate view
+
+@enduml

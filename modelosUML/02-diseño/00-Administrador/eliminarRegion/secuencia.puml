@@ -1,0 +1,35 @@
+@startuml
+title "Diagrama de Secuencia - Eliminar Región"
+
+actor "Administrador" as admin
+boundary "MapaView" as view
+boundary "ConfigDialog" as config
+control "EspacioController" as controller
+
+admin -> view: Pulsa tecla "O" (Config)
+activate view
+view -> config: show()
+activate config
+
+admin -> config: Selecciona región y pulsa "D" (Delete Region)
+config -> controller: obtenerUniversidad()
+activate controller
+controller --> config: Universidad
+deactivate controller
+
+config -> config: Verificar si hay > 1 región
+alt Última región
+    config -> config: showErrorMessage("Cannot delete...")
+else Múltiples regiones
+    config -> controller: eliminarRegion(id)
+    activate controller
+    note right: Remueve de la lista y guarda JSON.
+    controller --> config: ok
+    deactivate controller
+end
+
+config --> admin: Lista de regiones actualizada
+deactivate config
+deactivate view
+
+@enduml

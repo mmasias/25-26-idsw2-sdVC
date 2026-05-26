@@ -1,0 +1,32 @@
+@startuml
+title "Diagrama de Secuencia - Crear Planta"
+
+actor "Administrador" as admin
+boundary "PlantaDialog" as dialog
+boundary "DialogForm" as form
+control "EspacioController" as controller
+
+admin -> dialog: Pulsa tecla "A" (Add)
+activate dialog
+dialog -> form: showForm("Add Planta")
+activate form
+form --> dialog: [Nombre]
+deactivate form
+
+dialog -> dialog: Crear objeto Planta (UUID nuevo, numero auto)
+
+dialog -> controller: obtenerUniversidad()
+activate controller
+controller --> dialog: Universidad
+deactivate controller
+
+dialog -> dialog: Añadir planta a la región actual
+dialog -> controller: guardarUniversidad(universidad)
+activate controller
+controller --> dialog: ok
+deactivate controller
+
+dialog --> admin: Lista de plantas actualizada
+deactivate dialog
+
+@enduml

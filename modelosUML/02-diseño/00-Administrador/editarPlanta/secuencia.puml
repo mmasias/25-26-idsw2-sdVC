@@ -1,0 +1,31 @@
+@startuml
+title "Diagrama de Secuencia - Editar Planta (Renombrar)"
+
+actor "Administrador" as admin
+boundary "PlantaDialog" as dialog
+boundary "DialogForm" as form
+control "EspacioController" as controller
+
+admin -> dialog: Selecciona planta y pulsa "R" (Rename)
+activate dialog
+dialog -> form: showForm("Rename Planta")
+activate form
+form --> dialog: [Nuevo Nombre]
+deactivate form
+
+dialog -> dialog: Actualizar nombre en objeto Planta
+
+dialog -> controller: obtenerUniversidad()
+activate controller
+controller --> dialog: Universidad
+deactivate controller
+
+dialog -> controller: guardarUniversidad(universidad)
+activate controller
+controller --> dialog: ok
+deactivate controller
+
+dialog --> admin: Nombre actualizado en la lista
+deactivate dialog
+
+@enduml

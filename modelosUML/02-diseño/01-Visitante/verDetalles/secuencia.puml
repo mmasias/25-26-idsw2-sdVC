@@ -1,23 +1,34 @@
 @startuml
-title "Diagrama de Secuencia - Ver Detalles"
+title "Diagrama de Secuencia - Ver Detalles (Automático)"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
-control "EspacioController" as controller
-control "EspacioRepository" as repository
+control "MapContext" as context
+entity "GridMapaRenderer" as renderer
+boundary "PanelDetalles" as panel
 
-visitor -> view: Pulsa "Enter" sobre un espacio
+visitor -> view: Mueve el cursor (Flechas)
 activate view
-view -> controller: obtenerUniversidad()
-activate controller
-controller -> repository: obtenerUniversidad()
-activate repository
-repository --> controller: Universidad
-deactivate repository
-controller --> view: Universidad (con datos de espacios)
-deactivate controller
-view -> view: Buscar detalles del espacio seleccionado
-view --> visitor: Muestra diálogo con descripción y tipo detallado
+
+view -> context: getCursor().move()
+view -> renderer: spaceAt(x, y)
+activate renderer
+renderer --> view: Espacio (si existe)
+deactivate renderer
+
+view -> context: setSelectedEspacio(espacio)
+
+view -> view: renderizar()
+activate view
+view -> panel: renderizar(graphics, context)
+activate panel
+panel -> context: getSelectedEspacio()
+context --> panel: Espacio seleccionado
+panel --> view: Dibuja nombre, tipo y descripción en el lateral derecho
+deactivate panel
+deactivate view
+
+view --> visitor: El panel de detalles se actualiza instantáneamente
 deactivate view
 
 @enduml

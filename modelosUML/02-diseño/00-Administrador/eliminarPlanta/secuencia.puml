@@ -1,0 +1,31 @@
+@startuml
+title "Diagrama de Secuencia - Eliminar Planta"
+
+actor "Administrador" as admin
+boundary "PlantaDialog" as dialog
+control "EspacioController" as controller
+
+admin -> dialog: Selecciona planta y pulsa "D" (Delete)
+activate dialog
+
+dialog -> dialog: Verificar si planta tiene espacios
+alt Planta NO está vacía
+    dialog -> dialog: showMessage("Cannot eliminar: planta has espacios")
+else Planta vacía
+    dialog -> dialog: Eliminar planta de la lista
+    
+    dialog -> controller: obtenerUniversidad()
+    activate controller
+    controller --> dialog: Universidad
+    deactivate controller
+    
+    dialog -> controller: guardarUniversidad(universidad)
+    activate controller
+    controller --> dialog: ok
+    deactivate controller
+end
+
+dialog --> admin: Lista de plantas actualizada
+deactivate dialog
+
+@enduml
