@@ -4,19 +4,675 @@
   "regiones": [
     {
       "id": "region-1",
-      "nombre": "Main Campus",
+      "nombre": "Campus Central",
       "plantas": [
         {
           "id": "planta-0",
-          "nombre": "Ground Floor",
+          "nombre": "Planta Baja",
           "numero": 0,
-          "espacios": []
+          "espacios": [
+            {
+              "id": "espacio-pb001",
+              "nombre": "Pasillo Norte PB",
+              "tipo": "OTRO",
+              "descripcion": "Corredor principal de acceso norte",
+              "coordenadaX": 0,
+              "coordenadaY": 0,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-pb002",
+              "nombre": "Vestíbulo Principal",
+              "tipo": "OTRO",
+              "descripcion": "Zona de entrada y recibimiento",
+              "coordenadaX": 0,
+              "coordenadaY": 2,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-pb003",
+              "nombre": "Recepción",
+              "tipo": "OFICINA",
+              "descripcion": "Mostrador de información y atención al visitante",
+              "coordenadaX": 0,
+              "coordenadaY": 6,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-pb004",
+              "nombre": "Auditorio Principal",
+              "tipo": "AUDITORIO",
+              "descripcion": "Salón de usos múltiples con capacidad para 300 personas",
+              "coordenadaX": 10,
+              "coordenadaY": 2,
+              "ancho": 18,
+              "alto": 8
+            },
+            {
+              "id": "espacio-pb005",
+              "nombre": "Cafetería Principal",
+              "tipo": "CAFETERÍA",
+              "descripcion": "Comedor principal de la universidad",
+              "coordenadaX": 28,
+              "coordenadaY": 2,
+              "ancho": 16,
+              "alto": 8
+            },
+            {
+              "id": "espacio-pb006",
+              "nombre": "Biblioteca General",
+              "tipo": "BIBLIOTECA",
+              "descripcion": "Hemeroteca y sala de lectura abierta a todo el público",
+              "coordenadaX": 44,
+              "coordenadaY": 2,
+              "ancho": 16,
+              "alto": 8
+            },
+            {
+              "id": "espacio-pb007",
+              "nombre": "Pasillo Central PB",
+              "tipo": "OTRO",
+              "descripcion": "Corredor longitudinal central",
+              "coordenadaX": 0,
+              "coordenadaY": 10,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-pb008",
+              "nombre": "Conserjería",
+              "tipo": "OFICINA",
+              "descripcion": "Puesto de vigilancia y control de acceso",
+              "coordenadaX": 0,
+              "coordenadaY": 12,
+              "ancho": 6,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb009",
+              "nombre": "Aula 0.01",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta baja",
+              "coordenadaX": 6,
+              "coordenadaY": 12,
+              "ancho": 8,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb010",
+              "nombre": "Aula 0.02",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta baja",
+              "coordenadaX": 14,
+              "coordenadaY": 12,
+              "ancho": 8,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb011",
+              "nombre": "Aula 0.03",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta baja",
+              "coordenadaX": 22,
+              "coordenadaY": 12,
+              "ancho": 8,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb012",
+              "nombre": "Baños Hombres PB",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos hombres planta baja",
+              "coordenadaX": 30,
+              "coordenadaY": 12,
+              "ancho": 4,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb013",
+              "nombre": "Baños Mujeres PB",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos mujeres planta baja",
+              "coordenadaX": 34,
+              "coordenadaY": 12,
+              "ancho": 4,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb014",
+              "nombre": "Oficina de Secretaría",
+              "tipo": "OFICINA",
+              "descripcion": "Secretaría académica y administrativa",
+              "coordenadaX": 38,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-pb015",
+              "nombre": "Salón de Graduaciones",
+              "tipo": "AUDITORIO",
+              "descripcion": "Salón para ceremonias de graduación y eventos especiales",
+              "coordenadaX": 48,
+              "coordenadaY": 12,
+              "ancho": 12,
+              "alto": 8
+            }
+          ]
         },
         {
           "id": "planta-1",
-          "nombre": "First Floor",
+          "nombre": "Planta 1",
           "numero": 1,
-          "espacios": []
+          "espacios": [
+            {
+              "id": "espacio-p1001",
+              "nombre": "Pasillo Norte P1",
+              "tipo": "OTRO",
+              "descripcion": "Corredor superior planta primera",
+              "coordenadaX": 0,
+              "coordenadaY": 0,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p1002",
+              "nombre": "Aula 1.01",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta primera",
+              "coordenadaX": 0,
+              "coordenadaY": 2,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p1003",
+              "nombre": "Aula 1.02",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta primera",
+              "coordenadaX": 0,
+              "coordenadaY": 6,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p1004",
+              "nombre": "Lab. Informática",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de computación con 30 puestos",
+              "coordenadaX": 10,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p1005",
+              "nombre": "Aula 1.03",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta primera",
+              "coordenadaX": 24,
+              "coordenadaY": 2,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p1006",
+              "nombre": "Aula 1.04",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta primera",
+              "coordenadaX": 24,
+              "coordenadaY": 6,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p1007",
+              "nombre": "Lab. Química",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de química con campanas extractoras",
+              "coordenadaX": 34,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p1008",
+              "nombre": "Sala de Profesores P1",
+              "tipo": "OFICINA",
+              "descripcion": "Sala de descanso y trabajo del profesorado",
+              "coordenadaX": 48,
+              "coordenadaY": 2,
+              "ancho": 12,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p1009",
+              "nombre": "Pasillo Central P1",
+              "tipo": "OTRO",
+              "descripcion": "Corredor longitudinal central planta primera",
+              "coordenadaX": 0,
+              "coordenadaY": 10,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p1010",
+              "nombre": "Aula 1.05",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta primera",
+              "coordenadaX": 0,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1011",
+              "nombre": "Aula 1.06",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta primera",
+              "coordenadaX": 10,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1012",
+              "nombre": "Baños Hombres P1",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos hombres planta primera",
+              "coordenadaX": 20,
+              "coordenadaY": 12,
+              "ancho": 5,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1013",
+              "nombre": "Baños Mujeres P1",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos mujeres planta primera",
+              "coordenadaX": 25,
+              "coordenadaY": 12,
+              "ancho": 5,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1014",
+              "nombre": "Despacho 1.01",
+              "tipo": "OFICINA",
+              "descripcion": "Despacho docente planta primera",
+              "coordenadaX": 30,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1015",
+              "nombre": "Despacho 1.02",
+              "tipo": "OFICINA",
+              "descripcion": "Despacho docente planta primera",
+              "coordenadaX": 40,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p1016",
+              "nombre": "Almacén P1",
+              "tipo": "OTRO",
+              "descripcion": "Almacén de material didáctico y papelería",
+              "coordenadaX": 50,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            }
+          ]
+        },
+        {
+          "id": "planta-2",
+          "nombre": "Planta 2",
+          "numero": 2,
+          "espacios": [
+            {
+              "id": "espacio-p2001",
+              "nombre": "Pasillo Norte P2",
+              "tipo": "OTRO",
+              "descripcion": "Corredor superior planta segunda",
+              "coordenadaX": 0,
+              "coordenadaY": 0,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p2002",
+              "nombre": "Aula 2.01",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta segunda",
+              "coordenadaX": 0,
+              "coordenadaY": 2,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p2003",
+              "nombre": "Aula 2.02",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta segunda",
+              "coordenadaX": 0,
+              "coordenadaY": 6,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p2004",
+              "nombre": "Lab. Física",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de física con equipamiento óptico y mecánico",
+              "coordenadaX": 10,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p2005",
+              "nombre": "Aula 2.03",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta segunda",
+              "coordenadaX": 24,
+              "coordenadaY": 2,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p2006",
+              "nombre": "Aula 2.04",
+              "tipo": "AULA",
+              "descripcion": "Aula de teoría planta segunda",
+              "coordenadaX": 24,
+              "coordenadaY": 6,
+              "ancho": 10,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p2007",
+              "nombre": "Lab. Electrónica",
+              "tipo": "LABORATORIO",
+              "descripcion": "Laboratorio de electrónica e instrumentación",
+              "coordenadaX": 34,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p2008",
+              "nombre": "Sala de Profesores P2",
+              "tipo": "OFICINA",
+              "descripcion": "Sala de reuniones del profesorado planta segunda",
+              "coordenadaX": 48,
+              "coordenadaY": 2,
+              "ancho": 12,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p2009",
+              "nombre": "Pasillo Central P2",
+              "tipo": "OTRO",
+              "descripcion": "Corredor longitudinal central planta segunda",
+              "coordenadaX": 0,
+              "coordenadaY": 10,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p2010",
+              "nombre": "Aula 2.05",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta segunda",
+              "coordenadaX": 0,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p2011",
+              "nombre": "Aula 2.06",
+              "tipo": "AULA",
+              "descripcion": "Aula polivalente planta segunda",
+              "coordenadaX": 10,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p2012",
+              "nombre": "Baños Hombres P2",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos hombres planta segunda",
+              "coordenadaX": 20,
+              "coordenadaY": 12,
+              "ancho": 5,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p2013",
+              "nombre": "Baños Mujeres P2",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos mujeres planta segunda",
+              "coordenadaX": 25,
+              "coordenadaY": 12,
+              "ancho": 5,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p2014",
+              "nombre": "Sala de Estudio",
+              "tipo": "BIBLIOTECA",
+              "descripcion": "Sala de estudio y tutorías grupales",
+              "coordenadaX": 30,
+              "coordenadaY": 12,
+              "ancho": 14,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p2015",
+              "nombre": "Aula Magna Media",
+              "tipo": "AUDITORIO",
+              "descripcion": "Auditorio mediano para seminarios y conferencias",
+              "coordenadaX": 44,
+              "coordenadaY": 12,
+              "ancho": 16,
+              "alto": 8
+            }
+          ]
+        },
+        {
+          "id": "planta-3",
+          "nombre": "Planta 3",
+          "numero": 3,
+          "espacios": [
+            {
+              "id": "espacio-p3001",
+              "nombre": "Pasillo Norte P3",
+              "tipo": "OTRO",
+              "descripcion": "Corredor superior planta tercera",
+              "coordenadaX": 0,
+              "coordenadaY": 0,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p3002",
+              "nombre": "Rectorado",
+              "tipo": "OFICINA",
+              "descripcion": "Despacho del Rector de la universidad",
+              "coordenadaX": 0,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p3003",
+              "nombre": "Vicerrectorado",
+              "tipo": "OFICINA",
+              "descripcion": "Oficina del Vicerrector Académico",
+              "coordenadaX": 14,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p3004",
+              "nombre": "Sala de Juntas",
+              "tipo": "OFICINA",
+              "descripcion": "Sala de reuniones del equipo directivo",
+              "coordenadaX": 28,
+              "coordenadaY": 2,
+              "ancho": 14,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p3005",
+              "nombre": "Secretaría General",
+              "tipo": "OFICINA",
+              "descripcion": "Secretaría general y registro universitario",
+              "coordenadaX": 42,
+              "coordenadaY": 2,
+              "ancho": 18,
+              "alto": 8
+            },
+            {
+              "id": "espacio-p3006",
+              "nombre": "Pasillo Central P3",
+              "tipo": "OTRO",
+              "descripcion": "Corredor longitudinal central planta tercera",
+              "coordenadaX": 0,
+              "coordenadaY": 10,
+              "ancho": 60,
+              "alto": 2
+            },
+            {
+              "id": "espacio-p3007",
+              "nombre": "Despacho Prof. García",
+              "tipo": "OFICINA",
+              "descripcion": "Cubículo del profesor García",
+              "coordenadaX": 0,
+              "coordenadaY": 12,
+              "ancho": 6,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3008",
+              "nombre": "Despacho Prof. López",
+              "tipo": "OFICINA",
+              "descripcion": "Cubículo del profesor López",
+              "coordenadaX": 6,
+              "coordenadaY": 12,
+              "ancho": 6,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3009",
+              "nombre": "Despacho Prof. Martínez",
+              "tipo": "OFICINA",
+              "descripcion": "Cubículo de la profesora Martínez",
+              "coordenadaX": 12,
+              "coordenadaY": 12,
+              "ancho": 6,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3010",
+              "nombre": "Despacho Prof. Rodríguez",
+              "tipo": "OFICINA",
+              "descripcion": "Cubículo del profesor Rodríguez",
+              "coordenadaX": 18,
+              "coordenadaY": 12,
+              "ancho": 6,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3011",
+              "nombre": "Aula Doctorado 3.01",
+              "tipo": "AULA",
+              "descripcion": "Aula de doctorado e investigación",
+              "coordenadaX": 24,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3012",
+              "nombre": "Aula Doctorado 3.02",
+              "tipo": "AULA",
+              "descripcion": "Aula de doctorado e investigación",
+              "coordenadaX": 34,
+              "coordenadaY": 12,
+              "ancho": 10,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3013",
+              "nombre": "Baños P3",
+              "tipo": "BAÑO",
+              "descripcion": "Servicios higiénicos planta tercera",
+              "coordenadaX": 44,
+              "coordenadaY": 12,
+              "ancho": 5,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3014",
+              "nombre": "Sala de Estudio Posgrado",
+              "tipo": "BIBLIOTECA",
+              "descripcion": "Biblioteca y sala de estudio exclusiva para posgrado",
+              "coordenadaX": 49,
+              "coordenadaY": 12,
+              "ancho": 11,
+              "alto": 5
+            },
+            {
+              "id": "espacio-p3015",
+              "nombre": "Cafetería P3",
+              "tipo": "CAFETERÍA",
+              "descripcion": "Cafetería y zona de descanso para posgrado",
+              "coordenadaX": 0,
+              "coordenadaY": 17,
+              "ancho": 20,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p3016",
+              "nombre": "Aula Máster 3.03",
+              "tipo": "AULA",
+              "descripcion": "Aula para programas de máster",
+              "coordenadaX": 20,
+              "coordenadaY": 17,
+              "ancho": 16,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p3017",
+              "nombre": "Archivo Universitario",
+              "tipo": "OTRO",
+              "descripcion": "Archivo histórico y documental de la universidad",
+              "coordenadaX": 36,
+              "coordenadaY": 17,
+              "ancho": 12,
+              "alto": 4
+            },
+            {
+              "id": "espacio-p3018",
+              "nombre": "Terraza",
+              "tipo": "OTRO",
+              "descripcion": "Terraza y zona al aire libre planta tercera",
+              "coordenadaX": 48,
+              "coordenadaY": 17,
+              "ancho": 12,
+              "alto": 4
+            }
+          ]
         }
       ]
     }
