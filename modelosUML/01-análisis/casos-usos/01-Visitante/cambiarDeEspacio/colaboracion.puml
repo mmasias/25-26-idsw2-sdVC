@@ -4,7 +4,7 @@ skinparam linetype polyline
 rectangle #CDEBA5 ":Recorrido Abierto" as RecorridosAbierto
 rectangle #CDEBA5 ":Espacio Abierto" as EspacioAbiertoIn
 package cambiarDeEspacio as "cambiarDeEspacio()" {
-    rectangle #629EF9 NavegacionView
+    rectangle #629EF9 MapaView
     rectangle #b5bd68 RecorridoController
     rectangle #F2AC4E RecorridoRepository
     rectangle #F2AC4E Recorrido
@@ -13,16 +13,16 @@ package cambiarDeEspacio as "cambiarDeEspacio()" {
 
 rectangle #CDEBA5 ":Espacio Abierto" as EspacioAbiertoOut
 
-RecorridosAbierto -r-> NavegacionView: cambiarDeEspacio(direccion)
-EspacioAbiertoIn -r-> NavegacionView: cambiarDeEspacio(direccion)
+RecorridosAbierto -r-> MapaView: cambiarDeEspacio(direccion)
+EspacioAbiertoIn -r-> MapaView: cambiarDeEspacio(direccion)
 
-NavegacionView -d-> RecorridoController: obtenerSiguiente(actualId, direccion) : Espacio
+MapaView -d-> RecorridoController: obtenerSiguiente(actualId, direccion) : Espacio
 
 RecorridoController --> RecorridoRepository: findById(recorridoId) : Recorrido
 
 RecorridoRepository -- Recorrido
 Recorrido -- Espacio
 
-NavegacionView -r-> EspacioAbiertoOut: mostrarNuevoEspacio()
+MapaView -r-> EspacioAbiertoOut: mostrarNuevoEspacio()
 
 @enduml

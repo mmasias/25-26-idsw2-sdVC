@@ -23,7 +23,6 @@ package "Vistas"{
     boundary "EditarRecorridoView"
     boundary "EliminarRecorridoView"
 
-    boundary "BienvenidaView"
     boundary "ListarRecorridosView"
     boundary "RecorridoView"
     boundary "EspacioView"
@@ -31,7 +30,7 @@ package "Vistas"{
     boundary "DetalleEspacioView"
     boundary "EspaciosCercanosView"
     boundary "EspaciosPlantaView"
-    boundary "NavegacionView"
+    boundary "MapaView"
 
 }
 

@@ -15,7 +15,6 @@ package "Controladores"{
     control "EspacioController"
     control "IniciarSesionController"
     control "RecorridoController"
-    control "VisitaController"
 }
 
 @enduml

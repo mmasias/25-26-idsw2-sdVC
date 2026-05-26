@@ -10,7 +10,6 @@ package "Modelos"{
 
     entity "Administrador"
     entity "Sesion"
-    entity "Visita"
     entity "Recorrido"
     entity "Espacio"
 
