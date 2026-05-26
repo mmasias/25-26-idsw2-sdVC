@@ -1,5 +1,5 @@
 @startuml
-title "Diagrama de Secuencia - Ver Espacios Cercanos (Adyacencia)"
+title "Diagrama de Secuencia - Ver Espacios Cercanos (Adyacencia Robusta)"
 
 actor "Visitante" as visitor
 boundary "MapaView" as view
@@ -9,19 +9,25 @@ entity "GridMapaRenderer" as renderer
 visitor -> view: Pulsa tecla "C"
 activate view
 
-view -> context: getCursor()
-note right: Obtiene (x, y) actual
+view -> context: getSelectedEspacio() as actual
+view -> context: getCurrentEspacios()
 
-view -> renderer: spaceAt(x, y-1) [Norte]
+note over view, renderer: Escaneo de bordes completos\n(Independiente del tamaño del espacio)
+
+view -> renderer: spacesAdyacentes(espacios, actual)
 activate renderer
-renderer --> view: Espacio (si existe)
-view -> renderer: spaceAt(x, y+1) [Sur]
-view -> renderer: spaceAt(x-1, y) [Oeste]
-view -> renderer: spaceAt(x+1, y) [Este]
+
+renderer -> renderer: Borde Norte: scan (x..x+w-1, y-1)
+renderer -> renderer: Borde Sur: scan (x..x+w-1, y+h)
+renderer -> renderer: Borde Oeste: scan (x-1, y..y+h-1)
+renderer -> renderer: Borde Este: scan (x+w, y..y+h-1)
+
+renderer -> renderer: Filtrar espacios únicos y distintos al 'actual'
+renderer --> view: LinkedHashMap<id, Espacio> adyacentes
 deactivate renderer
 
-view -> view: Recolectar nombres de espacios únicos
-view -> context: setStatusMessage("Al lado: [Nombres...]")
+view -> view: Para cada adyacente: calcular dirección relativa (N/S/E/O/NE/SE/SO/NO)
+view -> context: setStatusMessage("Cerca: Nombre (N), Nombre (S)...")
 view --> visitor: Muestra adyacentes en la barra de estado
 deactivate view
 
