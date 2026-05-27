@@ -34,7 +34,7 @@
 
 ## Stack Tecnológico
 
-<div align="center">a
+<div align="center">
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Lanterna](https://img.shields.io/badge/Lanterna_TUI-3.1.x-blue?style=for-the-badge)
