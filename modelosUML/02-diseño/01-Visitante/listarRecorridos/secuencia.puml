@@ -1,0 +1,22 @@
+@startuml
+title "Diagrama de Secuencia - Listar Recorridos"
+
+actor "Visitante" as visitor
+boundary "MapaView" as view
+control "RecorridoController" as controller
+control "RecorridoRepository" as repository
+
+visitor -> view: Pulsa "T" (Tours)
+activate view
+view -> controller: obtenerTodos()
+activate controller
+controller -> repository: obtenerTodos()
+activate repository
+repository --> controller: List<Recorrido>
+deactivate repository
+controller --> view: List<Recorrido>
+deactivate controller
+view --> visitor: Muestra lista de recorridos disponibles
+deactivate view
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+title "Diagrama de Secuencia - Listar/Abrir Recorridos"
+
+actor "Administrador" as admin
+boundary "RecorridoDialog" as view
+control "RecorridoController" as controller
+control "RecorridoRepository" as repository
+database "JSON" as db
+
+admin -> view: Abrir gestor de recorridos (tecla 'T')
+activate view
+view -> controller: obtenerTodos()
+activate controller
+controller -> repository: obtenerTodos()
+activate repository
+repository -> db: Leer recorridos.json
+repository --> controller: List<Recorrido>
+deactivate repository
+controller --> view: List<Recorrido>
+deactivate controller
+view --> admin: Muestra lista de recorridos en el diálogo
+deactivate view
+
+@enduml

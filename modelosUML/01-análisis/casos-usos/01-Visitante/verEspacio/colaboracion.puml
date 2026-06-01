@@ -1,0 +1,24 @@
+@startuml verEspacio
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Recorrido Abierto" as RecorridoAbierto
+package verEspacio as "verEspacio()" {
+    rectangle #629EF9 EspacioView
+    rectangle #b5bd68 EspacioController
+    rectangle #F2AC4E EspacioRepository
+    rectangle #F2AC4E Espacio
+}
+
+rectangle #CDEBA5 ":Espacio Abierto" as EspacioAbierto
+
+RecorridoAbierto -r-> EspacioView: verEspacio()
+
+EspacioView -d-> EspacioController: obtenerUbicacionActual() : Espacio
+
+EspacioController --> EspacioRepository: findById(actualId) : Espacio
+
+EspacioRepository -- Espacio
+
+EspacioView -r-> EspacioAbierto: mostrarUbicacion()
+
+@enduml

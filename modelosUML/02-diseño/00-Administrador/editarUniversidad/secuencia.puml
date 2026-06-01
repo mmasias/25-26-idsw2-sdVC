@@ -1,0 +1,33 @@
+@startuml
+title "Diagrama de Secuencia - Editar Universidad"
+
+actor "Administrador" as admin
+boundary "MapaView" as view
+boundary "ConfigDialog" as config
+boundary "DialogForm" as form
+control "EspacioController" as controller
+
+admin -> view: Pulsa tecla "O" (Config)
+activate view
+view -> config: show()
+activate config
+
+admin -> config: Pulsa tecla "U" (Rename Uni)
+config -> form: showForm("Rename Universidad")
+activate form
+form --> config: [Nuevo Nombre]
+deactivate form
+
+config -> controller: actualizarNombreUniversidad(nuevoNombre)
+activate controller
+controller -> controller: Obtener Universidad y setNombre()
+controller -> controller: Guardar en JSON
+controller --> config: ok
+deactivate controller
+
+config --> admin: Nombre actualizado en pantalla
+deactivate config
+view --> admin: Mapa con nuevo título
+deactivate view
+
+@enduml

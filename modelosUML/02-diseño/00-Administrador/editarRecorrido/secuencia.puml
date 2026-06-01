@@ -1,0 +1,29 @@
+@startuml
+title "Diagrama de Secuencia - Editar Recorrido"
+
+actor "Administrador" as admin
+boundary "RecorridoDialog" as view
+control "RecorridoController" as controller
+control "RecorridoService" as service
+control "RecorridoRepository" as repository
+database "JSON" as db
+
+admin -> view: Modifica nombre/desc de un recorrido
+activate view
+view -> controller: actualizarRecorrido(recorrido)
+activate controller
+controller -> service: actualizarRecorrido(recorrido)
+activate service
+service -> repository: actualizar(recorrido)
+activate repository
+repository -> db: Sobrescribir recorridos.json
+repository --> service: boolean
+deactivate repository
+service --> controller: boolean
+deactivate service
+controller --> view: Resultado
+deactivate controller
+view --> admin: Refrescar lista
+deactivate view
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml editarEspacio
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Espacios Abierto" as EspaciosAbierto
+rectangle #CDEBA5 ":Espacio Abierto" as EspacioAbierto
+rectangle #CDEBA5 ":collaboration crearEspacio" as CrearEspacio
+rectangle #CDEBA5 ":collaboration abrirEspacios" as AbrirEspacios
+
+package editarEspacio as "editarEspacio()" {
+    rectangle #629EF9 EditarEspacioView
+    rectangle #b5bd68 EspacioController
+    rectangle #F2AC4E EspacioRepository
+    rectangle #F2AC4E Espacio
+}
+
+EspaciosAbierto --> EditarEspacioView: editarEspacio(espacioId)
+EspacioAbierto --> EditarEspacioView: editarEspacio(espacioId)
+CrearEspacio --> EditarEspacioView: editarEspacio(espacioNuevo)
+
+EditarEspacioView -d-> EspacioController: cargarEspacioParaEdición(espacioId) : Espacio
+
+EspacioController --> EspacioRepository: obtenerPorId(espacioId) : Espacio
+
+EspacioRepository -- Espacio
+
+EditarEspacioView --> EspacioController: modificarCampos(espacioId, cambios) : boolean
+
+EspacioController --> EspacioRepository: actualizar(espacio) : boolean
+
+EditarEspacioView ..> AbrirEspacios: <<include>> abrirEspacios()
+
+@enduml

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "recorrido-c8fd6958",
+    "nombre": "Nuevo recorrido",
+    "descripcion": "Estudiantes Erasmus",
+    "espacioIds": [
+      "espacio-pb002",
+      "espacio-pb011",
+      "espacio-pb007",
+      "espacio-pb005",
+      "espacio-pb015"
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+@startuml
+title "Diagrama de Secuencia - Ver Espacio"
+
+actor "Visitante" as visitor
+boundary "MapaView" as view
+control "EspacioController" as controller
+control "EspacioRepository" as repository
+
+visitor -> view: Selecciona un espacio en el mapa
+activate view
+view -> controller: obtenerUniversidad()
+activate controller
+controller -> repository: obtenerUniversidad()
+activate repository
+repository --> controller: Universidad
+deactivate repository
+controller --> view: Universidad
+deactivate controller
+view -> view: Identificar espacio bajo el cursor
+view --> visitor: Muestra panel con nombre y tipo del espacio
+deactivate view
+
+@enduml

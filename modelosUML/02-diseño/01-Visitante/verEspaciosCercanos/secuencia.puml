@@ -1,0 +1,34 @@
+@startuml
+title "Diagrama de Secuencia - Ver Espacios Cercanos (Adyacencia Robusta)"
+
+actor "Visitante" as visitor
+boundary "MapaView" as view
+control "MapContext" as context
+entity "GridMapaRenderer" as renderer
+
+visitor -> view: Pulsa tecla "C"
+activate view
+
+view -> context: getSelectedEspacio() as actual
+view -> context: getCurrentEspacios()
+
+note over view, renderer: Escaneo de bordes completos\n(Independiente del tamaño del espacio)
+
+view -> renderer: spacesAdyacentes(espacios, actual)
+activate renderer
+
+renderer -> renderer: Borde Norte: scan (x..x+w-1, y-1)
+renderer -> renderer: Borde Sur: scan (x..x+w-1, y+h)
+renderer -> renderer: Borde Oeste: scan (x-1, y..y+h-1)
+renderer -> renderer: Borde Este: scan (x+w, y..y+h-1)
+
+renderer -> renderer: Filtrar espacios únicos y distintos al 'actual'
+renderer --> view: LinkedHashMap<id, Espacio> adyacentes
+deactivate renderer
+
+view -> view: Para cada adyacente: calcular dirección relativa (N/S/E/O/NE/SE/SO/NO)
+view -> context: setStatusMessage("Cerca: Nombre (N), Nombre (S)...")
+view --> visitor: Muestra adyacentes en la barra de estado
+deactivate view
+
+@enduml

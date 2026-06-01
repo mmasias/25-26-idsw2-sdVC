@@ -1,0 +1,37 @@
+@startuml Vistas
+
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundCorner 5
+skinparam class {
+    BackgroundColor white
+    BorderColor #555555
+    ArrowColor #333333
+}
+
+package "Vistas"{
+  
+    boundary "LoginView"
+    boundary "EspaciosView"
+    boundary "CrearEspacioView"
+    boundary "EditarEspacioView"
+    boundary "EliminarEspacioView"
+
+    boundary "RecorridosView"
+    boundary "CrearRecorridoView"
+    boundary "EditarRecorridoView"
+    boundary "EliminarRecorridoView"
+
+    boundary "ListarRecorridosView"
+    boundary "RecorridoView"
+    boundary "EspacioView"
+    boundary "BuscarEspacioView"
+    boundary "DetalleEspacioView"
+    boundary "EspaciosCercanosView"
+    boundary "EspaciosPlantaView"
+    boundary "MapaView"
+
+}
+
+@enduml

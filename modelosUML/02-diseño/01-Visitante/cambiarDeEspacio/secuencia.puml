@@ -1,0 +1,13 @@
+@startuml
+title "Diagrama de Secuencia - Cambiar de Espacio (En Recorrido)"
+
+actor "Visitante" as visitor
+boundary "MapaView" as view
+
+visitor -> view: Pulsa tecla "A" (Anterior) o "D" (Siguiente)
+activate view
+view -> view: navegarRecorrido(direccion)
+view --> visitor: Actualiza el mapa centrando el nuevo espacio del recorrido
+deactivate view
+
+@enduml

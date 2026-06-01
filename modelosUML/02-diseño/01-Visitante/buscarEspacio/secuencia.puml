@@ -1,0 +1,18 @@
+@startuml
+title "Diagrama de Secuencia - Buscar Espacio"
+
+actor "Visitante" as visitor
+boundary "DialogForm" as view
+control "EspacioController" as controller
+
+visitor -> view: Introduce término de búsqueda
+activate view
+view -> controller: filtrar(termino)
+activate controller
+controller -> controller: Filtrar lista de espacios por nombre/tipo
+controller --> view: List<Espacio> (resultados)
+deactivate controller
+view --> visitor: Muestra lista de espacios encontrados
+deactivate view
+
+@enduml

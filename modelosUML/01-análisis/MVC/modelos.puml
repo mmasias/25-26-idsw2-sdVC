@@ -1,0 +1,16 @@
+@startuml modelos
+
+hide empty members
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam roundCorner 5
+
+package "Modelos"{
+
+    entity "Administrador"
+    entity "Sesion"
+    entity "Recorrido"
+    entity "Espacio"
+
+@enduml

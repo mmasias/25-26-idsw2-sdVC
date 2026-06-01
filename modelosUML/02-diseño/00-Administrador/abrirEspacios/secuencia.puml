@@ -1,0 +1,39 @@
+@startuml
+title "Diagrama de Secuencia - Listar/Abrir Espacios"
+
+actor "Administrador" as admin
+boundary "MapaView" as view
+control "EspacioController" as controller
+control "EspacioRepository" as repository
+entity "Universidad" as uni
+entity "Region" as reg
+database "JSON" as db
+
+admin -> view: Cargar vista del mapa
+activate view
+view -> controller: obtenerUniversidad()
+activate controller
+controller -> repository: cargarUniversidad()
+activate repository
+repository -> db: Leer universidad.json
+repository --> controller: Universidad
+deactivate repository
+controller --> view: Universidad
+deactivate controller
+
+view -> view: cargarDatos()
+activate view
+view -> uni: getRegiones()
+activate uni
+uni --> view: List<Region>
+deactivate uni
+view -> reg: obtenerPlantas()
+activate reg
+reg --> view: List<Planta>
+deactivate reg
+deactivate view
+
+view --> admin: Mostrar mapa con espacios
+deactivate view
+
+@enduml
