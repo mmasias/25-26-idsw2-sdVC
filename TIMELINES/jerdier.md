@@ -1,7 +1,7 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 25 | Días activos: 10 | Sesiones log: 11
+> Commits: 33 | Días activos: 14 | Sesiones log: 16
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 25 (12 feat / 5 fix / 8 other) |
-| Ratio fix/feat | 0.41 |
-| Días activos | 10 |
-| Sesiones documentadas | 11 |
-| Sesiones sin fecha en log | 11 |
+| Commits propios | 33 (18 feat / 6 fix / 9 other) |
+| Ratio fix/feat | 0.33 |
+| Días activos | 14 |
+| Sesiones documentadas | 16 |
+| Sesiones sin fecha en log | 16 |
 
 </div>
 
@@ -24,9 +24,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-06-02
-        Diseno       :done, 2026-05-25, 2026-06-02
-        Codigo       :done, 2026-05-22, 2026-06-02
+        Analisis     :done, 2026-05-25, 2026-06-05
+        Diseno       :done, 2026-05-25, 2026-06-05
+        Codigo       :done, 2026-05-22, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -180,6 +180,58 @@ gantt
 |---|---|
 | 17:07 | [fix: corrección archivos backend src](https://github.com/jerdier/25-26-idsw2-sdVC/commit/10a7728eee8d656b2188ec7b760ac8ec705da57f) |
 | 16:42 | [feat: implement attendance vertical slice and professor](https://github.com/jerdier/25-26-idsw2-sdVC/commit/7f2767ba6bb9c9c59ef31e2793d80f271c1e61e4) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 15 · 2026-06-02
+
+### Commits (2: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:17 | [feat: módulo de dispensas (alumno), tipos y actualización del log](https://github.com/jerdier/25-26-idsw2-sdVC/commit/fa0759df149204e3077229e99d573f9104222868) |
+| 21:29 | [mantenimiento: limpieza de base de datos y corrección de tipos de Node](https://github.com/jerdier/25-26-idsw2-sdVC/commit/357030548d64ca3d526f0b10b1f1860026636fb8) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (3: 3 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:17 | [feat: implementado módulo de Secretaría y estabilización técnica del frontend](https://github.com/jerdier/25-26-idsw2-sdVC/commit/435547ead4f07886ae1e132775a26e1040b869ee) |
+| 22:35 | [feat: implementado módulo de Secretaría Académica para gestión administrativa](https://github.com/jerdier/25-26-idsw2-sdVC/commit/fb37e0929eb3709ead777620593bb864f182bed6) |
+| 21:59 | [feat: implementado flujo de aprobación de dispensas y panel del director](https://github.com/jerdier/25-26-idsw2-sdVC/commit/1081e05b1ed29f55301d16c505ce8f7f9f548f26) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (2: 2 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:53 | [feat: implementada autenticación real y habilitada conectividad CORS](https://github.com/jerdier/25-26-idsw2-sdVC/commit/e1495aaada344e9cab5bf3eddf24181334f1e51e) |
+| 13:39 | [feat: implementada autenticación real por email y persistencia de sesión](https://github.com/jerdier/25-26-idsw2-sdVC/commit/22c88ebb5d68015b013714a373af19c556682c41) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (1: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:47 | [fix: conversatio_log](https://github.com/jerdier/25-26-idsw2-sdVC/commit/4d551e1afdcce8a5b78eda697ab83ea80195a8eb) |
 
 > ⚠️ Commits sin entrada en log
 

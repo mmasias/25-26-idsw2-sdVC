@@ -1,7 +1,7 @@
 # Timeline - inigovaqueroo04
 
 > Repo: [inigovaqueroo04/25-26-idsw2-sdVC](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)
-> Commits: 30 | Días activos: 7 | Sesiones log: 0
+> Commits: 36 | Días activos: 9 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,8 +9,8 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 30 (2 feat / 0 fix / 28 other) |
-| Días activos | 7 |
+| Commits propios | 36 (2 feat / 0 fix / 34 other) |
+| Días activos | 9 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-02
+        Analisis     :done, 2026-05-29, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -165,6 +165,34 @@ gantt
 | 19:29 | [docs: analizar abrirPlanificacion](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/d092af137ac0513f54e10071e9ebbbd660df9578) |
 | 19:23 | [docs: analizar validarConflicto](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/a8eefa6ab100643a0118ce96b49058cd6a174081) |
 | 18:58 | [docs: analiza caso de uso marcarCompletada](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/00c02acbc4f77f67fb6aeffdffcecaa5c0509d92) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (4: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 19:10 | [docs: corregir enlaces de detalle y prototipado](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/34d24ef5b1a6c37d0d81bd4b7b72dfd12c120884) |
+| 19:00 | [docs: organizar modelo de dominio con imagenes](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/6bf23bcd1c81c68f2c520c63458629af974401ba) |
+| 18:47 | [docs: preparar estructura RUP estilo pySigHor](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/217568ec16870268cec3529ffee41e5a7fc17757) |
+| 18:01 | [Organize RUP analysis documents](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/2ed3b4b220728a3f0f59b00190aeb2fd326e9330) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (2: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:32 | [docs: añadir imagenes renderizadas de diseño](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/fd55aa26da6061882889fa769e46ff744de657e3) |
+| 22:24 | [docs: completar diseño RUP conceptual](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/e58b2d9b559d2ae2838beb73df13914b12a9a4f2) |
 
 > ⚠️ Commits sin entrada en log
 

@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 50 | Días activos: 12 | Sesiones log: 29
+> Commits: 76 | Días activos: 15 | Sesiones log: 56
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 50 (42 feat / 4 fix / 4 other) |
-| Ratio fix/feat | 0.09 |
-| Días activos | 12 |
-| Sesiones documentadas | 29 |
-| Días log+commits | 6 |
+| Commits propios | 76 (67 feat / 5 fix / 4 other) |
+| Ratio fix/feat | 0.07 |
+| Días activos | 15 |
+| Sesiones documentadas | 56 |
+| Días log+commits | 9 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -27,9 +27,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-06-02
-        Analisis     :done, 2026-05-22, 2026-06-02
-        Diseno       :done, 2026-06-02, 2026-06-02
+        UML          :done, 2026-05-23, 2026-06-05
+        Analisis     :done, 2026-05-22, 2026-06-05
+        Diseno       :done, 2026-06-02, 2026-06-05
+        Desarrollo   :done, 2026-06-02, 2026-06-05
+        Codigo       :done, 2026-06-02, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -273,10 +275,16 @@ gantt
 
 ## Día 15 · 2026-06-02
 
-### Commits (9: 8 feat / 1 fix)
+### Commits (15: 14 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 01:01 | [feat: Update breadcrumbs in RUP documentation for improved navigation and traceability across Analysis, Design, and Development disciplines](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/796bc25c1a8ab91cf5882fc2b418d2f4332da1f3) |
+| 00:50 | [feat: Consolidate Grado creation and editing flows into a unified GradoFormComponent, update documentation, and implement incremental updates and bulk import functionality](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/e2d05f07a55004790f2e0bd68f8f0a0ac360cbe4) |
+| 00:39 | [feat(grados): Implement CRUD operations and import functionality for Grados](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/a83f5f62b7ef6894955e62fab231e90c67cc0551) |
+| 00:01 | [feat: Implementar gestión de grados académicos](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/03c570ad16039253ea3ce38d82cf1739b1ebd26b) |
+| 21:44 | [feat: add authentication feature with login and home components](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/d97aac13ae56c601055d37f62aa3f7e1391e42d1) |
+| 19:17 | [feat: initialize Angular frontend application with server-side rendering and NestJS backend](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/911aba89939df25944ce70ad00e5c02e58f299c8) |
 | 18:52 | [feat: Add sequence diagrams for editing and deleting grades](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b7c9e75a3f190838efc60f306637dd80757e14b7) |
 | 18:36 | [Add sequence diagrams for creating and listing grades](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3b7be7263027cd9b9e1e2ed16671ed69967236b8) |
 | 14:37 | [feat: add diseño y documentación para el caso de uso importarGrados](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/1a6adca1cc45ef7ae0e5d513d5e0eed08343e678) |
@@ -287,7 +295,7 @@ gantt
 | 10:36 | [feat: Add authentication use cases for iniciarSesion and cerrarSesion](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3928f8c6f792f80789c39fc5092e94539b8bf40c) |
 | 10:25 | [feat: Add navigation transition analyses for completing consultation, management, and process](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/35265893033cd45941dfd1eef2cebb912630e780) |
 
-### 💬 Conversation-log (9 sesiónes)
+### 💬 Conversation-log (12 sesiónes)
 
 - Sesión 37: Transiciones de Navegación - Rigor en el Cierre de Estados
 - Sesión 38: Autenticación y Cierre del Contexto Administrador
@@ -298,8 +306,97 @@ gantt
 - Sesión 43: Rama de Grados - Diseño Detallado de Importación Masiva
 - Sesión 44: Rama de Grados - Listado Paginado y Patrón El Delgado
 - Sesión 45: Rama de Grados - Diseño Detallado de Edición y Borrado Seguro
+- Sesión 46: Levantamiento de Infraestructura y Configuración de Persistencia
+- Sesión 47: Desarrollo de Autenticación y Refinamiento de UX
+- Sesión 48: Desarrollo de la Rama de Grados - Hub de Gestión, Alta Manual y Depuración del Motor de Búsqueda
 
-**Artefactos nuevos:** 🧩 
+**Artefactos nuevos:** 🔌 🧩 ⚙️ 
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (8: 8 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:56 | [feat: implement bulk deletion functionality for Asignaturas, Aulas, and Grados with UI updates](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/4cb1fef1d486de4a122a5a524ebe18057abbce6b) |
+| 00:47 | [feat(aulas): implement Aula module with CRUD operations and import functionality](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/da04e0707a14b89d58c5bd17566c220d312a5461) |
+| 00:12 | [feat(importarAulas): add detailed design documentation and sequence diagram](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/6bc674530f4e0c4f91c4e5448a8b7d9b1f678dd9) |
+| 00:04 | [feat: Add sequence diagrams for eliminarAula and editarAula use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/72b4b227f512c0866a01cfb87e3e5e71522cd9cf) |
+| 21:57 | [feat: Add sequence diagrams for crearAula and abrirAulas use cases; update AsignaturaService to remove redundant comments](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/d8664a7cecc7f05f9f1eeac2c3d299063763c1f1) |
+| 21:17 | [feat(asignaturas): add CRUD functionality for asignaturas](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/7cf06a0f8d18cf6a7fc5f5673d29a6d58c3f1c84) |
+| 17:57 | [feat: Add detailed sequence diagrams for crearAsignatura, editarAsignatura, and eliminarAsignatura use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/8d65a7537b82034f12156a4c41abc6c54c2b1082) |
+| 17:37 | [feat: Add sequence diagrams for abrirAsignaturas and importarAsignaturas use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/c4634386bc3d89a894a7acb74a2a045488918eb3) |
+
+### 💬 Conversation-log (8 sesiónes)
+
+- Sesión 49: Finalización del Ramillete de Grados - CRUD Completo e Importación
+- Sesión 50: Finalización del Ramillete de Grados - Consolidación de Componentes y Depuración Técnica
+- Sesión 51: Optimización de la Trazabilidad y Navegación Operativa RUP
+- Sesión 52: Rama de Asignaturas - Inicio del Diseño Detallado
+- Sesión 52: Rama de Asignaturas - Diseño Detallado Completo
+- Sesión 53: Excelencia en Trazabilidad - Normalización Global de Breadcrumbs
+- Sesión 54: Rama de Asignaturas - Desarrollo Completo y Consistencia UI
+- Sesión 55: Rama de Aulas - Inicio del Diseño Detallado
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (5: 4 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:12 | [feat(alumnos): add CRUD functionality for alumnos with import feature](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/6b929abb2245458745c5ebc0db0d836b0b316357) |
+| 19:54 | [fix: refactoring multi-format import functionality for CSV and Excel files](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/8f42e2c425a287d2852fc25430e089b26ee54a40) |
+| 18:35 | [feat(importarAlumnos): add detailed design documentation and sequence diagram](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/1cc91fe331d177bc047bf03c2664f3dadce256a1) |
+| 18:10 | [feat: Add detailed sequence diagrams for eliminarAlumno and editarAlumno use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/d8374f1c735eff5f7104b7f1ee019850b1c612dc) |
+| 17:45 | [feat: Add detailed sequence diagrams for crearAlumno and abrirAlumnos use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/5b0c976db4c0b1120864af6f3ff2a6a4fb26b29c) |
+
+### 💬 Conversation-log (9 sesiónes)
+
+- Sesión 56: Rama de Aulas - Diseño Detallado de Gestión y Borrado Seguro
+- Sesión 57: Rama de Aulas - Finalización del Diseño Detallado
+- Sesión 58: Rama de Aulas - Implementación Full-Stack Completa
+- Sesión 59: Acciones Masivas - Implementación de Eliminación Múltiple
+- Sesión 60: Rama de Alumnos - Inicio del Diseño Detallado
+- Sesión 61: Rama de Alumnos - Diseño Detallado de Mantenimiento y Borrado
+- Sesión 62: Rama de Alumnos - Finalización del Diseño Detallado
+- Sesión 63: Infraestructura - Motor de Importación Multi-formato (SOLID)
+- Sesión 64: Rama de Alumnos - Desarrollo Full-Stack y Validación de Excelencia
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (7: 7 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:09 | [feat: Add sequence diagrams for eliminarExamen and editarExamen use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/aa5b0d46d7bd0e0ae573962ebf35f3baa2905f6e) |
+| 20:48 | [feat: Add sequence diagrams for exam creation and listing use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/0075f27a7ddbb12021928a2e3585e222d3d538b5) |
+| 20:24 | [feat: Implement import and management features for professors](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b595cf69fd0cba6391d3f2680fb04638c44396dc) |
+| 16:23 | [feat: Add sequence diagrams for "eliminarProfesor" use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/c296053984adeffa549a225182916306e8756a27) |
+| 16:20 | [feat: Add sequence diagrams for editing and importing professors](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/112ed497ea91b37f0c53b3752a85bff1dab7f17a) |
+| 16:03 | [feat: Implement detailed design for crearProfesor use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3778cc27ad4ae107beacb0aa4aa7da24cf94fe6b) |
+| 15:53 | [feat: Implement detailed design for abrirProfesores use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/e528524e6908db87da421e2200e1cfe16dc37209) |
+
+### 💬 Conversation-log (7 sesiónes)
+
+- Sesión 65: Rama de Profesores - Inicio del Diseño Detallado
+- Sesión 66: Rama de Profesores - Diseño Detallado de Alta Manual
+- Sesión 67: Rama de Profesores - Diseño Detallado de Edición e Importación Masiva
+- Sesión 68: Rama de Profesores - Diseño Detallado de Borrado Seguro
+- Sesión 69: Rama de Profesores - Desarrollo Full-Stack Completo y Consistencia de Diseño
+- Sesión 70: Rama de Exámenes - Diseño Detallado de Apertura y Alta Manual
+- Sesión 71: Rama de Exámenes - Diseño Detallado de Edición y Borrado Seguro
 
 > 💬 + commits = proceso documentado
 

@@ -1,7 +1,7 @@
 # Timeline - liamanderson873
 
 > Repo: [liamanderson873/25-26-idsw2-sdVC](https://github.com/liamanderson873/25-26-idsw2-sdVC)
-> Commits: 61 | Días activos: 6 | Sesiones log: 0
+> Commits: 84 | Días activos: 10 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 61 (15 feat / 6 fix / 40 other) |
-| Ratio fix/feat | 0.40 |
-| Días activos | 6 |
+| Commits propios | 84 (18 feat / 16 fix / 50 other) |
+| Ratio fix/feat | 0.88 |
+| Días activos | 10 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,9 +23,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-05-31
-        Analisis     :done, 2026-05-21, 2026-05-31
-        Codigo       :done, 2026-05-29, 2026-05-31
+        UML          :done, 2026-05-21, 2026-06-05
+        Analisis     :done, 2026-05-21, 2026-06-05
+        Codigo       :done, 2026-05-29, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -185,12 +185,10 @@ gantt
 
 ## Día 12 · 2026-05-30
 
-### Commits (18: 3 feat / 1 fix)
+### Commits (14: 3 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 23:14 | [docs: cierre de sesion y sincronizacion final en main](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/95744690d530985a46ced608d100c8e1fd37f9f2) |
-| 23:12 | [Merge pull request #8 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/2e49207f9b919799d5730eb0439da3e4bfae47af) |
 | 23:08 | [chore: eliminar scripts de prueba y limpiar src/test](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/de6de07767dcc46213d2bbd626b8a9410fdeea9f) |
 | 23:02 | [feat(servicio): completar exportacion de examen (CU-04) con carga eager; docs: cerrar epica I/O en log y roadmap](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/dcc79560f8a50f6c136ea26683ff74a2d1a0ee18) |
 | 22:57 | [feat(servicio): implementar exportacion de examen (CU-04); docs: cerrar epica de Entradas/Salidas en log y roadmap](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/0e0f86162a46f706e5034c400eb8c8787c8ca1f2) |
@@ -202,11 +200,80 @@ gantt
 | 20:37 | [docs: registrar avance del CU-03 y correccion arquitectonica](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/cc5695e22bb3aa34ff7b0ebfb072b7460db995c5) |
 | 20:26 | [docs: actualizar log con nuevo estandar y plan I/O](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/27bb5fd3d7183a12bf8dfe8dd579d54d47c049b0) |
 | 20:23 | [docs: actualizar roadmap y log con validacion empirica de CU-09](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/2973051d31cb7559acff063176b3c376ff4a70a1) |
-| 20:13 | [Merge pull request #7 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/99a8c82ee8ed898ba348d7e284b67b58b99d3d88) |
 | 19:59 | [docs: actualizar log post-validacion CU-02 y preparar BD para CU-09](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/e07762dcef75f3119192ceae5c51259c06e2d00c) |
 | 19:40 | [docs: actualizar log y roadmap tras validacion exitosa de CU-02](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/9828fbfa7d3d09cf5097faa19594a77f2c5d58da) |
 | 17:30 | [feat(servicio): implementar algoritmo de generacion estratificada (CU-02)](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/21c6affd5f907ccba787579501e49c78d3327126) |
-| 17:20 | [Merge pull request #6 from liamanderson873/develop](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/6213507efe1ff8b7a89e6b26f5c3e1f7d4c5ffb0) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 15 · 2026-06-02
+
+### Commits (3: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:53 | [docs: finalizar log de la Épica de Corrección y diseño detallado](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/b0727c2a9b9a4ee01a6d0f10bddec35896f0aea5) |
+| 23:01 | [docs: reorganizar diseño en carpetas por Caso de Uso con READMEs detallados](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/082551fc37b07652b9d720e9603355583769642a) |
+| 22:53 | [docs: añadir diagramas de secuencia para todos los Casos de Uso core (CU-01 a CU-09)](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/c7a5c8910efe854a1d883c10465ec23bc6880ae8) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (7: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:17 | [docs: dejar de rastrear archivos de memoria y contexto en el repositorio remoto](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/8b6cd24112f7f92cd327be6afe4b6b66da685530) |
+| 22:16 | [docs: consolidar memoria privada y trazabilidad teorica en el repositorio del proyecto](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/6cfefc76ffbec2b555d69805c64fd17579161892) |
+| 22:14 | [docs: actualizar hitos recientes en contexto proyecto](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/221c7c983c033225d1bef60b5ef6418af865a978) |
+| 22:14 | [docs: actualizar conversation log y contexto de proyecto con hito 31](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/7be112a3b7222c361c4337a4bb20812a5614982e) |
+| 22:12 | [docs: corregir visualizacion de diagramas y codificacion de archivos README](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/c47d0eed395edb06f4c42388ef0d3990084ea9a2) |
+| 22:04 | [docs: completar diagramas de secuencia de diseño para la épica de maestros y core](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/81d1304e853d90226c1e972e02fb8bfde105257f) |
+| 21:48 | [feat: estandarizacion de CRUDs y DTOs para entidades maestras y actualizacion de seguridad](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/82a12a89fea310590ab6b094fc91272d4b9c1577) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (16: 1 feat / 10 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:01 | [docs: finalize session 36 and secure context for restart](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/4a90d978466ae78c0d8577a8122f2dac5061df2b) |
+| 00:51 | [fix: unblock UI and allow manual data recovery through frontend](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/7f069cab6dd09c59a8c7c32125831393a59a0d02) |
+| 00:49 | [fix: make asignatura-grado relation nullable to prevent errors with existing data](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/6b5c2a96bb3b901b700c87a148b037d389e7ae2c) |
+| 00:45 | [fix: total rebuild of AsignarExamenPage for max stability and individual sync tracking](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/5b4dfa4ff23cfcb623f950479f3e328922e092c9) |
+| 00:43 | [fix: total structural stabilization of AsignarExamenPage and robust error handling](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/3c72430028df55d84c8952ac576ca8669a429201) |
+| 00:42 | [fix: stabilize AsignarExamenPage with structural data safeguards and clean logs](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/4f3d358f2478f132047bafb8c528d086c5a0c5aa) |
+| 00:39 | [fix: final null-safe check in AsignarExamenPage filtering](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/979cd7d2d73643a314d44450233780372be55e44) |
+| 00:37 | [fix: exhaustive frontend hardening against null fields and data model changes](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/9a5923495c0da0760133dcc080306877c5a7d75b) |
+| 00:34 | [fix: restore asignatura-grado relation, fix exam cache, and improve lifecycle flow](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/c360fc75051b81742f42a91fc790acda5c4525a4) |
+| 00:28 | [fix: repair corrupted AsignarExamenPage.tsx and stabilize rendering](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/35acdfb1bad2dddd7489799a1d43c6d700d8c262) |
+| 00:22 | [fix: resolve intermittent white screen and fix sidebar routes](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/6f4381010188eba4a4747d18b407474877191763) |
+| 00:14 | [docs: add unified startup script start-all.ps1 and update instructions](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/984dd71bd1be55bf25dca1a54dae3a0b07b34201) |
+| 05:05 | [docs: reinforce context persistence rules as a critical priority](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/cab6ed2194d589a5361bfc6b5f7d3280f7bf2699) |
+| 05:03 | [docs: remove test data SQL and enforce PostgreSQL data population policy](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/e7b2fe2c77c273e09e357b6d29c6759b811fb87e) |
+| 05:01 | [docs: clean up temporary scripts and update project rules](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/ff2a68db8b13282c64475a5b2c04e48dad54087d) |
+| 04:56 | [feat: rediseño visual premium y motor de corrección masiva por IA](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/f899736aac82f6b53a5b36c77c1c019657e83446) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 02:57 | [feat: alineación total con prototipos RUP, auditoría de exámenes y flujo de simulación core funcional](https://github.com/liamanderson873/25-26-idsw2-sdVC/commit/a82d63bc519dc71fc53c158a42aff22808f8b9a3) |
 
 > ⚠️ Commits sin entrada en log
 

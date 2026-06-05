@@ -1,7 +1,7 @@
 # Timeline - Pareyor
 
 > Repo: [Pareyor/25-26-idsw2-sdVC](https://github.com/Pareyor/25-26-idsw2-sdVC)
-> Commits: 78 | Días activos: 12 | Sesiones log: 13
+> Commits: 99 | Días activos: 8 | Sesiones log: 23
 
 ## Patrón observado
 
@@ -9,13 +9,14 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 78 (57 feat / 20 fix / 1 other) |
-| Ratio fix/feat | 0.35 |
-| Días activos | 12 |
-| Sesiones documentadas | 13 |
-| Días log+commits | 12 |
-| Días solo log | 0 |
+| Commits propios | 99 (71 feat / 22 fix / 6 other) |
+| Ratio fix/feat | 0.30 |
+| Días activos | 8 |
+| Sesiones documentadas | 23 |
+| Días log+commits | 8 |
+| Días solo log | 8 |
 | Días solo commits | 0 |
+| Sesiones sin fecha en log | 1 |
 
 </div>
 
@@ -25,232 +26,148 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-21, 2026-06-02
-        Analisis     :done, 2026-05-21, 2026-06-02
-        Diseno       :done, 2026-05-30, 2026-06-02
-        Codigo       :done, 2026-05-30, 2026-06-02
+        Inicio       :milestone, 2026-05-27, 0d
+        UML          :done, 2026-05-19, 2026-06-05
+        Analisis     :done, 2026-05-21, 2026-06-05
+        Diseno       :done, 2026-05-30, 2026-06-05
+        Codigo       :done, 2026-05-19, 2026-06-05
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D12 | D13 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `corregirExamenes` | A |   |   |   |   |   |   |   |   |   |
-| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |
-| `generarExamenes` | A |   |   |   |   |   |   |   |   |   |
-| `importarAlumnos` | A |   |   |   |   |   |   |   |   |   |
-| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |
-| `asignarExamenes` |   | A |   |   |   |   |   |   |   |   |
-| `crearPregunta` |   | A |   |   |   |   |   |   |   |   |
-| `exportarAlumnos` |   | A |   |   |   |   |   |   |   |   |
-| `exportarPreguntas` |   | A |   |   |   |   |   |   |   |   |
-| `importarPreguntas` |   | A |   |   |   |   |   |   |   |   |
-| `crearAlumno` |   |   | A |   |   |   |   |   |   |   |
-| `crearDocente` |   |   | A |   |   |   |   |   |   |   |
-| `editarAsignatura` |   |   | A |   |   |   |   |   |   |   |
-| `editarDocente` |   |   | A |   |   |   |   |   |   |   |
-| `editarPregunta` |   |   | A |   |   |   |   |   |   |   |
-| `crearAsignatura` |   |   |   | A |   |   |   |   |   |   |
-| `crearGrado` |   |   |   | A |   |   |   |   |   |   |
-| `editarAlumno` |   |   |   | A |   |   |   |   |   |   |
-| `editarGrado` |   |   |   | A |   |   |   |   |   |   |
-| `verPreguntas` |   |   |   | A |   |   |   |   |   | D |
-| `eliminarPregunta` |   |   |   |   | A |   |   |   |   |   |
-| `verAlumnos` |   |   |   |   | A |   |   |   |   | D |
-| `verAsignaturas` |   |   |   |   | A |   |   |   |   | D |
-| `verDocentes` |   |   |   |   | A |   |   |   |   | D |
-| `verGrados` |   |   |   |   | A |   |   |   |   | D |
-| `eliminarAlumno` |   |   |   |   |   | A |   |   |   |   |
-| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   |   |
-| `eliminarDocente` |   |   |   |   |   | A |   |   |   |   |
-| `eliminarGrado` |   |   |   |   |   | A |   |   |   |   |
-| `iniciarSesion` |   |   |   |   |   | A |   |   | D |   |
-| `cerrarSesion` |   |   |   |   |   |   | A |   | D |   |
-| `completarGestion` |   |   |   |   |   |   | A |   | D |   |
-| `crearRespuesta` |   |   |   |   |   |   | A |   |   |   |
-| `verRespuestas` |   |   |   |   |   |   | A |   |   |   |
-| `cancelarGeneracion` |   |   |   |   |   |   |   | A |   |   |
-| `editarRespuesta` |   |   |   |   |   |   |   | A |   |   |
-| `eliminarRespuesta` |   |   |   |   |   |   |   | A |   |   |
-| `exportarAsignaturas` |   |   |   |   |   |   |   | A |   |   |
-| `exportarGrados` |   |   |   |   |   |   |   | A |   |   |
-| `importarAsignaturas` |   |   |   |   |   |   |   | A |   |   |
-| `importarGrados` |   |   |   |   |   |   |   | A |   |   |
+| Caso de uso | D-5 | D-4 | D-3 | D-2 | D-1 | D0 | D1 | D2 | D4 | D5 | D8 | D10 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `corregirExamenes` | A |   |   |   |   |   |   |   |   |   |   |   |
+| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |   |   |
+| `generarExamenes` | A |   |   |   |   |   |   |   |   |   |   |   |
+| `importarAlumnos` | A |   |   |   |   |   |   |   |   |   |   |   |
+| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |   |   |
+| `asignarExamenes` |   | A |   |   |   |   |   |   |   |   |   |   |
+| `crearPregunta` |   | A |   |   |   |   |   |   |   |   | D |   |
+| `exportarAlumnos` |   | A |   |   |   |   |   |   |   |   |   |   |
+| `exportarPreguntas` |   | A |   |   |   |   |   |   |   |   |   |   |
+| `importarPreguntas` |   | A |   |   |   |   |   |   |   |   |   |   |
+| `crearAlumno` |   |   | A |   |   |   |   |   |   |   | D |   |
+| `crearDocente` |   |   | A |   |   |   |   |   |   |   | D |   |
+| `editarAsignatura` |   |   | A |   |   |   |   |   |   |   | D |   |
+| `editarDocente` |   |   | A |   |   |   |   |   |   |   | D |   |
+| `editarPregunta` |   |   | A |   |   |   |   |   |   |   | D |   |
+| `crearAsignatura` |   |   |   | A |   |   |   |   |   |   | D |   |
+| `crearGrado` |   |   |   | A |   |   |   |   |   |   | D |   |
+| `editarAlumno` |   |   |   | A |   |   |   |   |   |   | D |   |
+| `editarGrado` |   |   |   | A |   |   |   |   |   |   | D |   |
+| `verPreguntas` |   |   |   | A |   |   |   |   |   | D |   |   |
+| `eliminarPregunta` |   |   |   |   | A |   |   |   |   |   | D |   |
+| `verAlumnos` |   |   |   |   | A |   |   |   |   | D |   |   |
+| `verAsignaturas` |   |   |   |   | A |   |   |   |   | D |   |   |
+| `verDocentes` |   |   |   |   | A |   |   |   |   | D |   |   |
+| `verGrados` |   |   |   |   | A |   |   |   |   | D |   |   |
+| `eliminarAlumno` |   |   |   |   |   | A |   |   |   |   | D |   |
+| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   |   | D |   |
+| `eliminarDocente` |   |   |   |   |   | A |   |   |   |   | D |   |
+| `eliminarGrado` |   |   |   |   |   | A |   |   |   |   | D |   |
+| `iniciarSesion` |   |   |   |   |   | A |   |   | D |   |   |   |
+| `cerrarSesion` |   |   |   |   |   |   | A |   | D |   |   |   |
+| `completarGestion` |   |   |   |   |   |   | A |   | D |   |   |   |
+| `crearRespuesta` |   |   |   |   |   |   | A |   |   |   |   | D |
+| `verRespuestas` |   |   |   |   |   |   | A |   |   |   |   | D |
+| `cancelarGeneracion` |   |   |   |   |   |   |   | A |   |   |   |   |
+| `editarRespuesta` |   |   |   |   |   |   |   | A |   |   |   | D |
+| `eliminarRespuesta` |   |   |   |   |   |   |   | A |   |   |   | D |
+| `exportarAsignaturas` |   |   |   |   |   |   |   | A |   |   |   |   |
+| `exportarGrados` |   |   |   |   |   |   |   | A |   |   |   |   |
+| `importarAsignaturas` |   |   |   |   |   |   |   | A |   |   |   |   |
+| `importarGrados` |   |   |   |   |   |   |   | A |   |   |   |   |
 
 </div>
 
 ---
 
-## Día 2 · 2026-05-20
-
-### Commits (2: 2 feat / 0 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 17:40 | [feat: Reescribe README.md provisionalmente y actualiza conversation-log.md del dia](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/306e151a13074bd34790d343d12649e16a9675f5) |
-| 17:08 | [feat: QUE_HACE.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/b4b488d29498c15ea8a4d9ebafe1806597a103c1) |
+## Día -6 · 2026-05-20
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 1: [17:38]
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 3 · 2026-05-21
-
-### Commits (3: 2 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 20:40 | [fix: corrige un error en la exportación de la sesión conversada con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/78a0ddb5e8ca9fbcf62d5c9a53a7bd4385095cfc) |
-| 20:39 | [feat: Implementa la automatización del agente IA para que poble el conversation log con la última sesión conversada y guarda en conversacín la sesión con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a213fe47c7f5c56735751acfccae1f909c9b186e) |
-| 19:10 | [feat: implementa el análisis de los 5 primeros casos de uso del priorizado de IdSw1 y su documentación](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f533af4fd0f45404178650dbd064f1ba87616a1f) |
+## Día -5 · 2026-05-21
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 2: Análisis de los 5 primeros casos de uso (MVC)
 
-**Artefactos nuevos:** 📐 🔍 
+**Artefactos nuevos:** 🔍 
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 4 · 2026-05-22
-
-### Commits (4: 3 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 18:14 | [feat: actualiza conversation-log.md con la última sesión conversada con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f1d5f3bb8bb9f59283619c9e24857e8e20e1d630) |
-| 18:04 | [feat: Implementa análisis de casos de uso 6-10 del priorizado de IdSw1](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5fbbcd81dccbebb5998769d6def88c4675bf3c89) |
-| 16:59 | [fix: corrige dos archivos innecesarios](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/76a9511f4e5c992b4e79a63bd8447fd8f93ae44b) |
-| 16:47 | [feat: agrega los archivos necesarios para automatizar a la IA al principio y final de cada sesión](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/060c93229c9474547ebc3ad11ddd84b8e13064f6) |
+## Día -4 · 2026-05-22
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 3: Análisis de los casos de uso 6-10 y refinamiento por prototipos
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 5 · 2026-05-23
-
-### Commits (5: 3 feat / 2 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 15:52 | [feat: Implementa las imágenes de los diagramas de los casos de uso implementados en la sesión de hoy (casos de uso del 11-15)](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1c950ae40b3bfe8d7972cbe59ff88756aaf2df79) |
-| 14:36 | [feat: Registra la nueva sesión conversada con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/b108dee496bfaf85ae5dce2e9f72650297e37a59) |
-| 14:15 | [fix: corrige nombre en apartado proyecto.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/32b53bd451ec0c067811f1da86d77f89cb79f5c9) |
-| 14:01 | [fix: corrige casos de uso 1-10 del priorizado, por falta de diagrama de secuencia y corrige el correspondiente README.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/97d75982c353b528b78a6b21829848873a3e6bcb) |
-| 13:51 | [feat: Implementa el análisis de los casos de uso 11-15 segun el priorizado de IdSw1(Jorgestor) y su documentación](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/6502aad03041edab231cbeb67523746e3d0636b6) |
+## Día -3 · 2026-05-23
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 4: Análisis de Casos de Uso 11-15 y Estandarización de Estilo (MVC + Secuencia)
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 6 · 2026-05-24
-
-### Commits (2: 2 feat / 0 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 18:53 | [feat: Implementa las imágenes de los diagramas de los casos de uso analizados en esta sesión (16-20) y agrega el apartado decisión tomada en el conversation-log de esta sesión.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/865d4492f48e7a49b5840aa4f0020bd3071346a4) |
-| 18:33 | [feat: Implementa el análisis de los casos de uso 16-20 (siguiendo el priorizado de casos de uso de IdSw1) tanto su codigo uml como su documentación y actualiza el conversation-log.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/d625d8790208cd1dda0f1131402199121e5e641c) |
+## Día -2 · 2026-05-24
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 5: Análisis de Casos de Uso 16-20 y Alineación con Prototipos y Estilo Visual
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 7 · 2026-05-25
-
-### Commits (11: 7 feat / 4 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 12:01 | [feat: pobla conversation-log y añade conversación con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/6eace90ead352587cbca052f2b6f031c2cb6eecb) |
-| 11:51 | [fix: corrige detalle en verDocentes](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/52c2e9759ceac114fa98e613b56e7598b3c06cc2) |
-| 11:45 | [fix: corrige un detalle en verAlumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/04cf0502a52abac252c0185e795549e21b4ade14) |
-| 11:43 | [fix: corrige un detalle en verGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/acf2f11ac500da5b90d03e12561033acc5927423) |
-| 11:41 | [fix: corrige un detalle en verAsignaturas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a8f93101086a7ac63ddb1b00125e98762afe6fcb) |
-| 11:34 | [feat: verDocentes](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5766bbf0085592cbb31e053667f7b37c1eef65b7) |
-| 11:33 | [feat: Análisis verDocentes](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/eafcc5e5191b4faad71d85fef686d439d8f3651b) |
-| 11:16 | [feat: Análisis de verAsignaturas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/9b0ce408d1470a3c726782a998a9ae4a7d4e13fd) |
-| 10:59 | [feat: Análisis verGrados](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/975f2df14aa182a6a6250c1eed64572ce0dab09a) |
-| 10:54 | [feat: análisis verAlumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1f445f2b278e07e77e529085be40a980e45385e3) |
-| 10:40 | [feat: Análisis eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/01c0a863d4767348759c75c7278c3dba17d7ee7b) |
+## Día -1 · 2026-05-25
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 6: Análisis de Casos de Uso 21-25 y Refinamiento de Estándares
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 8 · 2026-05-26
-
-### Commits (9: 7 feat / 2 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 12:25 | [feat: Implementa nueva sesion con la IA y actualiza el conversation-log.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/32d6f08abd09a323c5892a24bb31e8f52edb0163) |
-| 12:24 | [feat: Implementa nueva sesion con la IA y actualiza el conversation-log.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/50a3647d3a8538d245d947b20edcc13da5a0f262) |
-| 12:18 | [fix: Corrige dos relaciones en iniciarSesion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/9a2cbf419e21568baea06da5f20c3b5f4cd7faee) |
-| 12:16 | [feat: Análisis iniciarSesion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f17b4edfecb31f097eb49efb0105fc8871e71881) |
-| 11:58 | [feat: Análisis eliminarDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5faf88c24a2d984ada898cd9e9e4db87c0c951f1) |
-| 11:54 | [feat: Análisis elimnarAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/e7143748619c8b99a57c93e24390a1c0059dd27d) |
-| 11:52 | [feat: Análisis eliminarGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/212345fcbd98a4be2c7680bb75f3ce5ef8728f27) |
-| 11:45 | [fix: corrige fallo en las relaciones de eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/994f7d454e4854fcb2dd23a5b2d778e6225e26f3) |
-| 11:33 | [feat: Análisis eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/075c7ae3bfccb32a7d17686aabfeb94e071b51d3) |
+## Día 0 · 2026-05-26
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 7: Análisis de Casos de Uso 26-30 y Refinamiento de Flujos
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 9 · 2026-05-27
-
-### Commits (8: 5 feat / 3 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 14:51 | [feat: pobla conversation-log.md y agraga conversación de la sesión con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/923c34a048ff9b4d2b12c67e6c5814c1e869d6c1) |
-| 14:42 | [feat: Análisis crearAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/e39630838bac9ade89db48e8e51ee56de5162a55) |
-| 14:29 | [fix: Corrige verRespuestas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1361dfeb8b92c81f5749ce914a0f6eb9268ce1b7) |
-| 14:25 | [feat: Análisis verRespuestas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a57b39716ef60005b9afbed441b80ea4a649e4bc) |
-| 14:13 | [fix: corrige completarGestion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/01c51eba4b1f084a0c959bf134da79c547443c46) |
-| 14:10 | [feat: Análisis completarGestion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/bf6155ce47b319aa919d1cffcc885d7a2f1632db) |
-| 13:34 | [fix: corrige cerrarSesion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/4882ec0ce79f7c83468c02350acc41131f20db5d) |
-| 10:59 | [feat: Análisis cerrarSesion](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/269e3faccb149a1f3fb18ec5d71e885cec8a5771) |
+## Día 1 · 2026-05-27
 
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 8: Análisis de Casos de Uso 31-34 y Refinamiento de Navegación y Sesión
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 10 · 2026-05-28
+## Día 2 · 2026-05-28
 
 ### Commits (8: 7 feat / 1 fix)
 
@@ -273,7 +190,7 @@ gantt
 
 ---
 
-## Día 12 · 2026-05-30
+## Día 4 · 2026-05-30
 
 ### Commits (13: 10 feat / 3 fix)
 
@@ -298,13 +215,13 @@ gantt
 - Sesión 10: Diseño de Autenticación e Inicialización del Entorno de Desarrollo
 - Sesión 11: Diseño y Desarrollo de Completar Gestión y Logout
 
-**Artefactos nuevos:** 🔌 🧩 
+**Artefactos nuevos:** 🧩 
 
 > 💬 + commits = proceso documentado
 
 ---
 
-## Día 13 · 2026-05-31
+## Día 5 · 2026-05-31
 
 ### Commits (8: 6 feat / 2 fix)
 
@@ -327,7 +244,7 @@ gantt
 
 ---
 
-## Día 14 · 2026-06-01
+## Día 6 · 2026-06-01
 
 ### Commits (5: 3 feat / 1 fix)
 
@@ -342,6 +259,136 @@ gantt
 ### 💬 Conversation-log (1 sesión)
 
 - Sesión 13: Implementación de verDocentes, verGrados y Estabilización del Entorno
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 7 · 2026-06-02
+
+### Commits (5: 4 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:48 | [feat: Nueva sesión con la IA (conversation-log actualizado) y conversación exportada.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/bd8b83f6fa6404c5607da981426125d1e61e4ff7) |
+| 21:41 | [feat: Desarrollo de verPreguntas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5d0ef0c8d3414a327e6b037aa0d8939c0583f96b) |
+| 21:34 | [feat: implementación de verAlumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/7f9bb662646d1dacb90169fd3fca7dc0efb50a12) |
+| 21:26 | [fix: Gorrige el filtro de verGrados y verAsignaturas para que puedes buscar y no tenga en cuenta las tildes, mayúsculas,...](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/38328621eaac6fe096234fb0509e599061953c77) |
+| 21:22 | [feat: Acepta la implementación de verAsignaturaa](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1b6c02b8e4f2a08b84341b5e8931dcd55a41ca57) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 14: Implementación de verAsignaturas, verAlumnos, verPreguntas y Optimización de Búsqueda
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 8 · 2026-06-03
+
+### Commits (25: 19 feat / 5 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 19:48 | [feat: Nueva sesión y conversación con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fbbf7d24d12ee270c406f6a2495408b111d75e9b) |
+| 19:41 | [feat&fix: Acepta el diseño de eliminarPregunta y corrige crearAsignatura y editarAsignatura para añadir el paso por GradoService](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/13deb7d3d911700e58febddfdceb932976f67f3b) |
+| 19:25 | [fix: Corrige crearPregunta para añadir AsignaturaService antes de AsignaturaRepository](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5d8de5026559f9e1e10a2c8313b1a050f0074c11) |
+| 19:20 | [fix: corrige crearAlumno, editarAlumno y editarPregunta para añadir el estado intermedio de AsignaturaService para preguntas y GradoService para alumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5f63edec0f4d7a3dd31d8cacf00c098aebfe960f) |
+| 18:59 | [feat: Diseño de crearPregunta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/98c90601bdd3d26d233e82e40653450efaaca702) |
+| 18:54 | [feat: Nueva sesión y conversación con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fb5b440ddf975e729420f90eaa55b97c04eeb9b7) |
+| 18:48 | [feat: Diseño de eliminarAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/09622012096a6864923b0044e5a3b23f4c6ed8b3) |
+| 18:41 | [feat: diseño de editarAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fcd0f26be29f154f0398d4302513a2b2b824f283) |
+| 18:36 | [feat: Diseño de crearAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/24247652eaebd097e3394f8964a8b61679f8a840) |
+| 13:28 | [feat: Nueva sesión y conversación](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/27541d7048aec83f1c419cfcfa9f64b40dbba697) |
+| 13:23 | [feat: diseño de eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fef56d3275bf1870c1dd41d11d9320c4f78bbe71) |
+| 13:20 | [feat: Diseño de editarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/23bb2dd601a6839f854b48a4870c04357d1f4eff) |
+| 13:12 | [feta: acepta diseño de crearAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/e066145dc133632878386033d6c3a41251cac928) |
+| 12:49 | [fix: Corrige el nombre de las conversaciones con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/8de783a1fc8e4f2ded9ecda9cbe5ffbb9811b6b8) |
+| 12:45 | [feat: Nueva sesión](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/ef78ee9bf4c6ce6dcdbc51c52076dd779d9d08b4) |
+| 12:45 | [feat: Nueva sesión](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f415a25af6d220511607b01ef7d807157433ece0) |
+| 12:41 | [feat: diseño de eliminarGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/85559237f08d98e086bf77023a0386253a1c1c4a) |
+| 12:36 | [feat: Diseño de editarGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/21362d12dd9f8fdfd9db708deab5d4d58f8795aa) |
+| 12:29 | [feat: Diseño de crearGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/8783cb82af0f9623bfaf6d193a17d137364f38da) |
+| 12:24 | [fix: Corrige nombre de las conversaciones exportadas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/7022b14839a494169156dc8c68f96d1ee3e52d1b) |
+| 12:18 | [feat: Nueva sesión con el agente IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/3953dccc6a2fe14e9949edc3479505bdaefa703e) |
+| 12:08 | [feat: Diseño del caso de uso eliminarDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/4b6cc49bfc1ef38e991ebdae5c54219aebdd63c0) |
+| 12:04 | [feat: Acepta el diseño de editarDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/3097dbeb024e58d9708816cca5e52170bb2dba77) |
+| 12:01 | [fix: Corrige diagrama de secuencia en verDocente y crearDocente y corrige ubicación de las imágenes de verPreguntas y verAlumnos](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5d818a067fbf93158cf08025fbef4f3cfb9bbf63) |
+| 11:48 | [feat: Diseño de crearDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/944e4bcd4c61ac7be880e47080cd12014bc020ef) |
+
+### 💬 Conversation-log (5 sesiónes)
+
+- Sesión 15: Diseño del Módulo de Gestión de Docentes (CRUD)
+- Sesión 16: Diseño del Módulo de Gestión de Grados (CRUD)
+- Sesión 17: Diseño del Módulo de Gestión de Asignaturas (CRUD)
+- Sesión 18: Diseño del Módulo de Gestión de Alumnos (CRUD)
+- Sesión 19: Diseño del Módulo de Gestión de Preguntas-Respuestas (CRUD)
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 9 · 2026-06-04
+
+### Commits (13: 10 feat / 3 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 17:40 | [feat&docs: Añade nueva conversación con la IA y actualiza la documentación de conversation-log.md](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/c5da2178490cede47acb12e684fd7e90a45d4760) |
+| 17:30 | [feat: Desarrollo de eliminarAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/61675b19238309c799986fb7fe6151bd76696209) |
+| 17:27 | [feat: desarrollo de crearAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/823cbec53da1b6c2dda7ab52a775aee059c15d78) |
+| 17:18 | [fix: Corrige fallo en crearAsignatura, usaba DOCENTE en vez de ROLE_DOCENTE para dar permisos y no podía realizar bien la petición GET](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/7807e917551c13a5687ef04613a66501bc03f9fa) |
+| 16:45 | [feat: Desarrollo de crearAsignatura](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/5b7fce8d0d9b1bc722890818e63d6029ea2a3e70) |
+| 16:40 | [feat: Desarrollo de eliminarGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/1af84fe43293010cddfdeb8598890747ced535e4) |
+| 16:37 | [feat: Desarrollo de editarGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f243dd36ad89eaaa7bcae35154f3e00988c49e9f) |
+| 16:32 | [fix: Corrige la falta de un import que hacía que no reconociese la lógica de crearGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/e489ca8af7256f377d5499d89aa92dae55d19503) |
+| 16:30 | [feat: desarrollo de crearGrado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f67450f751b6936c30b13ae71615f3181855a797) |
+| 16:29 | [feat: desarrollo de eliminarDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/d0ea9fa70b58e2d790c128e35cfd495cdbe50cff) |
+| 16:20 | [fix: Corrige fallo en el desarrollo de editarDocente que no dejaba acceder al panel de edición por código duplicado](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/d2130ace33886154d9a1018bcaf0e666a02913ad) |
+| 16:15 | [feat: desarrollo de editarDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/591b74b0aa27f6c5b0621d77d422d8227fc44249) |
+| 16:09 | [feat: desarrollo de crearDocente](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/00206d99daa674f1051cc25865dd0386788c26ec) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 20: Implementación CRUD Módulo Asignaturas
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 10 · 2026-06-05
+
+### Commits (22: 12 feat / 6 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:03 | [docs: Nueva conversación con la IA y actualiza el conversation-log](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/7523e2538c094b7277f526f7003f5a861957cef7) |
+| 17:57 | [feat: Desarrollo de eliminarPregunta, con esto se finaliza el modulo preguntas/respuestas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/a99f6f1f47a756ccf09c3d8bf909d1830cd1b56c) |
+| 17:42 | [feat: Desarrollo de editarRespuesta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/ce9453a8e535be22b6280c6447640e2511dcc558) |
+| 17:41 | [fix: corrige fallo en eliminarPregunta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/7c9aacf56a17ff864499ccea0968c41a1d2e7d87) |
+| 17:21 | [feat: Desarrollo de eliminarPregunta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/792f9f7610d6a91d657f0e0207e0235b6a8663d9) |
+| 17:18 | [feat: Desarrollo de editarPregunta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fe0caed387a7abde2a4ca2ff6c6ec13c50b7d723) |
+| 17:00 | [feat: Desarrollo de crearPregunta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f51be0b807eb78e6a98620c123c79c59bd25ec87) |
+| 16:04 | [docs: Nueva sesión con la IA, sesión 22](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/fd6845367feb9ecbb0925562cb5d098a19d41260) |
+| 15:56 | [feat: Acepta el diseño de eliminarRespuesta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/f0be7ec5b0931e3fbe2f6595627a9d75e81eb7d3) |
+| 15:53 | [feat: Acepta el diseño de editarRespuesta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/57207ffe1b1acedfe54425cdb7629a007ec6a35e) |
+| 15:48 | [fix: Corrige verRespuestas para reducir el tamaño del diagrama de secuencia](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/871c97ff44cc90b66952805664ff65b860accacd) |
+| 15:40 | [feat: Diseño de crearRespuesta](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/c594c42bb4e5bc3a31e482baa9040423f2bb5076) |
+| 15:33 | [feat: Diseño de verRespuestas](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/0f8d5de98af8f259dadc53f5d2154a198f99c96e) |
+| 12:53 | [docs: Añade nueva sesion con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/0af9b729f766e9b875ddee91a71ef4817070dbdd) |
+| 12:53 | [docs: Añade la nueva documentación de la sesión 21 con la IA](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/78fe29eb19432ab15da1629ca60ac269fe348d51) |
+| 12:32 | [feat: Desarrollo de eliminarAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/ab3ed392996ce1bd2ed8f3cf0ae8331a514fdf60) |
+| 12:27 | [fix: Corrige el filtro de búsqueda de el módulo alumno que no había actualizado el cambio de NIU por DNI](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/9120b6aa01bdb1f06ed7f979d14ad87fb2587b2f) |
+| 12:20 | [feat: Desarrollo de editarAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/cdd1db7665d32e56c944860578e623b4d05277e3) |
+| 12:10 | [fix: Corrige datos esenciales para crearAlumnos, la IA solicitaba el NIU en vez de DNI o NIE.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/945d6a67c024f7712e2421ff4fcb3eb2ad9ed88e) |
+| 11:55 | [fix: Corrige la implementación de crearAlumno, al entrar en contacto con la base de datos no se reconocía el contenedor del docker.](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/9e7c18873f99108cfd1bd8b8800a77acc3e7a92f) |
+| 11:15 | [feat: Desarrollo de crearAlumno](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/756a41308b8c2e8084fc508d5316e7fe891343d6) |
+| 11:03 | [fix: Corrige enlace directo a la conversacion de la sesión 17](https://github.com/Pareyor/25-26-idsw2-sdVC/commit/d3e874bfe8a0d1e3d9fe3fa8b9f5b9118f55cd4d) |
+
+### 💬 Conversation-log (2 sesiónes)
+
+- Sesión 21: Implementación CRUD Módulo Alumnos y Refactor DNI
+- Sesión 22: Diseño del Módulo de Gestión de Preguntas y Respuestas (CRUD)
 
 > 💬 + commits = proceso documentado
 

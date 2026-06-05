@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 7 | Sesiones log: 93
+> Commits: 99 | Días activos: 9 | Sesiones log: 109
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 99 (55 feat / 29 fix / 15 other) |
-| Ratio fix/feat | 0.52 |
-| Días activos | 7 |
-| Sesiones documentadas | 93 |
-| Días log+commits | 7 |
-| Días solo log | 7 |
-| Días solo commits | 0 |
+| Commits propios | 99 (55 feat / 34 fix / 10 other) |
+| Ratio fix/feat | 0.61 |
+| Días activos | 9 |
+| Sesiones documentadas | 109 |
+| Días log+commits | 8 |
+| Días solo log | 8 |
+| Días solo commits | 1 |
 
 </div>
 
@@ -25,58 +25,58 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-27, 0d
-        UML          :done, 2026-05-19, 2026-06-02
-        Analisis     :done, 2026-05-21, 2026-06-02
-        Diseno       :done, 2026-05-27, 2026-06-02
-        Codigo       :done, 2026-05-19, 2026-06-02
+        Inicio       :milestone, 2026-05-28, 0d
+        UML          :done, 2026-05-22, 2026-06-05
+        Analisis     :done, 2026-05-21, 2026-06-05
+        Diseno       :done, 2026-05-27, 2026-06-05
+        Codigo       :done, 2026-05-19, 2026-06-05
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D-5 | D-4 | D-3 | D-2 | D-1 | D0 | D1 | D2 | D4 | D6 | D7 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `verAsignaturas` | A |   |   |   |   |   |   |   |   | D |   |
-| `verGrados` | A |   |   |   |   |   |   |   | D |   |   |
-| `cerrarSesion` |   | A |   |   |   |   | D |   |   |   |   |
-| `iniciarSesion` |   | A |   |   |   |   | D |   |   |   |   |
-| `verAlumnos` |   | A |   |   |   |   |   | D |   |   |   |
-| `completarGestion` |   |   | A |   |   |   |   | D |   |   |   |
-| `verDocentes` |   |   | A |   |   |   | D |   |   |   |   |
-| `verPreguntas` |   |   | A |   |   |   |   |   |   |   | D |
-| `verRespuestas` |   |   | A |   |   |   |   |   |   |   | D |
-| `crearDocente` |   |   |   | A |   |   | D |   |   |   |   |
-| `crearGrado` |   |   |   | A |   |   |   |   | D |   |   |
-| `editarDocente` |   |   |   | A |   |   | D |   |   |   |   |
-| `eliminarDocente` |   |   |   | A |   |   |   | D |   |   |   |
-| `exportarConfiguracionGlobal` |   |   |   | A |   |   |   |   |   |   |   |
-| `importarConfiguracionGlobal` |   |   |   | A |   |   |   |   |   |   |   |
-| `crearAlumno` |   |   |   |   | A |   |   | D |   |   |   |
-| `crearAsignatura` |   |   |   |   | A |   |   |   |   | D |   |
-| `editarAlumno` |   |   |   |   | A |   |   | D |   |   |   |
-| `editarGrado` |   |   |   |   | A |   |   |   | D |   |   |
-| `eliminarAlumno` |   |   |   |   | A |   |   | D |   |   |   |
-| `eliminarGrado` |   |   |   |   | A |   |   |   | D |   |   |
-| `crearPregunta` |   |   |   |   |   | A |   |   |   |   | D |
-| `crearRespuesta` |   |   |   |   |   | A |   |   |   |   | D |
-| `editarAsignatura` |   |   |   |   |   | A |   |   |   | D |   |
-| `editarPregunta` |   |   |   |   |   | A |   |   |   |   | D |
-| `editarRespuesta` |   |   |   |   |   | A |   |   |   |   | D |
-| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   | D |   |
-| `eliminarPregunta` |   |   |   |   |   | A |   |   |   |   | D |
-| `eliminarRespuesta` |   |   |   |   |   | A |   |   |   |   | D |
-| `generarExamenes` |   |   |   |   |   | A |   |   |   |   |   |
-| `asignarExamenes` |   |   |   |   |   |   | A |   |   |   |   |
-| `cancelarGeneracion` |   |   |   |   |   |   | A |   |   |   |   |
-| `corregirExamenes` |   |   |   |   |   |   | A |   |   |   |   |
+| Caso de uso | D-6 | D-5 | D-4 | D-3 | D-2 | D-1 | D0 | D1 | D3 | D5 | D6 | D7 | D8 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `verAsignaturas` | A |   |   |   |   |   |   |   |   | D |   |   |   |
+| `verGrados` | A |   |   |   |   |   |   |   | D |   |   |   |   |
+| `cerrarSesion` |   | A |   |   |   |   | D |   |   |   |   |   |   |
+| `iniciarSesion` |   | A |   |   |   |   | D |   |   |   |   |   |   |
+| `verAlumnos` |   | A |   |   |   |   |   | D |   |   |   |   |   |
+| `completarGestion` |   |   | A |   |   |   |   | D |   |   |   |   |   |
+| `verDocentes` |   |   | A |   |   |   | D |   |   |   |   |   |   |
+| `verPreguntas` |   |   | A |   |   |   |   |   |   |   | D |   |   |
+| `verRespuestas` |   |   | A |   |   |   |   |   |   |   | D |   |   |
+| `crearDocente` |   |   |   | A |   |   | D |   |   |   |   |   |   |
+| `crearGrado` |   |   |   | A |   |   |   |   | D |   |   |   |   |
+| `editarDocente` |   |   |   | A |   |   | D |   |   |   |   |   |   |
+| `eliminarDocente` |   |   |   | A |   |   |   | D |   |   |   |   |   |
+| `exportarConfiguracionGlobal` |   |   |   | A |   |   |   |   |   |   |   | D |   |
+| `importarConfiguracionGlobal` |   |   |   | A |   |   |   |   |   |   |   | D |   |
+| `crearAlumno` |   |   |   |   | A |   |   | D |   |   |   |   |   |
+| `crearAsignatura` |   |   |   |   | A |   |   |   |   | D |   |   |   |
+| `editarAlumno` |   |   |   |   | A |   |   | D |   |   |   |   |   |
+| `editarGrado` |   |   |   |   | A |   |   |   | D |   |   |   |   |
+| `eliminarAlumno` |   |   |   |   | A |   |   | D |   |   |   |   |   |
+| `eliminarGrado` |   |   |   |   | A |   |   |   | D |   |   |   |   |
+| `crearPregunta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `crearRespuesta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `editarAsignatura` |   |   |   |   |   | A |   |   |   | D |   |   |   |
+| `editarPregunta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `editarRespuesta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   | D |   |   |   |
+| `eliminarPregunta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `eliminarRespuesta` |   |   |   |   |   | A |   |   |   |   | D |   |   |
+| `generarExamenes` |   |   |   |   |   | A |   |   |   |   |   |   | D |
+| `asignarExamenes` |   |   |   |   |   |   | A |   |   |   |   |   | D |
+| `cancelarGeneracion` |   |   |   |   |   |   | A |   |   |   |   |   | D |
+| `corregirExamenes` |   |   |   |   |   |   | A |   |   |   |   |   | D |
 
 </div>
 
 ---
 
-## Día -6 · 2026-05-20
+## Día -7 · 2026-05-20
 
 ### 💬 Conversation-log (1 sesión)
 
@@ -86,7 +86,7 @@ gantt
 
 ---
 
-## Día -5 · 2026-05-21
+## Día -6 · 2026-05-21
 
 ### 💬 Conversation-log (2 sesiónes)
 
@@ -99,7 +99,7 @@ gantt
 
 ---
 
-## Día -4 · 2026-05-22
+## Día -5 · 2026-05-22
 
 ### 💬 Conversation-log (3 sesiónes)
 
@@ -107,11 +107,13 @@ gantt
 - Análisis de cerrarSesion()
 - Análisis de verAlumnos()
 
+**Artefactos nuevos:** 📐 
+
 > ⚠️ Log sin commits
 
 ---
 
-## Día -3 · 2026-05-23
+## Día -4 · 2026-05-23
 
 ### 💬 Conversation-log (4 sesiónes)
 
@@ -124,7 +126,7 @@ gantt
 
 ---
 
-## Día -2 · 2026-05-24
+## Día -3 · 2026-05-24
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -139,7 +141,7 @@ gantt
 
 ---
 
-## Día -1 · 2026-05-25
+## Día -2 · 2026-05-25
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -154,7 +156,7 @@ gantt
 
 ---
 
-## Día 0 · 2026-05-26
+## Día -1 · 2026-05-26
 
 ### 💬 Conversation-log (9 sesiónes)
 
@@ -172,27 +174,7 @@ gantt
 
 ---
 
-## Día 1 · 2026-05-27
-
-### Commits (15: 7 feat / 3 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 12:35 | [docs: aceptación diseño editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/55c28aa4a61163da8cfb47bab2097e26b8d33c2f) |
-| 12:33 | [feat: diseño de editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b75e94f76e1d8d6524b122549e1ba1e085aa2896) |
-| 12:23 | [docs: aceptación del diseño de verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/1411413287337e8a7adfe7abaca7e30d03dc2162) |
-| 12:21 | [feat: diseño de verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/a2ece9b0b68d374289c7b2c5049e29d96a64ecfe) |
-| 12:09 | [fix: correcion diseño crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8569117e2444b78bf62be681947a774d9c43216d) |
-| 12:04 | [feat: diseño de crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/effd3cdead47d096b7c1a12a5a355c5b98739c2f) |
-| 11:41 | [fix: correccion diseño cerrarSesion y adicion de la imagen del diagrama de secuencia de iniciarSesion (se me olvidó en el anterior commit)](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/9a2b9894d0ce94617b4a6e5e0a7039fc9fd130a1) |
-| 11:21 | [feat: diseño de cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5bfe907c72474c1808e2241fc8953e220e424fca) |
-| 11:14 | [docs: adición de la conversación del diseño de iniciarSesion y aceptación del diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6efa9e61e33b2dd871012048eee24c44c76b4f71) |
-| 11:08 | [feat: diseño de iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/9ff6a798bbf7b7fe8f63cd01cac2cc9f809ba4b0) |
-| 10:52 | [docs: adición de protocolo de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/76f883539bb62c5e788693d0c83f2ca74013bb3e) |
-| 10:22 | [docs: aceptacion completa del caso de uso corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/894f2119a60ce320b6b66655e9e738a5b8960c96) |
-| 10:19 | [feat: analisis de corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/a9719b8054e808202569316deaa4bf90d0624401) |
-| 10:08 | [fix: correccion analisis asignarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/593af2e4c9815c39fca47c570c69fff40c2cd740) |
-| 09:55 | [feat: analisis de asignarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/efe6f9a1b9044e5c16c86eb2d2334b3e79fcbf42) |
+## Día 0 · 2026-05-27
 
 ### 💬 Conversation-log (8 sesiónes)
 
@@ -207,13 +189,13 @@ gantt
 
 **Artefactos nuevos:** 🧩 
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 2 · 2026-05-28
+## Día 1 · 2026-05-28
 
-### Commits (15: 6 feat / 5 fix)
+### Commits (6: 2 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
@@ -223,15 +205,6 @@ gantt
 | 11:43 | [feat: diseño de editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/52e47aa75c18798852941e446504fb15232eb352) |
 | 11:19 | [docs: concrecion protocolo de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/154145bf7150303f1dfe75683dc0a7f2ee81125b) |
 | 11:12 | [fix: correccion diseño crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bcfae34103200133a086b77a11d9ca5795fcbd98) |
-| 11:07 | [fix: concreciones de JWT de diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/68eaaa51895bbab9aee94795858075c986fd658a) |
-| 10:55 | [feat: diseño de crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/667a52021316684c24f3960600c97da49a858d90) |
-| 10:51 | [fix: adicion de validacion de token en el diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/c1494d28aaf061bb060c6d744e4cfa1cd5206bf7) |
-| 10:41 | [fix: correccion diseño verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ba44b52473e51790de4708aba8a2010505da3549) |
-| 10:24 | [feat: diseño de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bfac79d848fe9fdc382deffd360195921c037c72) |
-| 09:54 | [fix: correccion diseño completarGestion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/61a52b7c71f896cc22fbe25e4f3f4c8f32539063) |
-| 09:34 | [feat: diseño de completarGestion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/d9802703645d67d6952746faad2da090833c9711) |
-| 09:20 | [docs: pendiente correccion del diseño de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/14e115b3eca8e66001156e40772310cd8e29268e) |
-| 09:12 | [feat: análisis de eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f0f82eb70d3c601ce1321a90849a37b39792f316) |
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -246,7 +219,7 @@ gantt
 
 ---
 
-## Día 3 · 2026-05-29
+## Día 2 · 2026-05-29
 
 ### Commits (10: 6 feat / 4 fix)
 
@@ -277,7 +250,7 @@ gantt
 
 ---
 
-## Día 4 · 2026-05-30
+## Día 3 · 2026-05-30
 
 ### Commits (12: 8 feat / 1 fix)
 
@@ -311,7 +284,7 @@ gantt
 
 ---
 
-## Día 5 · 2026-05-31
+## Día 4 · 2026-05-31
 
 ### Commits (9: 4 feat / 3 fix)
 
@@ -341,7 +314,7 @@ gantt
 
 ---
 
-## Día 6 · 2026-06-01
+## Día 5 · 2026-06-01
 
 ### Commits (19: 8 feat / 10 fix)
 
@@ -384,7 +357,7 @@ gantt
 
 ---
 
-## Día 7 · 2026-06-02
+## Día 6 · 2026-06-02
 
 ### Commits (19: 16 feat / 3 fix)
 
@@ -430,6 +403,85 @@ gantt
 - Implementación de eliminarRespuesta()
 
 > 💬 + commits = proceso documentado
+
+---
+
+## Día 7 · 2026-06-03
+
+### Commits (13: 4 feat / 9 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 13:45 | [fix: correccion implementacion eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5ca590a7cf1cb57246368457d890735332930964) |
+| 13:37 | [fix: correccion diseño eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/55e6b2d856ed3324cdb715226b152e6d4daecf26) |
+| 13:12 | [fix: correccion implementacion eliminarGrado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bd9a78f1881be8bbe4dbc7d74fe099f9f19a2def) |
+| 13:03 | [fix: correccion diseño eliminarGrado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/0f74eb934bbf3236c334e3251e9600863be00ede) |
+| 12:31 | [fix: correccion diseño eliminarGrado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8402561cb8e73443db124c4a8c8b5eb9b06839d3) |
+| 12:13 | [fix: correccion diseño eliminarGrado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bb2fd1bb94db55771e3984236ef35cd213f6e314) |
+| 11:33 | [fix: correccion implementacion de eliminarAsignatura](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ce131a1a0fca29a02d4f78a14143d823bdffb625) |
+| 11:23 | [fix: corrección diseño eliminarAsignatura](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/88b5e032f3b182061af4770f1b942b578dd30466) |
+| 11:04 | [feat: implementacion de importarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/f55516bcbd56db88ec2c48d2d30cd3ffbc64af52) |
+| 10:17 | [fix: corrección implementación exportarConfiguracionGlobal para ser fiel al diagrama de contexto](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ff01a9796e75419c3a63c6ee757a20e2f31f2a02) |
+| 10:00 | [feat: implementacion de exportarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8c21b65f7da99eb1d387a84172ca14ae0cdbeb38) |
+| 09:44 | [feat: diseño de importarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/922d1119875f15984a86e49c2b35ba082e822872) |
+| 09:33 | [feat: diseño de exportarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/cc0a4964a81baeb7aaa024867e5da75cc4eff2c8) |
+
+### 💬 Conversation-log (8 sesiónes)
+
+- Diseño de exportarConfiguracionGlobal()
+- Diseño de importarConfiguracionGlobal()
+- Implementación de exportarConfiguracionGlobal()
+- Corrección de exportarConfiguracionGlobal()
+- Implementación de importarConfiguracionGlobal()
+- Corrección de eliminarAsignatura()
+- Corrección de eliminarGrado()
+- Corrección de eliminarDocente()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 8 · 2026-06-04
+
+### Commits (8: 7 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:31 | [feat: implementacion de corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/072b1ff944080e31078beec927ff0d7a0d8cab96) |
+| 16:26 | [fix: correccion diseño corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/1d4e17be19ad3bb0e350dfe8b4495c0283393aee) |
+| 15:55 | [feat: adicion de conversacion (se me olvidó en el commit anterior)](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6d2a675a4037b2035084569e0c25c8ecefd14c2d) |
+| 15:54 | [feat: implementacion de asignarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6aeff40ed0dd9cf856a6b339cb0ab1f250b46593) |
+| 14:17 | [feat: activacion de credenciales para el cors](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8063aa1dff85eed7d3e389b2674a585b3a58ab9f) |
+| 13:13 | [feat: implementacion de generarExamenes y cancelarGeneracion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/3229a29cd64c7d4e9ff200652b2fc927d73af219) |
+| 10:06 | [feat: diseños de asignarExamenes, cancelarGeneracion y corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/0dfd87e7668eac55cf965eeb955d4d6ec6073fb5) |
+| 09:47 | [feat: diseño de generarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/72bd8a5b7734c67c0adf5f79685f83e93279911f) |
+
+### 💬 Conversation-log (8 sesiónes)
+
+- Diseño de generarExamenes()
+- Diseño de asignarExamenes()
+- Diseño de cancelarGeneracion()
+- Diseño de corregirExamenes()
+- Implementación de generarExamenes() y cancelarGeneracion()
+- Implementación de asignarExamenes() 
+- Corrección diseño de corregirExamenes() 
+- Implementación de corregirExamenes()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 9 · 2026-06-05
+
+### Commits (3: 0 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 10:51 | [fix: correccion de links en artefactos de analisis y diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/26b53ba35db7e35e1790272f57a68d97f741d0cb) |
+| 10:09 | [fix: correccion titulo readme](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/e6fc3655b3ad646b39769766dc23dbc1824aa338) |
+| 10:08 | [docs: README implementado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/95b691572b7714f1afc389ca50da08d6ec54bfc7) |
+
+> ⚠️ Commits sin entrada en log
 
 ---
 

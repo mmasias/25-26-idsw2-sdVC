@@ -1,7 +1,7 @@
 # Timeline - manuelmunoz8
 
 > Repo: [manuelmunoz8/25-26-idsw2-sdVC](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)
-> Commits: 48 | Días activos: 7 | Sesiones log: 9
+> Commits: 73 | Días activos: 10 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 48 (19 feat / 25 fix / 4 other) |
-| Ratio fix/feat | 1.31 |
-| Días activos | 7 |
+| Commits propios | 73 (24 feat / 38 fix / 11 other) |
+| Ratio fix/feat | 1.58 |
+| Días activos | 10 |
 | Sesiones documentadas | 9 |
 | Sesiones sin fecha en log | 9 |
 
@@ -24,11 +24,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-30, 2026-05-31
-        Analisis     :done, 2026-05-30, 2026-05-31
-        Diseno       :done, 2026-05-30, 2026-05-31
-        Desarrollo   :done, 2026-05-30, 2026-05-31
-        Codigo       :done, 2026-05-30, 2026-05-31
+        UML          :done, 2026-05-30, 2026-06-05
+        Analisis     :done, 2026-05-30, 2026-06-05
+        Diseno       :done, 2026-05-30, 2026-06-05
+        Desarrollo   :done, 2026-05-30, 2026-06-05
+        Codigo       :done, 2026-05-30, 2026-06-05
 ```
 
 ## Trazabilidad por caso de uso
@@ -161,11 +161,69 @@ gantt
 
 ## Día 13 · 2026-05-31
 
+### Commits (5: 2 feat / 3 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 14:53 | [fix: errores de implementacion de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/223a233299d30fe5b7564458c9301567089b1622) |
+| 14:43 | [feat: manejo de convocatorias y usuario de tipo coordinador](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6951907cbc739259db011b30eb9a53882ca60238) |
+| 14:25 | [feat: implementacion de diseño base a clouflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f16248054d6167622dbda26be96ea0f8113872f8) |
+| 14:09 | [fix: eliminacion de _redirects](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/79c3b6232e791f1e9319b69548887b01aa8df039) |
+| 02:18 | [fix: configuracion necesaria para pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a8c6ed75531ee23d878667fc7daa2d6da16deeb) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 15 · 2026-06-02
+
 ### Commits (1: 0 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 02:18 | [fix: configuracion necesaria para pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a8c6ed75531ee23d878667fc7daa2d6da16deeb) |
+| 19:19 | [fix: nombres de metodos en diseñado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3464a92fad6e116373070d7bd053fb81af3b5cc3) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (18: 3 feat / 8 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:34 | [Prueba 8](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f7105bc15db4fbd106b8cc8df8d44128a397861a) |
+| 01:24 | [Prueba 7](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/19b873aa5f25c7650251c6448765c9a7e87c0cb1) |
+| 01:18 | [Prueba 6](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/61210057a3cda02bdd0b11086ceddb0e799c8e06) |
+| 01:09 | [Prubas 5 de URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1dd165308309043c9a2fcb2d3655cb0b0d8f539a) |
+| 00:58 | [Pruebas de URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/80abcc845d7fd3a8e1acace00397fb9c8666f1d4) |
+| 00:24 | [fix: rutas de api de backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/dbb5986f60231c0ac6738622cb60a9739ac588b3) |
+| 00:14 | [Prueba 2](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2ac357f41ff7a8006e5a5570156be31db2341edb) |
+| 00:01 | [Prueba para URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4b95d327ea519b90886eaef14f100c4e2b093e0d) |
+| 22:51 | [fix: modulo faltante para render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8e70f3d150cd9a65cf7c7bfb88566762121933e2) |
+| 22:27 | [fix: validacion de cookies en el frontend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/388850129309b6488f351b41f5d7c730fe50dd97) |
+| 21:59 | [fix: acceder al ultimo deploy de cloudflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/b37b525737033c3d0599405861a601392446d455) |
+| 21:31 | [fix: errores de envio de datos al frontend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/fa6090dbbc8551d0ff48a45d6831823400c69389) |
+| 21:18 | [fix: Desactivacion de sincronizacion entre render y supabase](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5895869886e0bf534c0de93b511aa229e217e0ce) |
+| 21:07 | [fix: cambio de tipo de campo en base de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/bac266a03822f897ab0fa94014c5bcb06501b522) |
+| 20:57 | [feat: implementacion de JWT](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5d08a2ea00f971e8a20af3644e9293ae438d253f) |
+| 19:37 | [feat: seguridad XSS e inyecciones SQL](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d3e8ff93101354886bb5b4140021a1c8d12c75e) |
+| 19:23 | [fix: clases abstractas de controladores](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d8a43a03ac0018ca3586bc90a6a31e9fe17eb4c) |
+| 18:55 | [feat: implementacion de llamadas a API para login](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9708ea766a297781cd43b437033b691fdd592d9a) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (2: 0 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 10:27 | [fix: Re agregar REACT_APP_API_URL a wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1deb9230005a83d57094cca07d7ef0c89f4a0875) |
+| 10:14 | [fix: Eliminacion de vars en wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2e19a85807c958483be1cfca6a2f72058f9852dd) |
 
 > ⚠️ Commits sin entrada en log
 

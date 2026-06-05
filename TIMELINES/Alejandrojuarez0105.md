@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 36 | Días activos: 10 | Sesiones log: 28
+> Commits: 57 | Días activos: 14 | Sesiones log: 47
 
 ## Patrón observado
 
@@ -9,12 +9,12 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 36 (22 feat / 1 fix / 13 other) |
-| Ratio fix/feat | 0.04 |
-| Días activos | 10 |
-| Sesiones documentadas | 28 |
-| Días log+commits | 9 |
-| Días solo log | 1 |
+| Commits propios | 57 (40 feat / 1 fix / 16 other) |
+| Ratio fix/feat | 0.02 |
+| Días activos | 14 |
+| Sesiones documentadas | 47 |
+| Días log+commits | 13 |
+| Días solo log | 0 |
 | Días solo commits | 1 |
 
 </div>
@@ -26,9 +26,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-02
-        Analisis     :done, 2026-05-23, 2026-06-02
-        Diseno       :done, 2026-06-01, 2026-06-02
+        UML          :done, 2026-05-22, 2026-06-05
+        Analisis     :done, 2026-05-23, 2026-06-05
+        Diseno       :done, 2026-06-01, 2026-06-05
+        Desarrollo   :done, 2026-06-03, 2026-06-05
+        Codigo       :done, 2026-06-03, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -90,7 +92,7 @@ gantt
 ### 💬 Conversation-log (2 sesiónes)
 
 - Sesión 1: Migración inicial de artefactos RUP
-- Sesión 1: Corrección de migración y refactorización de enlaces
+- Sesión 2: Corrección de migración y refactorización de enlaces
 
 > 💬 + commits = proceso documentado
 
@@ -106,7 +108,7 @@ gantt
 
 ### 💬 Conversation-log (1 sesión)
 
-- Sesión 2: Centralización de recursos y reorganización estructural
+- Sesión 3: Centralización de recursos y reorganización estructural
 
 **Artefactos nuevos:** 📐 
 
@@ -127,8 +129,8 @@ gantt
 
 ### 💬 Conversation-log (2 sesiónes)
 
-- Sesión 3: Fase de Análisis e iniciarSesion()
-- Sesión 4: Análisis de cerrarSesion()
+- Sesión 4: Fase de Análisis e iniciarSesion()
+- Sesión 5: Análisis de cerrarSesion()
 
 **Artefactos nuevos:** 🔍 
 
@@ -153,10 +155,10 @@ gantt
 
 ### 💬 Conversation-log (4 sesiónes)
 
-- Sesión 5: Análisis RUP - abrirGrados()
-- Sesión 6: Análisis RUP - importarGrados()
-- Sesión 7: Análisis RUP - eliminarGrado()
-- Sesión 8: Análisis RUP - crearGrado()
+- Sesión 6: Análisis RUP - abrirGrados()
+- Sesión 7: Análisis RUP - importarGrados()
+- Sesión 8: Análisis RUP - eliminarGrado()
+- Sesión 9: Análisis RUP - crearGrado()
 
 > 💬 + commits = proceso documentado
 
@@ -179,15 +181,15 @@ gantt
 
 ### 💬 Conversation-log (9 sesiónes)
 
-- Sesión 9: Análisis RUP - editarGrado()
-- Sesión 10: Análisis RUP - abrirAsignaturas()
-- Sesión 11: Análisis RUP - importarAsignaturas()
-- Sesión 12: Análisis RUP - eliminarAsignatura()
-- Sesión 13: Análisis RUP - crearAsignatura()
-- Sesión 14: Análisis RUP - editarAsignatura()
-- Sesión 15: Análisis RUP - abrirExamenes()
-- Sesión 16: Análisis RUP - eliminarExamen()
-- Sesión 17: Análisis RUP - crearExamen() y expansión no solicitada de casos de uso
+- Sesión 10: Análisis RUP - editarGrado()
+- Sesión 11: Análisis RUP - abrirAsignaturas()
+- Sesión 12: Análisis RUP - importarAsignaturas()
+- Sesión 13: Análisis RUP - eliminarAsignatura()
+- Sesión 14: Análisis RUP - crearAsignatura()
+- Sesión 15: Análisis RUP - editarAsignatura()
+- Sesión 16: Análisis RUP - abrirExamenes()
+- Sesión 17: Análisis RUP - eliminarExamen()
+- Sesión 18: Análisis RUP - crearExamen() y expansión no solicitada de casos de uso
 
 > 💬 + commits = proceso documentado
 
@@ -203,7 +205,7 @@ gantt
 
 ### 💬 Conversation-log (1 sesión)
 
-- Sesión 18: Análisis RUP - Rama Aulas
+- Sesión 19: Análisis RUP - Rama Aulas
 
 > 💬 + commits = proceso documentado
 
@@ -231,7 +233,7 @@ gantt
 
 ### 💬 Conversation-log (1 sesión)
 
-- Sesión 19: Análisis RUP - Rama Profesores
+- Sesión 20: Análisis RUP - Rama Profesores
 
 > 💬 + commits = proceso documentado
 
@@ -250,9 +252,9 @@ gantt
 
 ### 💬 Conversation-log (3 sesiónes)
 
-- Sesión 20: Análisis RUP - Rama Calendario
-- Sesión 21: Análisis RUP - Rama Consulta de Calendario
-- Sesión 22: Análisis RUP - completarGestion()
+- Sesión 21: Análisis RUP - Rama Calendario
+- Sesión 22: Análisis RUP - Rama Consulta de Calendario
+- Sesión 23: Análisis RUP - completarGestion()
 
 > 💬 + commits = proceso documentado
 
@@ -272,9 +274,9 @@ gantt
 
 ### 💬 Conversation-log (3 sesiónes)
 
-- Sesión 23: Reorganización estructural - Actor Administrador
-- Sesión 24: Análisis RUP - Actor Profesor
-- Sesión 25: Análisis RUP - Actor Alumno
+- Sesión 24: Reorganización estructural - Actor Administrador
+- Sesión 25: Análisis RUP - Actor Profesor
+- Sesión 26: Análisis RUP - Actor Alumno
 
 **Artefactos nuevos:** 🧩 
 
@@ -284,12 +286,101 @@ gantt
 
 ## Día 15 · 2026-06-02
 
+### Commits (2: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:30 | [feat: desarrollar diseño de iniciar y cerrar sesion y cierre de sesión 29](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/3fb8c79bb692d33e79befa7b3eff5da5f8743a2c) |
+| 19:25 | [docs: agregado configuración-proyecto.md y cierre de sesión 28](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/520e9469257e4e70f4884d9d8d1b7220d2b23de1) |
+
+### 💬 Conversation-log (4 sesiónes)
+
+- Sesión 27: Inicio de la fase de Diseño RUP
+- Sesión 28: Refinamiento de la Documentación de Diseño
+- Sesión 29: Configuración y Scaffolding del Proyecto
+- Sesión 30: Diseño RUP - Autenticación
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (10: 9 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:43 | [feat: desarrollar implementación y documentación del caso de uso crearGrado y cierre de sesión 38](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/eebf873e804b19495a119676820bbcf3fff4e8a5) |
+| 01:20 | [feat: desarrollar implementación y documentación del caso de uso importarGrados y cierre de sesión 37](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/ec47913e6a631ffddf35d76ff6c8712347cdce9f) |
+| 00:40 | [feat: desarrollar implementación y documentación del caso de uso eliminarGrado y cierre de sesión 36](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/b70951fae768f81d254b237a5ad72344d48a65c1) |
+| 00:01 | [feat: desarrollar implementación y documentación del caso de uso abrirGrados y cierre de sesión 35](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/4737f652c17146e6f10baf898fc7f802c9b50f51) |
+| 20:34 | [feat: desarrollar implementación y documentación del caso de uso cerrarSesion y cierre de sesión 34](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8f0b2b6997e5d057c1e9ef016101669924508006) |
+| 19:47 | [docs: creacion de carpeta 03-desarrollo y el primer caso de uso iniciarSesion, cierre de sesión 33](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/cbce41d98ffb7f53f451a0deab6be918dd2062d6) |
+| 19:16 | [feat: implementados los dashboard de cada actor y cierre de sesión 32](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/65d578adbcb400a7697013b4d9ea013b947c29b5) |
+| 18:09 | [feat: desarrollar implementación de iniciarSesión y cierre de sesión 31](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/ed99a1b1bc2ab7c6e8343b695f8bf0e569c70703) |
+| 16:38 | [feat: Modificación diseño eliminarGrado y añadiendo carpeta extraDocs con los Prototipos en HTML](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/cd6dec17b2938f3d1cd336c8db79176ae1bf1329) |
+| 02:11 | [feat: desarrollar diseño de la rama Grados y cierre de sesión 30](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/150afb9dd4cff57fbca050934faa90c56aed9ce4) |
+
+### 💬 Conversation-log (6 sesiónes)
+
+- Sesión 31: Diseño RUP - Rama Grados
+- Sesión 32: Inicio de Implementación RUP - iniciarSesion()
+- Sesión 33: Ajuste de Dashboards según Prototipos
+- Sesión 34: Inicio de la fase de Desarrollo (Documentación)
+- Sesión 35: Implementación de cerrarSesion()
+- Sesión 36: Implementación de abrirGrados()
+
+**Artefactos nuevos:** 🔌 ⚙️ 
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (8: 7 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:28 | [feat: desarrollar implementación y documentación del caso de uso editarAsignatura y cierre de sesión 45](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/56436360d394c30f524800dffb4038bba26f25d9) |
+| 23:00 | [feat: desarrollar implementación y documentación del caso de uso crearAsignatura y cierre de sesión 44](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/eeaf192a2b79230035dcbf6c7a697a7abfcee840) |
+| 22:31 | [feat: desarrollar implementación y documentación del caso de uso importarAsignaturas y cierre de sesión 43](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/e5bd91b670ba9c9da990db3e972dfe8632bfcc7b) |
+| 22:07 | [docs: corrección de enlaces en eliminarAsignatura](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8137a2eda5419ae4f6e687189b4966fe81b78a87) |
+| 22:02 | [feat: desarrollar implementación y documentación del caso de uso eliminarAsignatura y cierre de sesión 42](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/888fb47d41942317aeda8343ff9e9ee200a81c3a) |
+| 21:46 | [feat: desarrollar implementación y documentación del caso de uso abrirAsignaturas y cierre de sesión 41](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/2038a06152bd6218035075d4a0d05f37f6f4a50b) |
+| 21:17 | [feat: desarrollar diseño de la rama Asignaturas y cierre de sesión 40](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8312931141532c736f0894154f84d1996160097e) |
+| 02:12 | [feat: desarrollar implementación y documentación del caso de uso editarGrado y cierre de sesión 39](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5fcbc63ff5cfd738781409fcae7fb7388e079bee) |
+
+### 💬 Conversation-log (9 sesiónes)
+
+- Sesión 37: Implementación de eliminarGrado()
+- Sesión 38: Implementación de importarGrados()
+- Sesión 39: Implementación de crearGrado()
+- Sesión 40: Implementación de editarGrado()
+- Sesión 41: Diseño RUP - Rama Asignaturas
+- Sesión 42: Implementación de abrirAsignaturas()
+- Sesión 43: Implementación de eliminarAsignatura()
+- Sesión 44: Implementación de importarAsignaturas()
+- Sesión 45: Implementación de crearAsignatura()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:42 | [feat: desarrollar diseño de la rama Examenes y cierre de sesión 47](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/ea51ab4549671db6ec8abf5be012879f37b09796) |
+
 ### 💬 Conversation-log (2 sesiónes)
 
-- Sesión 26: Inicio de la fase de Diseño RUP
-- Sesión 27: Refinamiento de la Documentación de Diseño
+- Sesión 46: Implementación de editarAsignatura()
+- Sesión 47: Diseño RUP - Rama Examenes
 
-> ⚠️ Log sin commits
+> 💬 + commits = proceso documentado
 
 ---
 

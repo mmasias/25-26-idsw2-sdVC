@@ -1,7 +1,7 @@
 # Timeline - beatriizorozco
 
 > Repo: [beatriizorozco/25-26-idsw2-sdVC](https://github.com/beatriizorozco/25-26-idsw2-sdVC)
-> Commits: 39 | Días activos: 9 | Sesiones log: 1
+> Commits: 63 | Días activos: 12 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,11 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 39 (5 feat / 4 fix / 30 other) |
-| Ratio fix/feat | 0.80 |
-| Días activos | 9 |
-| Sesiones documentadas | 1 |
-| Sesiones sin fecha en log | 1 |
+| Commits propios | 63 (6 feat / 5 fix / 52 other) |
+| Ratio fix/feat | 0.83 |
+| Días activos | 12 |
+| Sesiones documentadas | 0 |
 
 </div>
 
@@ -24,11 +23,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-06-02
-        Analisis     :done, 2026-05-21, 2026-06-02
-        Diseno       :done, 2026-05-21, 2026-06-02
-        Desarrollo   :done, 2026-05-21, 2026-06-02
-        Codigo       :done, 2026-06-01, 2026-06-02
+        UML          :done, 2026-05-23, 2026-06-05
+        Analisis     :done, 2026-05-21, 2026-06-05
+        Diseno       :done, 2026-05-21, 2026-06-05
+        Desarrollo   :done, 2026-05-21, 2026-06-05
+        Codigo       :done, 2026-06-01, 2026-06-05
 ```
 
 <!-- trazabilidad: manual -->
@@ -258,6 +257,63 @@ gantt
 | 16:25 | [docs: cerrar revisión del primer bloque y registrar incidencias](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/d10662f9e04ffbee662b78c8eecc5afd48c107f8) |
 | 15:47 | [fix(sesion): corregir CORS y documentar pruebas del bloque inicial](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/02d2e7c991c1cce9a1971451ef3cd38e176eac74) |
 | 15:23 | [test(sesion): documentar pruebas del bloque inicial](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/f9ca1fab8be61f0df268773805656272cf919cc4) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (10: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:05 | [docs: revision desarrollo segundo bloque sin resumen en conversation log por llegar a limite de uso](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/09ebb8ef471db1c98bb50043aa181ef3072e511b) |
+| 20:36 | [docs: resumen de cierre de sesion terminado](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/016903769fa3098a0fca3f79188cf9ed1eb1393a) |
+| 16:26 | [docs: cierre de la sesión pero sin explicación debido a límite de mensajes. Luego se actualizarán los detalles.](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/dd962db4f5ec972da808080b4e59f9a25b8cbd57) |
+| 16:24 | [primera iteracion de desarrolo de 2º bloque](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/7026aebe155e2117c6431c3ebd4885273f843654) |
+| 15:57 | [docs(diseno): revisar y cerrar diseño del bloque de perfil](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/b8bfdd5e959038431d7c0b12d83b6ad54c9771be) |
+| 15:17 | [docs(diseno): completar patrones del segundo bloque](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/1a09d495e41221229b05677fa4b7f677f4de286f) |
+| 14:56 | [Add main states summary to context diagram documentation](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/e6319d8a3e3015b20aa9555715b08028b3a9f1da) |
+| 14:55 | [docs(analisis): exigir confirmacion en casos de eliminacion](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/b3b767884c4edf46c3d7442a5e8da480817a519b) |
+| 13:58 | [docs(analisis): adaptar README general de la disciplina](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/26c2d9fdc44b7d17d2eaee5943d6deb7ceea32c8) |
+| 13:42 | [docs(rup): diseñar bloque de gestión de perfil](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/e061b4e86a54918cb2071bf53d4f389ed400658d) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (7: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:40 | [Update conversation-log.md](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/893521fd591adbea4ad2a83127aade8daeee2585) |
+| 01:40 | [Revise timestamps and session titles in conversation log](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/3bbac8c545c28795fe005d147281a0c87e577c02) |
+| 01:37 | [docs](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/50d60aab8164fc8c902991c63ee40859b7d690f0) |
+| 23:58 | [docs(rup): matizar carga docente por sede](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/f171f7b5c777e41009f0422f6f98b2e1a703fdd0) |
+| 23:41 | [docs(rup): completar diseño de carga y evidencias de perfil](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/2ef2ed0cf6f2ebf8fa925023e73792cbda82e644) |
+| 03:26 | [cierre de sesion](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/8e659d27e740ec705ef4dbf42bd6b009c01c5402) |
+| 03:18 | [docs(analisis): ajustar carga de trabajo del bloque 3](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/664731538986fc534ffe3251b6a2b665037b3c8c) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 18 · 2026-06-05
+
+### Commits (7: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:22 | [Merge branch 'main' of https://github.com/beatriizorozco/25-26-idsw2-sdVC](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/7dbe94ce00ea241830a5a90378cd0f5a4e3c712d) |
+| 19:04 | [docs(recompensas): actualizar detalle analisis y contexto del bloque 4](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/61d0947f356ace42c44e7e76070086c11afe6f8b) |
+| 18:54 | [Update conversation-log.md](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/7a19a68e295888de6472925445356e42317a4bf1) |
+| 18:52 | [docs(recompensas): avanzar detalle y analisis del bloque 4](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/1cde66d3b13ab7cf05a396ea581747cb912519c9) |
+| 18:27 | [docs(carga-trabajo): cerrar revisión del bloque 3](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/4abff67a6cd276ca7f634cdd50cb3ff01f57f2d0) |
+| 13:50 | [fix(carga-trabajo): consolidar reglas por sede](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/71989229b12ec0bb7c34e00ec9cd2a28f1387e83) |
+| 12:39 | [inicio de sesion](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/815c3f9d1a6a3faa031455c17a652b9e555f54c9) |
 
 > ⚠️ Commits sin entrada en log
 

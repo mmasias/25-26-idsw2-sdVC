@@ -1,7 +1,7 @@
 # Timeline - eirik-rosete
 
 > Repo: [eirik-rosete/25-26-idsw2-sdVC](https://github.com/eirik-rosete/25-26-idsw2-sdVC)
-> Commits: 8 | Días activos: 5 | Sesiones log: 3
+> Commits: 11 | Días activos: 8 | Sesiones log: 3
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 8 (6 feat / 2 fix / 0 other) |
-| Ratio fix/feat | 0.33 |
-| Días activos | 5 |
+| Commits propios | 11 (7 feat / 2 fix / 2 other) |
+| Ratio fix/feat | 0.28 |
+| Días activos | 8 |
 | Sesiones documentadas | 3 |
-| Días log+commits | 2 |
-| Días solo log | 1 |
-| Días solo commits | 3 |
+| Días log+commits | 3 |
+| Días solo log | 0 |
+| Días solo commits | 5 |
 
 </div>
 
@@ -26,9 +26,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-02
-        Diseno       :done, 2026-05-29, 2026-06-02
-        Desarrollo   :done, 2026-05-29, 2026-06-02
+        Analisis     :done, 2026-05-29, 2026-06-05
+        Diseno       :done, 2026-05-29, 2026-06-05
+        Desarrollo   :done, 2026-05-29, 2026-06-05
 ```
 
 ---
@@ -108,11 +108,41 @@ gantt
 
 ## Día 15 · 2026-06-02
 
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:54 | [refactor: Renombrando verPlantas y verRegiones a abrirPlantas y abrirRegiones para mantener congruencia y agregación de svg](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/22213d5de6001101c7e24bce7718070d3ca57d74) |
+
 ### 💬 Conversation-log (1 sesión)
 
 - Detallado y Prototipado de CRUD para Región y Planta
 
-> ⚠️ Log sin commits
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 16 · 2026-06-03
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:59 | [feat: añadiendo SOLID](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/b2ee49f0e0563e75b33150ff8ad2b427c7b268e8) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 17 · 2026-06-04
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:05 | [refactor: agregando instrucciones en GEMINI.md](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/39ee716c10146b0e04cd4d5af5554c6b2f18e759) |
+
+> ⚠️ Commits sin entrada en log
 
 ---
 
