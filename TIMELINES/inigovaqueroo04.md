@@ -30,32 +30,32 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 | D8 | D9 | D11 | D13 | D14 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |   |   |   |
-| `cerrarSesion` |   | A |   |   |   |   |
-| `completarGestion` |   | A |   |   |   |   |
-| `abrirGrupos` |   | A |   |   |   |   |
-| `crearGrupo` |   | A |   |   |   |   |
-| `editarGrupo` |   | A |   |   |   |   |
-| `eliminarGrupo` |   | A |   |   |   |   |
-| `invitarUsuario` |   | A |   |   |   |   |
-| `editarMiembro` |   | A |   |   |   |   |
-| `eliminarMiembro` |   |   | A |   |   |   |
-| `abrirInvitaciones` |   |   |   | A |   |   |
-| `editarInvitacion` |   |   |   | A |   |   |
-| `abrirTareas` |   |   |   | A |   |   |
-| `crearTarea` |   |   |   |   | A |   |
-| `editarTarea` |   |   |   |   | A |   |
-| `relacionarTareas` |   |   |   |   | A |   |
-| `eliminarTarea` |   |   |   |   | A |   |
-| `abrirPlanificacion` |   |   |   |   |   | A |
-| `validarConflicto` |   |   |   |   |   | A |
-| `marcarCompletada` |   |   |   |   |   | A |
-| `establecerHorario` |   |   |   |   |   | A |
-| `definirLocalizacion` |   |   |   |   |   | A |
-| `configurarRecordatorio` |   |   |   |   |   | A |
-| `asignarTareaAUsuario` |   |   |   |   |   | A |
+| Caso de uso | D7 | D8 | D9 | D11 | D13 | D14 | D17 |
+|---|:---:|:---:|:---:|:---:|:---:|:---: | :---: |
+| `iniciarSesion` | A |   |   |   |   | | D |
+| `cerrarSesion` |   | A |   |   |   | | D |
+| `completarGestion` |   | A |   |   |   | | D |
+| `abrirGrupos` |   | A |   |   |   | | D |
+| `crearGrupo` |   | A |   |   |   | | D |
+| `editarGrupo` |   | A |   |   |   | | D |
+| `eliminarGrupo` |   | A |   |   |   | | D |
+| `invitarUsuario` |   | A |   |   |   | | D |
+| `editarMiembro` |   | A |   |   |   | | D |
+| `eliminarMiembro` |   |   | A |   |   | | D |
+| `abrirInvitaciones` |   |   |   | A |   | | D |
+| `editarInvitacion` |   |   |   | A |   | | D |
+| `abrirTareas` |   |   |   | A |   | | D |
+| `crearTarea` |   |   |   |   | A | | D |
+| `editarTarea` |   |   |   |   | A | | D |
+| `relacionarTareas` |   |   |   |   | A | | D |
+| `eliminarTarea` |   |   |   |   | A | | D |
+| `abrirPlanificacion` |   |   |   |   |   | A | D |
+| `validarConflicto` |   |   |   |   |   | A | D |
+| `marcarCompletada` |   |   |   |   |   | A | D |
+| `establecerHorario` |   |   |   |   |   | A | D |
+| `definirLocalizacion` |   |   |   |   |   | A | D |
+| `configurarRecordatorio` |   |   |   |   |   | A | D |
+| `asignarTareaAUsuario` |   |   |   |   |   | A | D |
 
 </div>
 

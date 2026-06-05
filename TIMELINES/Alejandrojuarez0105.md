@@ -38,43 +38,44 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D5 | D6 | D7 | D10 | D12 | D13 | D14 |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `iniciarSesion` | A |   |   |   |   |   |   |
-| `cerrarSesion` | A |   |   |   |   |   |   |
-| `abrirGrados` |   | A |   |   |   |   |   |
-| `importarGrados` |   | A |   |   |   |   |   |
-| `eliminarGrado` |   | A |   |   |   |   |   |
-| `crearGrado` |   | A |   |   |   |   |   |
-| `editarGrado` |   | A |   |   |   |   |   |
-| `abrirAsignaturas` |   |   | A |   |   |   |   |
-| `importarAsignaturas` |   |   | A |   |   |   |   |
-| `eliminarAsignatura` |   |   | A |   |   |   |   |
-| `crearAsignatura` |   |   | A |   |   |   |   |
-| `editarAsignatura` |   |   | A |   |   |   |   |
-| `abrirExamenes` |   |   | A |   |   |   |   |
-| `eliminarExamen` |   |   | A |   |   |   |   |
-| `crearExamen` |   |   | A |   |   |   |   |
-| `abrirAulas` |   |   |   | A |   |   |   |
-| `importarAulas` |   |   |   | A |   |   |   |
-| `crearAula` |   |   |   | A |   |   |   |
-| `editarAula` |   |   |   | A |   |   |   |
-| `eliminarAula` |   |   |   | A |   |   |   |
-| `abrirProfesores` |   |   |   |   | A |   |   |
-| `importarProfesores` |   |   |   |   | A |   |   |
-| `crearProfesor` |   |   |   |   | A |   |   |
-| `editarProfesor` |   |   |   |   | A |   |   |
-| `eliminarProfesor` |   |   |   |   | A |   |   |
-| `generarCalendario` |   |   |   |   |   | A |   |
-| `completarProceso` |   |   |   |   |   | A |   |
-| `consultarCalendario` |   |   |   |   |   | A |   |
-| `completarConsulta` |   |   |   |   |   | A |   |
-| `descargarCalendarioExamenes` |   |   |   |   |   | A |   |
-| `completarGestion` |   |   |   |   |   | A |   |
-| `asignarProfesorAExamen` |   |   |   |   |   |   | A |
-| `completarComunicacion` |   |   |   |   |   |   | A |
-| `comunicarIncidenciasHorario` |   |   |   |   |   |   | A |
+| Caso de uso | D5 | D6 | D7 | D10 | D12 | D13 | D14 | D15 | D16 | D17 | D18 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---: | :---: | :---: | :---: | :---: |
+| `iniciarSesion` | A |   |   |   |   |   | | D | d | |     |
+| `cerrarSesion` | A |   |   |   |   |   | | D | d | |     |
+| `abrirGrados` |   | A |   |   |   |   | | | Dd | |     |
+| `importarGrados` |   | A |   |   |   |   | | | Dd | |     |
+| `eliminarGrado` |   | A |   |   |   |   | | | Dd | |     |
+| `crearGrado` |   | A |   |   |   |   | | | Dd | |     |
+| `editarGrado` |   | A |   |   |   |   | | | D | d |     |
+| `abrirAsignaturas` |   |   | A |   |   |   | | | | Dd |     |
+| `importarAsignaturas` |   |   | A |   |   |   | | | | Dd |     |
+| `eliminarAsignatura` |   |   | A |   |   |   | | | | Dd |     |
+| `crearAsignatura` |   |   | A |   |   |   | | | | Dd |     |
+| `editarAsignatura` |   |   | A |   |   |   | | | | Dd |     |
+| `abrirExamenes` |   |   | A |   |   |   | | | | | D |
+| `eliminarExamen` |   |   | A |   |   |   | | | | | D |
+| `crearExamen` |   |   | A |   |   |   | | | | | D |
+| `abrirAulas` |   |   |   | A |   |   | | | | |     |
+| `importarAulas` |   |   |   | A |   |   | | | | |     |
+| `crearAula` |   |   |   | A |   |   | | | | |     |
+| `editarAula` |   |   |   | A |   |   | | | | |     |
+| `eliminarAula` |   |   |   | A |   |   | | | | |     |
+| `abrirProfesores` |   |   |   |   | A |   | | | | |     |
+| `importarProfesores` |   |   |   |   | A |   | | | | |     |
+| `crearProfesor` |   |   |   |   | A |   | | | | |     |
+| `editarProfesor` |   |   |   |   | A |   | | | | |     |
+| `eliminarProfesor` |   |   |   |   | A |   | | | | |     |
+| `generarCalendario` |   |   |   |   |   | A | | | | |     |
+| `completarProceso` |   |   |   |   |   | A | | | | |     |
+| `consultarCalendario` |   |   |   |   |   | A | | | | |     |
+| `completarConsulta` |   |   |   |   |   | A | | | | |     |
+| `descargarCalendarioExamenes` |   |   |   |   |   | A | | | | |     |
+| `completarGestion` |   |   |   |   |   | A | | | | |     |
+| `asignarProfesorAExamen` |   |   |   |   |   |   | A | | | |     |
+| `completarComunicacion` |   |   |   |   |   |   | A | | | |     |
+| `comunicarIncidenciasHorario` |   |   |   |   |   |   | A | | | |     |
 
+| `editarExamen` |     |     |     |     |     |     |     |     |     |     | D |
 </div>
 
 ---

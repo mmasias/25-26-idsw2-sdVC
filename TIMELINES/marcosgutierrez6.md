@@ -34,49 +34,49 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D7 | D8 | D11 | D14 |
-|---|:---:|:---:|:---:|:---:|
-| `corregirExamenes` | A |   |   |   |
-| `exportarConfiguracionGlobal` | A |   |   |   |
-| `generarExamenes` | A |   |   |   |
-| `importarConfiguracionGlobal` | A |   |   |   |
-| `exportarAlumnos` |   | A |   |   |
-| `importarAlumnos` |   | A |   |   |
-| `importarPreguntas` |   | A |   |   |
-| `asignarExamenes` |   |   | A |   |
-| `crearAlumno` |   |   | A |   |
-| `crearDocente` |   |   | A |   |
-| `crearPregunta` |   |   | A |   |
-| `editarAsignatura` |   |   | A |   |
-| `editarPregunta` |   |   | A |   |
-| `exportarPreguntas` |   |   | A |   |
-| `iniciarSesion` |   |   |   | A |
-| `cerrarSesion` |   |   |   | A |
-| `completarGestion` |   |   |   | A |
-| `crearGrado` |   |   |   | A |
-| `editarGrado` |   |   |   | A |
-| `eliminarGrado` |   |   |   | A |
-| `crearAsignatura` |   |   |   | A |
-| `eliminarAsignatura` |   |   |   | A |
-| `editarAlumno` |   |   |   | A |
-| `eliminarAlumno` |   |   |   | A |
-| `editarDocente` |   |   |   | A |
-| `eliminarDocente` |   |   |   | A |
-| `eliminarPregunta` |   |   |   | A |
-| `verGrados` |   |   |   | A |
-| `verAsignaturas` |   |   |   | A |
-| `verAlumnos` |   |   |   | A |
-| `verDocentes` |   |   |   | A |
-| `verPreguntas` |   |   |   | A |
-| `verRespuestas` |   |   |   | A |
-| `crearRespuesta` |   |   |   | A |
-| `editarRespuesta` |   |   |   | A |
-| `eliminarRespuesta` |   |   |   | A |
-| `importarGrados` |   |   |   | A |
-| `importarAsignaturas` |   |   |   | A |
-| `exportarGrados` |   |   |   | A |
-| `exportarAsignaturas` |   |   |   | A |
-| `cancelarGeneracion` |   |   |   | A |
+| Caso de uso | D7 | D8 | D11 | D14 | D16 |
+|---|:---:|:---:|:---:|:---: | :---: |
+| `corregirExamenes` | A |   |   | | D |
+| `exportarConfiguracionGlobal` | A |   |   | | D |
+| `generarExamenes` | A |   |   | | D |
+| `importarConfiguracionGlobal` | A |   |   | | D |
+| `exportarAlumnos` |   | A |   | |     |
+| `importarAlumnos` |   | A |   | | D |
+| `importarPreguntas` |   | A |   | | D |
+| `asignarExamenes` |   |   | A | |     |
+| `crearAlumno` |   |   | A | |     |
+| `crearDocente` |   |   | A | |     |
+| `crearPregunta` |   |   | A | |     |
+| `editarAsignatura` |   |   | A | |     |
+| `editarPregunta` |   |   | A | |     |
+| `exportarPreguntas` |   |   | A | |     |
+| `iniciarSesion` |   |   |   | A |     |
+| `cerrarSesion` |   |   |   | A |     |
+| `completarGestion` |   |   |   | A |     |
+| `crearGrado` |   |   |   | A |     |
+| `editarGrado` |   |   |   | A |     |
+| `eliminarGrado` |   |   |   | A |     |
+| `crearAsignatura` |   |   |   | A |     |
+| `eliminarAsignatura` |   |   |   | A |     |
+| `editarAlumno` |   |   |   | A |     |
+| `eliminarAlumno` |   |   |   | A |     |
+| `editarDocente` |   |   |   | A |     |
+| `eliminarDocente` |   |   |   | A |     |
+| `eliminarPregunta` |   |   |   | A |     |
+| `verGrados` |   |   |   | A |     |
+| `verAsignaturas` |   |   |   | A |     |
+| `verAlumnos` |   |   |   | A |     |
+| `verDocentes` |   |   |   | A |     |
+| `verPreguntas` |   |   |   | A |     |
+| `verRespuestas` |   |   |   | A |     |
+| `crearRespuesta` |   |   |   | A |     |
+| `editarRespuesta` |   |   |   | A |     |
+| `eliminarRespuesta` |   |   |   | A |     |
+| `importarGrados` |   |   |   | A |     |
+| `importarAsignaturas` |   |   |   | A |     |
+| `exportarGrados` |   |   |   | A |     |
+| `exportarAsignaturas` |   |   |   | A |     |
+| `cancelarGeneracion` |   |   |   | A |     |
 
 </div>
 
