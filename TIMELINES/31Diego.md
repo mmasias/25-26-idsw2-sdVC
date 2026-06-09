@@ -1,7 +1,7 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 18 | Días activos: 13 | Sesiones log: 0
+> Commits: 24 | Días activos: 15 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 18 (11 feat / 4 fix / 3 other) |
-| Ratio fix/feat | 0.36 |
-| Días activos | 13 |
+| Commits propios | 24 (13 feat / 4 fix / 7 other) |
+| Ratio fix/feat | 0.30 |
+| Días activos | 15 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-05
-        Analisis     :done, 2026-05-22, 2026-06-05
-        Diseno       :done, 2026-05-29, 2026-06-05
-        Codigo       :done, 2026-05-30, 2026-06-05
+        UML          :done, 2026-05-22, 2026-06-09
+        Analisis     :done, 2026-05-22, 2026-06-09
+        Diseno       :done, 2026-05-29, 2026-06-09
+        Codigo       :done, 2026-05-30, 2026-06-09
 ```
 
 <!-- trazabilidad: manual -->
@@ -251,6 +251,34 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 19:09 | [feat: análisis investigador + diseño e implementación de investigadoresDeProyecto y solicitudes de eliminación de perfil](https://github.com/31Diego/25-26-idsw2-sdVC/commit/346503cfb1241b46d1c9ea03b959353f6574a67c) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 20 · 2026-06-07
+
+### Commits (3: 2 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:24 | [refactor: aplicar SRP y OCP — ArchivoService, enum Rol, guards de acceso en ProyectoService](https://github.com/31Diego/25-26-idsw2-sdVC/commit/4a7ee26f3e82b02a591d8d0d8186e27b55ca3a7d) |
+| 19:12 | [feat: consolidar controllers por entidad + fix flujo eliminación y bug FK entregables](https://github.com/31Diego/25-26-idsw2-sdVC/commit/546047c25061a5c4b31fb9e4e7c3cc6bc3b1ffe1) |
+| 14:30 | [feat: consolidar controllers por entidad + fix flujo eliminación y bug FK entregables](https://github.com/31Diego/25-26-idsw2-sdVC/commit/f4aada305e9aae1dc0cb77c40de88fdbf37623fc) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 21 · 2026-06-08
+
+### Commits (3: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:13 | [refactor: revisión SOLID y sincronización de diagramas de diseño](https://github.com/31Diego/25-26-idsw2-sdVC/commit/d1b190a3869137f6c0b666fda94a5751b2fc2c42) |
+| 20:23 | [refactor: mover lógica de negocio de controllers a services (SRP)](https://github.com/31Diego/25-26-idsw2-sdVC/commit/8bd9b6459c15e1d136c90e13e440707dbf70f0d5) |
+| 18:44 | [refactor: SRP con InvestigadorUserDetails y OCP con Strategy en ProyectoService](https://github.com/31Diego/25-26-idsw2-sdVC/commit/cecaa9b5cb97d7bee7ab0177d284aaba109766ce) |
 
 > ⚠️ Commits sin entrada en log
 

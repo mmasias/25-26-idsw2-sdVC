@@ -1,7 +1,7 @@
 # Timeline - martinlopez7
 
 > Repo: [martinlopez7/25-26-idsw2-sdVC](https://github.com/martinlopez7/25-26-idsw2-sdVC)
-> Commits: 99 | Días activos: 9 | Sesiones log: 109
+> Commits: 99 | Días activos: 11 | Sesiones log: 110
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 99 (55 feat / 34 fix / 10 other) |
-| Ratio fix/feat | 0.61 |
-| Días activos | 9 |
-| Sesiones documentadas | 109 |
-| Días log+commits | 8 |
-| Días solo log | 8 |
-| Días solo commits | 1 |
+| Commits propios | 99 (48 feat / 41 fix / 10 other) |
+| Ratio fix/feat | 0.85 |
+| Días activos | 11 |
+| Sesiones documentadas | 110 |
+| Días log+commits | 7 |
+| Días solo log | 10 |
+| Días solo commits | 4 |
 
 </div>
 
@@ -25,18 +25,18 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-28, 0d
-        UML          :done, 2026-05-22, 2026-06-05
-        Analisis     :done, 2026-05-21, 2026-06-05
-        Diseno       :done, 2026-05-27, 2026-06-05
-        Codigo       :done, 2026-05-19, 2026-06-05
+        Inicio       :milestone, 2026-05-30, 0d
+        UML          :done, 2026-05-24, 2026-06-09
+        Analisis     :done, 2026-05-21, 2026-06-09
+        Diseno       :done, 2026-05-27, 2026-06-09
+        Codigo       :done, 2026-05-19, 2026-06-09
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D-6 | D-5 | D-4 | D-3 | D-2 | D-1 | D0 | D1 | D3 | D5 | D6 | D7 | D8 |
+| Caso de uso | D-8 | D-7 | D-6 | D-5 | D-4 | D-3 | D-2 | D-1 | D1 | D3 | D4 | D5 | D6 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | `verAsignaturas` | A |   |   |   |   |   |   |   |   | D |   |   |   |
 | `verGrados` | A |   |   |   |   |   |   |   | D |   |   |   |   |
@@ -76,7 +76,7 @@ gantt
 
 ---
 
-## Día -7 · 2026-05-20
+## Día -9 · 2026-05-20
 
 ### 💬 Conversation-log (1 sesión)
 
@@ -86,7 +86,7 @@ gantt
 
 ---
 
-## Día -6 · 2026-05-21
+## Día -8 · 2026-05-21
 
 ### 💬 Conversation-log (2 sesiónes)
 
@@ -99,7 +99,7 @@ gantt
 
 ---
 
-## Día -5 · 2026-05-22
+## Día -7 · 2026-05-22
 
 ### 💬 Conversation-log (3 sesiónes)
 
@@ -107,13 +107,11 @@ gantt
 - Análisis de cerrarSesion()
 - Análisis de verAlumnos()
 
-**Artefactos nuevos:** 📐 
-
 > ⚠️ Log sin commits
 
 ---
 
-## Día -4 · 2026-05-23
+## Día -6 · 2026-05-23
 
 ### 💬 Conversation-log (4 sesiónes)
 
@@ -126,7 +124,7 @@ gantt
 
 ---
 
-## Día -3 · 2026-05-24
+## Día -5 · 2026-05-24
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -137,11 +135,13 @@ gantt
 - Análisis de importarConfiguracionGlobal()
 - Análisis de crearGrado()
 
+**Artefactos nuevos:** 📐 
+
 > ⚠️ Log sin commits
 
 ---
 
-## Día -2 · 2026-05-25
+## Día -4 · 2026-05-25
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -156,7 +156,7 @@ gantt
 
 ---
 
-## Día -1 · 2026-05-26
+## Día -3 · 2026-05-26
 
 ### 💬 Conversation-log (9 sesiónes)
 
@@ -174,7 +174,7 @@ gantt
 
 ---
 
-## Día 0 · 2026-05-27
+## Día -2 · 2026-05-27
 
 ### 💬 Conversation-log (8 sesiónes)
 
@@ -193,18 +193,7 @@ gantt
 
 ---
 
-## Día 1 · 2026-05-28
-
-### Commits (6: 2 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 12:15 | [docs: aceptacion del diseño de eliminarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/433a791745f23b6ce1422d3c96d6041d28445cdc) |
-| 12:14 | [feat: diseño de eliminarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/fb39cf8377c8200815c288c873b3bee6afb67684) |
-| 11:44 | [docs: aceptación de diseño editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/127bbd605fe8b332f49e230a27035d12508474a3) |
-| 11:43 | [feat: diseño de editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/52e47aa75c18798852941e446504fb15232eb352) |
-| 11:19 | [docs: concrecion protocolo de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/154145bf7150303f1dfe75683dc0a7f2ee81125b) |
-| 11:12 | [fix: correccion diseño crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/bcfae34103200133a086b77a11d9ca5795fcbd98) |
+## Día -1 · 2026-05-28
 
 ### 💬 Conversation-log (6 sesiónes)
 
@@ -215,26 +204,11 @@ gantt
 - Diseño de editarAlumno()
 - Diseño de eliminarAlumno()
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 2 · 2026-05-29
-
-### Commits (10: 6 feat / 4 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 15:09 | [fix: correccion implementación caso de uso eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/ec1a96389cd725b2a4717efa4a181a99a333e9c4) |
-| 14:10 | [feat: implementacion caso de uso eliminarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/2c36fff0ba94d667aa4f13e3969162aa078b33f5) |
-| 13:54 | [fix: correccion implementación caso de uso crearDocente para que transfiera automáticamente a editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5690d4e4732f1506df373661f1c61818ba4775fc) |
-| 13:41 | [feat: implementacion de caso de uso editarDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/aab29c589f6629b85762bc298185236589e4dc65) |
-| 13:00 | [fix: correccion de caso de uso verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/8fdc1fe2f18d2eb06bfaec8295a783dd163a3bbf) |
-| 12:42 | [fix: correccion implementación de crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b14bc4971801a7aa00b767d477ce50d87623557f) |
-| 12:37 | [feat: implementacion de caso de uso crearDocente](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/047b61d64a60751c584cb8d249bc78dca7df1f47) |
-| 10:37 | [feat: implementacion del caso de uso verDocentes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/a7389f4d12e34d92fb3669548b85e43365958af4) |
-| 09:44 | [feat: implementación del caso de uso cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/41a67cfab51ce9de2a99ec2c6ccaf914685635df) |
-| 09:14 | [feat: inicialización de proyectos springboot y react e implementación del caso de uso iniciarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b7c1a82f8383563a742093bb0193de4519172803) |
+## Día 0 · 2026-05-29
 
 ### 💬 Conversation-log (7 sesiónes)
 
@@ -246,13 +220,13 @@ gantt
 - Implementación de editarDocente()
 - Implementación de eliminarDocente()
 
-> 💬 + commits = proceso documentado
+> ⚠️ Log sin commits
 
 ---
 
-## Día 3 · 2026-05-30
+## Día 1 · 2026-05-30
 
-### Commits (12: 8 feat / 1 fix)
+### Commits (11: 7 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
@@ -267,7 +241,6 @@ gantt
 | 15:43 | [feat: implementacion caso de uso editarAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/e4a0bd0c2e6f17b8415d19432d1e0404a462060f) |
 | 14:42 | [feat: implementacion de crearAlumno](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/25540418ddff6a27cb8233a5ab38bfbf66c59a4c) |
 | 10:17 | [docs: aceptacion de implementacion de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5cc80f5734351d7925270098a59d2cc60dd202d4) |
-| 10:11 | [feat: implementacion de verAlumnos](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/440fe299bac45d338dbb9df85460af3ee1ace2d3) |
 
 ### 💬 Conversation-log (8 sesiónes)
 
@@ -284,7 +257,7 @@ gantt
 
 ---
 
-## Día 4 · 2026-05-31
+## Día 2 · 2026-05-31
 
 ### Commits (9: 4 feat / 3 fix)
 
@@ -314,7 +287,7 @@ gantt
 
 ---
 
-## Día 5 · 2026-06-01
+## Día 3 · 2026-06-01
 
 ### Commits (19: 8 feat / 10 fix)
 
@@ -357,7 +330,7 @@ gantt
 
 ---
 
-## Día 6 · 2026-06-02
+## Día 4 · 2026-06-02
 
 ### Commits (19: 16 feat / 3 fix)
 
@@ -406,7 +379,7 @@ gantt
 
 ---
 
-## Día 7 · 2026-06-03
+## Día 5 · 2026-06-03
 
 ### Commits (13: 4 feat / 9 fix)
 
@@ -441,7 +414,7 @@ gantt
 
 ---
 
-## Día 8 · 2026-06-04
+## Día 6 · 2026-06-04
 
 ### Commits (8: 7 feat / 1 fix)
 
@@ -471,7 +444,7 @@ gantt
 
 ---
 
-## Día 9 · 2026-06-05
+## Día 7 · 2026-06-05
 
 ### Commits (3: 0 feat / 2 fix)
 
@@ -482,6 +455,71 @@ gantt
 | 10:08 | [docs: README implementado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/95b691572b7714f1afc389ca50da08d6ec54bfc7) |
 
 > ⚠️ Commits sin entrada en log
+
+---
+
+## Día 8 · 2026-06-06
+
+### Commits (2: 0 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 21:39 | [fix: correccion version dependencia](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/124509eca8aff490c5f5066c221b6eab91c5d402) |
+| 21:39 | [fix: simplificacion analisis iniciarSesion y cerrarSesion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b4b5833186780d998d5ceefc90583a423eb8bcac) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 9 · 2026-06-07
+
+### Commits (7: 0 feat / 7 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:36 | [fix: correccion analisis importarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/93b7e2301c2fb0b6b8c0d07ec59a5fb31d62a019) |
+| 16:25 | [fix: correccion analisis exportarConfiguracionGlobal](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/14d63475a8313d9e41d47da1f1d480819c72049b) |
+| 16:16 | [fix: correccion analisis eliminarAsignatura](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/0e646fb6738ed17acdb29eef6d632a9a20c9e502) |
+| 16:08 | [fix: correccion analisis editarAsignatura](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/5163dcf55600ad84f520f49275443694924a78f8) |
+| 15:58 | [fix: correccion analisis verAsignaturas](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/66feb779b67247b7df115dc77691b4347f47e16b) |
+| 15:45 | [fix: correccion analisis eliminarAsignatura](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/d605ff0e8897032f5757ac3012ccec76b980b402) |
+| 15:36 | [fix: correccion analisis eliminarGrado](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/6a706bb1d73d5ce0bb7a3b7ae9a362da2c26d7e4) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 10 · 2026-06-08
+
+### Commits (3: 1 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 12:40 | [fix: correccion analisis asignarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/de108b95278c13fbf07d8457393884d032483514) |
+| 11:59 | [fix: correccion analisis cancelarGeneracion](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/1e85df9ad5f2c3fedb29cd883da622fee4004ffd) |
+| 11:29 | [feat: correccion analisis generarExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/a9faf6f7f888cf165a8494759be894bf574dbffc) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 11 · 2026-06-09
+
+### Commits (5: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:05 | [feat: implementación de generarExamenes desde ASIGNATURA_ABIERTO](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/d1b231b32068ed61e92d166b6cc90652d8c59f8a) |
+| 15:43 | [docs: actualización de readme principal y readme de diseño](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/7791b2c711d0460bcccf37c4f7858163e981597f) |
+| 15:14 | [chore: reubicacion de clases](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/2d7d38b8856191f624747477c1d64e236007e13a) |
+| 15:06 | [docs: adición de sesión](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/c0a6991717883ed2a6f9b31b6b148228ba5c500a) |
+| 14:32 | [fix: corrreccion analisis corregirExamenes](https://github.com/martinlopez7/25-26-idsw2-sdVC/commit/b0e9d6b000cdfa1ca395704707f24dad572ce3dc) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Planificación e implementación de generarExamenes() desde ASIGNATURA_ABIERTO
+
+> 💬 + commits = proceso documentado
 
 ---
 

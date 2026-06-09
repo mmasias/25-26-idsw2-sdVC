@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 76 | Días activos: 15 | Sesiones log: 56
+> Commits: 86 | Días activos: 17 | Sesiones log: 67
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 76 (67 feat / 5 fix / 4 other) |
-| Ratio fix/feat | 0.07 |
-| Días activos | 15 |
-| Sesiones documentadas | 56 |
-| Días log+commits | 9 |
+| Commits propios | 86 (74 feat / 8 fix / 4 other) |
+| Ratio fix/feat | 0.10 |
+| Días activos | 17 |
+| Sesiones documentadas | 67 |
+| Días log+commits | 11 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -27,11 +27,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-06-05
-        Analisis     :done, 2026-05-22, 2026-06-05
-        Diseno       :done, 2026-06-02, 2026-06-05
-        Desarrollo   :done, 2026-06-02, 2026-06-05
-        Codigo       :done, 2026-06-02, 2026-06-05
+        UML          :done, 2026-05-23, 2026-06-09
+        Analisis     :done, 2026-05-22, 2026-06-09
+        Diseno       :done, 2026-06-02, 2026-06-09
+        Desarrollo   :done, 2026-06-02, 2026-06-09
+        Codigo       :done, 2026-06-02, 2026-06-09
 ```
 
 <!-- trazabilidad: manual -->
@@ -376,10 +376,12 @@ gantt
 
 ## Día 18 · 2026-06-05
 
-### Commits (7: 7 feat / 0 fix)
+### Commits (9: 9 feat / 0 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 01:09 | [feat: add ClassSerializerInterceptor to Grado and Profesor controllers](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/594a0e3db88dafb5567cf91973c0fa2390439af8) |
+| 23:02 | [feat: add examen management feature with create, update, delete, and list functionalities](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b20a888f9937c2525e8c91f5e76a34840d06f347) |
 | 21:09 | [feat: Add sequence diagrams for eliminarExamen and editarExamen use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/aa5b0d46d7bd0e0ae573962ebf35f3baa2905f6e) |
 | 20:48 | [feat: Add sequence diagrams for exam creation and listing use cases](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/0075f27a7ddbb12021928a2e3585e222d3d538b5) |
 | 20:24 | [feat: Implement import and management features for professors](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/b595cf69fd0cba6391d3f2680fb04638c44396dc) |
@@ -388,7 +390,7 @@ gantt
 | 16:03 | [feat: Implement detailed design for crearProfesor use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/3778cc27ad4ae107beacb0aa4aa7da24cf94fe6b) |
 | 15:53 | [feat: Implement detailed design for abrirProfesores use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/e528524e6908db87da421e2200e1cfe16dc37209) |
 
-### 💬 Conversation-log (7 sesiónes)
+### 💬 Conversation-log (8 sesiónes)
 
 - Sesión 65: Rama de Profesores - Inicio del Diseño Detallado
 - Sesión 66: Rama de Profesores - Diseño Detallado de Alta Manual
@@ -397,6 +399,53 @@ gantt
 - Sesión 69: Rama de Profesores - Desarrollo Full-Stack Completo y Consistencia de Diseño
 - Sesión 70: Rama de Exámenes - Diseño Detallado de Apertura y Alta Manual
 - Sesión 71: Rama de Exámenes - Diseño Detallado de Edición y Borrado Seguro
+- Sesión 72: Rama de Exámenes - Implementación, Ajustes del Frontend e Impacto del Borrado
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 19 · 2026-06-06
+
+### Commits (2: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:18 | [feat: Added design phase to generarCalendario use case with documentation and diagrams.](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/f0d0146e1a7e566d23506f567ae0f49b5e5d7146) |
+| 02:07 | [fix: remove unused property from Examen interface](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/75cb61e3b51640e4c50c5ac741418c4e4ef82be4) |
+
+### 💬 Conversation-log (2 sesiónes)
+
+- Auditoría de Calidad, Refactorización de Delegación y Cierre de Ramillete de Profesores
+- Sesión 73: Rama de Calendario - Diseño Detallado del Motor de Asignación
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 20 · 2026-06-07
+
+### Commits (6: 4 feat / 2 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 12:05 | [feat: add export functionality for exam calendar in PDF and Excel formats](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/40bb5ce542cdb67c7b8c13671f8bc76d5a074382) |
+| 11:43 | [fix: resolve foreign key update issues in Asignaturas, Alumnos, and Exámenes services](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/6bc7c2b608492cbfffac3dc4b582552ecdbf35ea) |
+| 11:32 | [fix(calendario): implement academic dispersion heuristic for exam scheduling and update related services](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/77081aa8ef2fd4ac2291079bb525017fffa7bd5c) |
+| 11:03 | [feat: add exam calendar consultation feature with month, week, and day views](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/5cd76ed95a0c9d6ee7944d1d6ece8b3d5092cce3) |
+| 10:38 | [feat: add preference management for professors with listarConflictosExamenes use case](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/335603fcc69a3e88d12650ed32d4cc7355368b31) |
+| 09:04 | [feat(calendario): add functionality for generating and confirming exam calendars](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/8fd8ffd5a34c007c1a4408ac7c546ac03a5ba625) |
+
+### 💬 Conversation-log (8 sesiónes)
+
+- Sesión 74: Rama de Calendario - Construcción, Auditoría y Revisión de Diseño del Motor de Asignación
+- Sesión 75: Caso de Uso - listarConflictosExamenes y Preferencias Horarias
+- Sesión 76: Caso de Uso - consultarCalendario y Auditoría de generarCalendario
+- Sesión 77: Corrección de Carga de Relaciones en Consultar Calendario
+- Sesión 78: Heurística de Dispersión Temporal por Grado
+- Sesión 79: Cierre de la Iteración y Cierre de Sesión
+- Sesión 80: Corrección de Actualización de Relaciones (Bug de Clave Foránea en TypeORM)
+- Sesión 81: Caso de Uso - descargarCalendarioExamenes y Patrón Strategy
 
 > 💬 + commits = proceso documentado
 

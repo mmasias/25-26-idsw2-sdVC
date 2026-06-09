@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 57 | Días activos: 14 | Sesiones log: 47
+> Commits: 84 | Días activos: 17 | Sesiones log: 75
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 57 (40 feat / 1 fix / 16 other) |
-| Ratio fix/feat | 0.02 |
-| Días activos | 14 |
-| Sesiones documentadas | 47 |
-| Días log+commits | 13 |
+| Commits propios | 84 (67 feat / 1 fix / 16 other) |
+| Ratio fix/feat | 0.01 |
+| Días activos | 17 |
+| Sesiones documentadas | 75 |
+| Días log+commits | 16 |
 | Días solo log | 0 |
 | Días solo commits | 1 |
 
@@ -26,11 +26,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-05
-        Analisis     :done, 2026-05-23, 2026-06-05
-        Diseno       :done, 2026-06-01, 2026-06-05
-        Desarrollo   :done, 2026-06-03, 2026-06-05
-        Codigo       :done, 2026-06-03, 2026-06-05
+        UML          :done, 2026-05-22, 2026-06-09
+        Analisis     :done, 2026-05-23, 2026-06-09
+        Diseno       :done, 2026-06-01, 2026-06-09
+        Desarrollo   :done, 2026-06-03, 2026-06-09
+        Codigo       :done, 2026-06-03, 2026-06-09
 ```
 
 <!-- trazabilidad: manual -->
@@ -380,6 +380,103 @@ gantt
 
 - Sesión 46: Implementación de editarAsignatura()
 - Sesión 47: Diseño RUP - Rama Examenes
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 19 · 2026-06-06
+
+### Commits (6: 6 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:43 | [feat: desarrollar implementación y documentación del caso de uso abrirAulas y cierre de sesión 54](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/a045611fe9852cd4c4fb8c949ecf63f81b88594d) |
+| 23:56 | [feat: desarrollar diseño de la rama Alumnos y cierre de sesión 53](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/0999d608993600e928247283839a8bee9dcd9617) |
+| 22:02 | [feat: desarrollar diseño de la rama Aulas y cierre de sesión 52](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/813df71771a2a81e6bdebf6bd5d7974c3f8a6ba1) |
+| 14:42 | [feat: desarrollar implementación y documentación del caso de uso eliminarExamen y editarExamen,  cierre de sesión 50 y 51](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/fdc8896197f8f31a6f1e7617a2b402d76c7b655f) |
+| 14:15 | [feat: desarrollar implementación y documentación del caso de uso eliminarExamen y cierre de sesión 49](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/51507ac7bdf4eebadda1c4d29fef530afc74cde3) |
+| 13:51 | [feat: desarrollar implementación y documentación del caso de uso abrirExamenes y cierre de sesión 48](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/1392b271a9829a9d7fe24d5378161ea9df5a1661) |
+
+### 💬 Conversation-log (6 sesiónes)
+
+- Sesión 48: Implementación de abrirExamenes()
+- Sesión 49: Implementación de eliminarExamen()
+- Sesión 50: Implementación de crearExamen()
+- Sesión 51: Implementación de editarExamen()
+- Sesión 52: Diseño RUP - Rama Aulas
+- Sesión 53: Diseño RUP - Rama Alumnos - Cambio de Agente (Gemini CLI -> Antigravity CLI)
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 20 · 2026-06-07
+
+### Commits (12: 12 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:55 | [feat: desarrollar implementación y documentación del caso de uso crearProfesor y cierre de sesión 66](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/fa0cd2cf49a674a66b933c26ae65a9a80e1d48b1) |
+| 01:37 | [feat: desarrollar implementación y documentación del caso de uso eliminarProfesor y cierre de sesión 65](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/d39bc4782c05af9075af30cf2a7550668298bf18) |
+| 01:17 | [feat: desarrollar implementación y documentación del caso de uso importarProfesores y cierre de sesión 64](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/a3676946155a0b61ed9aca7c9c5a943994c2843a) |
+| 18:29 | [feat: desarrollar implementación y documentación del caso de uso abrirProfesores y cierre de sesión 63](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5c6729147065af7a3294966ff626fe141dfbed3a) |
+| 17:34 | [feat: desarrollar diseño de la rama Profesores y cierre de sesión 62](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/f79acdd32489a4a22b6664d38d8cf21f1d1a5645) |
+| 16:20 | [feat: desarrollar implementación y documentación de los casos de uso crearAlumno y editarAlumno y cierre de sesión 61](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/274a4b2c416b1849d93960c5e98869e36214c2e4) |
+| 15:45 | [feat: desarrollar implementación y documentación de los casos de uso eliminarAlumno e importarAlumno y cierre de sesión 60](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/bbe1a765795f291dd6d6af2aa34e9f1aff135e3d) |
+| 14:04 | [feat: desarrollar implementación y documentación del caso de uso abrirAlumnos y cierre de sesión 59](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8a695ef59308f2b35c1c0b28f370f438430ec9ae) |
+| 12:01 | [feat: desarrollar implementación y documentación del caso de uso editarAula y cierre de sesión 58](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5d78016ee059d9aa8d89889d48cbf58e803a4a41) |
+| 11:41 | [feat: desarrollar implementación y documentación del caso de uso crearAula y cierre de sesión 57](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/501cfe0fef51c165bf538be75150ce3509eedc1e) |
+| 02:46 | [feat: desarrollar implementación y documentación del caso de uso eliminarAula y cierre de sesión 56](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/5572ef4bc4997b343a1693508699635b16b009f2) |
+| 02:30 | [feat: desarrollar implementación y documentación del caso de uso importarAulas y cierre de sesión 55](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/2f96d754543cea365618482432f342e46b1b2b28) |
+
+### 💬 Conversation-log (10 sesiónes)
+
+- Sesión 54: Implementación de abrirAulas()
+- Sesión 55: Correcciones documentales - importarAulas y actualización de índices
+- Sesión 56: Implementación de eliminarAula()
+- Sesión 57: Implementación de crearAula()
+- Sesión 58: Implementación de editarAula()
+- Sesión 59: Implementación de abrirAlumnos()
+- Sesión 60: Implementación de importarAlumnos() y eliminarAlumno()
+- Sesión 61: Implementación de crearAlumno() y editarAlumno() (Corrección de errores)
+- Sesión 62: Diseño RUP de la rama de Profesores
+- Sesión 63: Implementación de abrirProfesores()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 21 · 2026-06-08
+
+### Commits (9: 9 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 17:03 | [feat: desarrollar implementación y docuemntación de los casos de uso consultarCalendario y descargarCalendarioExamenes, cierre de sesión 75](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/739b5ccd8512228257b88af32773f49c62f3575c) |
+| 16:05 | [feat: añadir validación de datos insuficientes en generarCalendario y cierre de sesión 74](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/75dc2e5d780b42787cbe6876fe7ef255789cabfa) |
+| 15:51 | [feat: desarrollar implementación y documentación del caso de uso generarCalendario y cierre de sesión 73](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/cfc5243570880e64dd4760b3e80fa8d0a3cf2a69) |
+| 15:29 | [feat: desarrollar diseño de la rama Consultar Calendario y cierre de sesión 72](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/c211183555b6d11cb49d3137003f09b384117e54) |
+| 15:11 | [feat: desarrollar diseño de la rama Generar Calendario y cierre de sesión 71](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/e60fe86617cd7d0c86a6320357bfd8c7574c2a4c) |
+| 03:17 | [feat: refactorizar módulo Exámenes con FKs reales (profesorId/aulaId) y actualizar lógica de conflictos y dashboard, cierre de sesión 70.](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/aa2e451aab92dd15d847523df0771059d73ad533) |
+| 02:36 | [feat: desarrollar implementación y documentación del caso de uso listarConflictosExamenes y cierre de sesión 69](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/a131f74330091f11b6ee4d9f8df79154674d2cc0) |
+| 02:21 | [feat: desarrollar implementación y documentación del caso de uso asignarProfesorAExamen y cierre de sesión 68](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/78d10308312082616fbb93933b787b99268aa875) |
+| 02:07 | [feat: desarrollar implementación y documentación del caso de uso editarProfesor y cierre de sesión 67](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/e43647220f8b111f86d2d6890e501d1286d96335) |
+
+### 💬 Conversation-log (12 sesiónes)
+
+- Sesión 64: Implementación de importarProfesores() - Cambio de Agente (Antigravity CLI -> Claude Code)
+- Sesión 65: Implementación de eliminarProfesor()
+- Sesión 66: Implementación de crearProfesor()
+- Sesión 67: Implementación de editarProfesor()
+- Sesión 68: Implementación de asignarProfesorAExamen()
+- Sesión 69: Implementación de listarConflictosExamenes()
+- Sesión 70: Refactor del módulo Exámenes y actualización del sistema de conflictos
+- Sesión 71: Diseño RUP - Generación de Calendario (generarCalendario)
+- Sesión 72: Diseño RUP - Consultar Calendario (consultarCalendario, descargarCalendarioExamenes)
+- Sesión 73: Implementación de generarCalendario()
+- Sesión 74: Refinamiento de generarCalendario (validación de datos insuficientes) y confirmación de alcance de Consultar Calendario
+- Sesión 75: Implementación de consultarCalendario() y descargarCalendarioExamenes()
 
 > 💬 + commits = proceso documentado
 

@@ -1,7 +1,7 @@
 # Timeline - jerdier
 
 > Repo: [jerdier/25-26-idsw2-sdVC](https://github.com/jerdier/25-26-idsw2-sdVC)
-> Commits: 33 | Días activos: 14 | Sesiones log: 16
+> Commits: 46 | Días activos: 16 | Sesiones log: 17
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 33 (18 feat / 6 fix / 9 other) |
-| Ratio fix/feat | 0.33 |
-| Días activos | 14 |
-| Sesiones documentadas | 16 |
-| Sesiones sin fecha en log | 16 |
+| Commits propios | 46 (30 feat / 6 fix / 10 other) |
+| Ratio fix/feat | 0.20 |
+| Días activos | 16 |
+| Sesiones documentadas | 17 |
+| Sesiones sin fecha en log | 17 |
 
 </div>
 
@@ -24,9 +24,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-06-05
-        Diseno       :done, 2026-05-25, 2026-06-05
-        Codigo       :done, 2026-05-22, 2026-06-05
+        UML          :done, 2026-06-07, 2026-06-09
+        Analisis     :done, 2026-05-25, 2026-06-09
+        Diseno       :done, 2026-05-25, 2026-06-09
+        Codigo       :done, 2026-05-22, 2026-06-09
 ```
 
 <!-- trazabilidad: manual -->
@@ -227,11 +228,48 @@ gantt
 
 ## Día 18 · 2026-06-05
 
-### Commits (1: 0 feat / 1 fix)
+### Commits (2: 1 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
+| 22:46 | [feat: profesionalización integral, seguridad y refinamiento de UI](https://github.com/jerdier/25-26-idsw2-sdVC/commit/edc9fda44b0097a52fb559dca9e9eb4896b0fefe) |
 | 09:47 | [fix: conversatio_log](https://github.com/jerdier/25-26-idsw2-sdVC/commit/4d551e1afdcce8a5b78eda697ab83ea80195a8eb) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 20 · 2026-06-07
+
+### Commits (11: 10 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:28 | [feat: diseño secretaria](https://github.com/jerdier/25-26-idsw2-sdVC/commit/16722fce9dc1d7d5a970b232ff4959bd3a6b8496) |
+| 19:42 | [feat: diseño profesor](https://github.com/jerdier/25-26-idsw2-sdVC/commit/ea127ebca0d0cb2aba1d85942a6fc44325406cca) |
+| 19:11 | [feat: diseño directorDeGrado](https://github.com/jerdier/25-26-idsw2-sdVC/commit/51e09e1dc8a522d934268d04baa8951149d40a21) |
+| 18:58 | [feat: diseño alumno](https://github.com/jerdier/25-26-idsw2-sdVC/commit/3a6ef107878e99025679d7361fe2d7422cfb1677) |
+| 18:52 | [feat: diseño administrador](https://github.com/jerdier/25-26-idsw2-sdVC/commit/f3016e4f813164613b50009cc50c90d9bc2317a2) |
+| 16:54 | [feat: analisis secretaria](https://github.com/jerdier/25-26-idsw2-sdVC/commit/b5dbf5d34312dfd52774adb2e68b80b73c45a150) |
+| 15:39 | [feat: analisis profesor](https://github.com/jerdier/25-26-idsw2-sdVC/commit/604b8fe76e64460f724d84699ccd24bc5921f46f) |
+| 14:12 | [feat: analisis directorDeGrado](https://github.com/jerdier/25-26-idsw2-sdVC/commit/4fe72b2408aa697ed1f31428855c62c75c306c93) |
+| 13:13 | [feat: analisis alumno](https://github.com/jerdier/25-26-idsw2-sdVC/commit/e3187b9cbbb419da2ed5e4dadd685418c7f1dc68) |
+| 12:53 | [feat: analisis administrador uml svg](https://github.com/jerdier/25-26-idsw2-sdVC/commit/7c8d3a2cbd02d04012b3cec4ff0746bd0726eb4d) |
+| 12:49 | [change: reestructuración directorios](https://github.com/jerdier/25-26-idsw2-sdVC/commit/c1bb91f5e25242a8d2c620daf27362aacb18bc72) |
+
+**Artefactos nuevos:** 📐 
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 21 · 2026-06-08
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:36 | [feat: mejoras codigo](https://github.com/jerdier/25-26-idsw2-sdVC/commit/e7c70172a8b83364f53a55eba0e13d49ba8ad4ab) |
 
 > ⚠️ Commits sin entrada en log
 

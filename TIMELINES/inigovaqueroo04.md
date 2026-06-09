@@ -1,7 +1,7 @@
 # Timeline - inigovaqueroo04
 
 > Repo: [inigovaqueroo04/25-26-idsw2-sdVC](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)
-> Commits: 36 | Días activos: 9 | Sesiones log: 0
+> Commits: 42 | Días activos: 10 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,8 +9,8 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 36 (2 feat / 0 fix / 34 other) |
-| Días activos | 9 |
+| Commits propios | 42 (3 feat / 0 fix / 39 other) |
+| Días activos | 10 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-05
+        Analisis     :done, 2026-05-29, 2026-06-09
 ```
 
 <!-- trazabilidad: manual -->
@@ -193,6 +193,23 @@ gantt
 |---|---|
 | 22:32 | [docs: añadir imagenes renderizadas de diseño](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/fd55aa26da6061882889fa769e46ff744de657e3) |
 | 22:24 | [docs: completar diseño RUP conceptual](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/e58b2d9b559d2ae2838beb73df13914b12a9a4f2) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 21 · 2026-06-08
+
+### Commits (6: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 16:57 | [feat: listar grupos propios del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/a0a8e4d34ea672e939eac7cbb8bd332d610e11a5) |
+| 16:42 | [docs: limpiar entrada menor del log](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/708003941c24b13a12059543bd5b74215732e256) |
+| 16:40 | [docs: documentar idioma de commits](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/0219911e7886013d93a74408f559f3bb19ab9ece) |
+| 16:37 | [docs: define commit and push policy](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/8f4b514498b34d9bf3fda097a8d5446aa160a3f0) |
+| 16:29 | [Document visual tracking workflow](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/1d3642471699f00cec5a178d14c0bff581f9e413) |
+| 16:19 | [Implement session navigation vertical slice](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/121daa66fbaff40f8bc7dbad510bb8889fa7bbcd) |
 
 > ⚠️ Commits sin entrada en log
 
