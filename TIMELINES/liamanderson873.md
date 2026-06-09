@@ -35,49 +35,49 @@ gantt
 
 | Caso de uso | D6 | D16 | D19 | D20 |
 |---|:---:|:---:|:---:|:---:|
-| `CU-01-corregirExamenes` | A | D |   |   |
-| `CU-02-generarExamenes` | A | D |   |   |
-| `CU-03-importarConfiguracionGlobal` | A |   | D |   |
-| `CU-04-exportarConfiguracionGlobal` | A |   | D |   |
-| `CU-05-importarAlumnos` | A | D |   |   |
-| `CU-06-importarPreguntas` | A | D |   |   |
-| `CU-07-exportarAlumnos` | A |   | D |   |
-| `CU-08-exportarPreguntas` | A |   | D |   |
-| `CU-09-asignarExamenes` | A | D |   |   |
-| `CU-10-crearPregunta` | A | D |   |   |
-| `CU-11-editarPregunta` | A | D |   |   |
-| `CU-12-editarAsignatura` | A | D |   |   |
-| `CU-13-crearDocente` | A | D |   |   |
-| `CU-14-crearAlumno` | A | D |   |   |
-| `CU-15-editarDocente` | A | D |   |   |
-| `CU-16-editarAlumno` | A | D |   |   |
-| `CU-17-crearGrado` | A | D |   |   |
-| `CU-18-crearAsignatura` | A | D |   |   |
-| `CU-19-editarGrado` | A | D |   |   |
-| `CU-20-verPreguntas` | A | D |   |   |
-| `CU-21-verAsignaturas` | A | D |   |   |
-| `CU-22-verGrados` | A | D |   |   |
-| `CU-23-verAlumnos` | A | D |   |   |
-| `CU-24-verDocentes` | A | D |   |   |
-| `CU-25-eliminarPregunta` | A | D |   |   |
-| `CU-26-eliminarAsignatura` | A | D |   |   |
-| `CU-27-eliminarGrado` | A | D |   |   |
-| `CU-28-eliminarAlumno` | A | D |   |   |
-| `CU-29-eliminarDocente` | A | D |   |   |
-| `CU-30-iniciarSesion` | A |   | D |   |
-| `CU-31-cerrarSesion` | A |   | D |   |
-| `CU-32-completarGestion` | A |   | D |   |
-| `CU-33-verRespuestas` | A |   | D |   |
-| `CU-34-crearRespuesta` | A |   | D |   |
-| `CU-35-editarRespuesta` | A |   | D |   |
-| `CU-36-eliminarRespuesta` | A |   | D |   |
-| `CU-37-cancelarGeneracion` | A |   | D |   |
-| `CU-38-importarAsignaturas` | A |   | D |   |
-| `CU-39-importarGrados` | A |   | D |   |
-| `CU-40-exportarAsignaturas` | A |   | D |   |
-| `CU-41-exportarGrados` | A |   | D |   |
-| `CU-42-verExamen` |   |   |   | AD |
-| `CU-43-verExamenes` |   |   |   | AD |
+| `CU-01-corregirExamenes` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-01-corregirExamenes) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-01-corregirExamenes) |  |  |
+| `CU-02-generarExamenes` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-02-generarExamenes) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-02-generarExamenes) |  |  |
+| `CU-03-importarConfiguracionGlobal` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-03-importarConfiguracionGlobal) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-03-importarConfiguracionGlobal) |  |
+| `CU-04-exportarConfiguracionGlobal` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-04-exportarConfiguracionGlobal) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-04-exportarConfiguracionGlobal) |  |
+| `CU-05-importarAlumnos` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-05-importarAlumnos) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-05-importarAlumnos) |  |  |
+| `CU-06-importarPreguntas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-06-importarPreguntas) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-06-importarPreguntas) |  |  |
+| `CU-07-exportarAlumnos` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-07-exportarAlumnos) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-07-exportarAlumnos) |  |
+| `CU-08-exportarPreguntas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-08-exportarPreguntas) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-08-exportarPreguntas) |  |
+| `CU-09-asignarExamenes` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-09-asignarExamenes) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-09-asignarExamenes) |  |  |
+| `CU-10-crearPregunta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-10-crearPregunta) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-10-crearPregunta) |  |  |
+| `CU-11-editarPregunta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-11-editarPregunta) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-11-editarPregunta) |  |  |
+| `CU-12-editarAsignatura` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-12-editarAsignatura) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-12-editarAsignatura) |  |  |
+| `CU-13-crearDocente` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-13-crearDocente) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-13-crearDocente) |  |  |
+| `CU-14-crearAlumno` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-14-crearAlumno) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-14-crearAlumno) |  |  |
+| `CU-15-editarDocente` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-15-editarDocente) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-15-editarDocente) |  |  |
+| `CU-16-editarAlumno` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-16-editarAlumno) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-16-editarAlumno) |  |  |
+| `CU-17-crearGrado` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-17-crearGrado) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-17-crearGrado) |  |  |
+| `CU-18-crearAsignatura` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-18-crearAsignatura) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-18-crearAsignatura) |  |  |
+| `CU-19-editarGrado` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-19-editarGrado) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-19-editarGrado) |  |  |
+| `CU-20-verPreguntas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-20-verPreguntas) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-20-verPreguntas) |  |  |
+| `CU-21-verAsignaturas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-21-verAsignaturas) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-21-verAsignaturas) |  |  |
+| `CU-22-verGrados` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-22-verGrados) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-22-verGrados) |  |  |
+| `CU-23-verAlumnos` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-23-verAlumnos) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-23-verAlumnos) |  |  |
+| `CU-24-verDocentes` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-24-verDocentes) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-24-verDocentes) |  |  |
+| `CU-25-eliminarPregunta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-25-eliminarPregunta) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-25-eliminarPregunta) |  |  |
+| `CU-26-eliminarAsignatura` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-26-eliminarAsignatura) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-26-eliminarAsignatura) |  |  |
+| `CU-27-eliminarGrado` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-27-eliminarGrado) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-27-eliminarGrado) |  |  |
+| `CU-28-eliminarAlumno` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-28-eliminarAlumno) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-28-eliminarAlumno) |  |  |
+| `CU-29-eliminarDocente` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-29-eliminarDocente) | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-29-eliminarDocente) |  |  |
+| `CU-30-iniciarSesion` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-30-iniciarSesion) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-30-iniciarSesion) |  |
+| `CU-31-cerrarSesion` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-31-cerrarSesion) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-31-cerrarSesion) |  |
+| `CU-32-completarGestion` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-32-completarGestion) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-32-completarGestion) |  |
+| `CU-33-verRespuestas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-33-verRespuestas) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-33-verRespuestas) |  |
+| `CU-34-crearRespuesta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-34-crearRespuesta) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-34-crearRespuesta) |  |
+| `CU-35-editarRespuesta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-35-editarRespuesta) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-35-editarRespuesta) |  |
+| `CU-36-eliminarRespuesta` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-36-eliminarRespuesta) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-36-eliminarRespuesta) |  |
+| `CU-37-cancelarGeneracion` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-37-cancelarGeneracion) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-37-cancelarGeneracion) |  |
+| `CU-38-importarAsignaturas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-38-importarAsignaturas) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-38-importarAsignaturas) |  |
+| `CU-39-importarGrados` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-39-importarGrados) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-39-importarGrados) |  |
+| `CU-40-exportarAsignaturas` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-40-exportarAsignaturas) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-40-exportarAsignaturas) |  |
+| `CU-41-exportarGrados` | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-41-exportarGrados) |  | [D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-41-exportarGrados) |  |
+| `CU-42-verExamen` |  |  |  | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-42-verExamen)[D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-42-verExamen) |
+| `CU-43-verExamenes` |  |  |  | [A](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/01-analisis/casos-uso/CU-43-verExamenes)[D](https://github.com/liamanderson873/25-26-idsw2-sdVC/tree/main/RUP/02-dise%C3%B1o/casos-uso/CU-43-verExamenes) |
 
 </div>
 

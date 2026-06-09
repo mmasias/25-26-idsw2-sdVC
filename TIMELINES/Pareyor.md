@@ -32,45 +32,46 @@ gantt
         Codigo       :done, 2026-05-19, 2026-06-09
 ```
 
+<!-- trazabilidad: manual -->
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D-12 | D-11 | D-10 | D-9 | D-8 | D-7 | D-6 | D-5 | D-3 | D-2 | D1 | D3 | D4 |
+| Caso de uso |  D-12  |  D-11  |  D-10  |  D-9  |  D-8  |  D-7  |  D-6  |  D-5  |  D-3  |  D-2  |  D1  |  D3  |  D4  |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `corregirExamenes` | A |   |   |   |   |   |   |   |   |   |   |   | D |
-| `exportarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |   |   | D |
-| `generarExamenes` | A |   |   |   |   |   |   |   |   |   |   |   | D |
-| `importarConfiguracionGlobal` | A |   |   |   |   |   |   |   |   |   |   |   | D |
-| `asignarExamenes` |   | A |   |   |   |   |   |   |   |   |   |   | D |
-| `crearPregunta` |   | A |   |   |   |   |   |   |   |   | D |   |   |
-| `crearAlumno` |   |   | A |   |   |   |   |   |   |   | D |   |   |
-| `crearDocente` |   |   | A |   |   |   |   |   |   |   | D |   |   |
-| `editarAsignatura` |   |   | A |   |   |   |   |   |   |   | D |   |   |
-| `editarDocente` |   |   | A |   |   |   |   |   |   |   | D |   |   |
-| `editarPregunta` |   |   | A |   |   |   |   |   |   |   | D |   |   |
-| `crearAsignatura` |   |   |   | A |   |   |   |   |   |   | D |   |   |
-| `crearGrado` |   |   |   | A |   |   |   |   |   |   | D |   |   |
-| `editarAlumno` |   |   |   | A |   |   |   |   |   |   | D |   |   |
-| `editarGrado` |   |   |   | A |   |   |   |   |   |   | D |   |   |
-| `verPreguntas` |   |   |   | A |   |   |   |   |   | D |   |   |   |
-| `eliminarPregunta` |   |   |   |   | A |   |   |   |   |   | D |   |   |
-| `verAlumnos` |   |   |   |   | A |   |   |   |   | D |   |   |   |
-| `verAsignaturas` |   |   |   |   | A |   |   |   |   | D |   |   |   |
-| `verDocentes` |   |   |   |   | A |   |   |   |   | D |   |   |   |
-| `verGrados` |   |   |   |   | A |   |   |   |   | D |   |   |   |
-| `eliminarAlumno` |   |   |   |   |   | A |   |   |   |   | D |   |   |
-| `eliminarAsignatura` |   |   |   |   |   | A |   |   |   |   | D |   |   |
-| `eliminarDocente` |   |   |   |   |   | A |   |   |   |   | D |   |   |
-| `eliminarGrado` |   |   |   |   |   | A |   |   |   |   | D |   |   |
-| `iniciarSesion` |   |   |   |   |   | A |   |   | D |   |   |   |   |
-| `cerrarSesion` |   |   |   |   |   |   | A |   | D |   |   |   |   |
-| `completarGestion` |   |   |   |   |   |   | A |   | D |   |   |   |   |
-| `crearRespuesta` |   |   |   |   |   |   | A |   |   |   |   | D |   |
-| `verRespuestas` |   |   |   |   |   |   | A |   |   |   |   | D |   |
-| `cancelarGeneracion` |   |   |   |   |   |   |   | A |   |   |   |   | D |
-| `editarRespuesta` |   |   |   |   |   |   |   | A |   |   |   | D |   |
-| `eliminarRespuesta` |   |   |   |   |   |   |   | A |   |   |   | D |   |
+| `corregirExamenes` | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/corregirExamenes) |     |     |     |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/corregirExamenes) |
+| `exportarConfiguracionGlobal` | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/exportarConfiguracionGlobal) |     |     |     |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/exportarConfiguracionGlobal) |
+| `generarExamenes` | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/generarExamenes) |     |     |     |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/generarExamenes) |
+| `importarConfiguracionGlobal` | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/importarConfiguracionGlobal) |     |     |     |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/importarConfiguracionGlobal) |
+| `asignarExamenes` |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/asignarExamenes) |     |     |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/asignarExamenes) |
+| `crearPregunta` |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearPregunta) |     |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearPregunta) |     |     |
+| `crearAlumno` |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearAlumno) |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearAlumno) |     |     |
+| `crearDocente` |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearDocente) |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearDocente) |     |     |
+| `editarAsignatura` |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarAsignatura) |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarAsignatura) |     |     |
+| `editarDocente` |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarDocente) |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarDocente) |     |     |
+| `editarPregunta` |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarPregunta) |     |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarPregunta) |     |     |
+| `crearAsignatura` |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearAsignatura) |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearAsignatura) |     |     |
+| `crearGrado` |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearGrado) |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearGrado) |     |     |
+| `editarAlumno` |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarAlumno) |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarAlumno) |     |     |
+| `editarGrado` |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarGrado) |     |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarGrado) |     |     |
+| `verPreguntas` |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verPreguntas) |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verPreguntas) |     |     |     |
+| `eliminarPregunta` |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarPregunta) |     |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarPregunta) |     |     |
+| `verAlumnos` |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verAlumnos) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verAlumnos) |     |     |     |
+| `verAsignaturas` |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verAsignaturas) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verAsignaturas) |     |     |     |
+| `verDocentes` |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verDocentes) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verDocentes) |     |     |     |
+| `verGrados` |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verGrados) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verGrados) |     |     |     |
+| `eliminarAlumno` |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarAlumno) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarAlumno) |     |     |
+| `eliminarAsignatura` |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarAsignatura) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarAsignatura) |     |     |
+| `eliminarDocente` |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarDocente) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarDocente) |     |     |
+| `eliminarGrado` |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarGrado) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarGrado) |     |     |
+| `iniciarSesion` |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/iniciarSesion) |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/iniciarSesion) |     |     |     |     |
+| `cerrarSesion` |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/cerrarSesion) |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/cerrarSesion) |     |     |     |     |
+| `completarGestion` |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/completarGestion) |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/completarGestion) |     |     |     |     |
+| `crearRespuesta` |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/crearRespuesta) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/crearRespuesta) |     |
+| `verRespuestas` |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/verRespuestas) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/verRespuestas) |     |
+| `cancelarGeneracion` |     |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/cancelarGeneracion) |     |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/cancelarGeneracion) |
+| `editarRespuesta` |     |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/editarRespuesta) |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/editarRespuesta) |     |
+| `eliminarRespuesta` |     |     |     |     |     |     |     | [A](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/analisis/eliminarRespuesta) |     |     |     | [D](https://github.com/Pareyor/25-26-idsw2-sdVC/tree/main/documents/dise%C3%B1o/eliminarRespuesta) |     |
 
 </div>
 
