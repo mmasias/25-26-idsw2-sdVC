@@ -35,13 +35,32 @@ gantt
 
 <div align="center">
 
-| Caso de uso | D8 | D11 | D12 |
-|---|:---:|:---:|:---:|
-| `Administrador` | A | D | d |
-| `Alumno` | A | D | d |
-| `DirectorDeGrado` | A | D | d |
-| `Profesor` | A | D | d |
-| `Secretaria` | A | D | d |
+| Caso de uso | D20 |
+|---|:---:|
+| `administrador/consultarUsuario` | AD |
+| `administrador/crearUsuario` | AD |
+| `administrador/editarUsuario` | AD |
+| `alumno/consultarSolicitudDispensa` | AD |
+| `alumno/crearSolicitudDispensa` | AD |
+| `alumno/editarSolicitudDispensa` | AD |
+| `directorDeGrado/consultarSolicitudDispensa` | AD |
+| `directorDeGrado/editarSolicitudDispensa` | AD |
+| `profesor/cerrarSesionClase` | AD |
+| `profesor/consultarDetalleAlumno` | AD |
+| `profesor/consultarListaAlumnos` | AD |
+| `profesor/consultarSolicitudDispensa` | AD |
+| `profesor/crearSesionClase` | AD |
+| `profesor/editarSesionClase` | AD |
+| `profesor/exportarHistorialAsistencias` | AD |
+| `profesor/registrarTomaAsistencia` | AD |
+| `secretaria/consultarDetalleMatricula` | AD |
+| `secretaria/consultarListaAlumnos` | AD |
+| `secretaria/consultarSolicitudDispensa` | AD |
+| `secretaria/crearSolicitudDispensa` | AD |
+| `secretaria/editarSolicitudDispensa` | AD |
+| `secretaria/exportarDispensas` | AD |
+| `secretaria/importarListasAlumnos` | AD |
+| `secretaria/importarMatricula` | AD |
 
 </div>
 
