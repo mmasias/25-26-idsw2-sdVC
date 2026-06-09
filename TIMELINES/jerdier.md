@@ -33,34 +33,36 @@ gantt
 <!-- trazabilidad: manual -->
 ## Trazabilidad por caso de uso
 
+> `A`/`D` en D8/D9: ficheros planos por actor (un .md por actor, no por CU). `AD` en D20: reestructuración + creación de subdirectorios per-CU con nuevo contenido de analisis y diseño.
+
 <div align="center">
 
-| Caso de uso | D20 |
-|---|:---:|
-| `administrador/consultarUsuario` | AD |
-| `administrador/crearUsuario` | AD |
-| `administrador/editarUsuario` | AD |
-| `alumno/consultarSolicitudDispensa` | AD |
-| `alumno/crearSolicitudDispensa` | AD |
-| `alumno/editarSolicitudDispensa` | AD |
-| `directorDeGrado/consultarSolicitudDispensa` | AD |
-| `directorDeGrado/editarSolicitudDispensa` | AD |
-| `profesor/cerrarSesionClase` | AD |
-| `profesor/consultarDetalleAlumno` | AD |
-| `profesor/consultarListaAlumnos` | AD |
-| `profesor/consultarSolicitudDispensa` | AD |
-| `profesor/crearSesionClase` | AD |
-| `profesor/editarSesionClase` | AD |
-| `profesor/exportarHistorialAsistencias` | AD |
-| `profesor/registrarTomaAsistencia` | AD |
-| `secretaria/consultarDetalleMatricula` | AD |
-| `secretaria/consultarListaAlumnos` | AD |
-| `secretaria/consultarSolicitudDispensa` | AD |
-| `secretaria/crearSolicitudDispensa` | AD |
-| `secretaria/editarSolicitudDispensa` | AD |
-| `secretaria/exportarDispensas` | AD |
-| `secretaria/importarListasAlumnos` | AD |
-| `secretaria/importarMatricula` | AD |
+| Caso de uso | D8 | D9 | D13 | D14 | D15 | D16 | D17 | D18 | D20 | D21 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `administrador/consultarUsuario` | A | D |   |   |   |   | d | d | AD | d |
+| `administrador/crearUsuario` | A | D |   |   |   |   | d | d | AD | d |
+| `administrador/editarUsuario` | A | D |   |   |   |   | d | d | AD | d |
+| `alumno/consultarSolicitudDispensa` | A | D |   |   | d | d |   | d | AD | d |
+| `alumno/crearSolicitudDispensa` | A | D |   |   | d | d |   | d | AD | d |
+| `alumno/editarSolicitudDispensa` | A | D |   |   | d | d |   | d | AD | d |
+| `directorDeGrado/consultarSolicitudDispensa` | A | D |   |   |   | d |   | d | AD | d |
+| `directorDeGrado/editarSolicitudDispensa` | A | D |   |   |   | d |   | d | AD | d |
+| `profesor/cerrarSesionClase` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/consultarDetalleAlumno` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/consultarListaAlumnos` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/consultarSolicitudDispensa` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/crearSesionClase` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/editarSesionClase` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/exportarHistorialAsistencias` | A | D | d | d |   |   |   | d | AD | d |
+| `profesor/registrarTomaAsistencia` | A | D | d | d |   |   |   | d | AD | d |
+| `secretaria/consultarDetalleMatricula` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/consultarListaAlumnos` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/consultarSolicitudDispensa` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/crearSolicitudDispensa` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/editarSolicitudDispensa` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/exportarDispensas` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/importarListasAlumnos` | A | D |   |   |   | d |   | d | AD | d |
+| `secretaria/importarMatricula` | A | D |   |   |   | d |   | d | AD | d |
 
 </div>
 
