@@ -1,0 +1,140 @@
+@startuml
+title Diagrama de Secuencia - Editar Asignatura - Spring Boot + React
+
+actor "Docente" as Docente
+participant "Frontend (React)" as FE
+participant "AsignaturasController" as Controller
+participant "AsignaturaService" as Service
+participant "GradoService" as GradoService
+participant "AlumnoService" as AlumnoService
+participant "AsignaturaRepository" as AsignaturaRepo
+participant "GradoRepository" as GradoRepo
+participant "AlumnoRepository" as AlumnoRepo
+database "Base de Datos (PostgreSQL)" as DB
+
+== CARGAR ASIGNATURA PARA EDICIÓN ==
+
+Docente -> FE: Clic en "Editar"
+activate FE
+FE -> Controller: GET /api/asignaturas/{id}
+activate Controller
+Controller -> Service: obtenerAsignaturaPorId(id, docenteId)
+activate Service
+Service -> AsignaturaRepo: findById(id)
+activate AsignaturaRepo
+AsignaturaRepo -> DB: SELECT * FROM asignaturas WHERE id = ?
+DB --> AsignaturaRepo: Optional<Asignatura>
+deactivate AsignaturaRepo
+Service --> Controller: AsignaturaDTO
+Controller --> FE: 200 OK
+FE --> Docente: Formulario con datos precargados
+
+loop EDICIÓN CONTINUA
+
+alt MATRICULAR ALUMNO
+
+    FE -> Controller: GET /api/asignaturas/{id}/alumnos-disponibles
+    Controller -> Service: obtenerAlumnosDisponibles(asignaturaId, docenteId)
+    Service -> GradoService: obtenerGradoIdsDeAsignatura(asignaturaId)
+    activate GradoService
+    GradoService -> AsignaturaRepo: findById(asignaturaId)
+    activate AsignaturaRepo
+    AsignaturaRepo -> DB: SELECT * FROM asignaturas WHERE id = ?
+    DB --> AsignaturaRepo: Asignatura
+    deactivate AsignaturaRepo
+    GradoService --> Service: List<Long> gradoIds
+    deactivate GradoService
+    Service -> AlumnoService: obtenerAlumnosDisponibles(docenteId, gradoIds, asignaturaId)
+    activate AlumnoService
+    AlumnoService -> AlumnoRepo: findAvailableAlumnosForAsignatura(...)
+    activate AlumnoRepo
+    AlumnoRepo -> DB: SELECT * FROM alumnos WHERE ...
+    DB --> AlumnoRepo: List<Alumno>
+    deactivate AlumnoRepo
+    AlumnoService --> Service: List<AlumnoDTO>
+    deactivate AlumnoService
+    Service --> Controller: List<AlumnoDTO>
+    Controller --> FE: 200 OK
+    FE --> Docente: Mostrar modal alumnos disponibles
+
+    Docente -> FE: Selecciona alumno
+    FE -> Controller: POST /api/asignaturas/{id}/alumnos/{alumnoId}
+    Controller -> Service: matricularAlumno(asignaturaId, alumnoId, docenteId)
+    Service -> GradoService: verificarAlumnoPerteneceAGrado(asignaturaId, alumnoId)
+    activate GradoService
+    GradoService -> AsignaturaRepo: findById(asignaturaId)
+    GradoService -> GradoRepo: findByAlumnoId(alumnoId)
+    GradoService --> Service: boolean
+    deactivate GradoService
+    Service -> AlumnoService: matricularAlumno(alumnoId, asignaturaId)
+    activate AlumnoService
+    AlumnoService -> AlumnoRepo: matricularEnAsignatura(alumnoId, asignaturaId)
+    activate AlumnoRepo
+    AlumnoRepo -> DB: INSERT INTO alumnos_asignaturas (...)
+    DB --> AlumnoRepo: ok
+    deactivate AlumnoRepo
+    AlumnoService --> Service: void
+    deactivate AlumnoService
+    Service --> Controller: void
+    Controller --> FE: 200 OK
+    FE --> Docente: Toast "Alumno matriculado"
+
+end
+
+alt DESMATRICULAR ALUMNO
+
+    Docente -> FE: Clic en "Quitar"
+    FE -> Controller: DELETE /api/asignaturas/{id}/alumnos/{alumnoId}
+    Controller -> Service: desmatricularAlumno(asignaturaId, alumnoId, docenteId)
+    Service -> AlumnoService: desmatricularAlumno(alumnoId, asignaturaId)
+    activate AlumnoService
+    AlumnoService -> AlumnoRepo: desmatricularDeAsignatura(alumnoId, asignaturaId)
+    activate AlumnoRepo
+    AlumnoRepo -> DB: DELETE FROM alumnos_asignaturas WHERE ...
+    DB --> AlumnoRepo: ok
+    deactivate AlumnoRepo
+    AlumnoService --> Service: void
+    deactivate AlumnoService
+    Service --> Controller: void
+    Controller --> FE: 204 No Content
+    FE --> Docente: Toast "Alumno desmatriculado"
+
+end
+
+alt GUARDAR CAMBIOS (ASIGNATURA)
+
+    Docente -> FE: Clic en "Guardar y salir"
+    FE -> Controller: PUT /api/asignaturas/{id}
+    Controller -> Service: actualizarAsignatura(id, dto, docenteId)
+    activate Service
+    Service -> AsignaturaRepo: findById(id)
+    Service -> Service: validarUnicidad(...)
+    Service -> Service: actualizarCampos(asignatura, dto)
+    alt Cambio de grados
+        Service -> GradoService: validarYActualizarGrados(asignatura, nuevosGradoIds, docenteId)
+        activate GradoService
+        loop Para cada nuevo grado
+            GradoService -> GradoRepo: findById(gradoId)
+            GradoService -> Service: verificarPerteneciaDocente(grado, docenteId)
+        end
+        GradoService --> Service: void (actualiza asignatura internamente)
+        deactivate GradoService
+    end
+    Service -> AsignaturaRepo: save(asignatura)
+    activate AsignaturaRepo
+    AsignaturaRepo -> DB: UPDATE asignaturas SET ...
+    DB --> AsignaturaRepo: ok
+    deactivate AsignaturaRepo
+    Service --> Controller: AsignaturaDTO
+    deactivate Service
+    Controller --> FE: 200 OK
+    FE --> Docente: Redirigir a lista asignaturas
+
+end
+
+end loop
+
+Docente -> FE: Clic en "Volver a lista"
+FE --> Docente: Navegar a verAsignaturas()
+
+@enduml

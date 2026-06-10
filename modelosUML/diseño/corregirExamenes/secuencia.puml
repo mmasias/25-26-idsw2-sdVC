@@ -1,0 +1,65 @@
+@startuml
+title Diagrama de Secuencia - Corregir Exámenes (Simplificado) - Spring Boot + React
+
+actor "Docente" as Teacher
+participant "Frontend (React)" as FE
+participant "ExamenesController" as Controller
+participant "CorreccionService" as CorreccionService
+
+== FLUJO PRINCIPAL: CORREGIR EXÁMENES ==
+
+Teacher -> FE: Clic en "Corregir Exámenes"
+activate FE
+
+FE --> Teacher: Mostrar formulario de subida de PDF
+
+Teacher -> FE: Selecciona PDF con exámenes resueltos\n(una página por alumno)
+FE -> FE: Validar formato PDF
+
+Teacher -> FE: Clic en "Corregir"
+FE -> Controller: POST /api/examenes/corregir\n(multipart/form-data: archivo PDF)
+activate Controller
+
+Controller -> CorreccionService: procesarPdf(archivoPdf)
+activate CorreccionService
+
+CorreccionService -> CorreccionService: contarPaginas(pdf) : int
+activate CorreccionService
+CorreccionService --> CorreccionService: numPaginas : int
+deactivate CorreccionService
+
+loop PARA CADA PÁGINA (i = 1..numPaginas)
+    CorreccionService -> CorreccionService: generarNotaAleatoria() : int
+    activate CorreccionService
+    CorreccionService --> CorreccionService: nota : int (1-10)
+    deactivate CorreccionService
+
+    CorreccionService -> CorreccionService: crearResultado(i, nota)
+    activate CorreccionService
+    CorreccionService --> CorreccionService: ResultadoCorreccion
+    deactivate CorreccionService
+end
+
+CorreccionService --> Controller: List<ResultadoCorreccionDTO>
+deactivate CorreccionService
+
+Controller --> FE: 200 OK (Lista de resultados)
+deactivate Controller
+
+FE --> Teacher: Mostrar resultados\n(Página 1: Nota 7, Página 2: Nota 5, ...)
+
+note right of CorreccionService
+**Corrección simplificada:**
+- Cuenta páginas del PDF (X páginas = X alumnos)
+- Genera nota aleatoria 1-10 por página
+- No hace reconocimiento de imagen
+- No compara respuestas con clave
+end note
+
+Teacher -> FE: Clic en "Volver al menú"
+FE -> FE: completarGestion()
+FE --> Teacher: Volver a SISTEMA_DISPONIBLE
+
+deactivate FE
+
+@enduml

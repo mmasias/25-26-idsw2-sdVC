@@ -1,0 +1,21 @@
+@startuml corregirExamenes-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+rectangle #CDEBA5 ":EXAMENES_CORREGIDOS" as ExamCorregidos
+
+package corregirExamenes as "corregirExamenes()" {
+    rectangle #629EF9 CorregirExamenesView
+    rectangle #b5bd68 ExamenesController
+    rectangle #F2AC4E Corrector
+}
+
+SistemaDisponible --> CorregirExamenesView: corregirExamenes()
+CorregirExamenesView -d-> ExamenesController: corregirExamenes(examenes)
+ExamenesController -> Corrector: corregir(examenes)
+
+Corrector --> ExamenesController: resultados (examen, nota)
+ExamenesController --> CorregirExamenesView: resultados
+CorregirExamenesView ..> ExamCorregidos
+
+@enduml

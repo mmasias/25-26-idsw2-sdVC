@@ -1,0 +1,47 @@
+@startuml editarAsignatura-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Asignaturas Abierto" as AsignaturasAbierto
+rectangle #CDEBA5 ":Asignatura Abierto" as AsignaturaAbierto
+rectangle #CDEBA5 ":Preguntas Contextuales Abierto" as PreguntasContextualesAbierto
+rectangle #CDEBA5 ":Examenes Asignados Contextuales" as ExamenesAsignadosContextuales
+rectangle #CDEBA5 ":Collaboration CrearAsignatura" as CrearAsignatura
+rectangle #CDEBA5 ":Collaboration verAsignaturas" as VerAsignaturas
+rectangle #CDEBA5 ":Collaboration verPreguntas" as VerPreguntas
+rectangle #CDEBA5 ":Collaboration eliminarAsignatura" as EliminarAsignatura
+rectangle #CDEBA5 ":Collaboration generarExamenes" as GenerarExamenes
+
+package editarAsignatura as "editarAsignatura()" {
+    rectangle #629EF9 EditarAsignaturaView
+    rectangle #b5bd68 AsignaturaController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Alumno
+}
+
+AsignaturasAbierto --> EditarAsignaturaView: editarAsignatura(asignaturaId)
+AsignaturaAbierto --> EditarAsignaturaView: editarAsignatura(asignaturaId)
+PreguntasContextualesAbierto --> EditarAsignaturaView: editarAsignatura(asignaturaId)
+ExamenesAsignadosContextuales --> EditarAsignaturaView: editarAsignatura(asignaturaId)
+CrearAsignatura --> EditarAsignaturaView: editarAsignatura(asignaturaNueva)
+
+EditarAsignaturaView -d-> AsignaturaController: cargarAsignaturaParaEdición(asignaturaId) : Asignatura
+
+AsignaturaController --> AsignaturaRepository: obtenerPorId(asignaturaId) : Asignatura
+
+EditarAsignaturaView --> AsignaturaController: modificarCampos(asignaturaId, cambios) : boolean
+
+AsignaturaController --> AsignaturaRepository: actualizar(asignatura) : boolean
+
+AsignaturaRepository -- Asignatura
+
+Asignatura --> Alumno : tiene
+Asignatura --> Grado : asociada
+
+EditarAsignaturaView ..> VerAsignaturas: <<include>> verAsignaturas()
+EditarAsignaturaView ..> VerPreguntas: <<include>> verPreguntas(asignaturaId)
+EditarAsignaturaView ..> GenerarExamenes: <<include>> generarExamenes(asignaturaId)
+EditarAsignaturaView ..> EliminarAsignatura: <<include>> eliminarAsignatura(asiganturaId)
+
+@enduml

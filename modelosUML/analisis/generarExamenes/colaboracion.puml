@@ -1,0 +1,44 @@
+@startuml generarExamenes-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+rectangle #CDEBA5 ":Asignatura Abierto" as AsignaturaAbierto
+rectangle #CDEBA5 ":Collaboration AsignarExamenes" as AsignarExamenes
+rectangle #CDEBA5 ":Collaboration CancelarGeneracion" as CancelarGeneracion
+
+package generarExamenes as "generarExamenes()" {
+    rectangle #629EF9 GenerarExamenesView
+    rectangle #b5bd68 ExamenesController
+    rectangle #F2AC4E Generador
+    rectangle #F2AC4E Validador
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E PreguntaRepository
+    rectangle #F2AC4E Pregunta
+}
+
+SistemaDisponible --> GenerarExamenesView: generarExamenes()
+AsignaturaAbierto --> GenerarExamenesView: generarExamenes(asignaturaId)
+
+GenerarExamenesView -d-> ExamenesController: validarDatos(datos) : boolean
+
+ExamenesController -> Validador: verificarDatos(datos) : boolean
+
+GenerarExamenesView --> ExamenesController: generar(datos) : List<Examen>
+
+ExamenesController -> Generador: generar(datos) : List<Examen>
+
+Generador -> PreguntaRepository: obtenerPreguntas(asignatura, temas) : List<Pregunta>
+
+Generador -> Examen: new Examen(asignatura, evaluacion, preguntas, clavePendiente=true)
+
+Validador -- Asignatura
+Validador -- Grado
+
+PreguntaRepository -- Pregunta
+
+GenerarExamenesView ..> AsignarExamenes: <<include>> asignarExamenes(examenesGenerados) [generación exitosa]
+GenerarExamenesView ..> CancelarGeneracion: <<include>> cancelarGeneracion() [cancelación]
+
+@enduml

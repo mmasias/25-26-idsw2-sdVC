@@ -1,0 +1,20 @@
+@startuml completarGestion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+package completarGestion as "completarGestion()" {
+    rectangle #629EF9 CompletarGestionView
+    rectangle #b5bd68 CompletarGestionController
+}
+
+rectangle #CDEBA5 ":AdminMenu" as AdminMenu
+rectangle #CDEBA5 ":DocenteMenu" as DocenteMenu
+
+SistemaDisponible -r-> CompletarGestionView: completarGestion()
+
+CompletarGestionView -d-> CompletarGestionController: solicitarMenu()
+
+CompletarGestionController -r-> AdminMenu: mostrarMenuAdmin()
+CompletarGestionController -l-> DocenteMenu: mostrarMenuDocente()
+
+@enduml

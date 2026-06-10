@@ -1,0 +1,87 @@
+@startuml crearAsignatura-analisis-secuencia
+
+skinparam linetype polyline
+
+' Actores externos
+actor ":Asignaturas Abierto" as AsignaturasAbierto
+participant ":Collaboration EditarAsignatura" as EditarAsignatura
+
+' Clases de análisis - Vista (Boundary)
+boundary "CrearAsignaturaView" as Vista <<boundary>>
+
+' Clases de análisis - Control  
+control "AsignaturaController" as Controlador <<control>>
+
+' Clases de análisis - Entidad (Entity)
+entity "AsignaturaRepository" as Repositorio <<entity>>
+entity "Asignatura" as AsignaturaEntity <<entity>>
+
+title Análisis de Colaboración: crearAsignatura()
+
+== Flujo Principal: Crear Asignatura ==
+
+AsignaturasAbierto -> Vista : 1: crearAsignatura()
+activate Vista
+
+Vista -> Vista : 2: presenta solicitud de\ndatos mínimos de la asignatura
+note right
+**Sistema presenta solicitud de datos mínimos de la asignatura**
+• Título (obligatorio)
+• Código (obligatorio)
+• Curso académico (obligatorio)
+
+**Sistema permite solicitar:**
+• crear asignatura
+• cancelar creación
+end note
+
+Vista -> Controlador : 3: validarDatosMínimos(título, código, cursoAcadémico)
+activate Controlador
+
+Controlador -> Repositorio : 4: verificarUnicidad(código)
+activate Repositorio
+Repositorio --> Controlador : 5: esÚnico : boolean
+deactivate Repositorio
+
+Controlador --> Vista : 6: validaciónCorrecta : boolean
+deactivate Controlador
+
+Vista -> Controlador : 7: crearAsignatura(título, código, cursoAcadémico)
+activate Controlador
+
+Controlador -> Repositorio : 8: crear(título, código, cursoAcadémico) : Asignatura
+activate Repositorio
+
+Repositorio -> AsignaturaEntity : 9: new Asignatura(título, código, cursoAcadémico)
+activate AsignaturaEntity
+note right
+**Asignatura creada con datos mínimos:**
+• Título: [proporcionado]
+• Código: [proporcionado]
+• Curso académico: [proporcionado]
+• Otros campos: valores por defecto
+• ID: generado automáticamente
+end note
+
+AsignaturaEntity --> Repositorio : 10: asignaturaNueva : Asignatura
+deactivate AsignaturaEntity
+
+Repositorio -> Repositorio : 13: persistir(asignaturaNueva, bateriaNueva)
+Repositorio --> Controlador : 14: asignaturaCreada : Asignatura
+deactivate Repositorio
+
+Controlador --> Vista : 15: asignaturaCreada : Asignatura
+deactivate Controlador
+
+Vista -> EditarAsignatura : 16: <<include>> editarAsignatura(asignaturaNueva)
+note right
+**Transferencia automática C→U**
+• Asignatura básica creada
+• Batería de preguntas creada
+• Edición completa automática
+• "El delgado" → "El gordo"
+end note
+
+deactivate Vista
+
+@enduml

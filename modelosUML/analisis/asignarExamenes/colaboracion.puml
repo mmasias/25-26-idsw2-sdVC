@@ -1,0 +1,39 @@
+@startuml asignarExamenes-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":EXAMENES_GENERADOS" as ExamGenerados
+rectangle #CDEBA5 ":EXAMENES_GENERADOS_CONTEXTUALES" as ExamGeneradosContext
+rectangle #CDEBA5 ":EXAMENES_ASIGNADOS" as ExamAsignados
+rectangle #CDEBA5 ":EXAMENES_ASIGNADOS_CONTEXTUALES" as ExamAsignadosContext
+
+package asignarExamenes as "asignarExamenes()" {
+    rectangle #629EF9 AsignarExamenesView
+    rectangle #b5bd68 ExamenesController
+    rectangle #F2AC4E GestorExamen
+    rectangle #F2AC4E GestorAlumnos
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Alumno
+}
+
+ExamGenerados --> AsignarExamenesView: asignarExamenes()
+ExamGeneradosContext --> AsignarExamenesView: asignarExamenes()
+
+AsignarExamenesView -d-> ExamenesController: obtenerAlumnosPorGrado(asignaturaId)
+
+ExamenesController -> GestorAlumnos: obtenerAlumnosPorGrado(asignaturaId)
+GestorAlumnos -- Grado
+GestorAlumnos -- Alumno
+
+AsignarExamenesView --> ExamenesController: asignarExamenes(asignaciones)
+
+ExamenesController -> GestorExamen: obtenerExamenes()
+
+ExamenesController -> GestorExamen: [PARA_CADA_ASIGNACION]\nactualizarExamen(alumno, clave)
+GestorExamen -> GestorExamen: generarClaveCorreccion(preguntas, respuestas, alumno)
+GestorExamen -> Examen: actualizar(alumno, clave, clavePendiente=false, asignada=true)
+
+ExamAsignados <-- AsignarExamenesView
+ExamAsignadosContext <-- AsignarExamenesView
+
+@enduml
