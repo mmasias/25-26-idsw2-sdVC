@@ -1,0 +1,34 @@
+@startuml
+title Diagrama de Secuencia - Ver Asignaturas (Listado)
+
+actor "Docente" as Actor
+participant "Frontend (React)" as FE
+participant "AsignaturaController" as Controller
+participant "AsignaturaService" as Service
+participant "AsignaturaRepository" as Repo
+
+Actor -> FE: Accede a "Gestión de Asignaturas"
+activate FE
+
+FE -> Controller: GET /api/asignaturas\n(Header: Authorization: Bearer <token>)
+activate Controller
+
+Controller -> Service: listarAsignaturas()
+activate Service
+
+Service -> Repo: findAll()
+activate Repo
+Repo --> Service: List<Asignatura>
+deactivate Repo
+
+Service --> Controller: List<AsignaturaDTO>
+deactivate Service
+
+Controller --> FE: 200 OK (JSON: List<AsignaturaDTO>)
+deactivate Controller
+
+FE -> FE: Renderizar tabla de asignaturas\n(Título, Código, Curso, Acciones)
+FE --> Actor: Muestra listado de asignaturas
+deactivate FE
+
+@enduml

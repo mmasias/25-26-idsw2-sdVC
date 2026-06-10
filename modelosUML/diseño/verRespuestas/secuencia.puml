@@ -1,0 +1,42 @@
+@startuml
+title Diagrama de Secuencia - Ver Respuestas
+
+actor "Docente" as Actor
+participant "Frontend (React)\nRespuestasListComponent" as FE
+participant "RespuestaController" as Controller
+participant "RespuestaService" as Service
+participant "PreguntaService" as PreguntaService
+participant "RespuestaRepository" as Repo
+
+Actor -> FE: Accede al detalle de una pregunta
+activate FE
+
+FE -> Controller: GET /api/respuestas/pregunta/{preguntaId}\n(Header: Authorization: Bearer <token>)
+activate Controller
+
+Controller -> Service: listarRespuestasPorPregunta(preguntaId, docenteId)
+activate Service
+
+Service -> PreguntaService: obtenerPreguntaPorId(preguntaId, docenteId)
+activate PreguntaService
+PreguntaService --> Service: Pregunta
+deactivate PreguntaService
+
+alt Pregunta No Existe o No Pertenece al Docente
+    Service --> Controller: throw UnauthorizedException()
+    Controller --> FE: 403 Forbidden
+    FE --> Actor: Mostrar mensaje de error
+else Pregunta Existe y Pertenece al Docente
+    Service -> Repo: findByPreguntaId(preguntaId)
+    activate Repo
+    Repo --> Service: List<Respuesta>
+    deactivate Repo
+    Service --> Controller: List<RespuestaDTO>
+    deactivate Service
+    Controller --> FE: 200 OK (List<RespuestaDTO> JSON)
+    deactivate Controller
+    FE --> Actor: Mostrar lista de respuestas\n(contenido, esCorrecta)
+end
+
+deactivate FE
+@enduml

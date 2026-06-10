@@ -1,0 +1,40 @@
+:root {
+  --neon-cyan: #06b6d4;
+  --neon-purple: #8b5cf6;
+  --bg-deep: #f8fafc;
+  --card-bg: #ffffff;
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+  --font-main: 'Inter', system-ui, sans-serif;
+  
+  font-family: var(--font-main);
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}

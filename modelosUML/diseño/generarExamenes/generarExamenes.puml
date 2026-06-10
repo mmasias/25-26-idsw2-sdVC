@@ -1,0 +1,59 @@
+@startuml
+title Diagrama de Secuencia - Generar Exámenes (Diseño Detallado) - Jorgestor
+
+actor "Docente" as Teacher
+participant "Frontend (React)" as FE
+participant "ExamenController" as Controller
+participant "ExamenService" as Service
+participant "AsignaturaService" as AsignaturaService
+participant "PreguntaService" as PreguntaService
+participant "ExamenSessionService" as SessionService
+participant "HttpSession" as Session
+
+Teacher -> FE: Configura Asignatura, Temas, Evaluación\ny parámetros por cada Grado
+activate FE
+
+FE -> Controller: POST /api/examenes/generar (GenerarExamenesDTO)
+activate Controller
+
+note over Controller: El DTO incluye List<ConfigGradoDTO>\ncon numExamenes, numTipos y dificultadProporcion
+
+Controller -> Service: generarExamenes(dto, docenteId)
+activate Service
+
+Service -> AsignaturaService: obtenerAsignaturaConGrados(asignaturaId, docenteId)
+activate AsignaturaService
+AsignaturaService --> Service: AsignaturaDTO (con sus Grados asociados)
+deactivate AsignaturaService
+
+Service -> PreguntaService: obtenerBancoPreguntas(asignaturaId, temasIds)
+activate PreguntaService
+PreguntaService --> Service: List<PreguntaDTO> (agrupadas por dificultad)
+deactivate PreguntaService
+
+loop PARA CADA Grado en ConfigGradoDTO
+    Service -> Service: validarDisponibilidadPreguntas(configGrado, banco)
+    
+    loop PARA CADA "Tipo" solicitado (numTipos)
+        Service -> Service: seleccionarPreguntas(proporcionDificultad, numPreguntas)
+        note right: Selección aleatoria respetando\n% de Fácil, Media y Difícil
+        Service -> Service: crearPlantillaExamen(gradoId, preguntasSeleccionadas)
+    end
+end
+
+Service -> SessionService: guardarBorradores(List<PlantillaExamenDTO>)
+activate SessionService
+SessionService -> Session: setAttribute("EXAMENES_BORRADOR", plantillas)
+SessionService --> Service: void
+deactivate SessionService
+
+Service --> Controller: GeneracionExitoDTO(totalPlantillas, resumenPorGrado)
+deactivate Service
+
+Controller --> FE: 200 OK (GeneracionExitoDTO)
+deactivate Controller
+
+FE -> FE: Redirigir a vista "EXAMENES_GENERADOS"
+deactivate FE
+
+@enduml

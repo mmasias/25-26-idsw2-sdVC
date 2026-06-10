@@ -1,0 +1,40 @@
+@startuml
+title Diagrama de Secuencia - Crear Docente
+
+actor "Administrador" as Actor
+participant "Frontend (React)" as FE
+participant "DocenteController" as Controller
+participant "UsuarioService" as Service
+participant "UsuarioRepository" as Repo
+
+Actor -> FE: Rellena formulario y pulsa "Guardar"
+activate FE
+
+FE -> Controller: POST /api/docentes\n(Header: Authorization: Bearer <token>, Body: DocenteDTO)
+activate Controller
+
+Controller -> Service: crearDocente(DocenteDTO)
+activate Service
+
+Service -> Repo: findByDni(dni)
+activate Repo
+Repo --> Service: Optional.empty()
+deactivate Repo
+
+Service -> Repo: save(nuevoDocente)
+activate Repo
+Repo --> Service: Usuario (persisted)
+deactivate Repo
+
+Service --> Controller: DocenteDTO (con ID)
+deactivate Service
+
+Controller --> FE: 201 Created (JSON: DocenteDTO)
+deactivate Controller
+
+FE -> FE: Mostrar notificación de éxito
+FE -> FE: Redirigir a listado (/dashboard/docentes)
+FE --> Actor: Muestra listado actualizado
+deactivate FE
+
+@enduml
