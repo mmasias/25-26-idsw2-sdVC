@@ -1,7 +1,7 @@
 # Timeline - SdeCos
 
 > Repo: [SdeCos/25-26-idsw2-sdVC](https://github.com/SdeCos/25-26-idsw2-sdVC)
-> Commits: 13 | Días activos: 9 | Sesiones log: 59
+> Commits: 22 | Días activos: 11 | Sesiones log: 92
 
 ## Patrón observado
 
@@ -9,10 +9,10 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 13 (0 feat / 0 fix / 13 other) |
-| Días activos | 9 |
-| Sesiones documentadas | 59 |
-| Sesiones sin fecha en log | 59 |
+| Commits propios | 22 (0 feat / 1 fix / 21 other) |
+| Días activos | 11 |
+| Sesiones documentadas | 92 |
+| Sesiones sin fecha en log | 92 |
 
 </div>
 
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-25, 2026-06-02
-        Diseno       :done, 2026-05-29, 2026-06-02
-        Desarrollo   :done, 2026-05-29, 2026-06-02
-        Codigo       :done, 2026-05-29, 2026-06-02
+        Analisis     :done, 2026-05-25, 2026-06-12
+        Diseno       :done, 2026-05-29, 2026-06-12
+        Desarrollo   :done, 2026-05-29, 2026-06-12
+        Codigo       :done, 2026-05-29, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -158,6 +158,37 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 08:48 | [diseno cdu profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/d8fc81492d76d1f8f27e6818e00a7cd593389862) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 23 · 2026-06-10
+
+### Commits (7: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 13:22 | [mejoras coherencia director de grado (dispensas unicamente de su grado)](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/d340e81e793ff20d0b48cc7f3865033727e5d4e8) |
+| 11:20 | [diseno cdu gestionarCatalogoGrados](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/ac42bfa44b431c65df6adf57cdb2be962ea01bd0) |
+| 11:13 | [analisis cdu gestionarCatalogoGrados](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/33d19df081126c8277d0083b99fead0b3e78d30b) |
+| 10:54 | [QOL: mejoras listado y creacion de sesiones de profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/2c227d594db569b45a6e802e57205eef4ce2bbeb) |
+| 10:12 | [fix: mostrado de asistencias desde profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/26af517174251118482d43504e7d0a0c043fcf4f) |
+| 10:03 | [mejoras propuestas tras pruebas, creacion de script para iniciar el sistema](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/ee52eb53b2bc0982ff70d029506a430628061107) |
+| 08:12 | [implementacion profesor](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/fad3a49b9a7a27ec44f64766c334470af916af81) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (2: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 12:18 | [mejoras listado grados a la hora de crear asignaturas](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/92e181c019e19562780d79973c790c42694187f7) |
+| 11:26 | [mejoras varias](https://github.com/SdeCos/25-26-idsw2-sdVC/commit/8298cc2c66e1bdce32d732bd9abcff01e282517b) |
 
 > ⚠️ Commits sin entrada en log
 

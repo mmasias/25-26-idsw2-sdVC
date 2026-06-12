@@ -1,7 +1,7 @@
 # Timeline - marcosgutierrez6
 
 > Repo: [marcosgutierrez6/25-26-idsw2-sdVC](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC)
-> Commits: 53 | Días activos: 7 | Sesiones log: 51
+> Commits: 57 | Días activos: 8 | Sesiones log: 55
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 53 (52 feat / 1 fix / 0 other) |
+| Commits propios | 57 (56 feat / 1 fix / 0 other) |
 | Ratio fix/feat | 0.01 |
-| Días activos | 7 |
-| Sesiones documentadas | 51 |
-| Sesiones sin fecha en log | 51 |
+| Días activos | 8 |
+| Sesiones documentadas | 55 |
+| Sesiones sin fecha en log | 55 |
 
 </div>
 
@@ -24,9 +24,9 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-25, 2026-06-05
-        Analisis     :done, 2026-05-25, 2026-06-05
-        Codigo       :done, 2026-05-21, 2026-06-05
+        UML          :done, 2026-05-25, 2026-06-12
+        Analisis     :done, 2026-05-25, 2026-06-12
+        Codigo       :done, 2026-05-21, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -211,6 +211,21 @@ gantt
 | 21:28 | [feat: Diseño del caso de uso de importarConfiguracionGlobal()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/75c1faf0397d40734961500c9f948651d528d722) |
 | 21:23 | [feat: Diseño del caso de uso de generarExamenes()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/a1beee7061d5cfb70a4e9e6a11a114bd6a925e40) |
 | 21:22 | [feat: Diseño del caso de uso de corregirExamenes()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/c670e236d2af9dc61264b90956b1dd96930dac7e) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (4: 4 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 20:09 | [feat: Diseño del caso de uso de crearPregunta()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/d0f055d4e728a610858bcf84cd2a05dcc4e84948) |
+| 20:07 | [feat: Diseño del caso de uso de asignarExamenes()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/cf289418458d4bb3497047e378e14331b547054c) |
+| 19:59 | [feat: Diseño del caso de uso de exportarPreguntas()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/c0726c830055ef1bcc99f33b47e178da0eb8c48f) |
+| 19:54 | [feat: Diseño del caso de uso de exportarAlumnos()](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC/commit/4d073d060ae9a60cb98ded3cded26e1379c2f334) |
 
 > ⚠️ Commits sin entrada en log
 

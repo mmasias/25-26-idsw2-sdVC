@@ -1,7 +1,7 @@
 # Timeline - manuelmunoz8
 
 > Repo: [manuelmunoz8/25-26-idsw2-sdVC](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)
-> Commits: 73 | Días activos: 10 | Sesiones log: 9
+> Commits: 74 | Días activos: 11 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 73 (24 feat / 38 fix / 11 other) |
-| Ratio fix/feat | 1.58 |
-| Días activos | 10 |
+| Commits propios | 74 (24 feat / 39 fix / 11 other) |
+| Ratio fix/feat | 1.62 |
+| Días activos | 11 |
 | Sesiones documentadas | 9 |
 | Sesiones sin fecha en log | 9 |
 
@@ -24,11 +24,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-30, 2026-06-05
-        Analisis     :done, 2026-05-30, 2026-06-05
-        Diseno       :done, 2026-05-30, 2026-06-05
-        Desarrollo   :done, 2026-05-30, 2026-06-05
-        Codigo       :done, 2026-05-30, 2026-06-05
+        UML          :done, 2026-05-30, 2026-06-12
+        Analisis     :done, 2026-05-30, 2026-06-12
+        Diseno       :done, 2026-05-30, 2026-06-12
+        Desarrollo   :done, 2026-05-30, 2026-06-12
+        Codigo       :done, 2026-05-30, 2026-06-12
 ```
 
 ## Trazabilidad por caso de uso
@@ -224,6 +224,18 @@ gantt
 |---|---|
 | 10:27 | [fix: Re agregar REACT_APP_API_URL a wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1deb9230005a83d57094cca07d7ef0c89f4a0875) |
 | 10:14 | [fix: Eliminacion de vars en wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2e19a85807c958483be1cfca6a2f72058f9852dd) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (1: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:54 | [fix: codificacion de caractares especiales](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/daad15b2faf5e8e253fcabab1c2880c69689badb) |
 
 > ⚠️ Commits sin entrada en log
 

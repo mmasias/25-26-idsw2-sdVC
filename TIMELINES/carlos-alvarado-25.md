@@ -1,7 +1,7 @@
 # Timeline - carlos-alvarado-25
 
 > Repo: [carlos-alvarado-25/25-26-idsw2-sdVC](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC)
-> Commits: 86 | Días activos: 17 | Sesiones log: 67
+> Commits: 87 | Días activos: 18 | Sesiones log: 68
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 86 (74 feat / 8 fix / 4 other) |
+| Commits propios | 87 (75 feat / 8 fix / 4 other) |
 | Ratio fix/feat | 0.10 |
-| Días activos | 17 |
-| Sesiones documentadas | 67 |
-| Días log+commits | 11 |
+| Días activos | 18 |
+| Sesiones documentadas | 68 |
+| Días log+commits | 12 |
 | Días solo log | 0 |
 | Días solo commits | 6 |
 | Sesiones sin fecha en log | 9 |
@@ -27,11 +27,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-06-09
-        Analisis     :done, 2026-05-22, 2026-06-09
-        Diseno       :done, 2026-06-02, 2026-06-09
-        Desarrollo   :done, 2026-06-02, 2026-06-09
-        Codigo       :done, 2026-06-02, 2026-06-09
+        UML          :done, 2026-05-23, 2026-06-12
+        Analisis     :done, 2026-05-22, 2026-06-12
+        Diseno       :done, 2026-06-02, 2026-06-12
+        Desarrollo   :done, 2026-06-02, 2026-06-12
+        Codigo       :done, 2026-06-02, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -446,6 +446,22 @@ gantt
 - Sesión 79: Cierre de la Iteración y Cierre de Sesión
 - Sesión 80: Corrección de Actualización de Relaciones (Bug de Clave Foránea en TypeORM)
 - Sesión 81: Caso de Uso - descargarCalendarioExamenes y Patrón Strategy
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 25 · 2026-06-12
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 08:05 | [feat: Implementar gestión de incidencias para profesores y administradores](https://github.com/carlos-alvarado-25/25-26-idsw2-sdVC/commit/8c3c4d41c35fd7585475895db4d3c61967a66eb4) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Sesión 82: Casos de Uso - comunicarIncidenciasHorario y completarComunicacion
 
 > 💬 + commits = proceso documentado
 

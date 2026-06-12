@@ -1,7 +1,7 @@
 # Timeline - 31Diego
 
 > Repo: [31Diego/25-26-idsw2-sdVC](https://github.com/31Diego/25-26-idsw2-sdVC)
-> Commits: 24 | Días activos: 15 | Sesiones log: 0
+> Commits: 28 | Días activos: 17 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 24 (13 feat / 4 fix / 7 other) |
-| Ratio fix/feat | 0.30 |
-| Días activos | 15 |
+| Commits propios | 28 (15 feat / 5 fix / 8 other) |
+| Ratio fix/feat | 0.33 |
+| Días activos | 17 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -23,10 +23,10 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-09
-        Analisis     :done, 2026-05-22, 2026-06-09
-        Diseno       :done, 2026-05-29, 2026-06-09
-        Codigo       :done, 2026-05-30, 2026-06-09
+        UML          :done, 2026-05-22, 2026-06-12
+        Analisis     :done, 2026-05-22, 2026-06-12
+        Diseno       :done, 2026-05-29, 2026-06-12
+        Codigo       :done, 2026-05-30, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -279,6 +279,32 @@ gantt
 | 21:13 | [refactor: revisión SOLID y sincronización de diagramas de diseño](https://github.com/31Diego/25-26-idsw2-sdVC/commit/d1b190a3869137f6c0b666fda94a5751b2fc2c42) |
 | 20:23 | [refactor: mover lógica de negocio de controllers a services (SRP)](https://github.com/31Diego/25-26-idsw2-sdVC/commit/8bd9b6459c15e1d136c90e13e440707dbf70f0d5) |
 | 18:44 | [refactor: SRP con InvestigadorUserDetails y OCP con Strategy en ProyectoService](https://github.com/31Diego/25-26-idsw2-sdVC/commit/cecaa9b5cb97d7bee7ab0177d284aaba109766ce) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 23 · 2026-06-10
+
+### Commits (2: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 19:21 | [fix: corregir OCP y code smells en CargaTrabajo + diseño e implementación de publicaciones](https://github.com/31Diego/25-26-idsw2-sdVC/commit/1034219982747f9c3ce3f011d61bd7913d418ded) |
+| 17:14 | [feat: diseño e implementación de carga de trabajo + límite en agregarInvestigador](https://github.com/31Diego/25-26-idsw2-sdVC/commit/76b113b5e54f7f5a3bf658d5d0d67f3888a2e775) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (2: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:59 | [refactor: aplicar SOLID y sincronizar diagramas de diseño](https://github.com/31Diego/25-26-idsw2-sdVC/commit/4fbe6e846cc04b6fc9bceb043035ea19739212fd) |
+| 17:56 | [feat: diseño e implementación de publicaciones y mis publicaciones + convocatorias + recompensas](https://github.com/31Diego/25-26-idsw2-sdVC/commit/dfcc4875c02fe778dce9fc326f67fbffc84ec030) |
 
 > ⚠️ Commits sin entrada en log
 

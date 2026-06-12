@@ -1,7 +1,7 @@
 # Timeline - beatriizorozco
 
 > Repo: [beatriizorozco/25-26-idsw2-sdVC](https://github.com/beatriizorozco/25-26-idsw2-sdVC)
-> Commits: 80 | Días activos: 14 | Sesiones log: 0
+> Commits: 93 | Días activos: 17 | Sesiones log: 10
 
 ## Patrón observado
 
@@ -9,10 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 80 (9 feat / 7 fix / 64 other) |
-| Ratio fix/feat | 0.77 |
-| Días activos | 14 |
-| Sesiones documentadas | 0 |
+| Commits propios | 93 (12 feat / 8 fix / 73 other) |
+| Ratio fix/feat | 0.66 |
+| Días activos | 17 |
+| Sesiones documentadas | 10 |
+| Sesiones sin fecha en log | 10 |
 
 </div>
 
@@ -23,11 +24,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-23, 2026-06-09
-        Analisis     :done, 2026-05-21, 2026-06-09
-        Diseno       :done, 2026-05-21, 2026-06-09
-        Desarrollo   :done, 2026-05-21, 2026-06-09
-        Codigo       :done, 2026-06-01, 2026-06-09
+        UML          :done, 2026-05-23, 2026-06-12
+        Analisis     :done, 2026-05-21, 2026-06-12
+        Diseno       :done, 2026-05-21, 2026-06-12
+        Desarrollo   :done, 2026-05-21, 2026-06-12
+        Codigo       :done, 2026-06-01, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -353,6 +354,52 @@ gantt
 | 17:00 | [feat(diseno): completar diseño del bloque 5 de gestión de proyectos](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/585ad6f0dc1a142270af360b54d0708061f90a31) |
 | 16:50 | [ix(analisis): alinear colaboraciones del bloque 5 con los diagramas de contexto](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/85ef2c1ae48b6e93324f1598155a4a0edee8f5ba) |
 | 14:47 | [docs(proyectos): completar detalle funcional del bloque 5](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/58048b57c8a8fdfe02c9c44c530580cacbb12c5a) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (1: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:32 | [docs(diseño): diseño del bloque 6: investigadores](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/b37558f3aa71e4491ffafdf23a78fed70445f79d) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (9: 3 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 00:35 | [feat(desarrollo): bloque 8 - publicaciones](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/59f3894cac6da2ff9605a889afa4384860d53377) |
+| 00:01 | [docs(analisis y diseño): bloque 8: publicaciones](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/0ac2b8ecc8e6446fc75cb3ebb59bdaa9b22a339c) |
+| 23:28 | [docs(detallado): se cmodifican editr y duplicar para juntarlos y cumplir ocp](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/ed37225b56b7e8431202c71221d56460d10988aa) |
+| 23:07 | [fix: corrijo fallos de ejecución del backend](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/1419e33b43bc018b3fba5a833e36747caa5ce011) |
+| 20:20 | [feat(entregables): implementar gestión y versionado del bloque 7](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/33d9c4f04eafb63dd2968554eb692d04f5ab0106) |
+| 18:38 | [docs(diesño): correcciones](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/ac6fae5b40aaf10ccc632f7f57c6496f7d09099a) |
+| 13:03 | [docs(analisis y diseño): gestion de entregables](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/d35bcb553ce7b58ac937b80803f8940cde29e120) |
+| 04:02 | [Update conversation-log.md](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/9d671bc8878478d49565e3b08f3b4c0bb279747d) |
+| 04:01 | [feat(investigadores): creo desarrollo del bloque 6 investigadores](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/0e3d069711fad73e358d879d32c202355e0bc4e0) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 25 · 2026-06-12
+
+### Commits (3: 0 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 12:37 | [docs(conversation-log.md): cierro sesion](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/90654c44106a2902c35741720c062b6d9dc38f9e) |
+| 12:30 | [docs(diseño): bloque 9 - incidencias y correcciones de analisis](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/f6868acd1d5746d0c0851fbf04d9dcae0e67ebd9) |
+| 12:03 | [docs(analisis): bloque 9 - convocatorias. También he corregido parte del desarrollo para que se abriera bien spring boot y readme principal](https://github.com/beatriizorozco/25-26-idsw2-sdVC/commit/2d3a82979c5da33c4a4aeb7f7aa42d6b897a248f) |
 
 > ⚠️ Commits sin entrada en log
 

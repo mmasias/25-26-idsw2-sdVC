@@ -1,7 +1,7 @@
 # Timeline - inigovaqueroo04
 
 > Repo: [inigovaqueroo04/25-26-idsw2-sdVC](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC)
-> Commits: 42 | Días activos: 10 | Sesiones log: 0
+> Commits: 61 | Días activos: 13 | Sesiones log: 0
 
 ## Patrón observado
 
@@ -9,8 +9,8 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 42 (3 feat / 0 fix / 39 other) |
-| Días activos | 10 |
+| Commits propios | 61 (20 feat / 0 fix / 41 other) |
+| Días activos | 13 |
 | Sesiones documentadas | 0 |
 
 </div>
@@ -22,7 +22,7 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-09
+        Analisis     :done, 2026-05-29, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -210,6 +210,58 @@ gantt
 | 16:37 | [docs: define commit and push policy](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/8f4b514498b34d9bf3fda097a8d5446aa160a3f0) |
 | 16:29 | [Document visual tracking workflow](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/1d3642471699f00cec5a178d14c0bff581f9e413) |
 | 16:19 | [Implement session navigation vertical slice](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/121daa66fbaff40f8bc7dbad510bb8889fa7bbcd) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (5: 5 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:34 | [feat: consultar invitaciones del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/511877d703308e440f3f5ab58b31c49e93f7572e) |
+| 22:37 | [feat: registrar invitaciones a grupos](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/b12a52e5e582cbc66628af308519be9c055744c0) |
+| 18:02 | [feat: eliminar grupos propios del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/93ab8980fa892a404e2d58edb4d94e292b72e266) |
+| 17:49 | [feat: editar grupos propios del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/1482e8ff3c3544ae53bc36dbf238aa69a6916352) |
+| 17:32 | [feat: crear grupos propios del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/c114d88503ed817ff6a162e3887402d5922304ee) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 23 · 2026-06-10
+
+### Commits (7: 7 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:34 | [feat: eliminar tareas programadas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/9ad0d62b85acee276c1c12d69945c4bed830ac3b) |
+| 18:26 | [feat: editar tareas programadas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/8d9476ca1571d8e8ba54b5fb26218217e0b39f49) |
+| 18:10 | [feat: crear tareas programadas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/2df7dcf703044bfd840649b7d0ad0782f4391f29) |
+| 17:50 | [feat: consultar tareas del usuario](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/3c1ac602740baaed71e5bdfc08f61488e38c6c43) |
+| 17:35 | [feat: cancelar invitaciones pendientes](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/2f98fb4369b3d8e9f1c86a8a093ec1583dd0aee9) |
+| 17:27 | [feat: eliminar miembros de grupos](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/35389a104c4e3157e53990de1967cfc493bb7e3a) |
+| 15:47 | [feat: gestionar invitaciones y roles de miembros](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/da99a133d85d5e5d9b1e988ab88b2a5ee4cae689) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (7: 5 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 22:37 | [docs: actualizar notas rup de cierre](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/f69e2067554a62e3f57e40a101f895739608f74f) |
+| 22:32 | [docs: cerrar plantillas rup iniciales](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/f0a7b0e3c5211b3a745731b76085c7ead99664fa) |
+| 22:25 | [feat: abrir agenda de planificacion](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/7b6625895da4eeb694d67291f8b62b73a362b5d6) |
+| 22:12 | [feat: relacionar tareas dependientes](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/2379c0dc87ce784fb07a73d8d9e9b145821b813f) |
+| 22:04 | [feat: detectar conflictos horarios](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/1fb3ae260631b18eead410caf167864e2b49bfb0) |
+| 21:51 | [feat: planificar tareas basicas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/9f2388908d6b6ee351cc1aca8ac51cb1a4950cc4) |
+| 16:41 | [feat: marcar tareas completadas](https://github.com/inigovaqueroo04/25-26-idsw2-sdVC/commit/e724769dcd65aa33c7caad4c606fb8cc4692fd93) |
 
 > ⚠️ Commits sin entrada en log
 

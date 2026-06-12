@@ -1,7 +1,7 @@
 # Timeline - Alejandrojuarez0105
 
 > Repo: [Alejandrojuarez0105/25-26-idsw2-sdVC](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC)
-> Commits: 84 | Días activos: 17 | Sesiones log: 75
+> Commits: 92 | Días activos: 20 | Sesiones log: 83
 
 ## Patrón observado
 
@@ -9,11 +9,11 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 84 (67 feat / 1 fix / 16 other) |
-| Ratio fix/feat | 0.01 |
-| Días activos | 17 |
-| Sesiones documentadas | 75 |
-| Días log+commits | 16 |
+| Commits propios | 92 (73 feat / 2 fix / 17 other) |
+| Ratio fix/feat | 0.02 |
+| Días activos | 20 |
+| Sesiones documentadas | 83 |
+| Días log+commits | 19 |
 | Días solo log | 0 |
 | Días solo commits | 1 |
 
@@ -26,11 +26,11 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-22, 2026-06-09
-        Analisis     :done, 2026-05-23, 2026-06-09
-        Diseno       :done, 2026-06-01, 2026-06-09
-        Desarrollo   :done, 2026-06-03, 2026-06-09
-        Codigo       :done, 2026-06-03, 2026-06-09
+        UML          :done, 2026-05-22, 2026-06-12
+        Analisis     :done, 2026-05-23, 2026-06-12
+        Diseno       :done, 2026-06-01, 2026-06-12
+        Desarrollo   :done, 2026-06-03, 2026-06-12
+        Codigo       :done, 2026-06-03, 2026-06-12
 ```
 
 <!-- trazabilidad: manual -->
@@ -477,6 +477,64 @@ gantt
 - Sesión 73: Implementación de generarCalendario()
 - Sesión 74: Refinamiento de generarCalendario (validación de datos insuficientes) y confirmación de alcance de Consultar Calendario
 - Sesión 75: Implementación de consultarCalendario() y descargarCalendarioExamenes()
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (3: 3 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:39 | [feat: añadiendo incidencias al dashboard del administrador](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/20d4d9dea5262f4118c95251d3c2230dcac7251d) |
+| 22:50 | [feat: desarrollar implementación y documentación del actor Profesor y cierre de sesión 77](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8525d6ce3de7ab4262865e1f924e1cade4a81124) |
+| 21:31 | [feat: desarrollar diseño del actor Profesor y cierre de sesión 76](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/1c24ab314b0aa3fe508728ad0e59686ff0644b48) |
+
+### 💬 Conversation-log (3 sesiónes)
+
+- Sesión 76: Diseño RUP – Actor Profesor
+- Sesión 77: Implementación y documentación de la rama Profesor
+- Sesión 78: Gestión de incidencias (panel admin + resolución + visibilidad profesor)
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 23 · 2026-06-10
+
+### Commits (3: 2 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 01:16 | [docs: Estudio de datos reales](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/8d106967737ed5d5824545177d37363c694e5eff) |
+| 22:44 | [feat: desarrollar implementación y documentación del actor Alumno y cierre de sesión 80](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/bb12f8acceca7013a5bf347bcb6c94415b18043b) |
+| 21:58 | [feat: desarrollar diseño del actor Alumno y cierre de sesión 79](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/627af9f04d6e28bfc478cb41f2680256e2fce295) |
+
+### 💬 Conversation-log (2 sesiónes)
+
+- Sesión 79: Diseño RUP – Rama Alumno
+- Sesión 80: Implementación de la rama Alumno
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (2: 1 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 19:10 | [feat: agregando la posibilidad de descargar como pdf](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/a93ae3ed2e179ac6dd38df100ee03eef5aec2545) |
+| 18:48 | [fix: Arreglada la generación automática del horario](https://github.com/Alejandrojuarez0105/25-26-idsw2-sdVC/commit/67cc6e758755c62ce8378217ae04df0d71da90cb) |
+
+### 💬 Conversation-log (3 sesiónes)
+
+- Sesión 81: Análisis de datos reales y planificación de adaptación del modelo académico
+- Sesión 82: Generación AUTOMÁTICA del horario de exámenes
+- Sesión 83: Descarga del calendario en PDF (además de CSV) para los tres actores
 
 > 💬 + commits = proceso documentado
 

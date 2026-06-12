@@ -1,7 +1,7 @@
 # Timeline - eirik-rosete
 
 > Repo: [eirik-rosete/25-26-idsw2-sdVC](https://github.com/eirik-rosete/25-26-idsw2-sdVC)
-> Commits: 11 | Días activos: 8 | Sesiones log: 3
+> Commits: 14 | Días activos: 11 | Sesiones log: 4
 
 ## Patrón observado
 
@@ -9,13 +9,13 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 11 (7 feat / 2 fix / 2 other) |
-| Ratio fix/feat | 0.28 |
-| Días activos | 8 |
-| Sesiones documentadas | 3 |
-| Días log+commits | 3 |
+| Commits propios | 14 (9 feat / 3 fix / 2 other) |
+| Ratio fix/feat | 0.33 |
+| Días activos | 11 |
+| Sesiones documentadas | 4 |
+| Días log+commits | 4 |
 | Días solo log | 0 |
-| Días solo commits | 5 |
+| Días solo commits | 7 |
 
 </div>
 
@@ -26,10 +26,20 @@ gantt
     axisFormat %d/%m
     section Artefactos
         Inicio       :milestone, 2026-05-19, 0d
-        Analisis     :done, 2026-05-29, 2026-06-05
-        Diseno       :done, 2026-05-29, 2026-06-05
-        Desarrollo   :done, 2026-05-29, 2026-06-05
+        Analisis     :done, 2026-05-29, 2026-06-12
+        Diseno       :done, 2026-05-29, 2026-06-12
+        Desarrollo   :done, 2026-05-29, 2026-06-12
 ```
+
+## Trazabilidad por caso de uso
+
+<div align="center">
+
+| Caso de uso | D24 |
+|---|:---:|
+| `01-realizacionCasoDeUso` | A |
+
+</div>
 
 ---
 
@@ -141,6 +151,46 @@ gantt
 | Hora | Mensaje |
 |---|---|
 | 20:05 | [refactor: agregando instrucciones en GEMINI.md](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/39ee716c10146b0e04cd4d5af5554c6b2f18e759) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 19 · 2026-06-06
+
+### Commits (1: 0 feat / 1 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 18:47 | [fix: adding conversation-log.md from previous commit](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/c8f83143f6a4f93e7245300375fe8c68882d8d67) |
+
+### 💬 Conversation-log (1 sesión)
+
+- Auditoría, Refactor Normativo e Inicio de Análisis
+
+> 💬 + commits = proceso documentado
+
+---
+
+## Día 22 · 2026-06-09
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 23:54 | [feat: Inicialización de análisis](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/6a7d00c105f231900d6e466f9d285fe6676a2230) |
+
+> ⚠️ Commits sin entrada en log
+
+---
+
+## Día 24 · 2026-06-11
+
+### Commits (1: 1 feat / 0 fix)
+
+| Hora | Mensaje |
+|---|---|
+| 09:20 | [feat: Análisis de casos de uso](https://github.com/eirik-rosete/25-26-idsw2-sdVC/commit/c52cf0673d3ae5c1d8b4cbc374e7cbf267f0efb1) |
 
 > ⚠️ Commits sin entrada en log
 
