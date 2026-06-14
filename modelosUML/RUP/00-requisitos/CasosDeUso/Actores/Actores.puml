@@ -1,0 +1,68 @@
+@startuml Actores
+title Actores del sistema (jerarquía)
+
+top to bottom direction
+
+actor Usuario
+actor Alumno
+actor Profesor
+actor DirectorDeGrado as Director
+actor SecretariaAcademica as Secretaria
+actor Administrador as Admin
+
+' Origen común para autenticación
+Usuario <|-- Alumno
+Usuario <|-- Profesor
+Usuario <|-- Secretaria
+
+' Jerarquía de capacidades
+Profesor  <|-- Director
+Director  <|-- Admin
+Secretaria <|-- Admin
+Alumno    <|-- Admin
+
+note right of Usuario
+  Usuario:
+  Origen común de actores autenticables.
+  Inicia y cierra sesión en el sistema.
+end note
+
+note right of Alumno
+  Alumno:
+  Puede solicitar una dispensa.
+end note
+
+note right of Profesor
+  Profesor:
+  Puede consultar listas de alumnos y dispensas,
+  y registrar la asistencia.
+end note
+
+note right of Director
+  Director de Grado:
+  Puede hacer todo lo que hace un Profesor,
+  además de revisar y aprobar o rechazar
+  las dispensas.
+end note
+
+note right of Secretaria
+  Secretaría Académica:
+  Gestiona matrículas y listas de alumnos
+  (alta individual e importación masiva),
+  los catálogos de grados y asignaturas,
+  las asignaciones profesor↔asignatura,
+  y registra/tramita las solicitudes
+  de dispensa de los alumnos.
+end note
+
+note right of Admin
+  Administrador del sistema:
+  Puede hacer todo lo que hacen
+  Alumno, Profesor, Director y Secretaría,
+  además de crear y gestionar las cuentas
+  de personal (profesores, directores,
+  secretarías y administradores). El alta
+  individual de alumnos es responsabilidad
+  de Secretaría.
+end note
+@enduml
