@@ -1,0 +1,64 @@
+import { Routes } from '@angular/router';
+import { LoginComponent } from './features/auth/login/login.component';
+import { HomeComponent } from './features/home/home.component';
+import { ListarGradosComponent } from './features/admin/grados/listar-grados/listar-grados.component';
+import { GradoFormComponent } from './features/admin/grados/grado-form/grado-form.component';
+import { ImportarGradosComponent } from './features/admin/grados/importar-grados/importar-grados.component';
+import { ListarAsignaturasComponent } from './features/admin/asignaturas/listar-asignaturas/listar-asignaturas.component';
+import { AsignaturaFormComponent } from './features/admin/asignaturas/asignatura-form/asignatura-form.component';
+import { ImportarAsignaturasComponent } from './features/admin/asignaturas/importar-asignaturas/importar-asignaturas.component';
+import { ListarAulasComponent } from './features/admin/aulas/listar-aulas/listar-aulas.component';
+import { AulaFormComponent } from './features/admin/aulas/aula-form/aula-form.component';
+import { ImportarAulasComponent } from './features/admin/aulas/importar-aulas/importar-aulas.component';
+import { ListarAlumnosComponent } from './features/admin/alumnos/listar-alumnos/listar-alumnos.component';
+import { AlumnoFormComponent } from './features/admin/alumnos/alumno-form/alumno-form.component';
+import { ImportarAlumnosComponent } from './features/admin/alumnos/importar-alumnos/importar-alumnos.component';
+import { ListarProfesoresComponent } from './features/admin/profesores/listar-profesores/listar-profesores.component';
+import { ProfesorFormComponent } from './features/admin/profesores/profesor-form/profesor-form.component';
+import { ImportarProfesoresComponent } from './features/admin/profesores/importar-profesores/importar-profesores.component';
+import { AsignarProfesorExamenComponent } from './features/admin/profesores/asignar-profesor-examen/asignar-profesor-examen.component';
+import { ProfesorPreferenciasComponent } from './features/admin/profesores/profesor-preferencias/profesor-preferencias.component';
+import { ComunicarIncidenciaComponent } from './features/profesor/incidencias/comunicar-incidencia/comunicar-incidencia.component';
+import { ListarIncidenciasComponent } from './features/admin/incidencias/listar-incidencias/listar-incidencias.component';
+
+import { ListarExamenesComponent } from './features/admin/examenes/listar-examenes/listar-examenes.component';
+import { ExamenFormComponent } from './features/admin/examenes/examen-form/examen-form.component';
+import { GenerarCalendarioComponent } from './features/admin/calendario/generar-calendario/generar-calendario.component';
+import { ConsultarCalendarioComponent } from './features/calendario/consultar-calendario/consultar-calendario.component';
+
+export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'calendario/consultar', component: ConsultarCalendarioComponent },
+  { path: 'profesor/incidencias/crear/:examenId', component: ComunicarIncidenciaComponent },
+  { path: 'profesor/incidencias/crear', component: ComunicarIncidenciaComponent },
+  { path: 'profesor/incidencias', redirectTo: 'profesor/incidencias/crear', pathMatch: 'full' },
+  { path: 'admin/incidencias', component: ListarIncidenciasComponent },
+  { path: 'admin/grados', component: ListarGradosComponent },
+  { path: 'admin/grados/crear', component: GradoFormComponent },
+  { path: 'admin/grados/editar/:id', component: GradoFormComponent },
+  { path: 'admin/grados/importar', component: ImportarGradosComponent },
+  { path: 'admin/asignaturas', component: ListarAsignaturasComponent },
+  { path: 'admin/asignaturas/crear', component: AsignaturaFormComponent },
+  { path: 'admin/asignaturas/editar/:id', component: AsignaturaFormComponent },
+  { path: 'admin/asignaturas/importar', component: ImportarAsignaturasComponent },
+  { path: 'admin/aulas', component: ListarAulasComponent },
+  { path: 'admin/aulas/crear', component: AulaFormComponent },
+  { path: 'admin/aulas/editar/:id', component: AulaFormComponent },
+  { path: 'admin/aulas/importar', component: ImportarAulasComponent },
+  { path: 'admin/alumnos', component: ListarAlumnosComponent },
+  { path: 'admin/alumnos/crear', component: AlumnoFormComponent },
+  { path: 'admin/alumnos/editar/:id', component: AlumnoFormComponent },
+  { path: 'admin/alumnos/importar', component: ImportarAlumnosComponent },
+  { path: 'admin/profesores', component: ListarProfesoresComponent },
+  { path: 'admin/profesores/crear', component: ProfesorFormComponent },
+  { path: 'admin/profesores/editar/:id', component: ProfesorFormComponent },
+  { path: 'admin/profesores/importar', component: ImportarProfesoresComponent },
+  { path: 'admin/profesores/:profesorId/asignar-examen', component: AsignarProfesorExamenComponent },
+  { path: 'admin/profesores/:id/preferencias', component: ProfesorPreferenciasComponent },
+  { path: 'admin/examenes', component: ListarExamenesComponent },
+  { path: 'admin/examenes/crear', component: ExamenFormComponent },
+  { path: 'admin/examenes/editar/:id', component: ExamenFormComponent },
+  { path: 'admin/calendario/generar', component: GenerarCalendarioComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
+];

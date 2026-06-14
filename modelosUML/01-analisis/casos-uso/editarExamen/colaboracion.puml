@@ -1,0 +1,40 @@
+@startuml editarExamen-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Exámenes Abierto" as ExamenesAbierto
+rectangle #CDEBA5 ":Examen Abierto" as ExamenAbierto
+
+package editarExamen as "editarExamen()" {
+    rectangle #629EF9 EditarExamenView
+    rectangle #b5bd68 ExamenController
+    rectangle #F2AC4E ExamenRepository
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E AulaRepository
+    rectangle #F2AC4E Examen
+}
+
+ExamenesAbierto -r-> EditarExamenView: editarExamen(examen)
+
+EditarExamenView -d-> ExamenController: buscarAsignaturas(criterio, pagina) : PagedResult<Asignatura>
+ExamenController -d-> AsignaturaRepository: buscarPaginadas(criterio, pagina) : PagedResult<Asignatura>
+
+EditarExamenView -d-> ExamenController: obtenerAulasDisponibles() : List<Aula>
+ExamenController -d-> AulaRepository: listarTodas() : List<Aula>
+
+EditarExamenView -d-> ExamenController: actualizar(examen, codigo, fecha, duracion, id_asignatura, id_aula) : Examen
+
+ExamenController -d-> ExamenRepository: existeCodigo(codigo) : Boolean
+ExamenController -r-> Examen: <<update>>
+ExamenController -d-> ExamenRepository: actualizar(examen)
+
+EditarExamenView ..> ExamenAbierto: <<editar>>
+ExamenAbierto --> ExamenAbierto: editarExamen()
+
+EditarExamenView ..> ExamenesAbierto: <<finalizar>> abrirExamenes()
+EditarExamenView ..> ExamenesAbierto: <<cancelar>>
+
+@enduml

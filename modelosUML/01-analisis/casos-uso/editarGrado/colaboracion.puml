@@ -1,0 +1,32 @@
+@startuml editarGrado-analisis
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Grados Abierto" as GradosAbierto
+rectangle #CDEBA5 ":Grado Abierto" as GradoAbierto
+
+package editarGrado as "editarGrado()" {
+    rectangle #629EF9 EditarGradoView
+    rectangle #b5bd68 GradoController
+    rectangle #F2AC4E GradoRepository
+    rectangle #F2AC4E Grado
+}
+
+GradosAbierto -r-> EditarGradoView: editarGrado(grado)
+
+EditarGradoView -d-> GradoController: actualizar(grado, codigo, nombre, descripcion) : Grado
+
+GradoController -d-> GradoRepository: existeCodigo(codigo) : Boolean
+GradoController -r-> Grado: <<update>>
+GradoController -d-> GradoRepository: actualizar(grado)
+
+EditarGradoView ..> GradoAbierto: <<editar>>
+GradoAbierto --> GradoAbierto: editarGrado()
+
+EditarGradoView ..> GradosAbierto: <<finalizar>> abrirGrados()
+EditarGradoView ..> GradosAbierto: <<cancelar>>
+
+@enduml

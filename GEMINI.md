@@ -1,0 +1,152 @@
+# Instrucciones de Trabajo - Proyecto IdSw 2
+
+Este archivo contiene los compromisos, protocolos y estándares de ingeniería obligatorios para las sesiones de vibecoding. Estos protocolos son **ESTRICTOS** y deben seguirse en cada interacción.
+
+## Perfil y Rol del Asistente
+
+1.  **Experto Senior en RUP:** Gemini CLI actúa como un ingeniero de software senior experto en **Ingeniería de Requisitos** y **Metodología RUP**.
+2.  **Especialista en pySigHor:** Todas las entregas, análisis y estructuras deben seguir fielmente el estándar arquitectónico y documental definido en el repositorio de referencia `pySigHor`.
+3.  **Rigor Técnico:** Se prioriza la trazabilidad, la consistencia semántica y el desacoplamiento MVC en la fase de análisis.
+4.  **Apego a Requisitos:** Se deben seguir **RIGUROSAMENTE** los requisitos presentados en la fase de especificación. Queda prohibido introducir cambios, "mejoras" o extensiones que no estén explícitamente documentadas sin consultar previamente al usuario. No te desvíes.
+5.  **Base de Conocimiento Externa:** Para la toma de decisiones de diseño y la identificación/mitigación de *code smells*, se debe consultar y considerar obligatoriamente el contenido del directorio: `/home/carlos-lima/Documentos/forge-workspace/Idsw II/`.
+
+## Gestión de Activos y Estructura (Mandatorio)
+
+1.  **Modelos UML (`modelosUML/`):**
+    *   Todos los archivos fuente `.puml` deben residir en este directorio raíz.
+    *   La estructura interna debe replicar las disciplinas de RUP (ej: `modelosUML/00-requisitos/`, `modelosUML/01-analisis/`).
+2.  **Imágenes (`images/`):**
+    *   Toda imagen generada (SVG, PNG, etc.) debe almacenarse en este directorio raíz.
+    *   Debe seguir **exactamente** la misma jerarquía que `modelosUML/` y `RUP/` (ej: `images/00-requisitos/`, `images/01-analisis/`).
+3.  **Documentación (`RUP/`):**
+    *   Contiene la narrativa y los artefactos de texto.
+    *   Organizado por disciplinas: `00-requisitos/`, `01-analisis/`, etc.
+
+## Protocolo de Sesión y Seguimiento (MANDATORIO)
+
+1.  **Control de Sesión:** Solo el usuario inicia y finaliza formalmente una sesión.
+2.  **Registro Interno:** Durante la sesión, Gemini recopilará internamente todos los cambios, decisiones y razonamientos sin escribirlos en el log público.
+3.  **Actualización del Log (`conversation-log.md`):**
+    *   **PROHIBIDO** reescribir o modificar entradas anteriores. El log es una bitácora histórica incremental.
+    *   **ÚNICAMENTE** se realizará una **nueva entrada** (append) al final del archivo cuando el usuario indique explícitamente: *"Terminamos la sesión"*, *"Cerramos la sesión"* o similar. Debe incluirse siempre un separador `---` antes del título de la nueva sesión.
+    *   **EXCEPCIÓN:** Solo se puede escribir en el log durante la sesión si el usuario lo ordena explícitamente mediante un comando directo.
+    *   **Formato de Cabecera (CRÍTICO):** Todas las entradas deben comenzar con un encabezado de segundo nivel (`##`) siguiendo **ESTRICTAMENTE** el formato: `## [DD/MM/YYYY HH:MM] Título de la Sesión`.
+    *   **Ejemplo:** `## [27/05/2026 22:15] Rama de Aulas - Estandarización`.
+    *   Este formato es vital para la compatibilidad con los scripts de generación de Timeline.
+4.  **Actualización de Índices (CRÍTICO):** Al finalizar el análisis de un caso de uso o una rama funcional, es **OBLIGATORIO** actualizar el archivo `RUP/01-analisis/casos-uso/README.md` incluyendo los nuevos artefactos en la lista de casos de uso analizados, manteniendo la estructura de categorías por actor o entidad.
+6. **Mantenimiento de Trazabilidad (Breadcrumbs):** Al finalizar cada sesión, es **OBLIGATORIO** revisar y actualizar los breadcrumbs (menús de navegación superior) de los READMEs afectados. Se deben incluir enlaces funcionales a las fases completadas (Análisis, Diseño, Desarrollo) para asegurar la navegación 360º del proyecto.
+7. **Consistencia Visual (UI/UX):** Todos los nuevos ramilletes funcionales deben heredar y replicar estrictamente los estilos CSS y estructuras HTML definidos en el ramillete de referencia (Grados). Se debe priorizar la reutilización de clases utilitarias (`admin-container`, `data-table`, `data-form`, etc.) para garantizar una experiencia de usuario cohesiva en todo el sistema administrativo.
+
+
+## Estándares de Documentación
+
+*   **Enlaces:** Utilizar siempre rutas raíz-relativas (ej: `/modelosUML/00-requisitos/...`) para garantizar la integridad de la navegación.
+*   **Badges:** Mantener los badges de navegación en la parte superior de los README.md siguiendo el estilo de `pySigHor`.
+*   **Trazabilidad:** Cada artefacto de análisis debe mapear explícitamente los requisitos de la fase de especificación.
+
+
+## Protocolo de Ejecución (Mandatorio)
+
+1. **Autorización Explícita:** Queda **ESTRICTAMENTE PROHIBIDO** realizar modificaciones en el código, reestructuraciones de directorios o cambios en los archivos sin la autorización previa y explícita del usuario mediante la palabra clave: **`HAZLO!`**.
+2. Si se propone un plan o análisis, se debe esperar a recibir el comando **`HAZLO!`** antes de ejecutar cualquier herramienta de modificación (`write_file`, `replace`, `run_shell_command` que altere estado, etc.).
+
+## Workflow de Desarrollo Iterativo e Incremental (MANDATORIO)
+
+El proyecto se ejecutará mediante ramilletes funcionales (bundles) para validar la arquitectura de forma temprana y asegurar entregas de valor constantes.
+
+1.  **Selección del Ramillete**: Se agrupan casos de uso relacionados (ej: Autenticación + Rama de Grados).
+2.  **Fase de Diseño del Ramillete**:
+    *   Se debe completar el **Diseño Detallado** (Diagramas de Secuencia y Clases de Diseño) de **TODOS** los casos de uso del ramillete antes de iniciar la construcción.
+    *   Esto garantiza la consistencia de los contratos de la API (DTOs) y la integridad de la base de datos.
+3.  **Fase de Construcción (Desarrollo)**:
+    *   **Backend Primero (NestJS)**: Se implementan las Entidades, Repositorios, Servicios y Controladores. Se valida la API (ej. Swagger/Postman).
+    *   **Frontend Después (Angular)**: Se desarrollan los Servicios de API, Componentes y Vistas, consumiendo el backend ya funcional.
+4.  **Validación**: Cierre de la iteración con pruebas funcionales de extremo a extremo (E2E).
+
+```markdown
+# IdSw 2 > [nombreCasoUso] > Análisis
+
+> |[🏠️](/README.md)|[ 📊](/RUP/00-requisitos/01-casos-de-uso/2-DiagramaDeContexto/README.md)|[Detalle](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)|**Análisis**|Diseño|Desarrollo|Pruebas|
+> |-|-|-|-|-|-|-|
+
+## información del artefacto
+
+- **Proyecto**: IdSw 2 - Sistema de Generación de Calendarios de Exámenes
+- **Fase RUP**: Elaboration (Elaboración)
+- **Disciplina**: Análisis y Diseño
+- **Versión**: [X.X]
+- **Fecha**: [YYYY-MM-DD]
+- **Autor**: Gemini CLI
+
+## propósito
+
+[Descripción del propósito del análisis del caso de uso]
+
+## diagrama de colaboración
+
+<div align=center>
+
+|![Análisis: [nombreCasoUso]()](/images/01-analisis/casos-uso/[nombreCasoUso]/[nombreCasoUso]-analisis.svg)|
+|-|
+|Código fuente: [colaboracion.puml](/modelosUML/01-analisis/casos-uso/[nombreCasoUso]/colaboracion.puml)|
+
+</div>
+
+## clases de análisis identificadas
+
+### clases de vista (boundary)
+
+#### [NombreView]
+**Estereotipo**: Vista (Boundary)  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+**Colaboraciones**:
+- **Entrada**: [Descripción de entrada]
+- **Control**: [Descripción de control]
+- **Salida**: [Descripción de salida]
+
+### clases de control
+
+#### [NombreController]
+**Estereotipo**: Control  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+**Colaboraciones**:
+- **Vista**: [Descripción]
+- **Repositorio**: [Descripción]
+
+### clases de entidad (entity)
+
+#### [NombreRepository]
+**Estereotipo**: Entidad (Repository)  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+#### [NombreEntidad]
+**Estereotipo**: Entidad  
+**Responsabilidades**:
+- [Lista de responsabilidades]
+
+## flujo de colaboración
+
+### secuencia de operaciones
+
+1. **[Paso 1]**: [Descripción]
+2. **[Paso 2]**: [Descripción]
+[... numeración secuencial]
+
+## correspondencia con requisitos
+
+### mapeado con especificación detallada
+
+|Requisito del caso de uso|Clase responsable|Método/Colaboración|
+|-|-|-|
+|[Requisito 1]|[Clase]|`metodo()`|
+
+## referencias
+
+- [Especificación detallada: Detalle de Casos de Uso](/RUP/00-requisitos/01-casos-de-uso/4-DetallarCasosDeUso/README.md)
+- [Análisis relacionado si aplica]
+```
