@@ -1,0 +1,29 @@
+@startuml eliminarRecompensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as RecompensaAbierta
+
+package eliminarRecompensa as "eliminarRecompensa()" {
+    rectangle #629EF9 EliminarRecompensaView
+    rectangle #b5bd68 RecompensaController
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E Recompensa
+}
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as RecompensasSalida
+
+RecompensaAbierta -r-> EliminarRecompensaView: eliminarRecompensa()
+
+EliminarRecompensaView -d-> RecompensaController: cargarRecompensaParaEliminacion(id) : Recompensa
+
+RecompensaController --> RecompensaRepository: obtenerPorId(id) : Recompensa
+
+RecompensaRepository -- Recompensa
+
+EliminarRecompensaView --> RecompensaController: eliminarRecompensa(id) : void
+
+RecompensaController --> RecompensaRepository: eliminarPorId(id) : void
+
+EliminarRecompensaView ..> RecompensasSalida: abrirRecompensas()
+
+@enduml

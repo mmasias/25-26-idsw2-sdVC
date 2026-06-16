@@ -1,0 +1,77 @@
+@startuml solicitarEliminacionPerfil-investigador-diseño
+skinparam linetype ortho
+
+actor "Investigador" as Inv
+participant "Navegador" as Nav
+participant "EliminacionController\n@Controller\nGET|POST /investigadores/{id}/solicitar-eliminacion" as Ctrl
+participant "SolicitudEliminacionService\n@Service" as Service
+participant "InvestigadorService\n@Service" as IService
+participant "InvestigadorRepository\nJpaRepository" as IRepo
+participant "SolicitudEliminacionRepository\nJpaRepository" as Repo
+database "H2" as DB
+
+Inv -> Nav : clic en "Solicitar eliminación de perfil"
+activate Nav
+Nav -> Ctrl : GET /investigadores/{id}/solicitar-eliminacion\n[@AuthenticationPrincipal investigador]
+activate Ctrl
+
+Ctrl -> Service : puedeGestionar(investigador, id)
+Service --> Ctrl : boolean
+
+alt !puedeGestionar
+    Ctrl --> Nav : 302 redirect → /perfil/opciones
+else puedeGestionar
+    Ctrl -> IService : obtenerInvestigador(id)
+    activate IService
+    IService -> IRepo : findById(id)
+    activate IRepo
+    IRepo -> DB : SELECT * FROM investigadores WHERE id = ?
+    DB --> IRepo : Investigador
+    deactivate IRepo
+    IRepo --> IService : Investigador
+    deactivate IService
+    IService --> Ctrl : objetivo
+    Ctrl -> Ctrl : model.addAttribute("investigadorDestino", objetivo)
+    Ctrl --> Nav : 200 OK · solicitar-eliminacion.html
+end
+
+deactivate Ctrl
+Nav --> Inv : muestra formulario de solicitud
+Nav -> Ctrl : POST /investigadores/{id}/solicitar-eliminacion\n[motivo]
+activate Ctrl
+
+Ctrl -> Service : puedeGestionar(investigador, id)
+Service --> Ctrl : boolean
+
+alt !puedeGestionar
+    Ctrl --> Nav : 302 redirect → /perfil/opciones
+else puedeGestionar
+    Ctrl -> IService : obtenerInvestigador(id)
+    activate IService
+    IService -> IRepo : findById(id)
+    IRepo -> DB : SELECT * FROM investigadores WHERE id = ?
+    DB --> IRepo : Investigador
+    IRepo --> IService : Investigador
+    deactivate IService
+    IService --> Ctrl : objetivo
+    Ctrl -> Service : crearSolicitud(objetivo, motivo)
+    activate Service
+    Service -> Repo : save(SolicitudEliminacion)
+    activate Repo
+    Repo -> DB : INSERT INTO solicitudes_eliminacion
+    DB --> Repo : SolicitudEliminacion
+    deactivate Repo
+    Repo --> Service : SolicitudEliminacion
+    deactivate Service
+    Service --> Ctrl : SolicitudEliminacion
+    Ctrl -> Service : requiereLogoutTrasEnviar(investigador)
+    Service --> Ctrl : true
+    Ctrl -> Ctrl : SecurityContextHolder.clearContext()\nsession.invalidate()
+    Ctrl --> Nav : 302 redirect → /login?logout\n(sesión invalidada)
+end
+
+deactivate Ctrl
+Nav --> Inv : redirige al login
+deactivate Nav
+
+@enduml

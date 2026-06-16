@@ -1,0 +1,22 @@
+# Base de datos H2
+*.mv.db
+*.trace.db
+
+# Build de Maven
+target/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.classpath
+*.project
+.settings/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Herramientas de IA (estado local, no compartir)
+.claude/
+.claire/

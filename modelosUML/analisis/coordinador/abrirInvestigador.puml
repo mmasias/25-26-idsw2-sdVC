@@ -1,0 +1,33 @@
+@startuml abrirInvestigador-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":INVESTIGADORES_ABIERTOS" as InvestigadoresAbiertos
+rectangle #CDEBA5 ":OPCIONES_PERFIL_INVESTIGADOR_ABIERTO" as OpcionesPerfilEntrada
+
+package abrirInvestigador as "abrirInvestigador()" {
+    rectangle #629EF9 InvestigadorView
+    rectangle #b5bd68 InvestigadorController
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":INVESTIGADOR_ABIERTO" as InvestigadorAbierto
+rectangle #CDEBA5 ":Collaboration AbrirOpcionesPerfilInvestigador" as ColPerfil
+rectangle #CDEBA5 ":Collaboration AbrirProyectosDeInvestigador" as ColProyectos
+rectangle #CDEBA5 ":INVESTIGADORES_ABIERTOS" as InvestigadoresSalida
+
+InvestigadoresAbiertos -r-> InvestigadorView: abrirInvestigador(id)
+OpcionesPerfilEntrada -r-> InvestigadorView: abrirInvestigador(id)
+
+InvestigadorView -d-> InvestigadorController: obtenerInvestigador(id) : Investigador
+
+InvestigadorController --> InvestigadorRepository: obtenerPorId(id) : Investigador
+
+InvestigadorRepository -- Investigador
+
+InvestigadorView ..> InvestigadorAbierto: investigadorMostrado()
+InvestigadorView ..> ColPerfil: abrirOpcionesPerfilInvestigador(id)
+InvestigadorView ..> ColProyectos: abrirProyectosDeInvestigador(id)
+InvestigadorView ..> InvestigadoresSalida: abrirInvestigadores()
+
+@enduml

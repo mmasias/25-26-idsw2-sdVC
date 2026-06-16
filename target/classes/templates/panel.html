@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GIPF — Panel principal</title>
+</head>
+<body>
+
+<h1>FUNIBER GIPF</h1>
+<p>Bienvenido, <span sec:authentication="name"></span></p>
+
+<nav>
+    <ul>
+        <li><a th:href="@{/proyectos}">Proyectos</a></li>
+        <li><a th:href="@{/publicaciones}">Publicaciones</a></li>
+        <li><a th:href="@{/mis-publicaciones}">Mis publicaciones</a></li>
+        <li><a th:href="@{/investigadores}">Investigadores</a></li>
+        <li sec:authorize="hasRole('COORDINADOR')"><a th:href="@{/convocatorias}">Convocatorias</a></li>
+        <li><a th:href="@{/recompensas}">Recompensas</a></li>
+        <li sec:authorize="hasRole('COORDINADOR')"><a th:href="@{/coordinador/carga-trabajo}">Carga de trabajo</a></li>
+        <li sec:authorize="hasRole('INVESTIGADOR')"><a th:href="@{/carga-trabajo}">Carga de trabajo</a></li>
+        <li><a th:href="@{/perfil/opciones}">Opciones de perfil</a></li>
+    </ul>
+</nav>
+
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Cerrar sesión</button>
+</form>
+
+</body>
+</html>

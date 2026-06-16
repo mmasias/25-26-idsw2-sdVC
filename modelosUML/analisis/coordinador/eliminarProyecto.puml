@@ -1,0 +1,29 @@
+@startuml eliminarProyecto-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as ProyectoAbierto
+
+package eliminarProyecto as "eliminarProyecto()" {
+    rectangle #629EF9 EliminarProyectoView
+    rectangle #b5bd68 ProyectoController
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E Proyecto
+}
+
+rectangle #CDEBA5 ":PROYECTOS_ABIERTOS" as ProyectosSalida
+
+ProyectoAbierto -r-> EliminarProyectoView: eliminarProyecto()
+
+EliminarProyectoView -d-> ProyectoController: cargarProyectoParaEliminacion(id) : Proyecto
+
+ProyectoController --> ProyectoRepository: obtenerPorId(id) : Proyecto
+
+ProyectoRepository -- Proyecto
+
+EliminarProyectoView --> ProyectoController: eliminarProyecto(id) : void
+
+ProyectoController --> ProyectoRepository: eliminarPorId(id) : void
+
+EliminarProyectoView ..> ProyectosSalida: abrirProyectos()
+
+@enduml
