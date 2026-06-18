@@ -1,0 +1,52 @@
+@startuml eliminarPerfil-coordinador-diseño
+title Diagrama de secuencia - Desactivar perfil desde solicitud
+
+actor Coordinador
+participant "EliminarPerfilModal\n(React)" as Frontend
+participant "SolicitudEliminacionPerfilController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "PerfilService" as PerfilService
+participant "SolicitudEliminacionPerfilRepository" as SolicitudRepository
+participant "UsuarioRepository" as PerfilRepository
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita desactivar perfil
+activate Frontend
+Frontend --> Coordinador: Muestra confirmación de desactivación
+alt Cancela desactivación
+    Coordinador -> Frontend: Cancela desactivación
+    Frontend --> Coordinador: Presenta SOLICITUD_ELIMINACION_PERFIL_ABIERTA
+else Confirma desactivación
+    Coordinador -> Frontend: Confirma desactivación
+    Frontend -> Frontend: Comprobar sesión local
+    Frontend -> Api: DELETE /api/solicitudes-eliminacion-perfil/{idSolicitud}/perfil\nCookie de sesión
+    activate Api
+    Api -> Sesion: obtenerSesionActual(authentication)
+    activate Sesion
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> PerfilService: eliminarPerfilDesdeSolicitud(coordinador, idSolicitud)
+    activate PerfilService
+    PerfilService -> SolicitudRepository: findById(idSolicitud)
+    SolicitudRepository -> DB: SELECT * FROM usuarios WHERE id = ?
+    DB --> SolicitudRepository: Resultado de persistencia
+    activate SolicitudRepository
+    SolicitudRepository --> PerfilService: SolicitudEliminacionPerfil
+    deactivate SolicitudRepository
+    PerfilService -> PerfilRepository: save(idPerfil, fecha, coordinador)
+    PerfilRepository -> DB: UPDATE usuarios SET activo = false WHERE id = ?
+    DB --> PerfilRepository: Resultado de persistencia
+    activate PerfilRepository
+    PerfilRepository --> PerfilService: Perfil desactivado
+    deactivate PerfilRepository
+    PerfilService -> SolicitudRepository: save(idSolicitud)
+    SolicitudRepository -> DB: UPDATE solicitudes_eliminacion_perfil SET estado = 'RESUELTA' WHERE id = ?
+    DB --> SolicitudRepository: Resultado de persistencia
+    PerfilService --> Api: DesactivacionPerfilResponse
+    deactivate PerfilService
+    Api --> Frontend: 200 OK\nDesactivacionPerfilResponse
+    deactivate Api
+    Frontend --> Coordinador: Presenta SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS
+end
+deactivate Frontend
+@enduml

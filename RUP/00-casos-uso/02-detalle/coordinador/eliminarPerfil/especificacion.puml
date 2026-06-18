@@ -1,0 +1,63 @@
+@startuml eliminarPerfil
+skinparam linetype polyline
+
+state in1 as "SOLICITUD_ELIMINACION_PERFIL_ABIERTA"
+in1 -[#green]-> eliminarPerfil
+
+
+state eliminarPerfil as "eliminarPerfil()" {
+
+    state " " as MostrandoSolicitud
+    state " " as ConfirmandoDesactivacion
+
+    [*] -[#green]-> MostrandoSolicitud
+    note on link
+    <b>Coordinador</b> tiene una solicitud de desactivación de perfil abierta
+    <b>Coordinador</b> solicita desactivar el perfil
+    end note
+
+    MostrandoSolicitud -[#green]-> ConfirmandoDesactivacion
+    note on link
+    <b>Sistema</b> presenta los datos de la solicitud:
+    • Nombre del investigador
+    • Correo electrónico
+    • Fecha de solicitud
+    • Motivo
+
+    y presenta la confirmación de desactivación:
+    • ¿Está seguro de desactivar este perfil?
+    • Advertencia: el acceso se revocará, pero el histórico se conservará.
+
+    <b>Al confirmar:</b>
+    • Se desactivará el acceso del investigador y se conservará su histórico
+    • Se volverá al listado de solicitudes actualizado
+
+    y permite solicitar las siguientes acciones:
+    • Confirmar desactivación
+    • Cancelar
+    end note
+
+    ConfirmandoDesactivacion -[#green]-> [*]
+    note on link
+    <b>Coordinador</b> solicita confirmar desactivación
+    <b>Sistema</b> visualiza el listado de solicitudes actualizado
+    end note
+
+    ConfirmandoDesactivacion -[#red]-> MostrandoSolicitud
+    note on link
+    <b>Coordinador</b> cancela la desactivación
+    <b>Sistema</b> visualiza la solicitud sin cambios
+    end note
+}
+
+eliminarPerfil -[#green]-> SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS
+note on link
+abrirSolicitudesEliminacionPerfil()
+end note
+
+eliminarPerfil -[#red]-> SOLICITUD_ELIMINACION_PERFIL_ABIERTA
+note on link
+Desactivación cancelada
+end note
+
+@enduml

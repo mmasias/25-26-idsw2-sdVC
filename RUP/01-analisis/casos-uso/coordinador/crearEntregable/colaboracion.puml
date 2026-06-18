@@ -1,0 +1,41 @@
+@startuml crearEntregable-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":ENTREGABLES_ABIERTOS" as EstadoEntrada
+package crearEntregable as "crearEntregable()" {
+    rectangle #629EF9 CrearEntregableView
+    rectangle #b5bd68 EntregableController
+    rectangle #b5bd68 EntregableService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E EntregableRepository
+    rectangle #F2AC4E ArchivoRepository
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Entregable
+    rectangle #F2AC4E ArchivoAdjunto
+}
+
+rectangle #CDEBA5 ":ENTREGABLE_ABIERTO" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirEntregable" as AbrirEntregable
+rectangle #CDEBA5 ":Collaboration EditarEntregable" as EditarEntregable
+rectangle #CDEBA5 ":Collaboration EliminarEntregable" as EliminarEntregable
+rectangle #CDEBA5 ":Collaboration AbrirEntregables" as AbrirEntregables
+
+EstadoEntrada -r-> CrearEntregableView: crearEntregable()
+
+CrearEntregableView -d-> EntregableController: crearEntregable(idProyecto, datos, archivo?, coordinador)
+EntregableController --> EntregableService: crear(proyectoId, datos, archivo?, coordinador)
+EntregableController --> SesionService: obtenerSesionActual(authentication)
+EntregableService --> ProyectoRepository: obtenerActivoPorId(idProyecto)
+EntregableService --> EntregableRepository: guardar(entidad)
+EntregableService --> ArchivoRepository: guardarOpcional(entregable, archivo, coordinador)
+ProyectoRepository -- Proyecto
+EntregableRepository -- Entregable
+ArchivoRepository -- ArchivoAdjunto
+CrearEntregableView ..> EstadoSalida: continuarNavegacion()
+CrearEntregableView ..> AbrirEntregable: abrirEntregable()
+CrearEntregableView ..> EditarEntregable: editarEntregable()
+CrearEntregableView ..> EliminarEntregable: eliminarEntregable()
+CrearEntregableView ..> AbrirEntregables: abrirEntregables()
+
+@enduml

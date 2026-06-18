@@ -1,0 +1,30 @@
+@startsalt abrirOpcionesPerfil-wireframe
+{
+    ====
+    <b>GIPF - OPCIONES DE PERFIL</b>
+    ====
+    {
+        <b>Perfil propio</b>
+        --
+        {
+            {<b>Nombre:</b> | Coordinador FUNIBER}
+            {<b>Correo:</b> | coordinador@funiber.org}
+            {<b>Unidad:</b> | Coordinacion de investigacion}
+        }
+
+        ~~
+
+        <b>Opciones disponibles</b>
+        --
+        {
+            {[Editar perfil]}
+            {[Abrir solicitudes de eliminacion]}
+            {[Solicitar eliminacion perfil]}
+        }
+
+        ~~
+
+        {[Volver]}
+    }
+}
+@endsalt

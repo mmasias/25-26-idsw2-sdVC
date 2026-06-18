@@ -1,0 +1,53 @@
+@startuml editarPerfil-coordinador-diseño
+title Diagrama de secuencia - Editar perfil propio del Coordinador
+
+actor Coordinador
+participant "EditarPerfilForm\n(React)" as Frontend
+participant "PerfilController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "PerfilService" as PerfilService
+participant "UsuarioRepository" as PerfilRepository
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita editar perfil
+activate Frontend
+Frontend -> Frontend: Precargar formulario con PerfilResponse actual
+Frontend --> Coordinador: Muestra formulario con datos precargados
+Coordinador -> Frontend: Modifica datos y guarda
+Frontend -> Frontend: Comprobar sesión local
+Frontend -> Api: PATCH /api/perfil\nPerfilUpdateRequest + cookie
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesión de Coordinador activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> PerfilService: actualizarPerfilPropio(coordinador, datos)
+    activate PerfilService
+note right of PerfilService: Responsabilidad interna: validarCambios
+    PerfilService -> PerfilRepository: findByNombreUsuario(coordinador)
+    PerfilRepository -> DB: SELECT * FROM usuarios WHERE usuario_id = ?
+    DB --> PerfilRepository: Resultado de persistencia
+    activate PerfilRepository
+    PerfilRepository --> PerfilService: Perfil
+    PerfilService -> PerfilService: actualizar(perfil, datos)
+    PerfilService -> PerfilRepository: save(perfilActualizado)
+    PerfilRepository -> DB: UPDATE usuarios SET nombre_completo = ?, correo = ?, unidad = ?,\nlinea_investigacion = ?, biografia = ? WHERE id = ?
+    DB --> PerfilRepository: Resultado de persistencia
+    PerfilRepository --> PerfilService: Perfil actualizado
+    deactivate PerfilRepository
+    PerfilService --> Api: PerfilResponse
+    deactivate PerfilService
+    Api --> Frontend: 200 OK\nPerfilResponse
+    deactivate Api
+    Frontend -> Frontend: Actualizar datos de perfil y notificar éxito
+    Frontend --> Coordinador: Presenta OPCIONES_PERFIL_ABIERTO actualizado
+else Datos inválidos o sesión ausente
+    Sesion --> Api: SesionNoValidaException / validación fallida
+    deactivate Sesion
+    Api --> Frontend: 400 Bad Request / 401 Unauthorized
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de edición
+end
+deactivate Frontend
+@enduml

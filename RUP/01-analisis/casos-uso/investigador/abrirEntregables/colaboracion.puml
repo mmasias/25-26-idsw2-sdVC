@@ -1,0 +1,43 @@
+@startuml abrirEntregables-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as EstadoEntrada1
+rectangle #CDEBA5 ":ENTREGABLE_ABIERTO" as EstadoEntrada2
+package abrirEntregables as "abrirEntregables()" {
+    rectangle #629EF9 ListarEntregablesView
+    rectangle #b5bd68 EntregableController
+    rectangle #b5bd68 EntregableService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E EntregableRepository
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Entregable
+}
+
+rectangle #CDEBA5 ":ENTREGABLES_ABIERTOS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirEntregable" as AbrirEntregable
+rectangle #CDEBA5 ":Collaboration CrearEntregable" as CrearEntregable
+rectangle #CDEBA5 ":Collaboration AbrirProyecto" as AbrirProyecto
+
+EstadoEntrada1 -r-> ListarEntregablesView: abrirEntregables(idProyecto)
+EstadoEntrada2 -r-> ListarEntregablesView: abrirEntregables(idProyecto)
+
+ListarEntregablesView -d-> EntregableController: listarEntregables(idProyecto, investigador)
+EntregableController --> EntregableService: listar(proyectoId, filtro, investigador)
+EntregableController --> SesionService: obtenerSesionActual(authentication)
+ListarEntregablesView --> EntregableController: filtrarEntregables(idProyecto, criterio, investigador)
+EntregableService --> ProyectoRepository: verificarParticipacion(idProyecto, investigador)
+EntregableService --> EntregableRepository: obtenerActivosPorProyecto(idProyecto)
+EntregableService --> EntregableRepository: buscarActivosPorProyecto(idProyecto, criterio)
+ProyectoRepository -- Proyecto
+EntregableRepository -- Entregable
+note right of EntregableController
+El Investigador consulta entregables
+de proyectos en los que participa.
+end note
+ListarEntregablesView ..> EstadoSalida: continuarNavegacion()
+ListarEntregablesView ..> AbrirEntregable: abrirEntregable()
+ListarEntregablesView ..> CrearEntregable: crearEntregable()
+ListarEntregablesView ..> AbrirProyecto: abrirProyecto()
+
+@enduml

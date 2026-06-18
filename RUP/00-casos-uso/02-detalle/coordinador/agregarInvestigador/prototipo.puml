@@ -1,0 +1,26 @@
+@startsalt agregarInvestigador-wireframe
+{
+    ====
+    <b>GIPF - AGREGAR INVESTIGADOR AL PROYECTO</b>
+    ====
+    {
+        <b>Proyecto:</b> PRY-SAN-EN-CURSO - Plataforma de investigación
+        --
+        {SI
+            "Filtrar por nombre, sede o línea" | [Buscar]
+        }
+        --
+        {
+            <b>Investigadores disponibles</b>
+            ==
+            <b>Nombre</b> | <b>Sede</b> | <b>Perfil</b> | <b>Carga</b> | <b>Disponibilidad</b>
+            Docente Investigador Santander | Santander | Investigador-docente | 30 h | 2 h docentes disponibles
+            Investigador Barcelona | Barcelona | Investigador | 24 h | Disponible
+        }
+        --
+        <i>Recomendación: priorizar perfiles compatibles con menor carga de trabajo.</i>
+        --
+        {[Asociar seleccionado] | [Cancelar]}
+    }
+}
+@endsalt

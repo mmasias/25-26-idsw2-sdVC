@@ -1,0 +1,22 @@
+@startsalt crearInvestigador-wireframe
+{
+    ====
+    <b>GIPF - CREAR INVESTIGADOR</b>
+    ====
+    {
+        <b>Datos del investigador</b>
+        --
+        {
+            {<b>Usuario *</b> | [                         ]}
+            {<b>Nombre completo *</b> | [                         ]}
+            {<b>Correo *</b> | [                         ]}
+            {<b>Sede *</b> | ^Santander^}
+            {<b>Unidad</b> | [                         ]}
+            {<b>Linea de investigacion</b> | [                         ]}
+            {<b>Biografia</b> | "                         "}
+        }
+        ~~
+        {[Crear investigador] | [Cancelar]}
+    }
+}
+@endsalt

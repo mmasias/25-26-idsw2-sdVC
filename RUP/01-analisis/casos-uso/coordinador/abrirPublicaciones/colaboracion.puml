@@ -1,0 +1,33 @@
+@startuml abrirPublicaciones-coordinador-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada
+package abrirPublicaciones as "abrirPublicaciones()" {
+    rectangle #629EF9 "abrirPublicacionesView" as View
+    rectangle #b5bd68 PublicacionController
+    rectangle #b5bd68 PublicacionService
+    rectangle #b5bd68 SesionService
+    rectangle #b5bd68 PoliticaPublicacion
+    rectangle #F2AC4E PublicacionRepository
+    rectangle #F2AC4E Publicacion
+
+}
+rectangle #CDEBA5 ":PUBLICACIONES_ABIERTAS" as EstadoSalida
+
+EstadoEntrada -r-> View: abrirPublicaciones()
+View -d-> PublicacionController: abrirPublicaciones(solicitud, actor)
+PublicacionController --> PublicacionService: listar(filtro, actor)
+PublicacionController --> SesionService: obtenerSesionActual(authentication)
+PublicacionService --> PoliticaPublicacion: permitirConsultaGlobal(actor)
+PublicacionService --> PublicacionRepository: buscarActivas(filtro)
+PublicacionRepository -- Publicacion
+
+View ..> EstadoSalida: continuarNavegacion()
+
+note right of PoliticaPublicacion
+Responsabilidad unica:
+autoriza sin persistir ni presentar.
+Permite ampliar reglas sin modificar
+la coordinacion del caso de uso.
+end note
+@enduml

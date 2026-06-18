@@ -1,0 +1,53 @@
+@startuml eliminarEntregable
+skinparam linetype polyline
+
+state in1 as "ENTREGABLE_ABIERTO"
+in1 -[#green]-> eliminarEntregable
+
+state eliminarEntregable as "eliminarEntregable()" {
+
+    state " " as SolicitandoRetirada
+    state " " as ConfirmandoRetirada
+
+    [*] -[#green]-> SolicitandoRetirada
+    note on link
+    <b>Coordinador</b> solicita retirar el entregable
+    end note
+
+    SolicitandoRetirada -[#green]-> ConfirmandoRetirada
+    note on link
+    <b>Sistema</b> presenta una confirmación de retirada
+    <b>Sistema</b> muestra información del entregable:
+    • ID
+    • Título
+    • Tipo
+    • Estado
+
+    <b>Sistema</b> permite solicitar:
+    • Confirmar retirada
+    • Cancelar
+    end note
+
+    ConfirmandoRetirada -[#green]-> [*]
+    note on link
+    <b>Coordinador</b> solicita confirmar la retirada
+    end note
+
+    ConfirmandoRetirada -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> solicita cancelar la retirada
+    <b>Sistema</b> presenta el listado de entregables sin cambios
+    end note
+}
+
+eliminarEntregable -[#green]-> ENTREGABLES_ABIERTOS
+note on link
+abrirEntregables()
+end note
+
+eliminarEntregable -[#red]-> ENTREGABLE_ABIERTO
+note on link
+abrirEntregable()
+end note
+
+@enduml

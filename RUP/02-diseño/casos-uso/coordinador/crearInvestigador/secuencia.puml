@@ -1,0 +1,68 @@
+@startuml crearInvestigador-coordinador-diseno
+title Diagrama de secuencia - Crear investigador
+
+actor Coordinador
+participant "InvestigadoresPage\n(React)" as Frontend
+participant "InvestigadorController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "InvestigadorService" as Service
+participant "UsuarioRepository" as Repo
+participant "CargaTrabajoRepository" as CargaRepo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita crear investigador
+activate Frontend
+Frontend --> Coordinador: Presenta formulario de alta
+alt Coordinador cancela
+    Coordinador -> Frontend: Cancela creacion
+    Frontend --> Coordinador: Conserva INVESTIGADORES_ABIERTOS
+else Coordinador guarda
+    Coordinador -> Frontend: Introduce datos y guarda
+    Frontend -> Api: POST /api/investigadores\nInvestigadorCreateRequest + cookie
+    activate Api
+    Api -> Sesion: obtenerSesionActual(authentication)
+    activate Sesion
+    alt Sesion valida
+        Sesion --> Api: SesionResponse
+        deactivate Sesion
+        Api -> Service: crear(sesion, datos)
+        activate Service
+        Service -> Repo: findByNombreUsuario(datos.usuario)
+        Repo -> DB: SELECT * FROM usuarios WHERE nombre_usuario = ?
+        DB --> Repo: Resultado de persistencia
+        Repo --> Service: Usuario / vacio
+        Service -> Repo: existsByEmailIgnoreCase(datos.email)
+        Repo -> DB: SELECT EXISTS(SELECT 1 FROM usuarios WHERE LOWER(email) = LOWER(?))
+        DB --> Repo: Resultado de persistencia
+        Repo --> Service: true / false
+        alt Usuario o correo duplicados
+            Service --> Api: ValidacionException
+            deactivate Service
+            Api --> Frontend: 400 Bad Request
+            deactivate Api
+            Frontend --> Coordinador: Presenta errores y conserva formulario
+        else Datos validos
+            Service -> Repo: save(usuarioInvestigador)
+        Repo -> DB: INSERT INTO usuarios (nombre_usuario, nombre_completo, correo, sede, rol, activo)\nVALUES (?, ?, ?, ?, 'INVESTIGADOR', true)
+            DB --> Repo: Resultado de persistencia
+            Repo --> Service: Usuario creado
+            Service -> CargaRepo: save(cargaInicial)
+        CargaRepo -> DB: INSERT INTO cargas_trabajo (usuario_id, horas_docencia, horas_investigacion,\nhoras_gestion_academica, fecha_actualizacion) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+            DB --> CargaRepo: Resultado de persistencia
+            CargaRepo --> Service: CargaTrabajo creada
+            Service --> Api: InvestigadorDetalleResponse
+            deactivate Service
+            Api --> Frontend: 201 Created\nInvestigador creado
+            deactivate Api
+            Frontend --> Coordinador: Presenta INVESTIGADOR_ABIERTO
+        end
+    else Sesion ausente o invalida
+        Sesion --> Api: SesionNoValidaException
+        deactivate Sesion
+        Api --> Frontend: 401 Unauthorized
+        deactivate Api
+        Frontend --> Coordinador: Presenta error de acceso
+    end
+end
+deactivate Frontend
+@enduml

@@ -1,0 +1,101 @@
+@startuml eliminarInvestigador-coordinador-diseno
+title Diagrama de secuencia - Desasignar investigador de proyecto
+
+actor Coordinador
+participant "ProyectoDetallePage\n(React)" as Frontend
+participant "ProyectoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "ProyectoService" as Service
+participant "ProyectoRepository" as Repo
+participant "UsuarioRepository" as InvestigadorRepo
+participant "EntregableRepository" as EntregableRepo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita desasignar investigador del proyecto
+activate Frontend
+Frontend -> Api: GET /api/proyectos/{id}/investigadores/{investigadorId}/opciones-desasignacion\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Coordinador activa
+    Sesion --> Api: Coordinador autenticado
+    deactivate Sesion
+note right of Service: Responsabilidad interna: prepararDesasignacion
+    activate Service
+    Service -> Repo: findById(id)
+    Repo -> DB: SELECT * FROM proyectos WHERE id = ? AND archivado = false
+    DB --> Repo: Resultado de persistencia
+    Repo --> Service: Proyecto / vacio
+    Service -> InvestigadorRepo: findById(id, investigadorId)
+    InvestigadorRepo -> DB: SELECT u.* FROM usuarios u JOIN proyecto_investigadores pi ON pi.usuario_id = u.id WHERE pi.proyecto_id = ? AND u.id = ?
+    DB --> InvestigadorRepo: Resultado de persistencia
+    InvestigadorRepo --> Service: Investigador / vacio
+    Service -> EntregableRepo: findAll(id, investigadorId)
+    EntregableRepo -> DB: SELECT * FROM solicitudes_eliminacion_perfil WHERE estado = 'PENDIENTE' ORDER BY fecha_creacion DESC
+    DB --> EntregableRepo: Resultado de persistencia
+    EntregableRepo --> Service: Responsabilidades pendientes
+    alt Proyecto o asociacion inexistente
+        Service --> Api: RecursoNoEncontradoException
+        deactivate Service
+        Api --> Frontend: 404 Not Found
+        deactivate Api
+        Frontend --> Coordinador: Presenta asociacion no encontrada
+    else Existen responsabilidades pendientes
+        Service --> Api: ConflictoException
+        deactivate Service
+        Api --> Frontend: 409 Conflict\nResponsabilidades pendientes
+        deactivate Api
+        Frontend --> Coordinador: Presenta responsabilidades que impiden desasignar
+    else Puede desasignarse
+        Service --> Api: OpcionesDesasignacionResponse
+        deactivate Service
+        Api --> Frontend: 200 OK\nConsecuencias de la desasignacion
+        deactivate Api
+        Frontend --> Coordinador: Presenta confirmacion y solicita motivo
+        alt Coordinador cancela
+            Coordinador -> Frontend: Cancela desasignacion
+            Frontend --> Coordinador: Conserva PROYECTO_ABIERTO
+        else Coordinador confirma
+            Coordinador -> Frontend: Confirma desasignacion con motivo
+            Frontend -> Api: PATCH /api/proyectos/{id}/investigadores/{investigadorId}/desasignacion\nDesasignacionRequest + cookie
+            activate Api
+            Api -> Sesion: obtenerSesionActual(authentication)
+            Sesion --> Api: Coordinador autenticado
+            Api -> Service: retirarInvestigador(id, investigadorId, motivo, coordinador)
+            activate Service
+            Service -> EntregableRepo: findAll(id, investigadorId)
+            EntregableRepo -> DB: SELECT * FROM solicitudes_eliminacion_perfil WHERE estado = 'PENDIENTE' ORDER BY fecha_creacion DESC
+            DB --> EntregableRepo: Resultado de persistencia
+            EntregableRepo --> Service: Responsabilidades pendientes
+            alt Aparecieron responsabilidades pendientes
+                Service --> Api: ConflictoException
+                deactivate Service
+                Api --> Frontend: 409 Conflict
+                deactivate Api
+                Frontend --> Coordinador: Presenta conflicto y conserva PROYECTO_ABIERTO
+            else Sin responsabilidades pendientes
+                Service -> Repo: save(id, investigadorId, fecha, coordinador, motivo)
+                Repo -> DB: DELETE FROM proyecto_investigadores WHERE proyecto_id = ? AND usuario_id = ?\nINSERT INTO movimientos_participacion_proyecto (proyecto_id, investigador_id, tipo, responsable_id, fecha, motivo) VALUES (?, ?, 'DESASIGNACION', ?, ?, ?)
+                DB --> Repo: Resultado de persistencia
+                Repo --> Service: Participacion desasignada
+                note right of Service
+                El perfil y la participacion historica
+                permanecen intactos.
+                end note
+                Service --> Api: ProyectoDetalleResponse
+                deactivate Service
+                Api --> Frontend: 200 OK\nInvestigador desasignado
+                deactivate Api
+                Frontend --> Coordinador: Presenta PROYECTO_ABIERTO
+            end
+        end
+    end
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

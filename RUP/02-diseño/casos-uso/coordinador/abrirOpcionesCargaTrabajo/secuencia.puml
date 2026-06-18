@@ -1,0 +1,67 @@
+@startuml abrirOpcionesCargaTrabajo-coordinador-diseno
+title Diagrama de secuencia - Abrir opciones de carga de trabajo del Coordinador
+
+actor Coordinador
+participant "CargaTrabajoPage\n(React)" as Frontend
+participant "CargaTrabajoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "CargaTrabajoService" as Service
+participant "CargaTrabajoRepository" as CargaRepo
+participant "UsuarioRepository" as PersonaRepo
+participant "ProyectoRepository" as ProyectoRepo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita abrir carga de trabajo
+activate Frontend
+Frontend -> Frontend: Comprobar sesion local
+Frontend -> Api: GET /api/carga-trabajo\nFiltros + cookie
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Coordinador activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> Service: obtenerPanelCoordinador(coordinador, filtros)
+    activate Service
+    Service -> CargaRepo: findAll(filtros)
+    CargaRepo -> DB: SELECT u.*, c.* FROM usuarios u LEFT JOIN cargas_trabajo c ON c.usuario_id = u.id WHERE u.activo = true
+    DB --> CargaRepo: Resultado de persistencia
+    activate CargaRepo
+    CargaRepo --> Service: ResumenCargaTrabajo
+    Service -> CargaRepo: findByUsuario(filtros)
+    CargaRepo -> DB: SELECT u.*, c.* FROM usuarios u LEFT JOIN cargas_trabajo c ON c.usuario_id = u.id WHERE u.activo = true
+    DB --> CargaRepo: Resultado de persistencia
+    CargaRepo --> Service: List<CargaTrabajoPersona>
+    Service -> ProyectoRepo: findByArchivadoOrderByNombreAsc(false)
+ProyectoRepo -> DB: SELECT p.* FROM proyectos p WHERE p.archivado = false AND p.estado <> 'COMPLETADO'\nAND NOT EXISTS (SELECT 1 FROM proyecto_investigadores pi WHERE pi.proyecto_id = p.id)
+    DB --> ProyectoRepo: Resultado de persistencia
+    activate ProyectoRepo
+    ProyectoRepo --> Service: List<ProyectoLibre>
+    deactivate ProyectoRepo
+    Service -> PersonaRepo: findByRolAndActivoTrueOrderByNombreCompletoAsc()
+    PersonaRepo -> DB: SELECT * FROM usuarios WHERE rol = 'INVESTIGADOR' AND activo = true AND sede IN (?)
+    DB --> PersonaRepo: Resultado de persistencia
+    activate PersonaRepo
+    PersonaRepo --> Service: List<Persona>
+    deactivate PersonaRepo
+    Service -> CargaRepo: findAll(proyectosLibres, sedesDocentes)
+    CargaRepo -> DB: SELECT u.*, c.* FROM usuarios u JOIN cargas_trabajo c ON c.usuario_id = u.id WHERE u.activo = true ORDER BY (c.horas_docencia + c.horas_investigacion + c.horas_gestion_academica) ASC
+    DB --> CargaRepo: Resultado de persistencia
+    CargaRepo --> Service: List<SugerenciaAsignacion>
+    deactivate CargaRepo
+    Service -> Service: mapearCarga(maximo16h)
+    Service --> Api: PanelCargaTrabajoResponse
+    deactivate Service
+    Api --> Frontend: 200 OK\nPanelCargaTrabajoResponse
+    deactivate Api
+    Frontend -> Frontend: Renderizar resumen, detalle y sugerencias
+    Frontend --> Coordinador: Presenta OPCIONES_CARGA_TRABAJO_ABIERTAS
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

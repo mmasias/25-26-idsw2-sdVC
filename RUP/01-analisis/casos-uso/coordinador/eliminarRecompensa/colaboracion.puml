@@ -1,0 +1,44 @@
+@startuml eliminarRecompensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoEntrada
+package eliminarRecompensa as "eliminarRecompensa()" {
+    rectangle #629EF9 EliminarRecompensaView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+}
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoSalidaExitosa
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoSalidaCancelada
+rectangle #CDEBA5 ":Collaboration AbrirRecompensas" as AbrirRecompensas
+
+EstadoEntrada -r-> EliminarRecompensaView: eliminarRecompensa()
+
+EliminarRecompensaView -d-> RecompensaController: solicitarConfirmacion(id)
+RecompensaController --> RecompensaService: eliminar(id, motivo, coordinador)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+RecompensaController --> EliminarRecompensaView: presentarConfirmacion()
+EliminarRecompensaView --> RecompensaController: confirmarAnulacion(id)
+EliminarRecompensaView --> RecompensaController: validarAnulacion(id)
+RecompensaService --> RecompensaRepository: obtenerPorId(id)
+RecompensaService --> ProyectoRepository: verificarProyectoCompletado(recompensa)
+RecompensaService --> RecompensaRepository: anular(id, fecha, coordinador, motivo)
+EliminarRecompensaView --> RecompensaController: cancelarAnulacion()
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+note right of RecompensaController
+La anulacion conserva la recompensa,
+su concesion y su trazabilidad,
+pero no modifica el proyecto ni la
+carga de trabajo del investigador.
+end note
+EliminarRecompensaView ..> EstadoSalidaExitosa: recompensaAnulada()
+EliminarRecompensaView ..> EstadoSalidaCancelada: anulacionCancelada()
+EliminarRecompensaView ..> AbrirRecompensas: abrirRecompensas()
+
+@enduml

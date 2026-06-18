@@ -1,0 +1,40 @@
+@startuml abrirPublicacion-coordinador-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PUBLICACIONES_ABIERTAS" as EstadoEntrada
+package abrirPublicacion as "abrirPublicacion()" {
+    rectangle #629EF9 "abrirPublicacionView" as View
+    rectangle #b5bd68 PublicacionController
+    rectangle #b5bd68 PublicacionService
+    rectangle #b5bd68 SesionService
+    rectangle #b5bd68 PoliticaPublicacion
+    rectangle #F2AC4E PublicacionRepository
+    rectangle #F2AC4E Publicacion
+    rectangle #F2AC4E RespuestaRepository
+    rectangle #F2AC4E ArchivoPublicacionRepository
+    rectangle #F2AC4E Respuesta
+    rectangle #F2AC4E ArchivoPublicacion
+}
+rectangle #CDEBA5 ":PUBLICACION_ABIERTA" as EstadoSalida
+
+EstadoEntrada -r-> View: abrirPublicacion()
+View -d-> PublicacionController: abrirPublicacion(solicitud, actor)
+PublicacionController --> PublicacionService: obtener(id, actor)
+PublicacionController --> SesionService: obtenerSesionActual(authentication)
+PublicacionService --> PublicacionRepository: obtenerActivaPorId(id)
+PublicacionService --> PoliticaPublicacion: permitirConsulta(actor, publicacion)
+
+PublicacionRepository -- Publicacion
+PublicacionService --> RespuestaRepository: buscarPorPublicacion(id)
+PublicacionService --> ArchivoPublicacionRepository: buscarPorPublicacion(id)
+RespuestaRepository -- Respuesta
+ArchivoPublicacionRepository -- ArchivoPublicacion
+View ..> EstadoSalida: continuarNavegacion()
+
+note right of PoliticaPublicacion
+Responsabilidad unica:
+autoriza sin persistir ni presentar.
+Permite ampliar reglas sin modificar
+la coordinacion del caso de uso.
+end note
+@enduml

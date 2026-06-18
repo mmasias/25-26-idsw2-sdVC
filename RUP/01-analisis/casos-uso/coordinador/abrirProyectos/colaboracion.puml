@@ -1,0 +1,43 @@
+@startuml abrirProyectos-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada1
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as EstadoEntrada2
+rectangle #CDEBA5 ":INVESTIGADOR_ABIERTO" as EstadoEntrada3
+package abrirProyectos as "abrirProyectos()" {
+    rectangle #629EF9 ListarProyectosView
+    rectangle #b5bd68 ProyectoController
+    rectangle #b5bd68 ProyectoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E Proyecto
+}
+
+rectangle #CDEBA5 ":PROYECTOS_ABIERTOS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirProyecto" as AbrirProyecto
+rectangle #CDEBA5 ":Collaboration CrearProyecto" as CrearProyecto
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada1 -r-> ListarProyectosView: abrirProyectos()
+EstadoEntrada2 -r-> ListarProyectosView: abrirProyectos()
+EstadoEntrada3 -r-> ListarProyectosView: abrirProyectos(idInvestigador)
+
+ListarProyectosView -d-> ProyectoController: listarProyectos(investigadorId?)
+ProyectoController --> ProyectoService: listar(criterio, investigadorId?)
+ProyectoController --> SesionService: obtenerSesionActual(authentication)
+ProyectoService --> ProyectoRepository: obtenerActivos()
+ProyectoService --> ProyectoRepository: obtenerActivosPorInvestigador(investigadorId)
+ListarProyectosView --> ProyectoController: filtrarProyectos(criterio, investigadorId?)
+ProyectoService --> ProyectoRepository: buscarPorCriterio(criterio, investigadorId?)
+ProyectoRepository -- Proyecto
+note right of ProyectoController
+Contexto opcional:
+- sin identificador: listado global
+- con investigadorId: proyectos asociados
+end note
+ListarProyectosView ..> EstadoSalida: continuarNavegacion()
+ListarProyectosView ..> AbrirProyecto: abrirProyecto()
+ListarProyectosView ..> CrearProyecto: crearProyecto()
+ListarProyectosView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

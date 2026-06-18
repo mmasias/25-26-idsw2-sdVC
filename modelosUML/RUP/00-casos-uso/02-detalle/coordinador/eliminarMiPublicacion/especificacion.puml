@@ -1,0 +1,53 @@
+@startuml eliminarPublicacion
+skinparam linetype polyline
+
+state in1 as "MI_PUBLICACION_ABIERTA"
+in1 -[#green]-> eliminarPublicacion
+
+state eliminarPublicacion as "eliminarPublicacion()" {
+
+    state " " as ConfirmandoRetirada
+    state " " as Retirando
+
+    [*] -[#green]-> ConfirmandoRetirada
+    note on link
+    <b>Coordinador</b> solicita retirar una publicación propia
+    end note
+
+    ConfirmandoRetirada -[#green]-> Retirando
+    note on link
+    <b>Sistema</b> presenta la confirmación de retirada con:
+    • ID
+    • Título
+    • Estado
+    • Visibilidad
+
+    y permite solicitar las siguientes acciones:
+    • Retirar de la publicación activa
+    • Cancelar
+    end note
+
+    Retirando -[#green]-> [*]
+    note on link
+    <b>Sistema</b> retira la publicación y conserva su histórico
+    y visualiza un mensaje de confirmación
+    end note
+
+    ConfirmandoRetirada -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> solicita cancelar
+    <b>Sistema</b> mantiene la publicación sin cambios
+    end note
+}
+
+eliminarPublicacion -[#green]-> MIS_PUBLICACIONES_ABIERTAS
+note on link
+Publicación retirada
+end note
+
+eliminarPublicacion -[#red]-> MI_PUBLICACION_ABIERTA
+note on link
+Retirada cancelada
+end note
+
+@enduml

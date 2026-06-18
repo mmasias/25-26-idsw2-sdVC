@@ -1,0 +1,46 @@
+@startuml editarRecompensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoEntrada
+package editarRecompensa as "editarRecompensa()" {
+    rectangle #629EF9 EditarRecompensaView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration EliminarRecompensa" as EliminarRecompensa
+rectangle #CDEBA5 ":Collaboration AbrirRecompensas" as AbrirRecompensas
+
+EstadoEntrada -r-> EditarRecompensaView: editarRecompensa()
+
+EditarRecompensaView -d-> RecompensaController: editarRecompensa(id, datos)
+RecompensaController --> RecompensaService: prepararEdicion(id)
+RecompensaController --> RecompensaService: actualizar(id, datos)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+EditarRecompensaView --> RecompensaController: validarCambios(datos)
+RecompensaService --> RecompensaRepository: obtenerPorId(id)
+RecompensaService --> ProyectoRepository: verificarProyectoCompletado(recompensa)
+RecompensaService --> InvestigadorRepository: verificarBeneficiario(datos.investigadorId)
+RecompensaService --> RecompensaService: validarTipoSegunBeneficiario()
+RecompensaService --> RecompensaRepository: actualizar(entidad)
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+note right of RecompensaController
+Editar no puede convertir una
+recompensa de no docente en
+reduccion docente.
+end note
+EditarRecompensaView ..> EstadoSalida: continuarNavegacion()
+EditarRecompensaView ..> EliminarRecompensa: eliminarRecompensa()
+EditarRecompensaView ..> AbrirRecompensas: abrirRecompensas()
+
+@enduml

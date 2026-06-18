@@ -1,0 +1,70 @@
+@startuml iniciarSesion-diseño
+title Diagrama de secuencia - Iniciar sesión
+
+actor Investigador
+participant "LoginPage\n(React)" as Frontend
+participant "AuthController\n(Spring Boot)" as Api
+participant "Spring Security" as Security
+participant "AuthService" as Auth
+participant "UsuarioRepository" as Repo
+database "Base de Datos" as DB
+participant "SesionService" as Sesion
+
+note over Investigador, Frontend
+Estado previo: SESION_CERRADA
+end note
+
+Investigador -> Frontend: Solicita acceder al sistema
+activate Frontend
+Frontend --> Investigador: Presenta formulario de acceso
+Investigador -> Frontend: Introduce usuario y contraseña
+Frontend -> Api: GET /api/auth/csrf
+activate Api
+note right of Security: Responsabilidad interna: obtenerTokenCsrf
+activate Security
+Security --> Api: CsrfTokenResponse
+deactivate Security
+Api --> Frontend: 200 OK\nCsrfTokenResponse
+deactivate Api
+Frontend -> Api: POST /api/auth/login\nLoginRequest + token CSRF
+activate Api
+Api -> Auth: autenticar(usuario, contrasena)
+activate Auth
+Auth -> Repo: findByNombreUsuario(usuario)
+activate Repo
+Repo -> DB: SELECT * FROM usuarios WHERE nombre_usuario = ?
+activate DB
+DB --> Repo: Usuario o vacío
+deactivate DB
+Repo --> Auth: Optional<Usuario>
+deactivate Repo
+Auth -> Auth: autenticar(usuario, contrasena, activo)
+
+alt Credenciales correctas y usuario activo
+    Auth --> Api: Usuario autenticado
+    deactivate Auth
+    Api -> Sesion: crearSesion(usuario, rol)
+    activate Sesion
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api --> Frontend: 200 OK + cookie de sesión\nHttpOnly, SameSite=Lax\nSecure en producción\nSesionResponse
+    deactivate Api
+    Frontend -> Api: GET /api/auth/csrf\nRenovar token tras autenticación
+    activate Api
+note right of Security: Responsabilidad interna: obtenerTokenCsrf
+    activate Security
+    Security --> Api: CsrfTokenResponse renovado
+    deactivate Security
+    Api --> Frontend: 200 OK\nCsrfTokenResponse renovado
+    deactivate Api
+    Frontend --> Investigador: Abre PANEL_PRINCIPAL_ABIERTO
+else Credenciales incorrectas o usuario inactivo
+    Auth --> Api: CredencialesIncorrectasException
+    deactivate Auth
+    Api --> Frontend: 401 Unauthorized
+    deactivate Api
+    Frontend --> Investigador: Presenta credenciales incorrectas\nPermite reintentar
+end
+deactivate Frontend
+
+@enduml

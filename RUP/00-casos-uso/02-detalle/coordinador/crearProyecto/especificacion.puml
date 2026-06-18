@@ -1,0 +1,44 @@
+@startuml crearProyecto
+skinparam linetype polyline
+
+state proyectos as "PROYECTOS_ABIERTOS"
+proyectos -[#green]-> crearProyecto
+
+state crearProyecto as "crearProyecto()" {
+    state " " as SolicitandoDatosMinimos
+    state " " as ValidandoDatos
+
+    [*] -[#green]-> SolicitandoDatosMinimos
+    note on link
+    <b>Coordinador</b> solicita crear un proyecto
+    <b>Sistema</b> permite introducir título, convocatoria de origen,
+    fechas previstas y descripción inicial
+    end note
+
+    SolicitandoDatosMinimos -[#green]-> ValidandoDatos
+    note on link
+    <b>Coordinador</b> solicita crear el proyecto
+    <b>Sistema</b> valida los datos mínimos y la coherencia de fechas
+    end note
+
+    ValidandoDatos -[#red]-> SolicitandoDatosMinimos
+    note on link
+    <b>Sistema</b> informa los datos que deben corregirse
+    end note
+
+    ValidandoDatos -[#green]-> [*]
+    note on link
+    <b>Sistema</b> registra el proyecto en estado Creado,
+    asigna su código y lo abre para continuar su definición
+    end note
+
+    SolicitandoDatosMinimos -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> cancela
+    end note
+}
+
+crearProyecto -[#green]-> PROYECTO_ABIERTO: Proyecto creado
+crearProyecto -[#red]-> PROYECTOS_ABIERTOS: Creación cancelada
+
+@enduml

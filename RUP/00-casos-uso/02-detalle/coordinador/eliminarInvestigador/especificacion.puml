@@ -1,0 +1,45 @@
+@startuml eliminarInvestigador
+skinparam linetype polyline
+
+state proyecto as "PROYECTO_ABIERTO"
+proyecto -[#green]-> eliminarInvestigador
+
+state eliminarInvestigador as "eliminarInvestigador(investigadorId)" {
+    state " " as ComprobandoResponsabilidades
+    state " " as ConfirmandoDesasignacion
+
+    [*] -[#green]-> ComprobandoResponsabilidades
+    note on link
+    <b>Coordinador</b> solicita retirar del proyecto al investigador seleccionado
+    end note
+
+    ComprobandoResponsabilidades -[#green]-> ConfirmandoDesasignacion
+    note on link
+    <b>Sistema</b> presenta el investigador y comprueba
+    entregables o responsabilidades pendientes
+
+    Si puede retirarse, solicita confirmación
+    end note
+
+    ComprobandoResponsabilidades -[#red]-> [*]
+    note on link
+    <b>Sistema</b> informa las responsabilidades que impiden retirarlo
+    end note
+
+    ConfirmandoDesasignacion -[#green]-> [*]
+    note on link
+    <b>Coordinador</b> confirma
+    <b>Sistema</b> registra la desasignación y conserva
+    la participación histórica en el proyecto
+    end note
+
+    ConfirmandoDesasignacion -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> cancela
+    end note
+}
+
+eliminarInvestigador -[#green]-> PROYECTO_ABIERTO: Investigador retirado
+eliminarInvestigador -[#red]-> PROYECTO_ABIERTO: Sin cambios
+
+@enduml

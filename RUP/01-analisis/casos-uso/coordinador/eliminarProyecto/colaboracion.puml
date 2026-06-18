@@ -1,0 +1,52 @@
+@startuml eliminarProyecto-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as EstadoEntrada
+package eliminarProyecto as "eliminarProyecto()" {
+    rectangle #629EF9 EliminarProyectoView
+    rectangle #b5bd68 ProyectoController
+    rectangle #b5bd68 ProyectoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E Proyecto
+}
+
+rectangle #CDEBA5 ":PROYECTOS_ABIERTOS" as EstadoSalida
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as EstadoSalidaSinCambios
+rectangle #CDEBA5 ":Collaboration AbrirProyecto" as AbrirProyecto
+rectangle #CDEBA5 ":Collaboration CrearProyecto" as CrearProyecto
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+rectangle #CDEBA5 ":Collaboration EditarProyecto" as EditarProyecto
+rectangle #CDEBA5 ":Collaboration EliminarProyecto" as EliminarProyecto
+rectangle #CDEBA5 ":Collaboration AgregarInvestigador" as AgregarInvestigador
+rectangle #CDEBA5 ":Collaboration EliminarInvestigador" as EliminarInvestigador
+rectangle #CDEBA5 ":Collaboration AbrirEntregables" as AbrirEntregables
+rectangle #CDEBA5 ":Collaboration AbrirInvestigadores" as AbrirInvestigadores
+rectangle #CDEBA5 ":Collaboration AbrirProyectos" as AbrirProyectos
+
+EstadoEntrada -r-> EliminarProyectoView: eliminarProyecto(proyectoId)
+
+EliminarProyectoView -d-> ProyectoController: prepararArchivado(proyectoId)
+ProyectoController --> ProyectoService: archivar(id)
+ProyectoController --> ProyectoService: archivar(id, motivo, coordinador)
+ProyectoController --> SesionService: obtenerSesionActual(authentication)
+ProyectoService --> ProyectoRepository: obtenerPorId(proyectoId)
+ProyectoService --> ProyectoRepository: obtenerEquipo(proyectoId)
+ProyectoController --> EliminarProyectoView: presentarConsecuenciasYConfirmacion()
+EliminarProyectoView --> ProyectoController: confirmarArchivado(proyectoId, coordinador)
+ProyectoService --> ProyectoRepository: archivar(proyectoId, fecha, coordinador)
+ProyectoRepository -- Proyecto
+EliminarProyectoView ..> EstadoSalida: proyectoArchivado()
+EliminarProyectoView ..> EstadoSalidaSinCambios: cancelarArchivado()
+EliminarProyectoView ..> AbrirProyecto: abrirProyecto()
+EliminarProyectoView ..> CrearProyecto: crearProyecto()
+EliminarProyectoView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+EliminarProyectoView ..> EditarProyecto: editarProyecto()
+EliminarProyectoView ..> EliminarProyecto: eliminarProyecto()
+EliminarProyectoView ..> AgregarInvestigador: agregarInvestigador()
+EliminarProyectoView ..> EliminarInvestigador: eliminarInvestigador()
+EliminarProyectoView ..> AbrirEntregables: abrirEntregables()
+EliminarProyectoView ..> AbrirInvestigadores: abrirInvestigadores()
+EliminarProyectoView ..> AbrirProyectos: abrirProyectos()
+
+@enduml

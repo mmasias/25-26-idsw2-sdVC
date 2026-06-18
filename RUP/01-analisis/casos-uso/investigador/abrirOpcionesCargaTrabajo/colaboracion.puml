@@ -1,0 +1,32 @@
+@startuml abrirOpcionesCargaTrabajo-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada
+package abrirOpcionesCargaTrabajo as "abrirOpcionesCargaTrabajo()" {
+    rectangle #629EF9 CargaTrabajoPropiaView
+    rectangle #b5bd68 CargaTrabajoController
+    rectangle #b5bd68 CargaTrabajoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E CargaTrabajoRepository
+    rectangle #F2AC4E CargaTrabajo
+}
+
+rectangle #CDEBA5 ":OPCIONES_CARGA_TRABAJO_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration EditarCargaTrabajo" as EditarCargaTrabajo
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada -r-> CargaTrabajoPropiaView: abrirOpcionesCargaTrabajo()
+
+CargaTrabajoPropiaView -d-> CargaTrabajoController: obtenerCargaPropia(investigador)
+CargaTrabajoController --> CargaTrabajoService: obtenerCargaPropia(investigador)
+CargaTrabajoController --> SesionService: obtenerSesionActual(authentication)
+CargaTrabajoPropiaView --> CargaTrabajoController: prepararAccionesPropias(investigador)
+CargaTrabajoService --> CargaTrabajoRepository: obtenerPorUsuario(investigador)
+CargaTrabajoService --> CargaTrabajoRepository: calcularResumenPersonal(cargaTrabajo)
+CargaTrabajoService --> CargaTrabajo: calcularMargenDocente(maximo16h)
+CargaTrabajoRepository -- CargaTrabajo
+CargaTrabajoPropiaView ..> EstadoSalida: opcionesCargaTrabajoAbiertas()
+CargaTrabajoPropiaView ..> EditarCargaTrabajo: editarCargaTrabajo()
+CargaTrabajoPropiaView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

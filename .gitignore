@@ -1,0 +1,26 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Backend
+src/backend/target/
+src/backend/data/
+src/backend/*-run.log
+src/backend/*-run.err.log
+
+# Frontend
+src/frontend/node_modules/
+src/frontend/dist/
+src/frontend/*.tsbuildinfo
+src/frontend/*-run.log
+src/frontend/*-run.err.log
+src/frontend/dev-server.*.log
+
+# Local diagram tooling
+tools/plantuml.jar
+
+# Environment
+.env
+.env.*
+!.env.example

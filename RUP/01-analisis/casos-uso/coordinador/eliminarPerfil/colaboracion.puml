@@ -1,0 +1,45 @@
+@startuml eliminarPerfil-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SOLICITUD_ELIMINACION_PERFIL_ABIERTA" as EstadoEntrada
+package eliminarPerfil as "eliminarPerfil()" {
+    rectangle #629EF9 EliminarPerfilView
+    rectangle #b5bd68 PerfilController
+    rectangle #b5bd68 PerfilService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E PerfilRepository
+    rectangle #F2AC4E Perfil
+    rectangle #F2AC4E SolicitudEliminacionPerfilRepository
+    rectangle #F2AC4E SolicitudEliminacionPerfil
+}
+
+rectangle #CDEBA5 ":SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS" as EstadoSalidaExitosa
+rectangle #CDEBA5 ":SOLICITUD_ELIMINACION_PERFIL_ABIERTA" as EstadoSalidaCancelada
+rectangle #CDEBA5 ":Collaboration AbrirSolicitudesEliminacionPerfil" as AbrirSolicitudesEliminacionPerfil
+
+EstadoEntrada -r-> EliminarPerfilView: eliminarPerfil()
+
+EliminarPerfilView -d-> PerfilController: solicitarConfirmacion(idSolicitud, idPerfil)
+PerfilController --> SesionService: obtenerSesionActual(authentication)
+PerfilController --> PerfilService: eliminarPerfilDesdeSolicitud(coordinador, idSolicitud)
+PerfilController --> EliminarPerfilView: presentarConfirmacion()
+EliminarPerfilView --> PerfilController: confirmarDesactivacion(idSolicitud, idPerfil)
+EliminarPerfilView --> PerfilController: cancelarDesactivacion()
+EliminarPerfilView --> PerfilController: validarDesactivacion(idPerfil)
+PerfilService --> SolicitudEliminacionPerfilRepository: obtenerPorId(idSolicitud)
+PerfilService --> PerfilRepository: obtenerPorId(idPerfil)
+PerfilService --> PerfilRepository: desactivar(idPerfil, fecha, coordinador)
+PerfilService --> SolicitudEliminacionPerfilRepository: marcarResuelta(idSolicitud)
+PerfilRepository -- Perfil
+SolicitudEliminacionPerfilRepository -- SolicitudEliminacionPerfil
+EliminarPerfilView ..> EstadoSalidaExitosa: perfilDesactivado()
+EliminarPerfilView ..> EstadoSalidaCancelada: desactivacionCancelada()
+EliminarPerfilView ..> AbrirSolicitudesEliminacionPerfil: abrirSolicitudesEliminacionPerfil()
+
+note right of PerfilRepository
+La baja revoca el acceso,
+pero conserva el perfil y
+sus relaciones historicas.
+end note
+
+@enduml

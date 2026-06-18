@@ -1,0 +1,40 @@
+@startuml responderPublicacion
+skinparam linetype polyline
+
+state in1 as "PUBLICACION_ABIERTA"
+in1 -[#green]-> responderPublicacion : responderPublicacion()
+
+state responderPublicacion as "responderPublicacion()" {
+    state " " as IntroduciendoRespuesta
+    state " " as ValidandoRespuesta
+
+    [*] -[#green]-> IntroduciendoRespuesta
+    note on link
+    <b>Investigador</b> solicita responder publicacion
+    <b>Sistema</b> presenta el formulario de respuesta
+    end note
+
+    IntroduciendoRespuesta -[#green]-> ValidandoRespuesta
+    note on link
+    <b>Investigador</b> introduce contenido y solicita publicar
+    end note
+
+    ValidandoRespuesta -[#green]-> [*]
+    note on link
+    <b>Sistema</b> registra la respuesta con su autor y fecha
+    end note
+
+    ValidandoRespuesta -[#red]-> IntroduciendoRespuesta
+    note on link
+    <b>Sistema</b> presenta errores de validacion
+    end note
+
+    IntroduciendoRespuesta -[#red]-> [*]
+    note on link
+    <b>Investigador</b> solicita cancelar
+    end note
+}
+
+responderPublicacion -[#green]-> PUBLICACION_ABIERTA : Respuesta publicada
+responderPublicacion -[#red]-> PUBLICACION_ABIERTA : Respuesta cancelada
+@enduml

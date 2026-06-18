@@ -1,0 +1,44 @@
+@startuml editarProyecto
+skinparam linetype polyline
+
+state proyecto as "PROYECTO_ABIERTO"
+proyecto -[#green]-> editarProyecto
+
+state editarProyecto as "editarProyecto()" {
+    state " " as PresentandoEdicion
+    state " " as ValidandoCambios
+
+    [*] -[#green]-> PresentandoEdicion
+    note on link
+    <b>Coordinador</b> solicita editar el proyecto abierto
+    <b>Sistema</b> presenta sus datos editables y las
+    transiciones de estado permitidas
+    end note
+
+    PresentandoEdicion -[#green]-> ValidandoCambios
+    note on link
+    <b>Coordinador</b> modifica datos y solicita guardar
+    <b>Sistema</b> valida fechas, datos obligatorios
+    y transición de estado
+    end note
+
+    ValidandoCambios -[#red]-> PresentandoEdicion
+    note on link
+    <b>Sistema</b> informa los cambios que deben corregirse
+    end note
+
+    ValidandoCambios -[#green]-> [*]
+    note on link
+    <b>Sistema</b> registra los cambios
+    end note
+
+    PresentandoEdicion -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> cancela
+    end note
+}
+
+editarProyecto -[#green]-> PROYECTO_ABIERTO: Proyecto actualizado
+editarProyecto -[#red]-> PROYECTO_ABIERTO: Edición cancelada
+
+@enduml

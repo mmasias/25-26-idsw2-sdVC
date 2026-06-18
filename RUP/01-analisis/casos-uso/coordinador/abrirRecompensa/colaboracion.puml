@@ -1,0 +1,47 @@
+@startuml abrirRecompensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoEntrada
+package abrirRecompensa as "abrirRecompensa()" {
+    rectangle #629EF9 DetalleRecompensaView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirRecompensas" as AbrirRecompensas
+rectangle #CDEBA5 ":Collaboration EliminarRecompensa" as EliminarRecompensa
+rectangle #CDEBA5 ":Collaboration EditarRecompensa" as EditarRecompensa
+
+EstadoEntrada -r-> DetalleRecompensaView: abrirRecompensa()
+
+DetalleRecompensaView -d-> RecompensaController: obtenerRecompensa(id)
+RecompensaController --> RecompensaService: obtenerGlobal(id)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+DetalleRecompensaView --> RecompensaController: prepararAccionesDisponibles(coordinador)
+RecompensaService --> RecompensaRepository: obtenerPorId(id)
+RecompensaService --> ProyectoRepository: verificarProyectoCompletado(recompensa)
+RecompensaService --> InvestigadorRepository: verificarBeneficiario(recompensa)
+RecompensaService --> RecompensaService: validarTipoSegunBeneficiario()
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+note right of RecompensaController
+El detalle conserva:
+- proyecto completado
+- investigador beneficiario
+- tipo permitido por sede/docencia
+end note
+DetalleRecompensaView ..> EstadoSalida: continuarNavegacion()
+DetalleRecompensaView ..> AbrirRecompensas: abrirRecompensas()
+DetalleRecompensaView ..> EliminarRecompensa: eliminarRecompensa()
+DetalleRecompensaView ..> EditarRecompensa: editarRecompensa()
+
+@enduml

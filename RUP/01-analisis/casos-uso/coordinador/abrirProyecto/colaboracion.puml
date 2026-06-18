@@ -1,0 +1,49 @@
+@startuml abrirProyecto-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PROYECTOS_ABIERTOS" as EstadoEntrada1
+rectangle #CDEBA5 ":ENTREGABLES_ABIERTOS" as EstadoEntrada2
+package abrirProyecto as "abrirProyecto()" {
+    rectangle #629EF9 DetalleProyectoView
+    rectangle #b5bd68 ProyectoController
+    rectangle #b5bd68 ProyectoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E EntregableRepository
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+    rectangle #F2AC4E Entregable
+}
+
+rectangle #CDEBA5 ":PROYECTO_ABIERTO" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration EditarProyecto" as EditarProyecto
+rectangle #CDEBA5 ":Collaboration EliminarProyecto" as EliminarProyecto
+rectangle #CDEBA5 ":Collaboration AgregarInvestigador" as AgregarInvestigador
+rectangle #CDEBA5 ":Collaboration EliminarInvestigador" as EliminarInvestigador
+rectangle #CDEBA5 ":Collaboration AbrirEntregables" as AbrirEntregables
+rectangle #CDEBA5 ":Collaboration AbrirInvestigadores" as AbrirInvestigadores
+rectangle #CDEBA5 ":Collaboration AbrirProyectos" as AbrirProyectos
+
+EstadoEntrada1 -r-> DetalleProyectoView: abrirProyecto(idProyecto)
+EstadoEntrada2 -r-> DetalleProyectoView: abrirProyecto(proyectoId)
+
+DetalleProyectoView -d-> ProyectoController: abrirProyecto(proyectoId)
+ProyectoController --> ProyectoService: obtener(id)
+ProyectoController --> SesionService: obtenerSesionActual(authentication)
+ProyectoService --> ProyectoRepository: obtenerPorId(proyectoId)
+ProyectoService --> InvestigadorRepository: obtenerEquipoPorProyecto(proyectoId)
+ProyectoService --> EntregableRepository: obtenerPorProyecto(proyectoId)
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+EntregableRepository -- Entregable
+DetalleProyectoView ..> EstadoSalida: continuarNavegacion()
+DetalleProyectoView ..> EditarProyecto: editarProyecto()
+DetalleProyectoView ..> EliminarProyecto: eliminarProyecto()
+DetalleProyectoView ..> AgregarInvestigador: agregarInvestigador()
+DetalleProyectoView ..> EliminarInvestigador: eliminarInvestigador()
+DetalleProyectoView ..> AbrirEntregables: abrirEntregables()
+DetalleProyectoView ..> AbrirInvestigadores: abrirInvestigadores()
+DetalleProyectoView ..> AbrirProyectos: abrirProyectos()
+
+@enduml

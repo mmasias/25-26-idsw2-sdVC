@@ -1,0 +1,132 @@
+@startuml crearRecompensa-coordinador-diseno
+title Diagrama de secuencia - Crear recompensa
+
+actor Coordinador
+participant "CrearRecompensaForm\n(React)" as Frontend
+participant "RecompensaController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "RecompensaService" as Service
+participant "ProyectoRepository" as ProyectoRepo
+participant "UsuarioRepository" as InvestigadorRepo
+participant "RecompensaRepository" as Repo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita crear recompensa
+activate Frontend
+Frontend -> Api: GET /api/recompensas/opciones-creacion\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Coordinador activa
+    Sesion --> Api: Coordinador autenticado
+    deactivate Sesion
+    Api -> Service: prepararCreacion()
+    activate Service
+    Service -> ProyectoRepo: findByEstadoOrderByNombreAsc(EstadoProyecto.COMPLETADO)
+    ProyectoRepo -> DB: SELECT * FROM proyectos WHERE estado = 'COMPLETADO'\nAND archivado = true
+    DB --> ProyectoRepo: Resultado de persistencia
+    ProyectoRepo --> Service: Proyectos disponibles
+    Service --> Api: OpcionesCreacionRecompensaResponse
+    deactivate Service
+    Api --> Frontend: 200 OK\nProyectos disponibles
+    deactivate Api
+    alt No existen proyectos disponibles
+        Frontend --> Coordinador: Presenta estado vacio y permite volver
+    else Existen proyectos disponibles
+        Frontend --> Coordinador: Presenta seleccion de proyecto
+
+        Coordinador -> Frontend: Selecciona proyecto completado
+        Frontend -> Api: GET /api/recompensas/opciones-creacion/{proyectoId}/beneficiarios
+        activate Api
+        Api -> Sesion: obtenerSesionActual(authentication)
+        Sesion --> Api: Coordinador autenticado
+        Api -> Service: obtenerBeneficiariosElegibles(proyectoId)
+        activate Service
+        Service -> ProyectoRepo: findById(proyectoId)
+        ProyectoRepo -> DB: SELECT * FROM proyectos WHERE id = ? AND estado = 'COMPLETADO'
+        DB --> ProyectoRepo: Resultado de persistencia
+        ProyectoRepo --> Service: Proyecto completado
+        Service -> InvestigadorRepo: findByRolAndActivoTrueOrderByNombreCompletoAsc(proyectoId)
+        InvestigadorRepo -> DB: SELECT u.* FROM usuarios u\nJOIN proyecto_investigadores pi ON pi.usuario_id = u.id\nWHERE pi.proyecto_id = ? AND u.activo = true
+        DB --> InvestigadorRepo: Resultado de persistencia
+        InvestigadorRepo --> Service: Beneficiarios elegibles
+        Service --> Api: Lista<BeneficiarioElegibleResponse>
+        deactivate Service
+        Api --> Frontend: 200 OK\nBeneficiarios elegibles
+        deactivate Api
+
+        alt No existen beneficiarios elegibles
+            Frontend --> Coordinador: Presenta estado vacio y permite cambiar proyecto
+        else Existen beneficiarios elegibles
+            Frontend --> Coordinador: Presenta seleccion de beneficiario
+            Coordinador -> Frontend: Selecciona beneficiario
+            Frontend -> Api: GET /api/recompensas/opciones-creacion/{proyectoId}/beneficiarios/{investigadorId}/tipos
+            activate Api
+            Api -> Sesion: obtenerSesionActual(authentication)
+            Sesion --> Api: Coordinador autenticado
+            Api -> Service: obtenerTiposPermitidos(proyectoId, investigadorId)
+            activate Service
+            Service -> InvestigadorRepo: findById(proyectoId, investigadorId)
+            InvestigadorRepo -> DB: SELECT * FROM usuarios WHERE id = ? AND rol = 'INVESTIGADOR' AND activo = true
+            DB --> InvestigadorRepo: Resultado de persistencia
+            InvestigadorRepo --> Service: Beneficiario con sede y condicion
+            Service -> Service: tiposPermitidos(beneficiario)
+            Service --> Api: TiposRecompensaPermitidosResponse
+            deactivate Service
+            Api --> Frontend: 200 OK\nTipos permitidos
+            deactivate Api
+            Frontend --> Coordinador: Permite introducir tipo, concepto y valor
+
+            alt Coordinador cancela
+                Coordinador -> Frontend: Cancela creacion
+                Frontend --> Coordinador: Presenta RECOMPENSAS_ABIERTAS
+            else Coordinador guarda
+                Coordinador -> Frontend: Introduce datos y guarda
+                Frontend -> Api: POST /api/recompensas\nRecompensaCreateRequest + cookie
+                activate Api
+                Api -> Sesion: obtenerSesionActual(authentication)
+                Sesion --> Api: Coordinador autenticado
+                Api -> Service: crear(datos)
+                activate Service
+                Service -> ProyectoRepo: findById(datos.proyectoId)
+                ProyectoRepo -> DB: SELECT * FROM proyectos WHERE id = ? AND estado = 'COMPLETADO'
+                DB --> ProyectoRepo: Resultado de persistencia
+                ProyectoRepo --> Service: Proyecto completado
+                Service -> InvestigadorRepo: findById(datos.proyectoId, datos.investigadorId)
+                InvestigadorRepo -> DB: SELECT * FROM usuarios WHERE id = ? AND rol = 'INVESTIGADOR' AND activo = true
+                DB --> InvestigadorRepo: Resultado de persistencia
+                InvestigadorRepo --> Service: Beneficiario con sede y condicion
+                Service -> Service: validarDatos(datos, beneficiario)\nReduccion: 4, 8, 12 o 16 horas
+                Service -> Repo: existsByProyectoAndBeneficiarioAndTipo(proyectoId, investigadorId, tipo)
+                Repo -> DB: SELECT EXISTS(SELECT 1 FROM recompensas WHERE proyecto_id = ? AND beneficiario_id = ? AND tipo = ? AND anulada = false)
+                DB --> Repo: Resultado de persistencia
+                Repo --> Service: true / false
+                alt Datos invalidos o recompensa duplicada
+                    Service --> Api: ValidacionException / ConflictoException
+                    deactivate Service
+                    Api --> Frontend: 400 Bad Request / 409 Conflict
+                    deactivate Api
+                    Frontend --> Coordinador: Presenta error y conserva formulario
+                else Recompensa valida
+                    Service -> Repo: save(recompensa)
+        Repo -> DB: INSERT INTO recompensas (proyecto_id, beneficiario_id, tipo, concepto,\nimporte_economico, horas_reduccion_docente, activa) VALUES (?, ?, ?, ?, ?, ?, true)
+                    DB --> Repo: Resultado de persistencia
+                    Repo --> Service: Recompensa creada
+                    Service --> Api: RecompensaDetalleResponse
+                    deactivate Service
+                    Api --> Frontend: 201 Created\nRecompensa creada
+                    deactivate Api
+                    Frontend --> Coordinador: Presenta RECOMPENSA_ABIERTA
+                end
+            end
+        end
+    end
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

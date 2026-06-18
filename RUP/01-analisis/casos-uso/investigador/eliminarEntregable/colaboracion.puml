@@ -1,0 +1,40 @@
+@startuml eliminarEntregable-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":ENTREGABLE_ABIERTO" as EstadoEntrada
+package eliminarEntregable as "eliminarEntregable()" {
+    rectangle #629EF9 EliminarEntregableView
+    rectangle #b5bd68 EntregableController
+    rectangle #b5bd68 EntregableService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E EntregableRepository
+    rectangle #F2AC4E Entregable
+}
+
+rectangle #CDEBA5 ":ENTREGABLES_ABIERTOS" as EstadoSalidaExitosa
+rectangle #CDEBA5 ":ENTREGABLE_ABIERTO" as EstadoSalidaCancelada
+rectangle #CDEBA5 ":Collaboration AbrirEntregables" as AbrirEntregables
+rectangle #CDEBA5 ":Collaboration AbrirEntregable" as AbrirEntregable
+
+EstadoEntrada -r-> EliminarEntregableView: eliminarEntregable()
+
+EliminarEntregableView -d-> EntregableController: solicitarConfirmacion(id)
+EntregableController --> EntregableService: retirar(id, motivo, investigador)
+EntregableController --> SesionService: obtenerSesionActual(authentication)
+EntregableController --> EliminarEntregableView: presentarConfirmacion()
+EliminarEntregableView --> EntregableController: confirmarRetiradaPropia(id, motivo, investigador)
+EliminarEntregableView --> EntregableController: cancelarRetirada()
+EntregableService --> EntregableRepository: obtenerActivoPorIdYAutor(id, investigador)
+EntregableService --> EntregableRepository: retirar(id, fecha, investigador, motivo)
+EntregableRepository -- Entregable
+EliminarEntregableView ..> EstadoSalidaExitosa: entregableRetirado()
+EliminarEntregableView ..> EstadoSalidaCancelada: retiradaCancelada()
+EliminarEntregableView ..> AbrirEntregables: abrirEntregables()
+EliminarEntregableView ..> AbrirEntregable: abrirEntregable()
+
+note right of EntregableRepository
+La retirada conserva versiones,
+autoria y relaciones historicas.
+end note
+
+@enduml

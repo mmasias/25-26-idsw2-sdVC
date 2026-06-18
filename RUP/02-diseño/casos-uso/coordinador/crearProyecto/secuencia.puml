@@ -1,0 +1,66 @@
+@startuml crearProyecto-coordinador-diseno
+title Diagrama de secuencia - Crear proyecto
+
+actor Coordinador
+participant "CrearProyectoForm\n(React)" as Frontend
+participant "ProyectoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "ProyectoService" as Service
+participant "ConvocatoriaRepository" as ConvocatoriaRepo
+participant "ProyectoRepository" as Repo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita crear proyecto
+activate Frontend
+Frontend -> Api: GET /api/proyectos/opciones-creacion\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+Sesion --> Api: Coordinador autenticado
+note right of Service: Responsabilidad interna: prepararCreacion
+activate Service
+Service -> ConvocatoriaRepo: findAllByOrderByFechaCierreAsc()
+ConvocatoriaRepo -> DB: SELECT * FROM convocatorias WHERE disponible = true ORDER BY fecha_fin
+DB --> ConvocatoriaRepo: Resultado de persistencia
+ConvocatoriaRepo --> Service: Convocatorias importadas
+Service --> Api: OpcionesCreacionProyectoResponse
+deactivate Service
+Api --> Frontend: 200 OK\nOpciones de creacion
+deactivate Api
+Frontend --> Coordinador: Presenta formulario minimo
+alt Coordinador cancela
+    Coordinador -> Frontend: Cancela creacion
+    Frontend --> Coordinador: Conserva PROYECTOS_ABIERTOS
+else Coordinador guarda
+    Coordinador -> Frontend: Introduce datos y guarda
+    Frontend -> Api: POST /api/proyectos\nProyectoCreateRequest + cookie
+    activate Api
+    Api -> Sesion: obtenerSesionActual(authentication)
+    Sesion --> Api: Coordinador autenticado
+    Api -> Service: crear(datos, coordinador)
+    activate Service
+    Service -> ConvocatoriaRepo: findById(datos.convocatoriaId)
+    ConvocatoriaRepo -> DB: SELECT * FROM convocatorias WHERE id = ? AND importada = true
+    DB --> ConvocatoriaRepo: Resultado de persistencia
+    ConvocatoriaRepo --> Service: Convocatoria / vacio
+note right of Service: Responsabilidad interna: validarDatosYFechas
+note right of Service: Responsabilidad interna: asignarCodigoCoordinadorYEstadoCreado
+    alt Datos invalidos
+        Service --> Api: ValidacionException
+        deactivate Service
+        Api --> Frontend: 400 Bad Request
+        deactivate Api
+        Frontend --> Coordinador: Presenta errores y conserva formulario
+    else Datos validos
+        Service -> Repo: save(proyecto)
+        Repo -> DB: INSERT INTO proyectos (codigo, nombre, descripcion, area, sede, estado,\nfecha_inicio, fecha_fin, convocatoria_id, archivado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, false)
+        DB --> Repo: Resultado de persistencia
+        Repo --> Service: Proyecto creado
+        Service --> Api: ProyectoDetalleResponse
+        deactivate Service
+        Api --> Frontend: 201 Created\nProyecto creado
+        deactivate Api
+        Frontend --> Coordinador: Presenta PROYECTO_ABIERTO
+    end
+end
+deactivate Frontend
+@enduml

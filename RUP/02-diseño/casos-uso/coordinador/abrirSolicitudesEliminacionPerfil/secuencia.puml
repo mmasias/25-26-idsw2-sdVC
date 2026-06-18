@@ -1,0 +1,50 @@
+@startuml abrirSolicitudesEliminacionPerfil-coordinador-diseño
+title Diagrama de secuencia - Abrir solicitudes de eliminación de perfil
+
+actor Coordinador
+participant "SolicitudesEliminacionPerfilPage\n(React)" as Frontend
+participant "SolicitudEliminacionPerfilController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "PerfilService" as SolicitudService
+participant "SolicitudEliminacionPerfilRepository" as SolicitudRepository
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita abrir solicitudes de eliminación
+activate Frontend
+Frontend -> Frontend: Comprobar sesión local
+Frontend -> Api: GET /api/solicitudes-eliminacion-perfil?criterio={criterio}\nCookie de sesión
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesión de Coordinador activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> SolicitudService: listarSolicitudesPendientes(criterio)
+    activate SolicitudService
+    alt Sin criterio
+        SolicitudService -> SolicitudRepository: findByEstadoOrderByFechaCreacionDesc()
+        SolicitudRepository -> DB: SELECT * FROM solicitudes_eliminacion_perfil WHERE estado = 'PENDIENTE' ORDER BY fecha_creacion DESC
+        DB --> SolicitudRepository: Resultado de persistencia
+    else Con criterio
+        SolicitudService -> SolicitudRepository: findByEstadoOrderByFechaCreacionDesc(criterio)
+    SolicitudRepository -> DB: SELECT s.* FROM solicitudes_eliminacion_perfil s JOIN usuarios u ON u.id = s.usuario_id\nWHERE s.estado = 'PENDIENTE' AND (LOWER(u.nombre_completo) LIKE ? OR LOWER(s.motivo) LIKE ?)\nORDER BY s.fecha_creacion DESC
+        DB --> SolicitudRepository: Resultado de persistencia
+    end
+    activate SolicitudRepository
+    SolicitudRepository --> SolicitudService: List<SolicitudEliminacionPerfil>
+    deactivate SolicitudRepository
+    SolicitudService --> Api: SolicitudesEliminacionPerfilResponse
+    deactivate SolicitudService
+    Api --> Frontend: 200 OK\nSolicitudesEliminacionPerfilResponse
+    deactivate Api
+    Frontend -> Frontend: Renderizar lista de solicitudes
+    Frontend --> Coordinador: Presenta SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS
+else Sesión ausente o rol no autorizado
+    Sesion --> Api: SesionNoValidaException / AccesoDenegado
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

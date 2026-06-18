@@ -1,0 +1,36 @@
+# FUNIBER > Coordinador > abrirInvestigadores > Diseño
+
+> |[🏠️](/README.md)|[📊](/RUP/00-casos-uso/01-actores-casos-uso/diagramas-contexto.md)|[Detalle](/RUP/00-casos-uso/02-detalle/coordinador/abrirInvestigadores/README.md)|[Análisis](/RUP/01-analisis/casos-uso/coordinador/abrirInvestigadores/README.md)|**Diseño**|[Desarrollo](/RUP/03-desarrollo/casos-uso/coordinador/abrirInvestigadores/README.md)|Pruebas|
+> |-|-|-|-|-|-|-|
+
+## Propósito
+
+Detallar la consulta del directorio de investigadores por el Coordinador, tanto en alcance global como en el contexto de un proyecto seleccionado.
+
+## Diagrama de secuencia
+
+|![Diseño: abrirInvestigadores()](/images/RUP/02-diseño/casos-uso/coordinador/abrirInvestigadores/secuencia.svg)|
+|-|
+|Código fuente: [secuencia.puml](secuencia.puml)|
+
+## Participantes
+
+- **InvestigadoresPage**: Presenta el directorio activo o los participantes del proyecto.
+- **InvestigadorController**: Expone `GET /api/investigadores`.
+- **SesionService**: Recupera la sesión autenticada y su rol.
+- **InvestigadorService**: Resuelve el alcance global o contextual y valida permisos.
+- **UsuarioRepository** y **ProyectoRepository**: Recuperan investigadores activos o participantes del proyecto.
+
+## Decisiones de Diseño
+
+- El mismo endpoint acepta `proyectoId` opcional para no duplicar el caso de uso.
+- La decisión de alcance se resuelve en servicio a partir de la sesión autenticada.
+- Sin `proyectoId` el Coordinador consulta el directorio global de investigadores activos.
+- Con `proyectoId` el listado se limita a los participantes del proyecto seleccionado.
+- El filtrado se aplica en servidor dentro del alcance recibido.
+- El listado permite abrir el detalle del investigador y, en alcance global, iniciar su alta.
+
+## Referencias
+
+- [Detalle](/RUP/00-casos-uso/02-detalle/coordinador/abrirInvestigadores/README.md)
+- [Análisis](/RUP/01-analisis/casos-uso/coordinador/abrirInvestigadores/README.md)

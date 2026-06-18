@@ -1,0 +1,49 @@
+@startuml abrirOpcionesCargaTrabajo-investigador-diseno
+title Diagrama de secuencia - Abrir carga de trabajo propia del Investigador
+
+actor Investigador
+participant "CargaTrabajoPropiaPage\n(React)" as Frontend
+participant "CargaTrabajoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "CargaTrabajoService" as Service
+participant "CargaTrabajoRepository" as CargaRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Solicita abrir carga de trabajo
+activate Frontend
+Frontend -> Frontend: Comprobar sesion local
+Frontend -> Api: GET /api/carga-trabajo/me\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> Service: obtenerCargaPropia(investigador)
+    activate Service
+    Service -> CargaRepo: findByUsuario(investigador)
+    CargaRepo -> DB: SELECT * FROM cargas_trabajo WHERE usuario_id = ?
+    DB --> CargaRepo: Resultado de persistencia
+    activate CargaRepo
+    CargaRepo --> Service: CargaTrabajo
+    deactivate CargaRepo
+    alt Sede con docencia investigadora
+        Service -> Service: mapearCarga(maximo16h)
+    else Sede solo investigadora
+        Service -> Service: mapearCarga()
+    end
+    Service --> Api: CargaTrabajoPropiaResponse
+    deactivate Service
+    Api --> Frontend: 200 OK\nCargaTrabajoPropiaResponse
+    deactivate Api
+    Frontend -> Frontend: Renderizar resumen propio
+    Frontend --> Investigador: Presenta OPCIONES_CARGA_TRABAJO_ABIERTAS
+else Sesion ausente
+    Sesion --> Api: SesionNoValidaException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized
+    deactivate Api
+    Frontend --> Investigador: Presenta SESION_CERRADA
+end
+deactivate Frontend
+@enduml

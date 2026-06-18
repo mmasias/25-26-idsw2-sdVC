@@ -1,0 +1,34 @@
+@startuml eliminarPublicacion-coordinador-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PUBLICACION_ABIERTA o MI_PUBLICACION_ABIERTA" as EstadoEntrada
+package eliminarPublicacion as "eliminarPublicacion()" {
+    rectangle #629EF9 "eliminarPublicacionView" as View
+    rectangle #b5bd68 PublicacionController
+    rectangle #b5bd68 PublicacionService
+    rectangle #b5bd68 SesionService
+    rectangle #b5bd68 PoliticaPublicacion
+    rectangle #F2AC4E PublicacionRepository
+    rectangle #F2AC4E Publicacion
+
+}
+rectangle #CDEBA5 ":Listado correspondiente al contexto de origen" as EstadoSalida
+
+EstadoEntrada -r-> View: eliminarPublicacion()
+View -d-> PublicacionController: eliminarPublicacion(solicitud, actor)
+PublicacionController --> PublicacionService: retirar(id, motivo, actor)
+PublicacionController --> SesionService: obtenerSesionActual(authentication)
+PublicacionService --> PublicacionRepository: obtenerActivaPorId(id)
+PublicacionService --> PoliticaPublicacion: permitirGestionGlobal(actor, publicacion)
+PublicacionService --> PublicacionRepository: retirar(publicacion, motivo, actor)
+PublicacionRepository -- Publicacion
+
+View ..> EstadoSalida: continuarNavegacion()
+
+note right of PoliticaPublicacion
+Responsabilidad unica:
+autoriza sin persistir ni presentar.
+Permite ampliar reglas sin modificar
+la coordinacion del caso de uso.
+end note
+@enduml

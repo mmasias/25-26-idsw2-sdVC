@@ -1,0 +1,28 @@
+@startuml abrirEntregables-coordinador-diseno
+title Diagrama de secuencia - Abrir entregables de proyecto
+actor Coordinador
+participant "EntregablesPage\n(React)" as Frontend
+participant "EntregableController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "EntregableService" as Service
+participant "ProyectoRepository" as ProyectoRepo
+participant "EntregableRepository" as Repo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita abrir entregables del proyecto
+Frontend -> Api: GET /api/proyectos/{proyectoId}/entregables?filtro=\nCookie de sesion
+Api -> Sesion: obtenerSesionActual(authentication)
+Sesion --> Api: Coordinador autenticado
+Api -> Service: listar(proyectoId, filtro)
+Service -> ProyectoRepo: findById(proyectoId)
+ProyectoRepo -> DB: SELECT * FROM proyectos\nWHERE id = ? AND archivado = false
+DB --> ProyectoRepo: Proyecto / vacio
+ProyectoRepo --> Service: Proyecto / vacio
+Service -> Repo: findByProyectoIdAndRetiradoOrderByFechaCreacionDesc(proyectoId, filtro)
+Repo -> DB: SELECT * FROM entregables\nWHERE proyecto_id = ? AND retirado = false\nAND coincide_filtro = true
+DB --> Repo: Entregables activos
+Repo --> Service: Entregables activos
+Service --> Api: List<EntregableResumenResponse>
+Api --> Frontend: 200 OK
+Frontend --> Coordinador: Presenta ENTREGABLES_ABIERTOS
+@enduml

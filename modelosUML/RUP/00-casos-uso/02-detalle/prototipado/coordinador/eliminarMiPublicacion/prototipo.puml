@@ -1,0 +1,62 @@
+@startsalt miPublicacionAbierta-wireframe
+{
+    ====
+    <b>GIPF - MI PUBLICACIÓN</b>
+    ====
+
+    {
+        { <b>ID:</b> | "PUB-INV-2025-014" }
+        { <b>Título:</b> | "Convocatoria interna de proyectos de investigación 2025" }
+        { <b>Estado:</b> | "Publicada" }
+        { <b>Visibilidad:</b> | "Pública" }
+        { <b>Fecha:</b> | "12/02/2025" }
+    }
+
+    --
+
+    <b>Descripción</b>
+    {
+        "Se abre la convocatoria interna para la presentación de proyectos de investigación
+        correspondientes al curso académico 2025."
+    }
+
+    --
+
+    <b>Adjuntos</b>
+    {
+        { "📎 Bases_Convocatoria_Investigacion_2025.pdf" | [Ver] }
+        { "📎 Plantilla_Propuesta_Proyecto.docx" | [Ver] }
+    }
+
+    --
+
+    { [Volver a Mis publicaciones] | [Editar publicación] | [Retirar publicación] }
+}
+
+@endsalt
+
+    @startsalt eliminarPublicacion-wireframe
+    {
+    ====
+    <b>GIPF - ELIMINAR PUBLICACIÓN</b>
+    ====
+
+    <b>Confirmación</b>
+    {
+        "¿Seguro que deseas eliminar esta publicación?"
+
+        --
+        <b>ID:</b> "PUB-INV-2025-014"
+        <b>Título:</b> "Convocatoria interna de proyectos de investigación 2025"
+        <b>Estado:</b> "Publicada"
+        <b>Visibilidad:</b> "Pública"
+
+        --
+        "Esta acción es irreversible."
+    }
+
+    --
+
+    { [Cancelar] | [Retirar de la publicación activa] }
+    }
+@endsalt

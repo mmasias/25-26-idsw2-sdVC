@@ -1,0 +1,60 @@
+@startuml abrirInvestigador-investigador-diseno
+title Diagrama de secuencia - Abrir investigador como Investigador
+
+actor Investigador
+participant "InvestigadorDetallePage\n(React)" as Frontend
+participant "InvestigadorController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "InvestigadorService" as Service
+participant "UsuarioRepository" as UsuarioRepo
+participant "ProyectoRepository" as ProyectoRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Selecciona investigador visible
+activate Frontend
+Frontend -> Api: GET /api/investigadores/{id}?proyectoId={proyectoId?}\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion valida
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> Service: obtener(sesion, id, proyectoId?)
+    activate Service
+    Service -> UsuarioRepo: findById(id)
+    UsuarioRepo -> DB: SELECT * FROM usuarios WHERE id = ?
+    DB --> UsuarioRepo: Resultado de persistencia
+    UsuarioRepo --> Service: Usuario / vacio
+    alt Consulta desde directorio general
+        Service -> ProyectoRepo: findDistinctByInvestigadoresIdOrderByNombreAsc(sesion.usuario.id)
+        ProyectoRepo -> DB: SELECT DISTINCT p.* FROM proyectos p JOIN proyecto_investigadores pi ON pi.proyecto_id = p.id WHERE pi.usuario_id = ? ORDER BY p.nombre
+        DB --> ProyectoRepo: Resultado de persistencia
+        ProyectoRepo --> Service: Lista<ProyectoResumen>
+    else Consulta desde proyecto compartido
+        Service -> ProyectoRepo: findById(proyectoId)
+        ProyectoRepo -> DB: SELECT * FROM proyectos WHERE id = ?
+        DB --> ProyectoRepo: Resultado de persistencia
+        ProyectoRepo --> Service: Proyecto / vacio
+    end
+    alt Investigador inexistente o no visible
+        Service --> Api: RecursoNoEncontradoException
+        deactivate Service
+        Api --> Frontend: 404 Not Found
+        deactivate Api
+        Frontend --> Investigador: Presenta investigador no disponible
+    else Investigador visible
+        Service --> Api: InvestigadorDetalleResponse
+        deactivate Service
+        Api --> Frontend: 200 OK\nDetalle visible del investigador
+        deactivate Api
+        Frontend --> Investigador: Presenta INVESTIGADOR_ABIERTO
+    end
+else Sesion ausente o invalida
+    Sesion --> Api: SesionNoValidaException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized
+    deactivate Api
+    Frontend --> Investigador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

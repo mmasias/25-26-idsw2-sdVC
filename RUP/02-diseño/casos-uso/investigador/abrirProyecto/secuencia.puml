@@ -1,0 +1,58 @@
+@startuml abrirProyecto-investigador-diseno
+title Diagrama de secuencia - Abrir proyecto como Investigador
+
+actor Investigador
+participant "ProyectoDetallePage\n(React)" as Frontend
+participant "ProyectoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "ProyectoService" as Service
+participant "ProyectoRepository" as Repo
+participant "UsuarioRepository" as InvestigadorRepo
+participant "EntregableRepository" as EntregableRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Selecciona proyecto
+activate Frontend
+Frontend -> Api: GET /api/proyectos/me/{id}\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Investigador activa
+    Sesion --> Api: Investigador autenticado
+    deactivate Sesion
+    Api -> Service: obtener(id, investigadorId)
+    activate Service
+    Service -> Repo: findById(id, investigadorId)
+    Repo -> DB: SELECT p.* FROM proyectos p JOIN proyecto_investigadores pi ON pi.proyecto_id = p.id WHERE p.id = ? AND pi.usuario_id = ? AND p.archivado = false
+    DB --> Repo: Resultado de persistencia
+    Repo --> Service: Proyecto / vacio
+    alt Proyecto inexistente, archivado o no visible
+        Service --> Api: RecursoNoEncontradoException
+        deactivate Service
+        Api --> Frontend: 404 Not Found
+        deactivate Api
+        Frontend --> Investigador: Presenta proyecto no encontrado
+    else Proyecto visible
+        Service -> InvestigadorRepo: findByRolAndActivoTrueOrderByNombreCompletoAsc(id)
+        InvestigadorRepo -> DB: SELECT u.* FROM usuarios u JOIN proyecto_investigadores pi ON pi.usuario_id = u.id WHERE pi.proyecto_id = ?
+        DB --> InvestigadorRepo: Resultado de persistencia
+        InvestigadorRepo --> Service: Equipo visible
+        Service -> EntregableRepo: findByProyectoIdAndRetiradoOrderByFechaCreacionDesc(id, investigadorId)
+        EntregableRepo -> DB: SELECT * FROM entregables WHERE proyecto_id = ? AND retirado = false
+        DB --> EntregableRepo: Resultado de persistencia
+        EntregableRepo --> Service: Entregables visibles
+        Service --> Api: ProyectoDetalleResponse
+        deactivate Service
+        Api --> Frontend: 200 OK\nDetalle visible
+        deactivate Api
+        Frontend --> Investigador: Presenta PROYECTO_ABIERTO
+    end
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Investigador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

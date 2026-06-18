@@ -1,0 +1,47 @@
+@startuml abrirProyecto
+skinparam linetype polyline
+
+state proyectos as "PROYECTOS_ABIERTOS"
+state entregables as "ENTREGABLES_ABIERTOS"
+proyectos -[#green]-> abrirProyecto
+entregables -[#green]-> abrirProyecto
+
+state abrirProyecto as "abrirProyecto(proyectoId)" {
+    state " " as ValidandoParticipacion
+    state " " as PresentandoProyecto
+
+    [*] -[#green]-> ValidandoParticipacion
+    note on link
+    <b>Investigador</b> solicita abrir el proyecto seleccionado
+    end note
+
+    ValidandoParticipacion -[#green]-> PresentandoProyecto
+    note on link
+    <b>Sistema</b> valida que el proyecto sea visible para el investigador
+    y presenta:
+    • Código, título, estado, convocatoria y coordinador
+    • Fechas y descripción
+    • Equipo investigador
+    • Entregables asociados
+
+    Permite abrir entregables, abrir investigadores o volver a proyectos
+    end note
+
+    ValidandoParticipacion -[#red]-> [*]
+    note on link
+    <b>Sistema</b> informa que el proyecto no está disponible
+    end note
+
+    PresentandoProyecto -[#green]-> [*]
+    note on link
+    <b>Investigador</b> consulta el detalle o solicita una acción
+    end note
+}
+
+abrirProyecto -[#green]-> PROYECTO_ABIERTO
+abrirProyecto -[#red]-> PROYECTOS_ABIERTOS: Proyecto no disponible
+abrirProyecto -[#green]-> ENTREGABLES_ABIERTOS: abrirEntregables()
+abrirProyecto -[#green]-> INVESTIGADORES_ABIERTOS: abrirInvestigadores()
+abrirProyecto -[#green]-> PROYECTOS_ABIERTOS: abrirProyectos()
+
+@enduml

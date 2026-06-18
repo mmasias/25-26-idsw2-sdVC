@@ -1,0 +1,33 @@
+@startuml abrirSolicitudesEliminacionPerfil-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":OPCIONES_PERFIL_ABIERTO" as EstadoEntradaOpciones
+rectangle #CDEBA5 ":SOLICITUD_ELIMINACION_PERFIL_ABIERTA" as EstadoEntradaSolicitud
+package abrirSolicitudesEliminacionPerfil as "abrirSolicitudesEliminacionPerfil()" {
+    rectangle #629EF9 ListarSolicitudesEliminacionPerfilView
+    rectangle #b5bd68 SolicitudEliminacionPerfilController
+    rectangle #b5bd68 PerfilService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E SolicitudEliminacionPerfilRepository
+    rectangle #F2AC4E SolicitudEliminacionPerfil
+}
+
+rectangle #CDEBA5 ":SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirSolicitudEliminacionPerfil" as AbrirSolicitudEliminacionPerfil
+rectangle #CDEBA5 ":Collaboration AbrirOpcionesPerfil" as AbrirOpcionesPerfil
+
+EstadoEntradaOpciones -r-> ListarSolicitudesEliminacionPerfilView: abrirSolicitudesEliminacionPerfil()
+EstadoEntradaSolicitud -d-> ListarSolicitudesEliminacionPerfilView: abrirSolicitudesEliminacionPerfil()
+
+ListarSolicitudesEliminacionPerfilView -d-> SolicitudEliminacionPerfilController: listarSolicitudesPendientes()
+SolicitudEliminacionPerfilController --> SesionService: obtenerSesionActual(authentication)
+SolicitudEliminacionPerfilController --> PerfilService: listarSolicitudesPendientes(criterio)
+ListarSolicitudesEliminacionPerfilView --> SolicitudEliminacionPerfilController: filtrarSolicitudes(criterio)
+PerfilService --> SolicitudEliminacionPerfilRepository: obtenerPendientes() : List<SolicitudEliminacionPerfil>
+PerfilService --> SolicitudEliminacionPerfilRepository: buscarPorCriterio(criterio) : List<SolicitudEliminacionPerfil>
+SolicitudEliminacionPerfilRepository -- SolicitudEliminacionPerfil
+ListarSolicitudesEliminacionPerfilView ..> EstadoSalida: solicitudesEliminacionPerfilAbiertas()
+ListarSolicitudesEliminacionPerfilView ..> AbrirSolicitudEliminacionPerfil: abrirSolicitudEliminacionPerfil(id)
+ListarSolicitudesEliminacionPerfilView ..> AbrirOpcionesPerfil: abrirOpcionesPerfil()
+
+@enduml

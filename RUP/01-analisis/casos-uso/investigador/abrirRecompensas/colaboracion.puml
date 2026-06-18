@@ -1,0 +1,52 @@
+@startuml abrirRecompensas-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoEntrada1
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada2
+package abrirRecompensas as "abrirRecompensas()" {
+    rectangle #629EF9 ListarRecompensasView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirRecompensa" as AbrirRecompensa
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada1 -r-> ListarRecompensasView: abrirRecompensas(idRecompensa)
+EstadoEntrada2 -r-> ListarRecompensasView: abrirRecompensas()
+
+ListarRecompensasView -d-> RecompensaController: listarRecompensasPropias(investigador, contexto)
+RecompensaController --> RecompensaService: listarPropias(investigadorId, criterio)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+ListarRecompensasView --> RecompensaController: filtrarRecompensasPropias(criterio)
+RecompensaService --> InvestigadorRepository: obtenerPerfil(investigador)
+RecompensaService --> RecompensaRepository: obtenerPropiasDeProyectosCompletados(investigador)
+RecompensaService --> RecompensaRepository: obtenerPropiasPorContexto(investigador, contexto)
+RecompensaService --> RecompensaRepository: buscarPropiasPorCriterio(investigador, criterio)
+RecompensaService --> ProyectoRepository: verificarCompletados()
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+note right of RecompensaController
+Contexto opcional:
+- sin identificador: listado propio
+- con identificador: listado propio acotado
+
+Reglas:
+- solo recompensas propias
+- docente: economica o reduccion
+- no docente: solo economica
+end note
+ListarRecompensasView ..> EstadoSalida: continuarNavegacion()
+ListarRecompensasView ..> AbrirRecompensa: abrirRecompensa()
+ListarRecompensasView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

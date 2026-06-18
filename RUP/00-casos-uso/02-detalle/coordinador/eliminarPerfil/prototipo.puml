@@ -1,0 +1,37 @@
+@startsalt eliminarPerfil-wireframe
+{
+    ====
+    <b>GIPF - ELIMINAR PERFIL</b>
+    ====
+    {
+        <b>Datos del investigador:</b>
+        --
+        {
+            {
+            {<b>Nombre:</b>             | "Ana López                                    "
+            <b>Correo electrónico:</b>  | "ana.lopez@funiber.org                         "}
+
+            {<b>Fecha de solicitud:</b> | "15-05-2026                                    "
+            <b>Motivo:</b>             | "Cese de actividad en la red                   "}
+            }
+        }
+
+        --
+
+        <b>Confirmación de desactivación</b>
+        {
+            <b>¿Está seguro de desactivar este perfil?</b>
+            <i>Advertencia: el acceso se revocará, pero el histórico se conservará.</i>
+
+            --
+            <b>Al confirmar:</b>
+            • Se desactivará el acceso del investigador y se conservará su histórico
+            • Se volverá al listado de solicitudes actualizado
+        }
+
+        ~~
+
+        {[Confirmar desactivación] | [Cancelar]}
+    }
+}
+@endsalt

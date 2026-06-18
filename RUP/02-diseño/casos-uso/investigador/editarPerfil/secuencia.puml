@@ -1,0 +1,53 @@
+@startuml editarPerfil-investigador-diseño
+title Diagrama de secuencia - Editar perfil del Investigador
+
+actor Investigador
+participant "EditarPerfilForm\n(React)" as Frontend
+participant "PerfilController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "PerfilService" as PerfilService
+participant "UsuarioRepository" as PerfilRepository
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Solicita editar su perfil
+activate Frontend
+Frontend -> Frontend: Precargar formulario con PerfilResponse actual
+Frontend --> Investigador: Muestra formulario con datos precargados
+Investigador -> Frontend: Modifica datos y guarda
+Frontend -> Frontend: Comprobar sesión local
+Frontend -> Api: PATCH /api/perfil\nPerfilUpdateRequest + cookie
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesión activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> PerfilService: actualizarPerfilPropio(investigador, datos)
+    activate PerfilService
+note right of PerfilService: Responsabilidad interna: validarCambios
+    PerfilService -> PerfilRepository: findByNombreUsuario(investigador)
+    PerfilRepository -> DB: SELECT * FROM usuarios WHERE usuario_id = ?
+    DB --> PerfilRepository: Resultado de persistencia
+    activate PerfilRepository
+    PerfilRepository --> PerfilService: Perfil
+    PerfilService -> PerfilService: actualizar(perfil, datos)
+    PerfilService -> PerfilRepository: save(perfilActualizado)
+    PerfilRepository -> DB: UPDATE usuarios SET nombre_completo = ?, correo = ?, unidad = ?,\nlinea_investigacion = ?, biografia = ? WHERE id = ?
+    DB --> PerfilRepository: Resultado de persistencia
+    PerfilRepository --> PerfilService: Perfil actualizado
+    deactivate PerfilRepository
+    PerfilService --> Api: PerfilResponse
+    deactivate PerfilService
+    Api --> Frontend: 200 OK\nPerfilResponse
+    deactivate Api
+    Frontend -> Frontend: Actualizar datos de perfil y notificar éxito
+    Frontend --> Investigador: Presenta OPCIONES_PERFIL_ABIERTO actualizado
+else Datos inválidos o sesión ausente
+    Sesion --> Api: SesionNoValidaException / validación fallida
+    deactivate Sesion
+    Api --> Frontend: 400 Bad Request / 401 Unauthorized
+    deactivate Api
+    Frontend --> Investigador: Presenta error de edición
+end
+deactivate Frontend
+@enduml

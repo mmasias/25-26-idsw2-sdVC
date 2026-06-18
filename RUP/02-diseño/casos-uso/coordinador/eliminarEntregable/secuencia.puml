@@ -1,0 +1,37 @@
+@startuml eliminarEntregable-coordinador-diseno
+title Diagrama de secuencia - Retirar entregable
+actor Coordinador
+participant "EntregableDetallePage\n(React)" as Frontend
+participant "EntregableController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "EntregableService" as Service
+participant "EntregableRepository" as Repo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita retirar entregable
+Frontend --> Coordinador: Presenta confirmacion y solicita motivo
+alt Coordinador cancela
+  Frontend --> Coordinador: Conserva ENTREGABLE_ABIERTO
+else Coordinador confirma
+  Coordinador -> Frontend: Confirma retirada con motivo
+  Frontend -> Api: PATCH /api/entregables/{id}/retirada\nmotivo + cookie
+  Api -> Sesion: obtenerSesionActual(authentication)
+  Sesion --> Api: Coordinador autenticado
+  Api -> Service: retirar(id, motivo, coordinador)
+  Service -> Repo: findByIdAndRetirado(id)
+  Repo -> DB: SELECT * FROM entregables\nWHERE id = ? AND retirado = false
+  DB --> Repo: Entregable / vacio
+  Repo --> Service: Entregable / vacio
+  Service -> Repo: save(id, fecha, coordinador, motivo)
+  Repo -> DB: UPDATE entregables SET retirado = true,\nfecha_retirada = ?, retirado_por_id = ?, motivo_retirada = ?\nWHERE id = ?
+  DB --> Repo: Entregable retirado
+  Repo --> Service: Entregable retirado
+  note right of Repo
+  Conserva autoria, proyecto,
+  archivos y versiones.
+  end note
+  Service --> Api: EntregableRetiradoResponse
+  Api --> Frontend: 200 OK
+  Frontend --> Coordinador: Presenta ENTREGABLES_ABIERTOS
+end
+@enduml

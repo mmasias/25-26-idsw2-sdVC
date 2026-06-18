@@ -1,0 +1,45 @@
+@startuml abrirRecompensas-investigador-diseno
+title Diagrama de secuencia - Abrir recompensas propias
+
+actor Investigador
+participant "MisRecompensasPage\n(React)" as Frontend
+participant "RecompensaController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "RecompensaService" as Service
+participant "RecompensaRepository" as Repo
+participant "ProyectoRepository" as ProyectoRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Solicita abrir recompensas
+activate Frontend
+Frontend -> Api: GET /api/recompensas/me?criterio={criterio}\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Investigador activa
+    Sesion --> Api: Investigador autenticado
+    deactivate Sesion
+    Api -> Service: listarPropias(investigadorId, criterio)
+    activate Service
+    Service -> Repo: findByBeneficiarioOrderByFechaCreacionDesc(investigadorId, criterio)
+    Repo -> DB: SELECT r.* FROM recompensas r JOIN proyectos p ON p.id = r.proyecto_id WHERE r.beneficiario_id = ? AND p.estado = 'COMPLETADO' AND r.anulada = false
+    DB --> Repo: Resultado de persistencia
+    Repo --> Service: Lista<Recompensa>
+    Service -> ProyectoRepo: findAll(proyectoIds)
+    ProyectoRepo -> DB: SELECT * FROM proyectos WHERE id IN (?)
+    DB --> ProyectoRepo: Resultado de persistencia
+    ProyectoRepo --> Service: Proyectos completados
+    Service --> Api: Lista<RecompensaResumenResponse>
+    deactivate Service
+    Api --> Frontend: 200 OK\nRecompensas propias
+    deactivate Api
+    Frontend --> Investigador: Presenta RECOMPENSAS_ABIERTAS
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Investigador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

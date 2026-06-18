@@ -1,0 +1,56 @@
+@startuml abrirInvestigadores-coordinador-diseno
+title Diagrama de secuencia - Abrir investigadores como Coordinador
+
+actor Coordinador
+participant "InvestigadoresPage\n(React)" as Frontend
+participant "InvestigadorController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "InvestigadorService" as Service
+participant "UsuarioRepository" as UsuarioRepo
+participant "ProyectoRepository" as ProyectoRepo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita abrir investigadores
+activate Frontend
+Frontend -> Api: GET /api/investigadores?criterio={criterio}&proyectoId={id?}\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion valida
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> Service: listar(sesion, criterio, proyectoId?)
+    activate Service
+    alt Rol Coordinador y sin proyecto seleccionado
+        Service -> UsuarioRepo: findByRolAndActivoTrueOrderByNombreCompletoAsc(INVESTIGADOR)
+        UsuarioRepo -> DB: SELECT * FROM usuarios WHERE rol = ? AND activo = true ORDER BY nombre_completo
+        DB --> UsuarioRepo: Resultado de persistencia
+        UsuarioRepo --> Service: Lista<Usuario>
+    else Con proyecto seleccionado
+        Service -> ProyectoRepo: findById(proyectoId, criterio)
+        ProyectoRepo -> DB: SELECT u.* FROM usuarios u JOIN proyecto_investigadores pi ON pi.usuario_id = u.id WHERE pi.proyecto_id = ?
+        DB --> ProyectoRepo: Resultado de persistencia
+        ProyectoRepo --> Service: Lista<Usuario>
+    else Rol no autorizado
+        Service --> Api: AccesoNoPermitidoException
+        deactivate Service
+        Api --> Frontend: 403 Forbidden
+        deactivate Api
+        Frontend --> Coordinador: Presenta error de acceso
+    end
+    alt Respuesta exitosa
+        Service --> Api: Lista<InvestigadorResumenResponse>
+        deactivate Service
+        Api --> Frontend: 200 OK\nDirectorio de investigadores
+        deactivate Api
+        Frontend --> Coordinador: Presenta INVESTIGADORES_ABIERTOS
+    end
+else Sesion ausente o invalida
+    Sesion --> Api: SesionNoValidaException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

@@ -1,0 +1,28 @@
+@startuml crearInvestigador-analisis
+skinparam linetype polyline
+
+actor Coordinador
+rectangle #CDEBA5 ":INVESTIGADORES_ABIERTOS" as InvestigadoresAbiertos
+package crearInvestigador as "crearInvestigador()" {
+    rectangle #629EF9 CrearInvestigadorView
+    rectangle #b5bd68 CrearInvestigadorController
+    rectangle #b5bd68 InvestigadorService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Investigador
+}
+rectangle #CDEBA5 ":INVESTIGADOR_ABIERTO" as InvestigadorAbierto
+rectangle #CDEBA5 ":INVESTIGADORES_ABIERTOS" as CreacionCancelada
+
+Coordinador -- InvestigadoresAbiertos
+InvestigadoresAbiertos -r-> CrearInvestigadorView: crearInvestigador()
+CrearInvestigadorView -d-> CrearInvestigadorController: registrarInvestigador(datosMinimos) : Investigador
+CrearInvestigadorController --> InvestigadorService: crear(sesion, datos)
+CrearInvestigadorController --> SesionService: obtenerSesionActual(authentication)
+InvestigadorService --> InvestigadorRepository: existeUsuarioOCorreo(datosMinimos) : boolean
+InvestigadorService --> Investigador: crear(datosMinimos) : Investigador
+InvestigadorService --> InvestigadorRepository: guardar(Investigador) : Investigador
+InvestigadorRepository -- Investigador
+CrearInvestigadorView ..> InvestigadorAbierto: abrirInvestigador(idInvestigador)
+CrearInvestigadorView ..> CreacionCancelada: cancelarCreacion()
+@enduml

@@ -1,0 +1,32 @@
+@startuml editarCargaTrabajo-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":OPCIONES_CARGA_TRABAJO_ABIERTAS" as EstadoEntrada
+package editarCargaTrabajo as "editarCargaTrabajo()" {
+    rectangle #629EF9 EditarCargaTrabajoPropiaView
+    rectangle #b5bd68 CargaTrabajoController
+    rectangle #b5bd68 CargaTrabajoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E CargaTrabajoRepository
+    rectangle #F2AC4E CargaTrabajo
+}
+
+rectangle #CDEBA5 ":OPCIONES_CARGA_TRABAJO_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada -r-> EditarCargaTrabajoPropiaView: editarCargaTrabajo()
+
+EditarCargaTrabajoPropiaView -d-> CargaTrabajoController: obtenerCargaPropia(investigador)
+CargaTrabajoController --> CargaTrabajoService: actualizarCargaPropia(investigador, datos)
+CargaTrabajoController --> SesionService: obtenerSesionActual(authentication)
+EditarCargaTrabajoPropiaView --> CargaTrabajoController: validarHoras(datos)
+EditarCargaTrabajoPropiaView --> CargaTrabajoController: actualizarCargaPropia(investigador, datos)
+CargaTrabajoService --> CargaTrabajoRepository: obtenerPorUsuario(investigador)
+CargaTrabajoService --> CargaTrabajo: validarLimiteDocente(maximo16h)
+CargaTrabajoService --> CargaTrabajoRepository: actualizar(cargaTrabajo)
+CargaTrabajoRepository -- CargaTrabajo
+EditarCargaTrabajoPropiaView ..> EstadoSalida: cargaTrabajoActualizada()
+EditarCargaTrabajoPropiaView ..> EstadoSalida: cancelarEdicion()
+EditarCargaTrabajoPropiaView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

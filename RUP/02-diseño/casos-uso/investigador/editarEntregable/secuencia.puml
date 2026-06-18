@@ -1,0 +1,36 @@
+@startuml editarEntregable-investigador-diseno
+title Diagrama de secuencia - Editar entregable propio
+actor Investigador
+participant "EditarEntregableForm\n(React)" as Frontend
+participant "EntregableController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "EntregableService" as Service
+participant "EntregableRepository" as Repo
+participant "ArchivoEntregableRepository" as ArchivoRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Modifica datos y guarda
+Frontend -> Api: PATCH /api/entregables/{id}\nEntregableUpdateRequest + archivo? + cookie
+Api -> Sesion: obtenerSesionActual(authentication)
+Sesion --> Api: Investigador autenticado
+Api -> Service: actualizar(id, cambios, archivo?, investigador)
+Service -> Repo: findByIdAndRetirado(id, investigador)
+Repo -> DB: SELECT * FROM entregables\nWHERE id = ? AND autor_id = ? AND retirado = false
+DB --> Repo: Entregable propio / vacio
+Repo --> Service: Entregable propio / vacio
+Service -> Service: actualizar()
+alt No es autor, esta retirado o datos invalidos
+  Service --> Api: AccesoDenegadoException / RecursoNoEncontradoException / ValidacionException
+  Api --> Frontend: 403 / 404 / 400
+else Cambios validos
+  Service -> Repo: save(entregable)
+  Repo -> DB: UPDATE entregables SET titulo = ?,\ndescripcion = ?, estado = ? WHERE id = ? AND autor_id = ?
+  DB --> Repo: Entregable actualizado
+  Service -> ArchivoRepo: save(entregable, archivo, investigador)
+  ArchivoRepo -> DB: INSERT INTO archivos_entregable\n(entregable_id, version, archivo, subido_por_id)\nVALUES (?, siguiente_version, ?, ?)
+  DB --> ArchivoRepo: Nueva version / vacio
+  Service --> Api: EntregableDetalleResponse
+  Api --> Frontend: 200 OK
+  Frontend --> Investigador: Presenta ENTREGABLE_ABIERTO actualizado
+end
+@enduml

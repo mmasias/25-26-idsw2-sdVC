@@ -1,0 +1,41 @@
+@startuml agregarInvestigador
+skinparam linetype polyline
+
+state proyecto as "PROYECTO_ABIERTO"
+proyecto -[#green]-> agregarInvestigador
+
+state agregarInvestigador as "agregarInvestigador()" {
+    state " " as PresentandoCandidatos
+    state " " as ConfirmandoAsignacion
+
+    [*] -[#green]-> PresentandoCandidatos
+    note on link
+    <b>Coordinador</b> solicita agregar un investigador al proyecto
+    end note
+
+    PresentandoCandidatos -[#green]-> ConfirmandoAsignacion
+    note on link
+    <b>Sistema</b> presenta investigadores existentes no asociados:
+    • Nombre, sede, perfil y línea de investigación
+    • Carga de trabajo y disponibilidad
+    • Recomendación de menor carga compatible
+
+    <b>Coordinador</b> selecciona un investigador
+    end note
+
+    ConfirmandoAsignacion -[#green]-> [*]
+    note on link
+    <b>Coordinador</b> confirma la asignación
+    <b>Sistema</b> asocia el investigador al proyecto
+    end note
+
+    ConfirmandoAsignacion -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> cancela la asignación
+    end note
+}
+
+agregarInvestigador -[#green]-> PROYECTO_ABIERTO: Investigador asociado
+agregarInvestigador -[#red]-> PROYECTO_ABIERTO: Asignación cancelada
+
+@enduml

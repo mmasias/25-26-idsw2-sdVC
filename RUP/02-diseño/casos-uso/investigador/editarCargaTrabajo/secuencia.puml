@@ -1,0 +1,63 @@
+@startuml editarCargaTrabajo-investigador-diseno
+title Diagrama de secuencia - Editar carga de trabajo propia del Investigador
+
+actor Investigador
+participant "EditarCargaTrabajoPropiaForm\n(React)" as Frontend
+participant "CargaTrabajoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "CargaTrabajoService" as Service
+participant "CargaTrabajoRepository" as CargaRepo
+database "Base de Datos" as DB
+
+Investigador -> Frontend: Solicita editar su carga de trabajo
+activate Frontend
+Frontend -> Frontend: Precargar formulario con carga actual
+Frontend --> Investigador: Muestra formulario con datos precargados
+Investigador -> Frontend: Modifica horas y guarda
+Frontend -> Frontend: Comprobar sesion local
+Frontend -> Api: PATCH /api/carga-trabajo/me\nCargaTrabajoUpdateRequest + cookie
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion activa
+    Sesion --> Api: SesionResponse
+    deactivate Sesion
+    Api -> Service: actualizarCargaPropia(investigador, datos)
+    activate Service
+    Service -> Service: validarCargaDocente(datos, sede, maximo16h)
+    alt Sede sin docencia registra horas docentes
+        Service --> Api: validacion fallida
+        Api --> Frontend: 400 Bad Request
+        Frontend --> Investigador: Presenta error de docencia no aplicable
+    else Investigador-docente supera 16 horas docentes
+        Service --> Api: validacion fallida
+        Api --> Frontend: 400 Bad Request
+        Frontend --> Investigador: Presenta error de limite docente
+    else Carga valida
+        Service -> CargaRepo: findByUsuario(investigador)
+        CargaRepo -> DB: SELECT * FROM cargas_trabajo WHERE usuario_id = ?
+        DB --> CargaRepo: Resultado de persistencia
+        activate CargaRepo
+        CargaRepo --> Service: CargaTrabajo
+        Service -> Service: actualizarCarga(cargaTrabajo, datos)
+        Service -> CargaRepo: save(cargaTrabajoActualizada)
+        CargaRepo -> DB: UPDATE cargas_trabajo SET horas_docencia = ?, horas_investigacion = ?,\nhoras_gestion_academica = ?, observaciones = ?, fecha_actualizacion = CURRENT_TIMESTAMP\nWHERE usuario_id = ?
+        DB --> CargaRepo: Resultado de persistencia
+        CargaRepo --> Service: CargaTrabajo actualizada
+        deactivate CargaRepo
+        Service --> Api: CargaTrabajoPropiaResponse
+        deactivate Service
+        Api --> Frontend: 200 OK\nCargaTrabajoPropiaResponse
+        deactivate Api
+        Frontend -> Frontend: Actualizar resumen y notificar exito
+        Frontend --> Investigador: Presenta OPCIONES_CARGA_TRABAJO_ABIERTAS
+    end
+else Datos invalidos o sesion ausente
+    Sesion --> Api: SesionNoValidaException / validacion fallida
+    deactivate Sesion
+    Api --> Frontend: 400 Bad Request / 401 Unauthorized
+    deactivate Api
+    Frontend --> Investigador: Presenta error de edicion
+end
+deactivate Frontend
+@enduml

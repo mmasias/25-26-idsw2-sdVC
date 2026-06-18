@@ -1,0 +1,49 @@
+@startuml eliminarRecompensa
+
+skinparam linetype polyline
+
+state in1 as "RECOMPENSA_ABIERTA"
+in1 -[#green]-> eliminarRecompensa
+note on link
+eliminarRecompensa()
+end note
+
+state eliminarRecompensa as "eliminarRecompensa()" {
+
+    state " " as ConfirmandoAnulacion
+    state " " as RecompensaAnulada
+
+    [*] -[#green]-> ConfirmandoAnulacion
+    note on link
+    <b>Coordinador</b> solicita anular recompensa
+    end note
+
+    ConfirmandoAnulacion -[#green]-> RecompensaAnulada
+    note on link
+    <b>Sistema</b> presenta confirmación de anulación
+    <b>Coordinador</b> solicita confirmar anulación
+    <b>Sistema</b> presenta la anulacion de la recompensa
+    end note
+
+    ConfirmandoAnulacion -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> solicita cancelar la operación
+    end note
+
+    RecompensaAnulada -[#green]-> [*]
+    note on link
+    <b>Sistema</b> presenta confirmación de anulación
+    end note
+}
+
+
+eliminarRecompensa -[#green]-> RECOMPENSAS_ABIERTAS
+note on link
+abrirRecompensas()
+end note
+
+
+
+
+
+@enduml

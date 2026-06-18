@@ -1,0 +1,42 @@
+@startuml abrirOpcionesCargaTrabajo-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada
+package abrirOpcionesCargaTrabajo as "abrirOpcionesCargaTrabajo()" {
+    rectangle #629EF9 PanelCargaTrabajoView
+    rectangle #b5bd68 CargaTrabajoController
+    rectangle #b5bd68 CargaTrabajoService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E CargaTrabajoRepository
+    rectangle #F2AC4E PersonaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E CargaTrabajo
+    rectangle #F2AC4E Persona
+    rectangle #F2AC4E Proyecto
+}
+
+rectangle #CDEBA5 ":OPCIONES_CARGA_TRABAJO_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration EditarCargaTrabajo" as EditarCargaTrabajo
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada -r-> PanelCargaTrabajoView: abrirOpcionesCargaTrabajo()
+
+PanelCargaTrabajoView -d-> CargaTrabajoController: obtenerResumenGlobal(coordinador, filtros)
+CargaTrabajoController --> CargaTrabajoService: obtenerPanelCoordinador(coordinador, filtros)
+CargaTrabajoController --> SesionService: obtenerSesionActual(authentication)
+PanelCargaTrabajoView --> CargaTrabajoController: listarCargaPorPersona(filtros)
+PanelCargaTrabajoView --> CargaTrabajoController: seleccionarPersona(idPersona)
+CargaTrabajoService --> CargaTrabajoRepository: obtenerResumenGlobal(filtros)
+CargaTrabajoService --> CargaTrabajoRepository: obtenerDetallePorPersona(filtros)
+CargaTrabajoService --> ProyectoRepository: obtenerProyectosLibres()
+CargaTrabajoService --> PersonaRepository: obtenerInvestigadoresDocentesPorSede()
+CargaTrabajoService --> CargaTrabajoRepository: sugerirInvestigadoresDocentesConMenorCarga(proyectoLibre, sedesDocentes)
+CargaTrabajoService --> PersonaRepository: obtenerPorId(idPersona)
+CargaTrabajoRepository -- CargaTrabajo
+PersonaRepository -- Persona
+ProyectoRepository -- Proyecto
+PanelCargaTrabajoView ..> EstadoSalida: opcionesCargaTrabajoAbiertas()
+PanelCargaTrabajoView ..> EditarCargaTrabajo: editarCargaTrabajo(idPersona)
+PanelCargaTrabajoView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

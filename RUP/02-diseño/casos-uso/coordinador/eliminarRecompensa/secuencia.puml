@@ -1,0 +1,64 @@
+@startuml eliminarRecompensa-coordinador-diseno
+title Diagrama de secuencia - Anular recompensa
+
+actor Coordinador
+participant "RecompensaDetallePage\n(React)" as Frontend
+participant "RecompensaController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "RecompensaService" as Service
+participant "RecompensaRepository" as Repo
+participant "ProyectoRepository" as ProyectoRepo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita anular recompensa
+activate Frontend
+Frontend --> Coordinador: Presenta confirmacion y solicita motivo
+alt Coordinador cancela
+    Coordinador -> Frontend: Cancela anulacion
+    Frontend --> Coordinador: Conserva RECOMPENSA_ABIERTA
+else Coordinador confirma
+    Coordinador -> Frontend: Confirma anulacion con motivo
+    Frontend -> Api: PATCH /api/recompensas/{id}/anulacion\nMotivo y cookie de sesion
+    activate Api
+    Api -> Sesion: obtenerSesionActual(authentication)
+    activate Sesion
+    alt Sesion de Coordinador activa
+        Sesion --> Api: Coordinador autenticado
+        deactivate Sesion
+        Api -> Service: eliminar(id, motivo, coordinador)
+        activate Service
+        Service -> Repo: findById(id)
+        Repo -> DB: SELECT * FROM recompensas WHERE id = ?
+        DB --> Repo: Resultado de persistencia
+        Repo --> Service: Recompensa / vacio
+        alt Recompensa inexistente
+            Service --> Api: RecursoNoEncontradoException
+            deactivate Service
+            Api --> Frontend: 404 Not Found
+            deactivate Api
+            Frontend --> Coordinador: Presenta recompensa no encontrada
+        else Recompensa existente
+            Service -> ProyectoRepo: findById(recompensa.proyectoId)
+            ProyectoRepo -> DB: SELECT * FROM proyectos WHERE id = ? AND estado = 'COMPLETADO'
+            DB --> ProyectoRepo: Resultado de persistencia
+            ProyectoRepo --> Service: Proyecto completado
+            Service -> Repo: save(recompensa, fecha, coordinador, motivo)
+            Repo -> DB: UPDATE recompensas SET anulada = true, fecha_anulacion = ?, anulada_por_id = ?, motivo_anulacion = ? WHERE id = ?
+            DB --> Repo: Resultado de persistencia
+            Repo --> Service: Recompensa anulada
+            Service --> Api: anulacion registrada
+            deactivate Service
+            Api --> Frontend: 204 No Content
+            deactivate Api
+            Frontend --> Coordinador: Presenta RECOMPENSAS_ABIERTAS
+        end
+    else Sesion ausente o rol invalido
+        Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+        deactivate Sesion
+        Api --> Frontend: 401 Unauthorized / 403 Forbidden
+        deactivate Api
+        Frontend --> Coordinador: Presenta error de anulacion
+    end
+end
+deactivate Frontend
+@enduml

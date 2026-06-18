@@ -1,0 +1,31 @@
+@startuml abrirSolicitudEliminacionPerfil-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SOLICITUDES_ELIMINACION_PERFIL_ABIERTAS" as EstadoEntrada
+package abrirSolicitudEliminacionPerfil as "abrirSolicitudEliminacionPerfil()" {
+    rectangle #629EF9 DetalleSolicitudEliminacionPerfilView
+    rectangle #b5bd68 SolicitudEliminacionPerfilController
+    rectangle #b5bd68 PerfilService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E SolicitudEliminacionPerfilRepository
+    rectangle #F2AC4E SolicitudEliminacionPerfil
+}
+
+rectangle #CDEBA5 ":SOLICITUD_ELIMINACION_PERFIL_ABIERTA" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirSolicitudesEliminacionPerfil" as AbrirSolicitudesEliminacionPerfil
+rectangle #CDEBA5 ":Collaboration EliminarPerfil" as EliminarPerfil
+
+EstadoEntrada -r-> DetalleSolicitudEliminacionPerfilView: abrirSolicitudEliminacionPerfil()
+
+DetalleSolicitudEliminacionPerfilView -d-> SolicitudEliminacionPerfilController: obtenerSolicitudEliminacionPerfil(id)
+SolicitudEliminacionPerfilController --> SesionService: obtenerSesionActual(authentication)
+SolicitudEliminacionPerfilController --> PerfilService: obtenerSolicitud(id)
+DetalleSolicitudEliminacionPerfilView --> SolicitudEliminacionPerfilController: prepararAccionesDisponibles(coordinador)
+PerfilService --> SolicitudEliminacionPerfilRepository: obtenerPorId(id)
+PerfilService --> SolicitudEliminacionPerfilRepository: verificarPermisos(actor)
+SolicitudEliminacionPerfilRepository -- SolicitudEliminacionPerfil
+DetalleSolicitudEliminacionPerfilView ..> EstadoSalida: solicitudEliminacionPerfilAbierta()
+DetalleSolicitudEliminacionPerfilView ..> AbrirSolicitudesEliminacionPerfil: abrirSolicitudesEliminacionPerfil()
+DetalleSolicitudEliminacionPerfilView ..> EliminarPerfil: eliminarPerfil()
+
+@enduml

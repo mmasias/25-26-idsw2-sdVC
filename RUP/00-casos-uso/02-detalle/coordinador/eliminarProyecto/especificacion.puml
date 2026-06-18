@@ -1,0 +1,42 @@
+@startuml eliminarProyecto
+skinparam linetype polyline
+
+state proyecto as "PROYECTO_ABIERTO"
+proyecto -[#green]-> eliminarProyecto
+
+state eliminarProyecto as "eliminarProyecto()" {
+    state " " as MostrandoConsecuencias
+    state " " as ConfirmandoArchivado
+
+    [*] -[#green]-> MostrandoConsecuencias
+    note on link
+    <b>Coordinador</b> solicita eliminar el proyecto abierto
+    <b>Sistema</b> presenta el proyecto y la informacion
+    vinculada que se conservara en el historico
+    end note
+
+    MostrandoConsecuencias -[#green]-> ConfirmandoArchivado
+    note on link
+    <b>Sistema</b> informa que el proyecto dejara
+    de aparecer en la gestion activa, pero conservara
+    estado, equipo, entregables y recompensas
+    end note
+
+    ConfirmandoArchivado -[#green]-> [*]
+    note on link
+    <b>Coordinador</b> confirma
+    <b>Sistema</b> archiva el proyecto y registra
+    fecha y Coordinador responsable
+    end note
+
+    ConfirmandoArchivado -[#red]-> [*]
+    note on link
+    <b>Coordinador</b> cancela
+    <b>Sistema</b> conserva el proyecto activo sin cambios
+    end note
+}
+
+eliminarProyecto -[#green]-> PROYECTOS_ABIERTOS: Proyecto archivado
+eliminarProyecto -[#red]-> PROYECTO_ABIERTO: Sin cambios
+
+@enduml

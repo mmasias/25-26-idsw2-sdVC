@@ -1,0 +1,89 @@
+@startuml eliminarProyecto-coordinador-diseno
+title Diagrama de secuencia - Archivar proyecto
+
+actor Coordinador
+participant "ProyectoDetallePage\n(React)" as Frontend
+participant "ProyectoController\n(Spring Boot)" as Api
+participant "SesionService" as Sesion
+participant "ProyectoService" as Service
+participant "ProyectoRepository" as Repo
+database "Base de Datos" as DB
+
+Coordinador -> Frontend: Solicita archivar proyecto
+activate Frontend
+Frontend -> Api: GET /api/proyectos/{id}/opciones-archivado\nCookie de sesion
+activate Api
+Api -> Sesion: obtenerSesionActual(authentication)
+activate Sesion
+alt Sesion de Coordinador activa
+    Sesion --> Api: Coordinador autenticado
+    deactivate Sesion
+    Api -> Service: archivar(id)
+    activate Service
+    Service -> Repo: findById(id)
+    Repo -> DB: SELECT * FROM proyectos WHERE id = ? AND archivado = false
+    DB --> Repo: Resultado de persistencia
+    Repo --> Service: Proyecto / vacio
+    alt Proyecto inexistente o ya archivado
+        Service --> Api: RecursoNoEncontradoException / ConflictoException
+        deactivate Service
+        Api --> Frontend: 404 Not Found / 409 Conflict
+        deactivate Api
+        Frontend --> Coordinador: Presenta error y conserva PROYECTO_ABIERTO
+    else Proyecto activo
+        Service -> Repo: findById(id)
+        Repo -> DB: SELECT p.*, COUNT(pi.usuario_id) AS participantes FROM proyectos p LEFT JOIN proyecto_investigadores pi ON pi.proyecto_id = p.id WHERE p.id = ? GROUP BY p.id
+        DB --> Repo: Resultado de persistencia
+        Repo --> Service: Estado, equipo y elementos vinculados
+        Service --> Api: OpcionesArchivadoProyectoResponse
+        deactivate Service
+        Api --> Frontend: 200 OK\nConsecuencias del archivado
+        deactivate Api
+        Frontend --> Coordinador: Presenta confirmacion y solicita motivo
+        alt Coordinador cancela
+            Coordinador -> Frontend: Cancela archivado
+            Frontend --> Coordinador: Conserva PROYECTO_ABIERTO
+        else Coordinador confirma
+            Coordinador -> Frontend: Confirma archivado con motivo
+            Frontend -> Api: PATCH /api/proyectos/{id}/archivado\nProyectoArchivadoRequest + cookie
+            activate Api
+            Api -> Sesion: obtenerSesionActual(authentication)
+            Sesion --> Api: Coordinador autenticado
+            Api -> Service: archivar(id, motivo, coordinador)
+            activate Service
+            Service -> Repo: findById(id)
+            Repo -> DB: SELECT * FROM proyectos WHERE id = ? AND archivado = false
+            DB --> Repo: Resultado de persistencia
+            Repo --> Service: Proyecto / vacio
+            alt Proyecto inexistente o archivado durante la confirmacion
+                Service --> Api: RecursoNoEncontradoException / ConflictoException
+                deactivate Service
+                Api --> Frontend: 404 Not Found / 409 Conflict
+                deactivate Api
+                Frontend --> Coordinador: Presenta conflicto
+            else Proyecto activo
+                Service -> Repo: save(id, fecha, coordinador, motivo)
+                Repo -> DB: UPDATE proyectos SET archivado = true, estado = 'COMPLETADO', fecha_archivado = ?, archivado_por_id = ?, motivo_archivado = ? WHERE id = ?
+                DB --> Repo: Resultado de persistencia
+                Repo --> Service: Proyecto archivado
+                note right of Service
+                Se conservan estado, equipo,
+                entregables y recompensas.
+                end note
+                Service --> Api: ProyectoArchivadoResponse
+                deactivate Service
+                Api --> Frontend: 200 OK\nProyecto archivado
+                deactivate Api
+                Frontend --> Coordinador: Presenta PROYECTOS_ABIERTOS
+            end
+        end
+    end
+else Sesion ausente o rol invalido
+    Sesion --> Api: SesionNoValidaException / AccesoDenegadoException
+    deactivate Sesion
+    Api --> Frontend: 401 Unauthorized / 403 Forbidden
+    deactivate Api
+    Frontend --> Coordinador: Presenta error de acceso
+end
+deactivate Frontend
+@enduml

@@ -1,0 +1,47 @@
+@startuml abrirProyectos
+skinparam linetype polyline
+
+state panel as "PANEL_PRINCIPAL_ABIERTO"
+state proyecto as "PROYECTO_ABIERTO"
+state investigador as "INVESTIGADOR_ABIERTO"
+
+panel -[#green]-> abrirProyectos
+proyecto -[#green]-> abrirProyectos
+investigador -[#green]-> abrirProyectos
+
+state abrirProyectos as "abrirProyectos(investigadorId?)" {
+    state " " as PresentandoProyectos
+    state " " as FiltrandoProyectos
+
+    [*] -[#green]-> PresentandoProyectos
+    note on link
+    <b>Investigador</b> solicita abrir proyectos
+    end note
+
+    PresentandoProyectos -[#green]-> FiltrandoProyectos
+    note on link
+    <b>Sistema</b> presenta:
+    • Los proyectos propios, si no existe otro investigador de contexto
+    • Los proyectos visibles asociados, si existe investigador de contexto
+    • Código, título, estado, coordinador y fechas
+
+    Permite filtrar, abrir un proyecto o volver al panel principal
+    end note
+
+    FiltrandoProyectos -[#green]-> FiltrandoProyectos
+    note on link
+    <b>Investigador</b> introduce o limpia criterios
+    <b>Sistema</b> presenta los proyectos coincidentes
+    end note
+
+    FiltrandoProyectos -[#green]-> [*]
+    note on link
+    <b>Investigador</b> solicita una opción disponible
+    end note
+}
+
+abrirProyectos -[#green]-> PROYECTOS_ABIERTOS
+abrirProyectos -[#green]-> PROYECTO_ABIERTO: abrirProyecto(proyectoId)
+abrirProyectos -[#green]-> PANEL_PRINCIPAL_ABIERTO: abrirPanelPrincipal()
+
+@enduml

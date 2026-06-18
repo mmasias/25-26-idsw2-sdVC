@@ -1,0 +1,54 @@
+@startuml abrirRecompensas-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoEntrada1
+rectangle #CDEBA5 ":PANEL_PRINCIPAL_ABIERTO" as EstadoEntrada2
+package abrirRecompensas as "abrirRecompensas()" {
+    rectangle #629EF9 ListarRecompensasView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoSalida
+rectangle #CDEBA5 ":Collaboration AbrirRecompensa" as AbrirRecompensa
+rectangle #CDEBA5 ":Collaboration CrearRecompensa" as CrearRecompensa
+rectangle #CDEBA5 ":Collaboration AbrirPanelPrincipal" as AbrirPanelPrincipal
+
+EstadoEntrada1 -r-> ListarRecompensasView: abrirRecompensas(idRecompensa)
+EstadoEntrada2 -r-> ListarRecompensasView: abrirRecompensas()
+
+ListarRecompensasView -d-> RecompensaController: listarRecompensas(contexto)
+RecompensaController --> RecompensaService: listarGlobales(criterio)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+ListarRecompensasView --> RecompensaController: filtrarRecompensas(criterio)
+RecompensaService --> RecompensaRepository: obtenerDeProyectosCompletados()
+RecompensaService --> RecompensaRepository: obtenerPorContexto(contexto)
+RecompensaService --> RecompensaRepository: buscarPorCriterio(criterio)
+RecompensaService --> ProyectoRepository: verificarCompletados()
+RecompensaService --> InvestigadorRepository: obtenerBeneficiarios()
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+note right of RecompensaController
+Contexto opcional:
+- sin identificador: listado global
+- con identificador: listado acotado
+
+Reglas:
+- proyecto completado como origen
+- docente: economica o reduccion
+- no docente: solo economica
+end note
+ListarRecompensasView ..> EstadoSalida: continuarNavegacion()
+ListarRecompensasView ..> AbrirRecompensa: abrirRecompensa()
+ListarRecompensasView ..> CrearRecompensa: crearRecompensa()
+ListarRecompensasView ..> AbrirPanelPrincipal: abrirPanelPrincipal()
+
+@enduml

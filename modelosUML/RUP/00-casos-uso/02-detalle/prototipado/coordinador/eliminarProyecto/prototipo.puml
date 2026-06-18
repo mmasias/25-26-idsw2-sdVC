@@ -1,0 +1,27 @@
+@startsalt eliminarProyecto-wireframe
+{
+    ====
+    <b>GIPF - ARCHIVAR PROYECTO</b>
+    ====
+    {
+        <b>Proyecto seleccionado</b>
+        --
+        {
+            <b>Codigo:</b> PRY-SAN-CREADO-01
+            <b>Titulo:</b> Proyecto pendiente de definicion
+            <b>Estado actual:</b> Creado
+        }
+        --
+        <b>Conservacion historica</b>
+        --
+        {
+            Se conservaran el estado, el equipo, los entregables,
+            las recompensas y el resto de informacion vinculada.
+        }
+        --
+        <b>El proyecto dejara de aparecer en la gestion activa.</b>
+        --
+        {[Archivar proyecto] | [Cancelar]}
+    }
+}
+@endsalt

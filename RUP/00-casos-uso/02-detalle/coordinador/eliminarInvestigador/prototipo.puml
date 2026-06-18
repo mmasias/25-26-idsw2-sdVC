@@ -1,0 +1,26 @@
+@startsalt eliminarInvestigador-wireframe
+{
+    ====
+    <b>GIPF - RETIRAR INVESTIGADOR DEL PROYECTO</b>
+    ====
+    {
+        <b>Investigador seleccionado</b>
+        --
+        {
+            <b>Nombre:</b> Docente Investigador Santander
+            <b>Sede:</b> Santander
+            <b>Perfil:</b> Investigador-docente
+        }
+        --
+        <b>Responsabilidades en el proyecto</b>
+        --
+        {
+            Sin entregables ni responsabilidades pendientes.
+        }
+        --
+        ¿Confirmas que deseas retirar a este investigador del proyecto?
+        --
+        {[Retirar del proyecto] | [Cancelar]}
+    }
+}
+@endsalt

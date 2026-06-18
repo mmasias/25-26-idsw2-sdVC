@@ -1,0 +1,44 @@
+@startuml importarConvocatoria-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":CONVOCATORIA_ABIERTA" as Entrada
+package importarConvocatoria as "importarConvocatoria()" {
+    rectangle #629EF9 ImportarConvocatoriaView
+    rectangle #b5bd68 ConvocatoriaController
+    rectangle #b5bd68 ImportacionConvocatoriaService
+    rectangle #b5bd68 SesionService
+    rectangle #b5bd68 PoliticaConvocatoria
+    rectangle #b5bd68 SelectorImportadorConvocatoria
+    rectangle #b5bd68 "ImportadorConvocatoria\n<<interface>>" as Importador
+    rectangle #b5bd68 ValidadorConvocatoria
+    rectangle #F2AC4E ConvocatoriaRepository
+    rectangle #F2AC4E FuenteConvocatoria
+    rectangle #F2AC4E Convocatoria
+}
+rectangle #CDEBA5 ":CONVOCATORIA_ABIERTA" as Salida
+
+Entrada -r-> ImportarConvocatoriaView: importarConvocatoria()
+ImportarConvocatoriaView -d-> ConvocatoriaController: previsualizar(fuente, actor)
+ConvocatoriaController --> SesionService: obtenerSesionActual(authentication)
+ConvocatoriaController --> ImportacionConvocatoriaService: previsualizar(fuente, actor)
+ConvocatoriaController --> ImportacionConvocatoriaService: confirmar(datos, fuente, actor)
+ImportacionConvocatoriaService --> PoliticaConvocatoria: permitirImportacion(actor)
+ImportacionConvocatoriaService --> SelectorImportadorConvocatoria: seleccionar(fuente)
+SelectorImportadorConvocatoria --> Importador: obtenerCompatible(fuente)
+ConvocatoriaController --> Importador: extraer(fuente)
+Importador -- FuenteConvocatoria
+ImportacionConvocatoriaService --> ValidadorConvocatoria: validar(datosNormalizados)
+ValidadorConvocatoria --> ConvocatoriaRepository: existeReferenciaExterna(referencia)
+ImportarConvocatoriaView --> ConvocatoriaController: confirmar(datosNormalizados, actor)
+ImportacionConvocatoriaService --> ValidadorConvocatoria: revalidar(datosNormalizados)
+ImportacionConvocatoriaService --> ConvocatoriaRepository: guardarTrasConfirmacion(convocatoria)
+ConvocatoriaRepository -- Convocatoria
+ImportarConvocatoriaView ..> Salida: presentarConvocatoria()
+
+note right of Importador
+Punto de extension OCP:
+cada fuente implementa esta
+abstraccion sin cambiar
+el controlador.
+end note
+@enduml

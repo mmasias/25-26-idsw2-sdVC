@@ -1,0 +1,22 @@
+@startsalt abrirInvestigador-wireframe
+{
+    ====
+    <b>GIPF - PERFIL DE INVESTIGADOR</b>
+    ====
+    {
+        <b>Datos del investigador</b>
+        --
+        {
+            {<b>Nombre:</b> | Ana Lopez}
+            {<b>Correo:</b> | ana.lopez@funiber.org}
+            {<b>Sede:</b> | Santander}
+            {<b>Tipo:</b> | Investigadora-docente}
+            {<b>Unidad:</b> | Investigacion}
+            {<b>Linea:</b> | Inteligencia artificial}
+            {<b>Proyectos visibles compartidos:</b> | 1}
+        }
+        ~~
+        {[Abrir proyecto] | [Volver]}
+    }
+}
+@endsalt

@@ -1,0 +1,54 @@
+@startuml crearRecompensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoEntrada
+package crearRecompensa as "crearRecompensa()" {
+    rectangle #629EF9 CrearRecompensaView
+    rectangle #b5bd68 RecompensaController
+    rectangle #b5bd68 RecompensaService
+    rectangle #b5bd68 SesionService
+    rectangle #F2AC4E RecompensaRepository
+    rectangle #F2AC4E ProyectoRepository
+    rectangle #F2AC4E InvestigadorRepository
+    rectangle #F2AC4E Recompensa
+    rectangle #F2AC4E Proyecto
+    rectangle #F2AC4E Investigador
+}
+
+rectangle #CDEBA5 ":RECOMPENSA_ABIERTA" as EstadoSalida
+rectangle #CDEBA5 ":RECOMPENSAS_ABIERTAS" as EstadoSalidaCancelada
+rectangle #CDEBA5 ":Collaboration AbrirRecompensa" as AbrirRecompensa
+
+EstadoEntrada -r-> CrearRecompensaView: crearRecompensa()
+
+CrearRecompensaView -d-> RecompensaController: prepararCreacion()
+RecompensaController --> RecompensaService: prepararCreacion()
+RecompensaController --> RecompensaService: obtenerBeneficiariosElegibles(proyectoId)
+RecompensaController --> RecompensaService: obtenerTiposPermitidos(proyectoId, investigadorId)
+RecompensaController --> RecompensaService: crear(datos)
+RecompensaController --> SesionService: obtenerSesionActual(authentication)
+RecompensaService --> ProyectoRepository: obtenerCompletadosPendientesRecompensa()
+CrearRecompensaView --> RecompensaController: seleccionarProyecto(proyectoId)
+RecompensaService --> InvestigadorRepository: obtenerElegiblesPorProyecto(proyectoId)
+CrearRecompensaView --> RecompensaController: seleccionarBeneficiario(investigadorId)
+RecompensaService --> InvestigadorRepository: obtenerBeneficiario(investigadorId)
+RecompensaService --> RecompensaService: obtenerTiposPermitidos(beneficiario)
+CrearRecompensaView --> RecompensaController: crearRecompensa(datos)
+RecompensaService --> RecompensaService: validarRecompensa(datos)
+RecompensaService --> RecompensaRepository: existeDuplicado(datos)
+RecompensaService --> RecompensaRepository: guardar(entidad)
+RecompensaRepository -- Recompensa
+ProyectoRepository -- Proyecto
+InvestigadorRepository -- Investigador
+note right of RecompensaController
+Origen obligatorio:
+- proyecto completado
+- beneficiario elegible
+- docente: economica o reduccion
+- no docente: solo economica
+end note
+CrearRecompensaView ..> EstadoSalida: continuarNavegacion()
+CrearRecompensaView ..> EstadoSalidaCancelada: cancelarCreacion()
+CrearRecompensaView ..> AbrirRecompensa: abrirRecompensa()
+
+@enduml
