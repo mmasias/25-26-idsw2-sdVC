@@ -1,0 +1,62 @@
+@startuml secuencia-cu06-importar-preguntas
+title Diagrama de Secuencia - Importar Preguntas
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorPregunta" as Controller
+participant "ServicioPregunta" as Service
+participant "RepositorioTema" as RepoTema
+participant "RepositorioPregunta" as RepoPreg
+participant "RepositorioRespuesta" as RepoResp
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Sube fichero JSON de preguntas
+activate FE
+
+FE -> Controller : POST /api/preguntas/importar (List<DTO_Pregunta>)
+activate Controller
+
+Controller -> Service : importarPreguntas(listaDto)
+activate Service
+
+loop por cada DTO_Pregunta
+    Service -> RepoTema : findById(temaId)
+    activate RepoTema
+    RepoTema -> DB : SELECT tema
+    DB --> RepoTema : resultado
+    RepoTema --> Service : Optional<Tema>
+    deactivate RepoTema
+
+    alt Tema no existe
+        Service --> Controller : throw RuntimeException("Tema no encontrado")
+        Controller --> FE : 400 Bad Request
+        FE --> Actor : Muestra error de tema no encontrado
+    else Tema existe
+        Service -> RepoPreg : saveAndFlush(pregunta)
+        activate RepoPreg
+        RepoPreg -> DB : INSERT pregunta
+        DB --> RepoPreg : ok (ID asignado)
+        RepoPreg --> Service : preguntaGuardada
+        deactivate RepoPreg
+
+        loop por cada DTO_Respuesta
+            Service -> RepoResp : save(respuesta)
+            activate RepoResp
+            RepoResp -> DB : INSERT respuesta (vinculada a ID pregunta)
+            DB --> RepoResp : ok
+            RepoResp --> Service : ok
+            deactivate RepoResp
+        end
+    end
+end
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK (Procesado correctamente)
+deactivate Controller
+
+FE --> Actor : Muestra confirmación de importación
+deactivate FE
+
+@enduml

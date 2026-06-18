@@ -1,0 +1,21 @@
+﻿@startuml verGrados-analisis
+skinparam linetype polyline
+
+actor Docente
+package verGrados as "verGrados()" {
+    rectangle #629EF9 VistaListaGrados
+    rectangle #b5bd68 ControladorGrados
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaListaGrados: solicitarVerGrados()
+VistaListaGrados -d-> ControladorGrados: obtenerGrados()
+ControladorGrados --> Grado: consultarTodos()
+Grado --> Alumno
+
+Docente --> VistaListaGrados: aplicarFiltro(criterios)
+VistaListaGrados --> ControladorGrados: filtrar(criterios)
+ControladorGrados --> Grado: consultar(criterios)
+
+@enduml

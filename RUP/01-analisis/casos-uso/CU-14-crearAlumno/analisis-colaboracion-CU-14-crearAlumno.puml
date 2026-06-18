@@ -1,0 +1,17 @@
+﻿@startuml crearAlumno-analisis
+skinparam linetype polyline
+
+actor Docente
+package crearAlumno as "crearAlumno()" {
+    rectangle #629EF9 VistaCreacionAlumno
+    rectangle #b5bd68 ControladorAlumnos
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaCreacionAlumno: solicitarCreacion()
+Docente --> VistaCreacionAlumno: introducirDatos(nombre, apellidos, dni)
+VistaCreacionAlumno -d-> ControladorAlumnos: crearAlumno(datos)
+ControladorAlumnos --> Alumno: inicializar(datos)
+ControladorAlumnos --> VistaCreacionAlumno: notificarExitoYRedirigir()
+
+@enduml

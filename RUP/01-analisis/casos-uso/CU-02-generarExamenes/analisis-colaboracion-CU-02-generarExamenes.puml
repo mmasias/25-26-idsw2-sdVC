@@ -1,0 +1,24 @@
+﻿@startuml generarExamenes-analisis
+skinparam linetype polyline
+
+actor Docente
+package generarExamenes as "generarExamenes()" {
+    rectangle #629EF9 VistaGeneracion
+    rectangle #b5bd68 ControladorGeneracion
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Tema
+    rectangle #F2AC4E Pregunta
+    rectangle #F2AC4E Examen
+}
+
+Docente -r-> VistaGeneracion: seleccionarAsignatura()
+VistaGeneracion -d-> ControladorGeneracion: obtenerTemas(asignatura)
+ControladorGeneracion --> Asignatura: getTemas()
+Asignatura --> Tema
+
+Docente --> VistaGeneracion: generarExamenes(parametros)
+VistaGeneracion --> ControladorGeneracion: generar(parametros)
+ControladorGeneracion --> Pregunta: filtrarPorParametros(parametros)
+ControladorGeneracion --> Examen: crearExamen(preguntas)
+
+@enduml

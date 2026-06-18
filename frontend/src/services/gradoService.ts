@@ -1,0 +1,26 @@
+import api from '../api/axios';
+import type { Grado } from '../types';
+
+export const getGrados = async (): Promise<Grado[]> => {
+  const response = await api.get<Grado[]>('/grados');
+  return Array.isArray(response.data) ? response.data : [];
+};
+
+export const createGrado = async (grado: Grado): Promise<Grado> => {
+  const response = await api.post<Grado>('/grados', grado);
+  return response.data;
+};
+
+export const updateGrado = async (id: number, grado: Grado): Promise<Grado> => {
+  const response = await api.put<Grado>(`/grados/${id}`, grado);
+  return response.data;
+};
+
+export const deleteGrado = async (id: number): Promise<void> => {
+  await api.delete(`/grados/${id}`);
+};
+
+export const importarGrados = async (grados: Grado[]): Promise<string> => {
+  const response = await api.post<string>('/grados/importar', grados);
+  return response.data;
+};

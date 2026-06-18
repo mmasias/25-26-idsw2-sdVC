@@ -1,0 +1,61 @@
+@startuml secuencia-cu02-generar-examen
+title Diagrama de Secuencia - Generar Exámenes
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorExamen" as Controller
+participant "ServicioExamen" as Service
+participant "RepositorioAsignatura" as RepoAsig
+participant "RepositorioPregunta" as RepoPreg
+participant "RepositorioExamen" as RepoExamen
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Configura parámetros del examen
+activate FE
+
+FE -> Controller : POST /api/examenes/generar (DTO_GenerarExamen)
+activate Controller
+
+Controller -> Service : generarExamen(dto)
+activate Service
+
+Service -> RepoAsig : findById(asignaturaId)
+activate RepoAsig
+RepoAsig -> DB : SELECT asignatura
+DB --> RepoAsig : resultado
+RepoAsig --> Service : asignatura
+deactivate RepoAsig
+
+Service -> RepoPreg : findByTemaIdInAndHabilitadaTrue(temaIds)
+activate RepoPreg
+RepoPreg -> DB : SELECT preguntas habilitadas
+DB --> RepoPreg : lista_preguntas
+RepoPreg --> Service : poolPreguntas
+deactivate RepoPreg
+
+Service -> Service : algoritmoSacosDificultad(poolPreguntas, proporciones)
+note right: Se agrupa por Dificultad (BAJA/MEDIA/ALTA),\nse hace shuffle y se selecciona\nsegún porcentajes.
+
+alt Preguntas insuficientes
+    Service --> Controller : throw RuntimeException("Preguntas insuficientes...")
+    Controller --> FE : 400 Bad Request
+    FE --> Actor : Muestra error de preguntas insuficientes
+else Selección completada
+    Service -> RepoExamen : save(examen)
+    activate RepoExamen
+    RepoExamen -> DB : INSERT examen + vinculación preguntas
+    DB --> RepoExamen : ok
+    RepoExamen --> Service : examenGuardado
+    deactivate RepoExamen
+
+    Service --> Controller : examenGuardado
+    deactivate Service
+
+    Controller --> FE : 200 OK (Examen generado con ID)
+    deactivate Controller
+
+    FE --> Actor : Muestra examen generado
+    deactivate FE
+end
+
+@enduml

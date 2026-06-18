@@ -1,0 +1,114 @@
+.tableContainer {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.thead {
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.th {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tr {
+  border-bottom: 1px solid var(--surface-3);
+  transition: background 0.12s ease;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.tr:hover {
+  background-color: #f8fafc;
+}
+
+.td {
+  padding: 0.875rem 1.25rem;
+  font-size: 0.855rem;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────── */
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.editBtn {
+  composes: actionBtn;
+  border-color: var(--border);
+  background: var(--surface-2);
+}
+.editBtn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-soft);
+  color: var(--primary);
+}
+
+.deleteBtn {
+  composes: actionBtn;
+  border-color: var(--border);
+  background: var(--surface-2);
+}
+.deleteBtn:hover {
+  background: var(--danger-light);
+  border-color: #fecaca;
+  color: var(--danger);
+}
+
+/* ─── States ─────────────────────────────────────────────── */
+.empty {
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.loading {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--surface-3);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,17 @@
+﻿@startuml eliminarAsignatura-analisis
+skinparam linetype polyline
+
+actor Docente
+package eliminarAsignatura as "eliminarAsignatura()" {
+    rectangle #629EF9 VistaEliminacionAsignatura
+    rectangle #b5bd68 ControladorAsignaturas
+    rectangle #F2AC4E Asignatura
+}
+
+Docente -r-> VistaEliminacionAsignatura: solicitarEliminar()
+VistaEliminacionAsignatura --> Asignatura: getDatos()
+Docente --> VistaEliminacionAsignatura: confirmarEliminar()
+VistaEliminacionAsignatura -d-> ControladorAsignaturas: eliminarAsignatura()
+ControladorAsignaturas --> Asignatura: delete()
+
+@enduml

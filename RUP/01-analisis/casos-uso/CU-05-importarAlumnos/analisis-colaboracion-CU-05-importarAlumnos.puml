@@ -1,0 +1,22 @@
+@startuml importarAlumnos-analisis
+skinparam linetype polyline
+
+actor Docente
+
+rectangle #CDEBA5 ":Collaboration crearAlumno" as ColCrearAl
+
+package importarAlumnos as "importarAlumnos()" {
+    rectangle #629EF9 VistaImportacionAlumnos
+    rectangle #b5bd68 ControladorImportacionAlumnos
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaImportacionAlumnos: seleccionarArchivo(archivo)
+VistaImportacionAlumnos -d-> ControladorImportacionAlumnos: procesarArchivo(archivo)
+ControladorImportacionAlumnos --> Alumno: validarDuplicado()
+ControladorImportacionAlumnos --> VistaImportacionAlumnos: mostrarPrevisualizacion()
+
+Docente --> VistaImportacionAlumnos: confirmarImportacion()
+VistaImportacionAlumnos ..> ColCrearAl: <<include>> crearAlumno() [por cada alumno del archivo]
+
+@enduml

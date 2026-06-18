@@ -1,0 +1,49 @@
+@startuml secuencia-cu27-eliminar-grado
+title Diagrama de Secuencia - Eliminar Grado
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorGrado" as Controller
+participant "ServicioGrado" as Service
+participant "RepositorioGrado" as RepoGrado
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Pulsa "Eliminar" en el grado
+activate FE
+
+FE -> Controller : DELETE /api/grados/{id}
+activate Controller
+
+Controller -> Service : eliminar(id)
+activate Service
+
+Service -> RepoGrado : existsById(id)
+activate RepoGrado
+RepoGrado -> DB : SELECT EXISTS
+DB --> RepoGrado : true/false
+RepoGrado --> Service : boolean
+deactivate RepoGrado
+
+alt Grado existe
+    Service -> RepoGrado : deleteById(id)
+    activate RepoGrado
+    RepoGrado -> DB : DELETE FROM grados
+    DB --> RepoGrado : ok
+    RepoGrado --> Service : ok
+    deactivate RepoGrado
+
+    Service --> Controller : void
+    deactivate Service
+
+    Controller --> FE : 200 OK
+    deactivate Controller
+
+    FE --> Actor : Elimina la fila de la tabla
+    deactivate FE
+else Grado no existe
+    Service --> Controller : throw RuntimeException
+    Controller --> FE : 400 Bad Request
+    FE --> Actor : Muestra error
+end
+
+@enduml

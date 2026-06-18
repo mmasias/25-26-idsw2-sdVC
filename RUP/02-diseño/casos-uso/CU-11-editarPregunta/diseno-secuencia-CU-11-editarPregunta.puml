@@ -1,0 +1,68 @@
+@startuml secuencia-cu11-editar-pregunta
+title Diagrama de Secuencia - Editar Pregunta
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorPregunta" as Controller
+participant "ServicioPregunta" as Service
+participant "RepositorioTema" as RepoTema
+participant "RepositorioPregunta" as RepoPreg
+participant "RepositorioRespuesta" as RepoResp
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Modifica datos de la pregunta
+activate FE
+
+FE -> Controller : POST /api/preguntas (DTO_Pregunta con ID)
+activate Controller
+
+Controller -> Service : guardarIndividual(dto)
+activate Service
+
+Service -> RepoTema : findById(temaId)
+activate RepoTema
+RepoTema -> DB : SELECT tema
+DB --> RepoTema : tema
+RepoTema --> Service : Optional<Tema>
+deactivate RepoTema
+
+Service -> RepoPreg : findById(id)
+activate RepoPreg
+RepoPreg -> DB : SELECT pregunta
+DB --> RepoPreg : preguntaExistente
+RepoPreg --> Service : Optional<Pregunta>
+deactivate RepoPreg
+
+Service -> RepoResp : deleteByPregunta(pregunta)
+activate RepoResp
+RepoResp -> DB : DELETE FROM respuestas WHERE pregunta_id = ?
+DB --> RepoResp : ok
+RepoResp --> Service : ok
+deactivate RepoResp
+
+Service -> RepoPreg : save(preguntaActualizada)
+activate RepoPreg
+RepoPreg -> DB : UPDATE pregunta
+DB --> RepoPreg : ok
+RepoPreg --> Service : ok
+deactivate RepoPreg
+
+loop por cada DTO_Respuesta
+    Service -> RepoResp : save(nuevaRespuesta)
+    activate RepoResp
+    RepoResp -> DB : INSERT respuesta
+    DB --> RepoResp : ok
+    RepoResp --> Service : ok
+    deactivate RepoResp
+end
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK
+deactivate Controller
+
+FE --> Actor : Muestra pregunta actualizada
+deactivate FE
+
+@enduml

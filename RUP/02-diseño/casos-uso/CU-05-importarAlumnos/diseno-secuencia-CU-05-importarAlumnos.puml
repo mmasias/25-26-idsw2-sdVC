@@ -1,0 +1,61 @@
+@startuml secuencia-cu05-importar-alumnos
+title Diagrama de Secuencia - Importar Alumnos
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorAlumno" as Controller
+participant "ServicioAlumno" as Service
+participant "RepositorioGrado" as RepoGrado
+participant "RepositorioAlumno" as RepoAlumno
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Sube fichero JSON de alumnos
+activate FE
+
+FE -> Controller : POST /api/alumnos/importar (List<DTO_Alumno>)
+activate Controller
+
+Controller -> Service : importarAlumnos(listaDto)
+activate Service
+
+loop por cada DTO_Alumno
+    Service -> RepoGrado : findByCodigo(codigoGrado)
+    activate RepoGrado
+    RepoGrado -> DB : SELECT grado
+    DB --> RepoGrado : resultado
+    RepoGrado --> Service : Optional<Grado>
+    deactivate RepoGrado
+
+    alt Grado no existe
+        Service --> Controller : throw RuntimeException("Grado no existe")
+        Controller --> FE : 400 Bad Request (Error descriptivo)
+        FE --> Actor : Muestra error de grado no encontrado
+    else Grado existe
+        Service -> RepoAlumno : findByDni(dni)
+        activate RepoAlumno
+        RepoAlumno -> DB : SELECT alumno
+        DB --> RepoAlumno : resultado
+        RepoAlumno --> Service : Optional<Alumno>
+        deactivate RepoAlumno
+
+        Service -> Service : mapearDatos(alumno, dto, grado)
+
+        Service -> RepoAlumno : save(alumno)
+        activate RepoAlumno
+        RepoAlumno -> DB : INSERT/UPDATE (UPSERT)
+        DB --> RepoAlumno : ok
+        RepoAlumno --> Service : alumnoGuardado
+        deactivate RepoAlumno
+    end
+end
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK (Procesado correctamente)
+deactivate Controller
+
+FE --> Actor : Muestra confirmación de importación
+deactivate FE
+
+@enduml

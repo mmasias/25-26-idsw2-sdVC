@@ -1,0 +1,24 @@
+@startuml importarPreguntas-analisis
+skinparam linetype polyline
+
+actor Docente
+
+rectangle #CDEBA5 ":Collaboration crearPregunta" as ColCrearPreg
+
+package importarPreguntas as "importarPreguntas()" {
+    rectangle #629EF9 VistaImportacionPreguntas
+    rectangle #b5bd68 ControladorImportacionPreguntas
+    rectangle #F2AC4E Pregunta
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E Tema
+}
+
+Docente -r-> VistaImportacionPreguntas: seleccionarOrigen(archivo)
+VistaImportacionPreguntas -d-> ControladorImportacionPreguntas: analizarArchivo(archivo)
+ControladorImportacionPreguntas --> Pregunta: crearInstancia()
+ControladorImportacionPreguntas --> VistaImportacionPreguntas: mostrarResumen()
+
+Docente --> VistaImportacionPreguntas: confirmarImportacion()
+VistaImportacionPreguntas ..> ColCrearPreg: <<include>> crearPregunta() [por cada pregunta del archivo]
+
+@enduml

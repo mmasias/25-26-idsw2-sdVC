@@ -1,0 +1,86 @@
+@startuml secuencia-cu23-ver-alumnos
+title Diagrama de Secuencia - Ver Alumnos
+
+actor "Docente" as Actor
+participant "AlumnosPage\n(React)" as ListPage
+participant "AlumnoDetailPage\n(React)" as DetailPage
+participant "ExamenRevisionPage\n(React — nueva pestaña)" as RevisionPage
+participant "ControladorAlumno" as CtrlAlumno
+participant "ControladorExamen" as CtrlExamen
+participant "ServicioAlumno" as SvcAlumno
+participant "ServicioExamen" as SvcExamen
+participant "RepositorioAlumno" as RepoAlumno
+participant "RepositorioExamenAlumno" as RepoExAl
+database "Base de Datos\n(PostgreSQL)" as DB
+
+group Fase 1: Listar alumnos
+    Actor -> ListPage : Navega a "Alumnos"
+    activate ListPage
+
+    ListPage -> CtrlAlumno : GET /api/alumnos
+    activate CtrlAlumno
+
+    CtrlAlumno -> SvcAlumno : listarTodos()
+    activate SvcAlumno
+
+    SvcAlumno -> RepoAlumno : findAll()
+    activate RepoAlumno
+    RepoAlumno -> DB : SELECT * FROM alumnos
+    DB --> RepoAlumno : lista de alumnos
+    RepoAlumno --> SvcAlumno : List<Alumno>
+    deactivate RepoAlumno
+
+    SvcAlumno --> CtrlAlumno : List<DTO_Alumno>
+    deactivate SvcAlumno
+
+    CtrlAlumno --> ListPage : 200 OK (JSON lista)
+    deactivate CtrlAlumno
+
+    ListPage --> Actor : Muestra tabla de alumnos
+end
+
+group Fase 2: Ver detalle del alumno
+    Actor -> ListPage : Pulsa en un alumno
+
+    ListPage -> DetailPage : navigate('/alumnos/{id}')
+    activate DetailPage
+
+    DetailPage -> CtrlExamen : GET /api/examenes/alumno/{alumnoId}
+    activate CtrlExamen
+
+    CtrlExamen -> SvcExamen : obtenerExamenesAlumno(alumnoId)
+    activate SvcExamen
+
+    SvcExamen -> RepoExAl : findByAlumnoId(alumnoId)
+    activate RepoExAl
+    RepoExAl -> DB : SELECT examen_alumnos WHERE alumno_id=?
+    DB --> RepoExAl : lista_ejemplares
+    RepoExAl --> SvcExamen : List<ExamenAlumno>
+    deactivate RepoExAl
+
+    SvcExamen --> CtrlExamen : List<DTO_EjemplarResumen>
+    deactivate SvcExamen
+
+    CtrlExamen --> DetailPage : 200 OK (examenes del alumno)
+    deactivate CtrlExamen
+
+    DetailPage --> Actor : Muestra info alumno + lista de exámenes
+    deactivate DetailPage
+end
+
+group Fase 3: Ver examen del alumno
+    Actor -> DetailPage : Pulsa "Ver examen" en un ejemplar
+    activate DetailPage
+
+    DetailPage -> RevisionPage : window.open('/examenes/revision/{ejemplarId}', '_blank')
+    activate RevisionPage
+    note right : Se abre en nueva pestaña del navegador
+
+    RevisionPage --> Actor : Muestra revisión del examen
+    deactivate RevisionPage
+    deactivate DetailPage
+end
+
+deactivate ListPage
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml importarAsignaturas-analisis
+skinparam linetype polyline
+
+note "<<abstracto>>\nInvocado desde CU-03: importarConfiguracionGlobal" as N1
+
+rectangle #CDEBA5 ":Collaboration crearAsignatura" as ColCrearAsig
+
+package importarAsignaturas as "importarAsignaturas()" {
+    rectangle #629EF9 VistaImportacionAsignaturas
+    rectangle #b5bd68 ControladorImportacionAsignaturas
+    rectangle #F2AC4E Asignatura
+}
+
+VistaImportacionAsignaturas -d-> ControladorImportacionAsignaturas: importarAsignaturas(listaAsignaturas)
+ControladorImportacionAsignaturas --> Asignatura: validarDuplicado()
+ControladorImportacionAsignaturas --> VistaImportacionAsignaturas: confirmacion
+
+VistaImportacionAsignaturas ..> ColCrearAsig: <<include>> crearAsignatura() [por cada asignatura nueva]
+
+@enduml

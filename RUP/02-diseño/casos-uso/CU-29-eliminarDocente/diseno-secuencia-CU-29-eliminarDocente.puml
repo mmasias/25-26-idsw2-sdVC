@@ -1,0 +1,49 @@
+@startuml secuencia-cu29-eliminar-docente
+title Diagrama de Secuencia - Eliminar Docente
+
+actor "Administrador Institucional" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorProfesor" as Controller
+participant "ServicioProfesor" as Service
+participant "RepositorioProfesor" as RepoProfesor
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Pulsa "Eliminar" en el docente
+activate FE
+
+FE -> Controller : DELETE /api/profesores/{id}
+activate Controller
+
+Controller -> Service : eliminar(id)
+activate Service
+
+Service -> RepoProfesor : existsById(id)
+activate RepoProfesor
+RepoProfesor -> DB : SELECT EXISTS
+DB --> RepoProfesor : true/false
+RepoProfesor --> Service : boolean
+deactivate RepoProfesor
+
+alt Profesor existe
+    Service -> RepoProfesor : deleteById(id)
+    activate RepoProfesor
+    RepoProfesor -> DB : DELETE FROM profesores
+    DB --> RepoProfesor : ok
+    RepoProfesor --> Service : ok
+    deactivate RepoProfesor
+
+    Service --> Controller : void
+    deactivate Service
+
+    Controller --> FE : 200 OK
+    deactivate Controller
+
+    FE --> Actor : Elimina la fila de la tabla
+    deactivate FE
+else Profesor no existe
+    Service --> Controller : throw RuntimeException
+    Controller --> FE : 400 Bad Request
+    FE --> Actor : Muestra error
+end
+
+@enduml

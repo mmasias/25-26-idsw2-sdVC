@@ -1,0 +1,19 @@
+﻿@startuml crearPregunta-analisis
+skinparam linetype polyline
+
+actor Docente
+package crearPregunta as "crearPregunta()" {
+    rectangle #629EF9 VistaCreacionPregunta
+    rectangle #b5bd68 ControladorGestionPreguntas
+    rectangle #F2AC4E Pregunta
+    rectangle #F2AC4E Asignatura
+}
+
+Docente -r-> VistaCreacionPregunta: solicitarCreacion()
+Docente --> VistaCreacionPregunta: proporcionarDatos(asignatura, enunciado, tema, dificultad)
+VistaCreacionPregunta -d-> ControladorGestionPreguntas: crearPregunta(datos)
+ControladorGestionPreguntas --> Asignatura: validarExistencia()
+ControladorGestionPreguntas --> Pregunta: inicializar(datos)
+ControladorGestionPreguntas --> VistaCreacionPregunta: notificarExitoYRedirigir()
+
+@enduml

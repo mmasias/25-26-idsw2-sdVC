@@ -1,0 +1,223 @@
+@startuml diagrama-clases-diseno
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor white
+  BorderColor #475569
+  HeaderBackgroundColor #dbeafe
+  FontName Arial
+  FontSize 11
+}
+skinparam enum {
+  BackgroundColor #fef9c3
+  BorderColor #ca8a04
+  FontName Arial
+  FontSize 10
+}
+hide empty members
+
+' == ENUMERACIONES ==
+
+enum Rol {
+  DOCENTE
+  ADMINISTRADOR_INSTITUCIONAL
+}
+
+enum Dificultad {
+  BAJA
+  MEDIA
+  ALTA
+}
+
+enum TipoEvaluacion {
+  PARCIAL_1
+  PARCIAL_2
+  PARCIAL_3
+  FINAL
+  EXTRAORDINARIO
+}
+
+enum EstadoExamen {
+  PENDIENTE
+  ASIGNADO
+  PENDIENTE_CALIFICACION
+  CORREGIDO
+}
+
+' == CLASES DE DISENO ==
+
+class Usuario <<Entity>> {
+  - id : Long
+  - username : String
+  - password : String
+  - rol : Rol
+  - nombre : String
+}
+
+class Profesor <<Entity>> {
+  - id : Long
+  - dni : String
+  - nombre : String
+  - apellidos : String
+  - email : String
+  - usuario : String
+  - password : String
+}
+
+class Alumno <<Entity>> {
+  - id : Long
+  - dni : String
+  - nombre : String
+  - apellidos : String
+  - curso : Integer
+}
+
+class Grado <<Entity>> {
+  - id : Long
+  - codigo : String
+  - nombre : String
+}
+
+class Asignatura <<Entity>> {
+  - id : Long
+  - nombre : String
+  - codigo : String
+  - cursoAcademico : String
+  - cursoSugerido : Integer
+}
+
+class Tema <<Entity>> {
+  - id : Long
+  - nombre : String
+}
+
+class Pregunta <<Entity>> {
+  - id : Long
+  - enunciado : String
+  - dificultad : Dificultad
+  - habilitada : boolean
+}
+
+class Respuesta <<Entity>> {
+  - id : Long
+  - contenido : String
+  - esCorrecta : boolean
+  - indice : Integer
+}
+
+class Examen <<Entity>> {
+  - id : Long
+  - tipoEvaluacion : TipoEvaluacion
+  - esPersonalizado : boolean
+  - fechaExamen : LocalDate
+}
+
+class ExamenAlumno <<Entity>> {
+  - id : Long
+  - claveCorreccion : String
+  - notaSugerida : Double
+  - notaFinal : Double
+  - estado : EstadoExamen
+}
+
+class ExamenAlumnoMarca <<Entity>> {
+  - id : Long
+  - indiceMarcado : Integer
+}
+
+' == SERVICIOS (capa de negocio) ==
+
+class ServicioExamen <<Service>> {
+  + generarYAsignar(dto) : int
+  + asignarGrupo(dto) : void
+  + corregirExamen(dto) : void
+  + cancelarGeneracion(dto) : void
+  + exportarExamen(id) : DTO
+  + obtenerRevisionEjemplar(id) : DTO
+}
+
+class ServicioAlumno <<Service>> {
+  + listarTodos() : List
+  + guardarIndividual(dto) : void
+  + actualizarAlumno(id, dto) : void
+  + eliminarAlumno(id) : void
+  + importarDesdeCSV(file) : int
+}
+
+class ServicioPregunta <<Service>> {
+  + listarTodas() : List
+  + guardar(dto) : void
+  + actualizar(id, dto) : void
+  + eliminar(id) : void
+  + toggleHabilitada(id) : void
+  + importarDesdeCSV(file) : int
+}
+
+class ServicioAsignatura <<Service>> {
+  + listarTodas() : List
+  + guardar(dto) : void
+  + actualizar(id, dto) : void
+  + eliminar(id) : void
+}
+
+class ServicioGrado <<Service>> {
+  + listarTodos() : List
+  + guardar(dto) : void
+  + actualizar(id, dto) : void
+  + eliminar(id) : void
+}
+
+class ServicioProfesor <<Service>> {
+  + listarTodos() : List
+  + crearOActualizar(dto) : void
+  + eliminar(id) : void
+}
+
+class ServicioConfiguracion <<Service>> {
+  + exportar() : DTO
+  + importar(dto) : void
+  + getResumen() : DTO
+}
+
+' == RELACIONES ENTRE ENTIDADES ==
+
+Alumno    "*" --> "1"    Grado
+Alumno    "*" --  "*"    Asignatura    : matriculas
+Asignatura "*" --> "1"   Profesor
+Asignatura "*" --  "*"   Grado         : asignatura_grados
+Asignatura "1" --> "*"   Tema
+Tema       "1" --> "*"   Pregunta
+Pregunta   "1" --> "*"   Respuesta
+Examen     "*" --> "1"   Asignatura
+Examen     "*" --  "*"   Pregunta      : examen_preguntas
+ExamenAlumno "*" --> "1" Alumno
+ExamenAlumno "*" --> "1" Examen
+ExamenAlumnoMarca "*" --> "1"    ExamenAlumno
+ExamenAlumnoMarca "*" --> "1"    Pregunta
+ExamenAlumnoMarca "*" --> "0..1" Respuesta
+
+' == RELACIONES CON ENUMERACIONES ==
+
+Usuario    ..> Rol
+Profesor   ..> Rol
+Pregunta   ..> Dificultad
+Examen     ..> TipoEvaluacion
+ExamenAlumno ..> EstadoExamen
+
+' == SERVICIOS -> ENTIDADES ==
+
+ServicioExamen ..> Examen
+ServicioExamen ..> ExamenAlumno
+ServicioExamen ..> ExamenAlumnoMarca
+ServicioAlumno ..> Alumno
+ServicioPregunta ..> Pregunta
+ServicioPregunta ..> Respuesta
+ServicioAsignatura ..> Asignatura
+ServicioGrado ..> Grado
+ServicioProfesor ..> Profesor
+ServicioProfesor ..> Usuario
+ServicioConfiguracion ..> ServicioAlumno
+ServicioConfiguracion ..> ServicioPregunta
+ServicioConfiguracion ..> ServicioAsignatura
+ServicioConfiguracion ..> ServicioGrado
+
+@enduml

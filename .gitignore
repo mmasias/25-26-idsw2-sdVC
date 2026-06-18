@@ -1,0 +1,22 @@
+target/
+*.class
+.mvn/
+mvnw
+mvnw.cmd
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+*.log
+.DS_Store
+.idea/
+*.iml
+.vscode/
+postman-payloads.md
+
+# Archivos de Memoria y Contexto (Privados)
+MEMORY.md
+CONTEXTO_PROYECTO.md
+TRAZABILIDAD_TEORICA.md
+DEFENSA_IDSW2.md

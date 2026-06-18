@@ -1,0 +1,18 @@
+﻿@startuml crearGrado-analisis
+skinparam linetype polyline
+
+actor Docente
+package crearGrado as "crearGrado()" {
+    rectangle #629EF9 VistaCreacionGrado
+    rectangle #b5bd68 ControladorGrados
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaCreacionGrado: solicitarCreacion()
+Docente --> VistaCreacionGrado: proporcionarDatos(nombre, codigo)
+VistaCreacionGrado -d-> ControladorGrados: crearGrado(datos)
+ControladorGrados --> Grado: inicializar(datos)
+ControladorGrados --> VistaCreacionGrado: notificarExitoYRedirigir()
+
+@enduml

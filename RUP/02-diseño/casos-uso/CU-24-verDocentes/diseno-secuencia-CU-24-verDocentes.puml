@@ -1,0 +1,36 @@
+@startuml secuencia-cu24-ver-docentes
+title Diagrama de Secuencia - Ver Docentes
+
+actor "Administrador Institucional" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorProfesor" as Controller
+participant "ServicioProfesor" as Service
+participant "RepositorioProfesor" as RepoProfesor
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Navega a "Docentes"
+activate FE
+
+FE -> Controller : GET /api/profesores
+activate Controller
+
+Controller -> Service : listarTodos()
+activate Service
+
+Service -> RepoProfesor : findAll()
+activate RepoProfesor
+RepoProfesor -> DB : SELECT * FROM profesores
+DB --> RepoProfesor : lista de profesores
+RepoProfesor --> Service : List<Profesor>
+deactivate RepoProfesor
+
+Service --> Controller : List<DTO_Profesor>
+deactivate Service
+
+Controller --> FE : 200 OK (JSON lista)
+deactivate Controller
+
+FE --> Actor : Muestra tabla de docentes
+deactivate FE
+
+@enduml

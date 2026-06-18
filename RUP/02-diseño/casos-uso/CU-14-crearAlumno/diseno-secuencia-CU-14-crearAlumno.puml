@@ -1,0 +1,57 @@
+@startuml secuencia-cu14-crear-alumno
+title Diagrama de Secuencia - Crear Alumno
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorAlumno" as Controller
+participant "ServicioAlumno" as Service
+participant "RepositorioGrado" as RepoGrado
+participant "RepositorioAlumno" as RepoAlumno
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Introduce datos del nuevo alumno
+activate FE
+
+FE -> Controller : POST /api/alumnos (DTO_Alumno)
+activate Controller
+
+Controller -> Service : guardarIndividual(dto)
+activate Service
+
+Service -> RepoGrado : findByCodigo(codigoGrado)
+activate RepoGrado
+RepoGrado -> DB : SELECT grado
+DB --> RepoGrado : resultado
+RepoGrado --> Service : Optional<Grado>
+deactivate RepoGrado
+
+alt Grado no existe
+    Service --> Controller : throw RuntimeException
+    Controller --> FE : 400 Bad Request
+    FE --> Actor : Muestra error de grado no encontrado
+else Grado existe
+    Service -> RepoAlumno : findByDni(dni)
+    activate RepoAlumno
+    RepoAlumno -> DB : SELECT alumno
+    DB --> RepoAlumno : null
+    RepoAlumno --> Service : Optional.empty()
+    deactivate RepoAlumno
+
+    Service -> RepoAlumno : save(nuevoAlumno)
+    activate RepoAlumno
+    RepoAlumno -> DB : INSERT alumno
+    DB --> RepoAlumno : ok
+    RepoAlumno --> Service : alumno
+    deactivate RepoAlumno
+
+    Service --> Controller : void
+    deactivate Service
+
+    Controller --> FE : 200 OK
+    deactivate Controller
+
+    FE --> Actor : Muestra alumno creado en tabla
+    deactivate FE
+end
+
+@enduml

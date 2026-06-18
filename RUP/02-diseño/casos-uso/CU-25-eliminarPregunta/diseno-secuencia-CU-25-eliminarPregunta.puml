@@ -1,0 +1,36 @@
+@startuml secuencia-cu25-eliminar-pregunta
+title Diagrama de Secuencia - Eliminar Pregunta
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorPregunta" as Controller
+participant "ServicioPregunta" as Service
+participant "RepositorioPregunta" as RepoPreg
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Pulsa "Eliminar" en la pregunta
+activate FE
+
+FE -> Controller : DELETE /api/preguntas/{id}
+activate Controller
+
+Controller -> Service : eliminar(id)
+activate Service
+
+Service -> RepoPreg : deleteById(id)
+activate RepoPreg
+RepoPreg -> DB : DELETE FROM preguntas WHERE id = ?
+DB --> RepoPreg : ok
+RepoPreg --> Service : ok
+deactivate RepoPreg
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK
+deactivate Controller
+
+FE --> Actor : Elimina la fila de la tabla
+deactivate FE
+
+@enduml

@@ -1,0 +1,24 @@
+﻿@startuml editarGrado-analisis
+skinparam linetype polyline
+
+actor Docente
+package editarGrado as "editarGrado()" {
+    rectangle #629EF9 VistaEdicionGrado
+    rectangle #b5bd68 ControladorGrados
+    rectangle #F2AC4E Grado
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaEdicionGrado: verDatosActuales()
+VistaEdicionGrado -d-> ControladorGrados: obtenerDatos()
+ControladorGrados --> Grado: getDatos()
+
+Docente --> VistaEdicionGrado: modificarCampos(datos)
+VistaEdicionGrado --> ControladorGrados: guardar(datos)
+ControladorGrados --> Grado: actualizar(datos)
+
+Docente --> VistaEdicionGrado: eliminarGrado()
+VistaEdicionGrado --> ControladorGrados: eliminar()
+ControladorGrados --> Grado: delete()
+
+@enduml

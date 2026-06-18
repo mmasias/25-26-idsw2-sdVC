@@ -1,0 +1,16 @@
+﻿@startuml iniciarSesion-analisis
+skinparam linetype polyline
+
+actor UsuarioNoRegistrado
+package iniciarSesion as "iniciarSesion()" {
+    rectangle #629EF9 VistaInicioSesion
+    rectangle #b5bd68 ControladorInicioSesion
+    rectangle #F2AC4E Usuario
+}
+
+UsuarioNoRegistrado -r-> VistaInicioSesion: introducirCredenciales()
+VistaInicioSesion --> ControladorInicioSesion: autenticar()
+ControladorInicioSesion --> Usuario: verificarCredenciales()
+ControladorInicioSesion --> VistaInicioSesion: mostrarError()
+
+@enduml

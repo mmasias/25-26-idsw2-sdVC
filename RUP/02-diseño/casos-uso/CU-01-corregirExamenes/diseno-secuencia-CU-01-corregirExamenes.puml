@@ -1,0 +1,57 @@
+@startuml secuencia-cu01-corregir-examen
+title Diagrama de Secuencia - Corregir Exámenes
+
+actor "Docente / IA" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorExamen" as Controller
+participant "ServicioExamen" as Service
+participant "RepositorioExamenAlumno" as RepoExAl
+participant "RepositorioExamenAlumnoMarca" as RepoMarcas
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Inicia corrección masiva
+activate FE
+
+FE -> Controller : POST /api/examenes/{id}/corregir
+activate Controller
+
+Controller -> Service : corregirMasivo(examenId)
+activate Service
+
+Service -> RepoExAl : findByExamenId(examenId)
+activate RepoExAl
+RepoExAl -> DB : SELECT ejemplares + alumno + examen
+DB --> RepoExAl : lista_ejemplares
+RepoExAl --> Service : List<ExamenAlumno>
+deactivate RepoExAl
+
+Service -> RepoMarcas : findAllByExamenAlumnoIdIn(candidatoIds)
+activate RepoMarcas
+RepoMarcas -> DB : SELECT marcas + pregunta + respuesta
+DB --> RepoMarcas : lista_marcas
+RepoMarcas --> Service : List<ExamenAlumnoMarca>
+deactivate RepoMarcas
+
+Service -> Service : agruparMarcasPorEjemplar()
+note right: Collectors.groupingBy(ejemplarId)
+
+Service -> Service : calcularNota(aciertos, fallos)
+note right: Fórmula: Aciertos - (Fallos / 3)
+
+Service -> RepoExAl : saveAll(ejemplaresActualizados)
+activate RepoExAl
+RepoExAl -> DB : UPDATE nota_final, estado='CORREGIDO'
+DB --> RepoExAl : ok
+RepoExAl --> Service : ok
+deactivate RepoExAl
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK (Corrección procesada)
+deactivate Controller
+
+FE --> Actor : Muestra resultados actualizados
+deactivate FE
+
+@enduml

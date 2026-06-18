@@ -1,0 +1,22 @@
+﻿@startuml asignarExamenes-analisis
+skinparam linetype polyline
+
+actor Docente
+package asignarExamenes as "asignarExamenes()" {
+    rectangle #629EF9 VistaAsignacionExamen
+    rectangle #b5bd68 ControladorAsignacion
+    rectangle #F2AC4E Examen
+    rectangle #F2AC4E Alumno
+    rectangle #F2AC4E Grado
+}
+
+Docente -r-> VistaAsignacionExamen: iniciarAsignacion()
+VistaAsignacionExamen -d-> ControladorAsignacion: obtenerExamenesGenerados()
+ControladorAsignacion --> Examen: getGenerados()
+
+Docente --> VistaAsignacionExamen: asignarAlumnos(listaAlumnos)
+VistaAsignacionExamen --> ControladorAsignacion: validarYRegistrar(listaAlumnos)
+ControladorAsignacion --> Alumno: validarPerteneceGrado(grado)
+ControladorAsignacion --> Examen: vincularAlumno(student)
+
+@enduml

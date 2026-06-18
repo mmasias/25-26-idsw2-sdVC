@@ -1,0 +1,19 @@
+﻿@startuml verDocentes-analisis
+skinparam linetype polyline
+
+actor AdministradorInstitucional
+package verDocentes as "verDocentes()" {
+    rectangle #629EF9 VistaListaDocentes
+    rectangle #b5bd68 ControladorDocentes
+    rectangle #F2AC4E Docente
+}
+
+AdministradorInstitucional -r-> VistaListaDocentes: solicitarVerDocentes()
+VistaListaDocentes -d-> ControladorDocentes: obtenerDocentes()
+ControladorDocentes --> Docente: consultarTodos()
+
+AdministradorInstitucional --> VistaListaDocentes: aplicarFiltro(criterios)
+VistaListaDocentes --> ControladorDocentes: filtrar(criterios)
+ControladorDocentes --> Docente: consultar(criterios)
+
+@enduml

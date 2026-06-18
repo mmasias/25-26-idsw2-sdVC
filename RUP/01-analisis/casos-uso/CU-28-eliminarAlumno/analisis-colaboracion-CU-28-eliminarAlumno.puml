@@ -1,0 +1,17 @@
+﻿@startuml eliminarAlumno-analisis
+skinparam linetype polyline
+
+actor Docente
+package eliminarAlumno as "eliminarAlumno()" {
+    rectangle #629EF9 VistaEliminacionAlumno
+    rectangle #b5bd68 ControladorAlumnos
+    rectangle #F2AC4E Alumno
+}
+
+Docente -r-> VistaEliminacionAlumno: solicitarEliminar()
+VistaEliminacionAlumno --> Alumno: getDatos()
+Docente --> VistaEliminacionAlumno: confirmarEliminar()
+VistaEliminacionAlumno -d-> ControladorAlumnos: eliminarAlumno()
+ControladorAlumnos --> Alumno: delete()
+
+@enduml

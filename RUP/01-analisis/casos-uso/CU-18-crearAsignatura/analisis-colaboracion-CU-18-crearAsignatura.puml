@@ -1,0 +1,21 @@
+﻿@startuml crearAsignatura-analisis
+skinparam linetype polyline
+
+actor Docente
+package crearAsignatura as "crearAsignatura()" {
+    rectangle #629EF9 VistaCreacionAsignatura
+    rectangle #b5bd68 ControladorAsignaturas
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E BancoPreguntas
+    rectangle #F2AC4E Alumno
+    rectangle #F2AC4E Grado
+}
+
+Docente -r-> VistaCreacionAsignatura: solicitarCreacion()
+Docente --> VistaCreacionAsignatura: introducirDatos(nombre, codigo, curso)
+VistaCreacionAsignatura -d-> ControladorAsignaturas: crearAsignatura(datos)
+ControladorAsignaturas --> Asignatura: inicializar(datos)
+ControladorAsignaturas --> BancoPreguntas: crearBateria()
+ControladorAsignaturas --> VistaCreacionAsignatura: notificarExitoYRedirigir()
+
+@enduml

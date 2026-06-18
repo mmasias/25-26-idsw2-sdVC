@@ -1,0 +1,43 @@
+@startuml secuencia-cu19-editar-grado
+title Diagrama de Secuencia - Editar Grado
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorGrado" as Controller
+participant "ServicioGrado" as Service
+participant "RepositorioGrado" as RepoGrado
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Modifica datos del grado
+activate FE
+
+FE -> Controller : POST /api/grados (DTO_Grado con código existente)
+activate Controller
+
+Controller -> Service : crearOActualizar(dto)
+activate Service
+
+Service -> RepoGrado : findByCodigo(codigo)
+activate RepoGrado
+RepoGrado -> DB : SELECT grado
+DB --> RepoGrado : resultado
+RepoGrado --> Service : Optional<Grado>
+deactivate RepoGrado
+
+Service -> RepoGrado : save(gradoActualizado)
+activate RepoGrado
+RepoGrado -> DB : UPDATE grado
+DB --> RepoGrado : ok
+RepoGrado --> Service : grado
+deactivate RepoGrado
+
+Service --> Controller : void
+deactivate Service
+
+Controller --> FE : 200 OK
+deactivate Controller
+
+FE --> Actor : Muestra grado actualizado
+deactivate FE
+
+@enduml

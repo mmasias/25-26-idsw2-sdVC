@@ -1,0 +1,19 @@
+﻿@startuml editarRespuesta-analisis
+skinparam linetype polyline
+
+actor Docente
+package editarRespuesta as "editarRespuesta()" {
+    rectangle #629EF9 VistaEdicionRespuesta
+    rectangle #b5bd68 ControladorEdicionRespuestas
+    rectangle #F2AC4E Respuesta
+}
+
+Docente -r-> VistaEdicionRespuesta: solicitarEditar()
+VistaEdicionRespuesta --> ControladorEdicionRespuestas: getDatos()
+ControladorEdicionRespuestas --> Respuesta: read()
+Docente --> VistaEdicionRespuesta: modificarCampos()
+Docente --> VistaEdicionRespuesta: confirmarGuardar()
+VistaEdicionRespuesta -d-> ControladorEdicionRespuestas: actualizarRespuesta()
+ControladorEdicionRespuestas --> Respuesta: update()
+
+@enduml

@@ -1,0 +1,20 @@
+﻿@startuml verPreguntas-analisis
+skinparam linetype polyline
+
+actor Docente
+package verPreguntas as "verPreguntas()" {
+    rectangle #629EF9 VistaListaPreguntas
+    rectangle #b5bd68 ControladorPreguntas
+    rectangle #F2AC4E Pregunta
+    rectangle #F2AC4E Asignatura
+}
+
+Docente -r-> VistaListaPreguntas: solicitarVerPreguntas()
+VistaListaPreguntas -d-> ControladorPreguntas: obtenerLista(contexto)
+ControladorPreguntas --> Pregunta: consultar(contexto)
+
+Docente --> VistaListaPreguntas: aplicarFiltro(criterios)
+VistaListaPreguntas --> ControladorPreguntas: filtrar(criterios)
+ControladorPreguntas --> Pregunta: consultar(criterios)
+
+@enduml

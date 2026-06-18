@@ -1,0 +1,36 @@
+@startuml secuencia-cu20-ver-preguntas
+title Diagrama de Secuencia - Ver Preguntas
+
+actor "Docente" as Actor
+participant "Frontend\n(React)" as FE
+participant "ControladorPregunta" as Controller
+participant "ServicioPregunta" as Service
+participant "RepositorioPregunta" as RepoPreg
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Actor -> FE : Navega a "Batería de Preguntas"
+activate FE
+
+FE -> Controller : GET /api/preguntas
+activate Controller
+
+Controller -> Service : listarTodas()
+activate Service
+
+Service -> RepoPreg : findAll()
+activate RepoPreg
+RepoPreg -> DB : SELECT * FROM preguntas
+DB --> RepoPreg : listaPreguntas
+RepoPreg --> Service : List<Pregunta>
+deactivate RepoPreg
+
+Service --> Controller : List<DTO_Pregunta>
+deactivate Service
+
+Controller --> FE : 200 OK (JSON)
+deactivate Controller
+
+FE --> Actor : Muestra tabla de preguntas
+deactivate FE
+
+@enduml
