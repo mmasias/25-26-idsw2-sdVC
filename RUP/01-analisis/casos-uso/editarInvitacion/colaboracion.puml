@@ -1,0 +1,18 @@
+@startuml editarInvitacion-analisis
+skinparam linetype polyline
+left to right direction
+
+actor Usuario
+boundary EditarInvitacionView
+control InvitacionesController
+entity InvitacionRepository
+entity "Invitacion" as EntidadInvitacion
+rectangle ":Invitaciones Abierto" as InvitacionesAbierto #C5E0B4
+
+Usuario --> EditarInvitacionView : 1: editarInvitacion(datosActualizados)
+EditarInvitacionView --> InvitacionesController : 2: actualizarInvitacion(id, datosActualizados)
+InvitacionesController --> InvitacionRepository : 3: modificarDatos(id, datosActualizados)
+InvitacionRepository -- EntidadInvitacion
+EditarInvitacionView --> InvitacionesAbierto : 4: actualizaEstado()
+
+@enduml

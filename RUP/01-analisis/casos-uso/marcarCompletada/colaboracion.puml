@@ -1,0 +1,18 @@
+@startuml marcarCompletada-analisis
+skinparam linetype polyline
+left to right direction
+
+actor Usuario
+boundary ListarTareasView
+control TareasController
+entity TareaRepository
+entity Tarea
+rectangle ":Tareas Abierto" as TareasAbierto #C5E0B4
+
+Usuario --> ListarTareasView : 1: marcarCompletada(idTarea)
+ListarTareasView --> TareasController : 2: actualizarEstadoTarea(idTarea, estado)
+TareasController --> TareaRepository : 3: modificarTarea(idTarea, estado)
+TareaRepository -- Tarea
+ListarTareasView --> TareasAbierto : 4: actualizaEstado()
+
+@enduml

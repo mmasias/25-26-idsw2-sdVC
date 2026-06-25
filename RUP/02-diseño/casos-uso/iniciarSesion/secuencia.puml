@@ -1,0 +1,34 @@
+@startuml iniciarSesion-secuencia
+!theme plain
+autonumber
+
+actor Usuario
+participant LoginView <<UI React>>
+participant SesionController <<Router FastAPI>>
+participant AuthService <<Lógica Autenticación>>
+participant UsuarioRepository <<Capa Datos SQLAlchemy>>
+database PostgreSQL
+
+Usuario -> LoginView : Introduce credenciales
+activate LoginView
+LoginView -> SesionController : POST /login
+activate SesionController
+SesionController -> AuthService : login(email, password)
+activate AuthService
+AuthService -> UsuarioRepository : buscarPorEmail(email)
+activate UsuarioRepository
+UsuarioRepository -> PostgreSQL : SELECT
+activate PostgreSQL
+PostgreSQL --> UsuarioRepository : Devuelve registro
+deactivate PostgreSQL
+UsuarioRepository --> AuthService : Devuelve objeto Usuario (con hash)
+deactivate UsuarioRepository
+AuthService -> AuthService : Verifica hash de contraseña\ny genera token JWT
+AuthService --> SesionController : Devuelve token JWT
+deactivate AuthService
+SesionController --> LoginView : Retorna Token
+deactivate SesionController
+LoginView --> Usuario : Muestra Dashboard (Sesión Iniciada)
+deactivate LoginView
+
+@enduml

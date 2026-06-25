@@ -1,0 +1,24 @@
+@startuml cerrarSesion-secuencia
+!theme plain
+autonumber
+
+actor Usuario
+participant NavbarView <<UI React>>
+participant SesionController <<Router FastAPI>>
+participant AuthService <<Lógica Autenticación>>
+
+Usuario -> NavbarView : Hace clic en cerrar sesión
+activate NavbarView
+NavbarView -> SesionController : POST /logout (JWT)
+activate SesionController
+SesionController -> AuthService : logout(token)
+activate AuthService
+AuthService -> AuthService : Invalida el token o registra la salida
+AuthService --> SesionController : Devuelve 200 OK
+deactivate AuthService
+SesionController --> NavbarView : Responde 200 OK
+deactivate SesionController
+NavbarView -> NavbarView : Borra token del localStorage/estado\ny redirige al login
+deactivate NavbarView
+
+@enduml

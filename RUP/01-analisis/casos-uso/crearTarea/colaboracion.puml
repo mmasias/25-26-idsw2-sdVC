@@ -1,0 +1,25 @@
+@startuml crearTarea-analisis
+skinparam linetype polyline
+
+actor Usuario
+package crearTarea as "crearTarea()" {
+    rectangle #629EF9 CrearTareaView
+    rectangle #b5bd68 TareasController
+    rectangle #F2AC4E TareaRepository
+    rectangle #F2AC4E Tarea
+    rectangle #F2AC4E Grupo
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> CrearTareaView: 1: crearTarea()
+
+CrearTareaView -d-> TareasController: 2: registrarTarea(datos, grupo)
+
+TareasController --> TareaRepository: 3: crearTareaEnGrupo(datos, grupo)
+
+TareaRepository -- Tarea
+TareaRepository -- Grupo
+
+CrearTareaView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

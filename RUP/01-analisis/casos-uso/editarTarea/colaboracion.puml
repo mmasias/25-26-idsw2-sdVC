@@ -1,0 +1,23 @@
+@startuml editarTarea-analisis
+skinparam linetype polyline
+
+actor Usuario
+package editarTarea as "editarTarea()" {
+    rectangle #629EF9 EditarTareaView
+    rectangle #b5bd68 TareasController
+    rectangle #F2AC4E TareaRepository
+    rectangle #F2AC4E Tarea
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> EditarTareaView: 1: editarTarea(tarea)
+
+EditarTareaView -d-> TareasController: 2: actualizarTarea(id, datos)
+
+TareasController --> TareaRepository: 3: guardarCambios(id, datos)
+
+TareaRepository -- Tarea
+
+EditarTareaView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

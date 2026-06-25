@@ -1,0 +1,18 @@
+@startuml iniciarSesion-analisis
+skinparam linetype polyline
+left to right direction
+
+actor Usuario
+boundary LoginView
+control SesionController
+entity UsuarioRepository
+entity "Usuario" as EntidadUsuario
+rectangle ":Sesión Cerrada" as SesionCerrada #FFB3BA
+
+Usuario --> LoginView : 1: iniciarSesion(credenciales)
+LoginView --> SesionController : 2: autenticar(credenciales)
+SesionController --> UsuarioRepository : 3: buscarPorEmail(email)
+UsuarioRepository -- EntidadUsuario
+LoginView --> SesionCerrada : 4: actualizaEstado()
+
+@enduml

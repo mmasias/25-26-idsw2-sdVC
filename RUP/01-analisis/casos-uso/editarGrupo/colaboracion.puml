@@ -1,0 +1,23 @@
+@startuml editarGrupo-analisis
+skinparam linetype polyline
+
+actor Usuario
+package editarGrupo as "editarGrupo()" {
+    rectangle #629EF9 EditarGrupoView
+    rectangle #b5bd68 GruposController
+    rectangle #F2AC4E GrupoRepository
+    rectangle #F2AC4E Grupo
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> EditarGrupoView: 1: editarGrupo(grupo)
+
+EditarGrupoView -d-> GruposController: 2: actualizarGrupo(id, datos)
+
+GruposController --> GrupoRepository: 3: guardarCambios(id, datos)
+
+GrupoRepository -- Grupo
+
+EditarGrupoView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

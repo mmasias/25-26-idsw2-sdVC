@@ -1,0 +1,23 @@
+@startuml completarGestion-secuencia
+!theme plain
+autonumber
+
+actor Usuario
+participant TareasView <<UI React>>
+participant DashboardController <<Router Frontend/Backend>>
+participant DashboardView <<UI React>>
+
+Usuario -> TareasView : Hace clic en 'Volver/Finalizar'
+activate TareasView
+TareasView -> DashboardController : Notifica navegación
+activate DashboardController
+DashboardController -> DashboardController : Verifica cambios sin guardar
+DashboardController -> DashboardController : Redirige a ruta principal
+DashboardController -> DashboardView : Carga vista principal
+activate DashboardView
+DashboardView --> Usuario : Renderiza Dashboard
+deactivate DashboardView
+deactivate DashboardController
+deactivate TareasView
+
+@enduml

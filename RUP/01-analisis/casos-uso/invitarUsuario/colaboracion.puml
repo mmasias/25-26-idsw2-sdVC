@@ -1,0 +1,31 @@
+@startuml invitarUsuario-analisis
+skinparam linetype polyline
+
+actor Usuario
+package invitarUsuario as "invitarUsuario()" {
+    rectangle #629EF9 EnviarInvitacionView
+    rectangle #b5bd68 InvitacionesController
+    rectangle #F2AC4E InvitacionRepository
+    rectangle #F2AC4E UsuarioRepository
+    rectangle #F2AC4E MiembroRepository
+    rectangle #F2AC4E Invitacion
+    rectangle #F2AC4E Usuario as UserEnt
+    rectangle #F2AC4E MiembroGrupo
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> EnviarInvitacionView: 1: invitarUsuario(grupo)
+
+EnviarInvitacionView -d-> InvitacionesController: 2: enviarInvitacion(grupo, idUsuario)
+
+InvitacionesController --> UsuarioRepository: 3: validarExistencia(idUsuario)
+InvitacionesController --> MiembroRepository: 4: verificarPertenencia(grupo, idUsuario)
+InvitacionesController --> InvitacionRepository: 5: crearInvitacion(grupo, idUsuario)
+
+UsuarioRepository -- UserEnt
+MiembroRepository -- MiembroGrupo
+InvitacionRepository -- Invitacion
+
+EnviarInvitacionView -r-> SistemaDisponible: 6: sistemaDisponible(usuario)
+
+@enduml

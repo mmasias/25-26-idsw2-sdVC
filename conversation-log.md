@@ -1,25 +1,836 @@
 # Conversation log
 
-## [HH:MM] Inicio de sesión
+## [21/05/2026] [21:37] Estructuración del marco de trabajo RUP
 
-**Prompt:** *(lo que le dijo al AI para arrancar el proyecto)*
+**Prompt:** Actúa como un arquitecto de software experto en metodologías RUP. Necesito crear la estructura de directorios inicial para las fases de Análisis y Diseño de mi sistema de gestión de tareas compartidas, basándome en un enfoque pragmático. Proporciona los comandos de terminal para crear una carpeta `RUP/` en la raíz, con subcarpetas `01-analisis/casos-uso` y `02-diseño/casos-uso`. Además, genera el contenido de un archivo `RUP/README.md` que explique brevemente el propósito de esta carpeta, enfatizando que el análisis será agnóstico a la tecnología y el diseño contendrá la arquitectura final.
 
-**Resultado:** *(lo que produjo)*
+**Resultado:** Como arquitecto, he establecido la base metodológica para el proyecto. Se ha optado por una estructura que separa claramente la intención del negocio de la realización técnica.
 
-**Decisión:** *(qué aceptó, qué rechazó, qué modificó, y por qué)*
+**Decisión:** Acepto el esquema de carpetas (01-analisis/ y 02-diseño/) porque proporciona una trazabilidad clara desde los requisitos iniciales hacia la implementación final. Esto me permite organizar los artefactos de forma que cualquier evaluador pueda seguir el hilo conductor de mis decisiones de diseño sin perderse en el código.
+
+## [21/05/2026] [22:07] Documentación y preparación de modelos RUP
+
+**Prompt:** Actúa como un arquitecto de software experto en RUP. Estamos documentando la arquitectura de un sistema de gestión colaborativa de tareas familiares. Tarea 1: Genera el contenido para el archivo RUP/01-analisis/README.md... Tarea 2: Genera el contenido para el archivo `RUP/02-diseño/README.md...` Tarea 3: Basado en tu experiencia RUP, sugiéreme qué 3 archivos .puml esenciales debería crear... Tarea 4: Dame los comandos de terminal (touch) para crear those 6 archivos vacíos en sus respectivas carpetas.
+
+**Resultado:** Creación de READMEs para Análisis y Diseño, definición de estrategia de modelado con 6 archivos .puml esenciales e inicialización de los mismos en el sistema de archivos.
+
+**Decisión:** Acepto la estructura de archivos propuesta porque cubre los artefactos esenciales para una correcta transición de análisis a diseño, siguiendo la metodología RUP adaptada a VibeCoding. Durante la ejecución del paso, el comando touch falló por no estar disponible en mi entorno actual (PowerShell).
+
+## [21/05/2026] [22:45] Modelado de análisis para Gestión de Sesión y Coordinación
+
+**Prompt:** Actúa como un ingeniero de software experto en la metodología RUP. Fase 1: Análisis. Modelado de casos de uso (iniciarSesion, cerrarSesion, completarGestion). Tarea: Crear subcarpetas, READMEs con propósito y flujo, y diagramas de colaboración (.puml) usando estereotipos BCE.
+
+**Resultado:** Creación de la estructura de artefactos para tres casos de uso clave. Se generaron los READMEs centrados en el valor de negocio y los diagramas de comunicación UML que detallan la interacción entre fronteras (boundary), controles y entidades.
+
+**Decisión:** He modelado las interacciones de forma estrictamente agnóstico a la tecnología para garantizar que la lógica de coordinación y seguridad (autenticación) sea validada desde la perspectiva del dominio antes de cualquier implementación técnica. Esto asegura un diseño robusto y alineado con los objetivos de negocio.
+
+## [21/05/2026] [22:55] Configuración de asistente de versionado profesional
+
+**Prompt:** A partir de ahora, vas a ser mi asistente de versionado profesional. Cada vez que te diga 'Genera commit', quiero que analices los últimos cambios... Genera el comando de commit para lo que acabamos de trabajar.
+
+**Resultado:** Se ha establecido una convención de 'Conventional Commits' para el proyecto. Se generó el comando: `git commit -m "docs: análisis BCE para iniciarSesion, cerrarSesion y completarGestion"`.
+
+**Decisión:** Adopto el estándar de Conventional Commits (feat, docs, chore, refactor) para mejorar la legibilidad del historial del repositorio y facilitar la generación automática de changelogs en el futuro. Esto eleva la calidad profesional del proceso de entrega.
+
+## [23/05/2026] [12:15] Análisis RUP para el módulo de Gestión de Tareas
+
+**Prompt:** Actúa como un Ingeniero de Software RUP. Vamos a realizar la Fase 1: Análisis para el módulo de 'Gestión de Tareas'. Analiza el modelo de dominio y la especificación de los casos de uso (Abrir, Crear, Editar, Eliminar, Marcar como Completada y relacionarTarea). Crea las carpetas correspondientes en RUP/01-analisis/casos-uso/, genera los archivos colaboracion.puml con diagramas BCE y los README.md explicativos.
+
+**Resultado:** Análisis detallado de la lógica de control para la gestión de tareas. Se han estructurado los artefactos de análisis (BCE) para cuatro casos de uso fundamentales, definiendo las responsabilidades del GestorTareas y su interacción con las entidades del dominio (Tarea, Grupo, ConflictoHorario).
+
+**Decisión:** He aceptado la estructura y el modelado BCE para el bloque inicial de gestión de tareas. La lógica de control definida en los controladores es coherente con el modelo de dominio.
+
+Sin embargo, he identificado un error de entendimiento: el CLI no ha generado los artefactos para los casos de uso abrirTarea, relacionarTarea y validarConflicto
+
+## [23/05/2026] [12:30] Extensión del Análisis RUP: Navegación, Relaciones y Validaciones
+
+**Prompt:** Actúa como un ingeniero de software RUP experto. Fase 1: Análisis (Realización de Casos de Uso). Procesa los diagramas de estado para abrirTareas, relacionarTareas y validarConflicto. Crea las carpetas, READMEs con lógica BCE y diagramas de colaboración .puml.
+
+**Resultado:** Modelado analático completo para flujos de navegación y lógica de negocio compleja. Se han definido las interacciones BCE para la visualización de listas (abrirTareas), la vinculación lógica entre entidades (relacionarTareas) y la extracción de la lógica de validación temporal (validarConflicto). Se actualizá el seguimiento en MEMORY.md y README.md.
+
+**Decisión:** He aceptado el modelado BCE para abrirTareas, relacionarTareas y validarConflicto. He validado que los diagramas de colaboración reflejan correctamente la delegación de responsabilidades
+
+## [23/05/2026] [17:40] Organización Modular de Análisis RUP
+
+**Prompt:** Actúa como un arquitecto de software experto en RUP. Organiza la estructura de análisis de mi proyecto creando directorios en RUP/01-analisis/casos-uso/ y agrupando los casos de uso en 4 módulos funcionales: gestion-sesion, gestion-grupos, gestion-tareas, y planificacion-configuracion.
+
+**Resultado:** Creación de los directorios para los 4 módulos funcionales. Movimiento de los casos de uso existentes a sus módulos correspondientes y generación de las subcarpetas con los archivos `README.md` y `colaboracion.puml` para los nuevos casos de uso. Propuesta de iniciar el análisis en `gestion-sesion`.
+
+Decisión: Acepto la organizacion de los casos de uso en 4 modulos funcionales.
+
+## [24/05/2026] [10:58] Análisis RUP: Gestión de Grupos
+
+**Prompt:** Actúa como un arquitecto RUP experto. Vamos a realizar la Fase 1: Análisis para el módulo gestion-grupos. Genera sus artefactos BCE (colaboracion.puml y README.md) para los casos de uso: abrirGrupos(), crearGrupo(), editarGrupo(), eliminarGrupo(), invitarUsuario(), editarMiembro(), eliminarMiembro(), abrirInvitaciones() y editarInvitacion().
+
+**Resultado:** Generación exitosa de los diagramas de colaboración BCE y documentación README para los 9 casos de uso del módulo 'gestion-grupos'. Se ha definido una lógica de coordinación robusta donde el `GestorGrupos` centraliza la validación de membresías, la creación de invitaciones y la gestión de miembros, asegurando la integridad referencial (ej. limpieza de miembros al eliminar un grupo).
+
+**Decisión:** He validado y aceptado el modelado BCE para la gestión de grupos. Se ha actualizado la memoria del proyecto (`MEMORY.md`) marcando este módulo como completado.
+
+## [24/05/2026] [11:04] Cierre de Fase 1 (Análisis): Planificación y Configuración
+
+**Prompt:** Actúa como un arquitecto RUP experto. Vamos a cerrar la Fase 1: Análisis con el último módulo: planificacion-configuracion. Genera los artefactos BCE para: abrirPlanificacion(), establecerHorario(), definirLocalizacion(), configurarRecordatorio() y asignarTareaAUsuario().
+
+**Resultado:** Generación completa de diagramas de colaboración BCE y documentación para el bloque técnico de planificación. Se ha establecido al `GestorPlanificacion` como el coordinador de las entidades técnicas (`Horario`, `Localizacion`, `Recordatorio`) en relación con la entidad central `Tarea`.
+
+**Decisión:** Con este módulo, doy por **concluida la Fase 1: Análisis**. He verificado que todos los casos de uso del sistema cuentan con su realización de análisis (BCE). Con esto, el sistema tiene una lógica de negocio completa y trazable, listo para avanzar a la Fase 2: Diseño.
+
+## [24/05/2026] [12:34] Inicio de Fase 2 (Diseño): Arquitectura y Estructura
+
+**Prompt:** Actúa como un arquitecto RUP experto. Iniciamos la Fase 2: Diseño. Crea la estructura de carpetas, propón una Arquitectura de Capas y genera el README.md de diseño.
+
+**Resultado:** Inicialización formal de la fase de diseño técnico. Se ha establecido una **Arquitectura de 3 Capas (UI, BLL, DAL)** optimizada para .NET/Java, facilitando el desacoplamiento mediante interfaces y DTOs. Se han creado los directorios para diagramas de clases, secuencia y arquitectura.
+
+**Decisión:** He adoptado la arquitectura de 3 capas porque ofrece el mejor equilibrio entre mantenibilidad y escalabilidad para un sistema de gestión de tareas. 
+
+
+## [29/05/2026] [17:05] Establecimiento de Protocolo de Registro Dual
+
+**Prompt:** a partir de ahora, cuando te diga bienvenido, comenzará una nueva sesion, las sesiones contienen a su vez muchos conversation log, entonces cuando yo te diga guarda registro significa que tienes que guardar en el archivo conversation-log.md el prompt que te he dado, el resultado que me has dado debajo y finalmente la decision. Cuando te diga guarda sesion eso es para que me hagas un resumen de todo lo que te he preguntado y has hecho en toda la sesion, este resumen de la sesion lo vas a escribir en el archivo sesion-log.md entendido?
+
+**Resultado:** Se ha configurado un nuevo flujo de trabajo para la gestión de bitácoras. Se diferencia ahora entre "registros de conversación" (detallados por tarea) y "resúmenes de sesión" (archivo sesion-log.md), mejorando la granularidad y la capacidad de revisión del progreso del proyecto.
+
+**Decisión:** Adopto este protocolo para garantizar una trazabilidad impecable tanto a nivel de micro-decisiones (conversación) como de macro-objetivos (sesión), facilitando la auditoría y la continuidad del desarrollo siguiendo los estándares de rigor establecidos.
+---
+
+## [30/05/2026] [17:58] Diseño Técnico: Diagrama de Clases 'iniciarSesion' (Vertical Slice)
+
+**Prompt:** Actúa como un Arquitecto de Software Senior experto en RUP. Vamos a completar el diseño técnico de nuestro Corte Vertical (iniciarSesion). TAREA: Crea la subcarpeta RUP/02-diseño/diagramas-clases/iniciarSesion/. Genera el Diagrama de Clases de Diseño Técnico (clases-diseno.puml). Debe reflejar estrictamente nuestro stack (React, FastAPI, PostgreSQL) e incluir: Capa UI, DTO, Router, Servicio y Datos... Genera un breve README.md...
+
+**Resultado:** Se ha completado el diseño de clases técnico para el inicio de sesión. Se crearon los artefactos en `RUP/02-diseño/diagramas-clases/iniciarSesion/`, incluyendo un diagrama PlantUML detallado con tipos de datos explícitos del stack (str, UUID, JSX.Element) y estereotipos de arquitectura. Se redactó un README.md que detalla la inyección de dependencias en el backend y el uso de Context API en el frontend.
+
+**Decisión:** He validado y aceptado este diseño de clases porque materializa con éxito la transición desde la abstracción del análisis (BCE) hacia una arquitectura física real y ejecutable.
+---
+
+## [30/05/2026] [18:27] Diseño Técnico: Ramillete Gestión de Sesión (Cerrar y Completar)
+
+**Prompt:** He decidido adoptar una estrategia iterativa por 'ramilletes' funcionales. Nuestro objetivo ahora es terminar el diseño técnico del módulo gestion-sesion. TAREA: Para los casos de uso cerrarSesion y completarGestion, genera sus respectivos Diagramas de Secuencia de Diseño y Diagramas de Clases de Diseño... Modela la eliminación del token JWT, la invalidación en el backend (blacklist) y la redirección segura al Dashboard verificando el token.
+
+**Resultado:** Se han generado los artefactos técnicos para completar el módulo `gestion-sesion`. Para `cerrarSesion`, se modeló el flujo de invalidación dual (cliente/servidor) mediante un `TokenBlacklistRepository`. Para `completarGestion`, se diseñó la lógica de interceptación de rutas en React (`ProtectedRoute`) y la validación proactiva contra el backend. Se crearon diagramas de clases, secuencia y archivos README explicativos en sus respectivas carpetas dentro de `RUP/02-diseño/`.
+
+**Decisión:** He validado y aceptado este diseño técnico porque consolida una arquitectura de seguridad "zero-trust" para la sesión y cierra con éxito nuestro primer "ramillete" iterativo.
 
 ---
 
-> El log no se reescribe. Se escribe mientras ocurre.
->
-> Para cada intercambio relevante con el AI, añada una entrada con este formato:
->
-> ```
-> ## [HH:MM] Título breve de lo que se pidió
->
-> **Prompt:** lo que le dijo al AI (textual o resumido fielmente)
->
-> **Resultado:** lo que produjo
->
-> **Decisión:** qué aceptó, qué rechazó, qué modificó, y por qué
-> ```
+## [01/06/2026] [17:13] Fase 03: Construcción - Inicialización de Estructura Física
+
+**Prompt:** Actúa como un Ingeniero de Software Senior experto en desarrollo Full-Stack (FastAPI + React). Hemos concluido con éxito el diseño del ramillete gestion-sesion y nos encontramos trabajando en la rama aislada desarrollo-fastapi-react. Entramos formalmente en la Fase 03: Construcción. REGLA DE CONTROL DE GIT: Tienes ESTRICTAMENTE PROHIBIDO ejecutar comandos git add, git commit o git push por tu cuenta. Tu entorno es de solo desarrollo sobre los archivos de código. TAREA: Basándote estrictamente en el diseño estipulado en RUP/02-diseño/configuracion-proyecto.md, inicializa la estructura física de código del proyecto creando las carpetas raíces /backend e /frontend en la raíz del repositorio con su arquitectura interna...
+
+**Resultado:** Se ha inicializado la estructura de carpetas y archivos base para el backend (FastAPI) y frontend (React). En el backend, se creó el andamiaje `app/` con sus subcapas y un `main.py` funcional con configuración CORS y un endpoint `/health`. En el frontend, se estructuró `src/` y se configuró `services/api.ts` con una instancia de Axios preparada para comunicación asíncrona y manejo de JWT.
+
+**Decisión:** He aprobado la materialización física del andamiaje base en la rama aislada desarrollo-fastapi-react. La estructuración del frontend en React deja el entorno limpio y listo para el consumo asíncrono y seguro de la API. Con esta infraestructura física firmemente asentada y blindada bajo nuestra política de gestión de configuración, doy por abierta la construcción del ramillete gestion-sesion
+
+---
+
+## [01/06/2026] [17:33] Fase 03: Construcción - Backend de iniciarSesion
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior experto en FastAPI y arquitecturas limpias. Estamos en la Fase 03: Construcción - Módulo Gestión de Sesión (Backend de iniciarSesion). REGLAS DE CONTROL DE PROYECTO: Tienes ESTRICTAMENTE PROHIBIDO ejecutar comandos de Git (git add, git commit, etc.). No uses fragmentos o comentarios evasivos como # ... rest of code .... Escribe los archivos completos, limpios y listos para producción. TAREA: Implementa la lógica completa de backend para el caso de uso iniciarSesion en la carpeta /backend.
+
+**Resultado:** Implementación integral de la capa de backend para el inicio de sesión. Se han desarrollado los componentes de configuración (JWT, CORS, DB), modelos de datos (SQLAlchemy), esquemas de validación (Pydantic), repositorios de persistencia, servicios de autenticación y el router de API. El sistema ahora permite recibir credenciales, validarlas contra la base de datos (hashing con bcrypt) y retornar un token JWT válido.
+
+**Decisión:** He validado la implementación física del backend tras realizar una auditoría técnica estricta sobre el código generado por la IA. Durante la revisión, detecté un desvío crítico en auth_router.py: la herramienta introdujo un acoplamiento fuerte al instanciar manualmente el repositorio y el servicio dentro del endpoint, rompiendo el Principio de Inversión de Control (IoC) y violando las especificaciones de nuestro documento de diseño técnico. Tras identificar este error, denegué la versión inicial y ordené una refactorización inmediata para reestructurar el router
+
+---
+
+## [01/06/2026] [17:58] Fase 03: Construcción - Frontend de iniciarSesion (Infraestructura)
+
+**Prompt:** Actúa como un Ingeniero de Software Frontend Senior experto en React, TypeScript y gestión de estado. Estamos en la Fase 03: Construcción - Módulo Gestión de Sesión (Frontend de iniciarSesion). REGLAS DE CONTROL DE PROYECTO: Tienes ESTRICTAMENTE PROHIBIDO ejecutar comandos de Git (git add, git commit, etc.). Escribe los archivos completos, tipados con TypeScript estricto, limpios y listos para producción. Nada de comentarios evasivos. TAREA: Implementa la infraestructura de autenticación global en la carpeta /frontend poblando las capas correspondientes de forma desacoplada según nuestros diagramas de clases de diseño.
+
+**Resultado:** Se ha desplegado la arquitectura de autenticación en el frontend. Se definieron interfaces TypeScript robustas para el dominio de seguridad, se implementó un servicio de API especializado (`auth.service.ts`) para la comunicación asíncrona y se creó un proveedor de contexto global (`AuthContext.tsx`) utilizando la Context API de React. El sistema ahora gestiona de forma transparente el ciclo de vida del token JWT y el estado de sesión del usuario.
+
+**Decisión:** He validado y aprobado el despliegue de esta infraestructura de soporte en el frontend porque materializa fielmente el desacoplamiento de capas definido en nuestro diagrama de clases de diseño.
+
+---
+
+## [01/06/2026] [18:12] Fase 03: Construcción - Frontend de iniciarSesion (Interfaz y Configuración)
+
+**Prompt:** Actúa como un Ingeniero de Software Frontend Senior experto en React, TypeScript y enrutamiento... Diseña e implementa los componentes visuales y el sistema de enrutamiento... Implementa ProtectedRoute.tsx, LoginPage.tsx y actualiza App.tsx... Además, crea el archivo package.json y tsconfig.json para el proyecto.
+
+**Resultado:** Se ha completado el "Corte Vertical" del frontend para el inicio de sesión. Se implementó la `LoginPage` con manejo de estados asíncronos (loading/error) y el componente `ProtectedRoute` para blindar el acceso al `Dashboard`. Se configuró el enrutamiento global en `App.tsx` integrando el `AuthProvider`. Finalmente, se generaron los archivos de configuración técnica (`package.json`, `tsconfig.json`) necesarios para el ecosistema Vite + TypeScript.
+
+**Decisión:** 
+ He aprobado la entrega de la capa de presentación y el sistema de navegación protegida, logrando completar de extremo a extremo el primer "Corte Vertical" funcional del proyecto.Durante el despliegue, asumí el control de la infraestructura técnica realizando una auditoría sobre el archivo tsconfig.json provisto por el CLI. Corregí manualmente las directivas obsoletas (esModuleInterop y moduleResolution) para elevarlas a los estándares modernos de compilación exigidos por Vite y TypeScript 5+.
+
+---
+
+## [01/06/2026] [18:24] Fase 03: Construcción - Refinamiento de UI y Enrutamiento
+
+**Prompt:** Actúa como un Ingeniero de Software Frontend Senior experto en React, TypeScript y enrutamiento. Fase 03: Construcción - Módulo Gestión de Sesión (Interfaz de Usuario y Enrutamiento). TAREA: Desarrolla la capa de presentación visual creando LoginPage.tsx, DashboardPage.tsx y configurando App.tsx con rutas protegidas y redirección por defecto.
+
+**Resultado:** Implementación completa de la interfaz de usuario para el inicio de sesión. Se creó la `DashboardPage.tsx` como vista protegida y se refinó la `LoginPage.tsx` con manejo de estados asíncronos y estilos profesionales. Se configuró el enrutamiento global en `App.tsx` utilizando `react-router-dom`, asegurando que el acceso al dashboard esté mediado por `ProtectedRoute`.
+
+Decisión: He consolidado la experiencia de usuario del módulo de sesión mediante una interfaz limpia y un flujo de navegación robusto.
+
+---
+
+## [02/06/2026] [18:17] Fase 03: Construcción - Inicialización de Datos y Refactorización de Seguridad
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior. El circuito de comunicación entre Frontend y Backend funciona perfectamente. Ahora necesitamos crear un script de inicialización de datos (seed.py) en la raíz de la carpeta /backend para insertar nuestro primer usuario de pruebas en la base de datos... Comprobar si el usuario con username 'admin' ya existe. Si no existe, debe crearlo con el username 'admin', la contraseña hash correspondiente y activado (is_active=True).
+
+**Resultado:** Se ha creado exitosamente `backend/seed.py` para la carga inicial de datos. Durante la implementación, se identificó y resolvió una incompatibilidad crítica entre `passlib` y `bcrypt` v5.0.0+ mediante la refactorización de `backend/app/core/security.py`, sustituyendo el framework `passlib` por el uso directo de la librería `bcrypt`. El script fue ejecutado y se confirmó la creación del usuario 'admin' en la base de datos `sql_app.db`.
+
+**Decisión:** He aprobado la inclusión del script de inicialización y la refactorización del módulo de seguridad. Esta acción asegura que el primer "Corte Vertical" sea plenamente funcional para pruebas de usuario.
+
+---
+
+## [03/06/2026] [12:24] Fase 03: Construcción - Cierre de Módulo Gestión de Sesión (cerrarSesion)
+
+**Prompt:** Actúa como un Ingeniero de Software Frontend Senior experto en React y TypeScript. Estamos en la Fase 03: Construcción - Cierre del Módulo Gestión de Sesión (Caso de Uso cerrarSesion)... Implementa o actualiza el archivo src/pages/DashboardPage.tsx... Consumo del Contexto (logout, user), Interfaz del Panel (:SistemaDisponible), Lógica de Desconexión y redirección a /login.
+
+**Resultado:** Implementación de la capa de presentación para el cierre de sesión y el panel de control principal. Se actualizó `DashboardPage.tsx` integrando el hook `useAuth` para personalizar la experiencia del usuario y gestionar la desconexión segura. La interfaz presenta un diseño profesional que refleja el estado del sistema y asegura que, al cerrar sesión, el estado global se limpie y el usuario sea redirigido proactivamente al login.
+
+**Decisión:** He validado y aprobado el cierre del módulo de Gestión de Sesión. Con la implementación del flujo de salida y el refinamiento del Dashboard, el primer ramillete funcional del proyecto (iniciar/cerrar sesión) queda completado de extremo a extremo, cumpliendo con los estándares de seguridad y usabilidad definidos en la fase de diseño.
+
+---
+
+## [04/06/2026] [14:45] Fase 03: Construcción - Corrección de Tipos UUID en Inyección de Dependencias
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior. Tenemos el error AttributeError: 'str' object has no attribute 'hex' en app/routers/deps.py en la línea donde se ejecuta user = db.query(User).filter(User.id == user_id).first(). SQLAlchemy 2.0 está intentando acceder a .hex porque el campo User.id es de tipo UUID, pero el valor user_id (extraído del payload sub del token JWT) es de tipo str. Analiza qué dato se está guardando exactamente en el sub al generar el token y reescribe completamente el archivo app/routers/deps.py aplicando la solución correspondiente.
+
+**Resultado:** Se ha resuelto el error de incompatibilidad de tipos entre strings de JWT y columnas UUID de SQLAlchemy 2.0. Tras verificar que `auth_service.py` almacena el ID del usuario en el claim `sub`, se reescribió `backend/app/routers/deps.py` para incluir una conversión explícita a `uuid.UUID(user_id_str)` con manejo de excepciones (`ValueError`). Esto garantiza que la consulta de base de datos reciba el tipo de dato correcto esperado por el ORM.
+
+**Decisión:** He validado y aprobado la corrección en la inyección de dependencias. Esta actualización es crítica para la estabilidad del sistema bajo SQLAlchemy 2.0, asegurando que la recuperación del usuario autenticado sea robusta y cumpla con el tipado estricto exigido por la infraestructura de datos.
+
+---
+
+## [04/06/2026] [18:06] Fase 02: Diseño Técnico - Gestión de Tareas (abrir, crear, editar)
+
+**Prompt:** Actúa como un Arquitecto de Software Senior experto en RUP. Vamos a realizar el diseño técnico del bloque funcional gestion-tareas... para los tres primeros casos de uso: abrirTareas, crearTarea, editarTarea. Genera de cada uno un diagrama de clases y un diagrama de secuencia con un README explicativo, estructurado en carpetas dentro de RUP/02-diseño/.
+
+**Resultado:** Se ha completado el diseño detallado para el núcleo de la gestión de tareas. Se crearon 6 diagramas PlantUML (clases y secuencia) y 3 READMEs técnicos. El diseño especifica el uso del hook `useTasks` en el frontend, esquemas Pydantic para validación en el backend y la lógica de Control de Acceso Basado en Roles (RBAC) donde el `TaskService` valida si el usuario es `ADMIN` o el dueño de la tarea antes de permitir ediciones.
+
+**Decisión:** He validado y aprobado este diseño técnico porque garantiza una separación clara de responsabilidades y un control de seguridad robusto a nivel de API. La estructura de carpetas mantiene la coherencia con el resto del proyecto, facilitando la trazabilidad desde el análisis BCE hasta la arquitectura física.
+
+---
+
+## [04/06/2026] [18:45] Fase 03: Construcción - Alineación de Gestión de Tareas con Diseño UML
+
+**Prompt:** Actúa como un Ingeniero de Software Full-Stack Senior experto en FastAPI y React. Estamos en la Fase 03: Construcción - Alineación del Módulo Gestión de Tareas con el Diseño Oficial. Audita la implementación actual y refactoriza el código para que sea un reflejo 100% exacto de las clases y flujos definidos en tus diagramas...
+
+**Resultado:** Refactorización integral del módulo de Gestión de Tareas (Backend y Frontend). Se actualizaron los modelos de SQLAlchemy, esquemas Pydantic e interfaces TypeScript para incluir el campo `group_id` según el análisis BCE. El `TaskService` fue alineado con las responsabilidades del `TareasController` de diseño. En la UI, se adaptaron los componentes `TaskForm` y `TaskItem` para manejar la asignación de tareas (`assigned_to_id`), implementando una lógica de auto-asignación temporal mientras se desarrolla el módulo de miembros.
+
+**Decisión:** He validado y aceptado la refactorización porque garantiza que el código sea un espejo fiel de los artefactos de diseño UML generados previamente. Esta alineación técnica elimina la deuda técnica temprana y asegura que el sistema escale correctamente hacia las funcionalidades de grupos y planificación familiar.
+
+---
+
+## [04/06/2026] [19:36] Fase 03: Construcción - Sincronización de Esquema y Hard Reset de DB
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior. Estamos teniendo un sqlite3.OperationalError: table tasks has no column named group_id al intentar crear una tarea... Reescribe completamente el archivo seed.py en la raíz de la carpeta /backend para que actúe como un script de "Hard Reset" (destrucción y reconstrucción) de la base de datos.
+
+**Resultado:** Se ha resuelto la desincronización entre los modelos de Python y la base de datos física SQLite. Se reescribió `backend/seed.py` para realizar un `drop_all` y `create_all` de la metadata de SQLAlchemy, asegurando que la tabla `tasks` incluya ahora la columna `group_id`. El script fue ejecutado con éxito, recreando el esquema y reinsertando el usuario 'admin' con el hashing de seguridad correcto.
+
+**Decisión:** Hemos aceptado el arreglo sobre el error que tuvo la IA en el cambio anterior. Validando asi su funcionalidad
+
+---
+
+## [04/06/2026] [19:47] Fase 03: Construcción - Implementación Integral del Caso de Uso 'editarTarea'
+
+**Prompt:** Auditoría y corrección del flujo de actualización (update_task y update_task_status). Implementación completa del caso de uso editarTarea, ya que no estaba disponible en la interfaz de usuario.
+
+**Resultado:** Se ha completado la funcionalidad de edición de tareas de extremo a extremo. Se refactorizaron los esquemas Pydantic y el `TaskService` para soportar actualizaciones parciales y validar permisos (RBAC). En el frontend, se implementó el componente `EditTaskModal.tsx`, se actualizó el hook `useTasks` y se añadieron controles visuales en `TaskItem.tsx` para editar y eliminar tareas. Se garantizó que el flujo sea 100% coherente con los diagramas de diseño UML.
+
+**Decisión:** He validado y aprobado la implementación final del ciclo CRUD de tareas.
+
+---
+
+## [06/06/2026] [10:15] Fase 02: Diseño - Gestión de Miembros (Reglas y Casos de Uso)
+
+**Prompt:** Actúa como un Arquitecto de Software Senior experto en UML y Análisis de Requisitos. Estamos en la Fase de Diseño: Módulo de Gestión de Miembros... Lee atentamente el archivo /_contexto/actoresYCasosDeUso/README.md... Diseña las reglas de negocio y los Casos de Uso formales para el bloque de 'Gestión de Miembros'.
+
+**Resultado:** Se han definido formalmente las reglas de negocio y los casos de uso para la administración de la familia. Se creó el documento `gestion-miembros.md` con una matriz de permisos, reglas de jerarquía (BR-MEM-02) y borrado lógico (BR-MEM-03). Además, se generaron diagramas UML de clases y secuencia en la carpeta `RUP/02-diseño/` para los flujos de invitación y desactivación, asegurando la trazabilidad desde los requerimientos.
+
+**Decisión:** He validado y aceptado el diseño porque establece un marco de seguridad claro basado en roles (Admin, Miembro Admin, Miembro) y garantiza la integridad de los datos históricos mediante la desactivación en lugar del borrado físico.
+
+---
+
+## [06/06/2026] [17:54] Fase 04: Construcción - Backend de Gestión de Miembros e Integridad de Datos
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior experto en FastAPI y SQLAlchemy. Implementa el backend de Gestión de Miembros: Modelos, Esquemas, Servicios y Rutas... Actualización de seed.py... 'Backend de Gestión de Miembros implementado. Modelos, esquemas, rutas y reglas de negocio aplicadas. Base de datos lista para el reinicio'.
+
+**Resultado:** Implementación completa del módulo de miembros en el backend. Se actualizó el modelo `User` con campos `email` y `group_id`. Se desarrolló el `UserService` aplicando las reglas de jerarquía y borrado lógico. Se expusieron los endpoints mediante `user_router.py` y se registró en la aplicación principal. Finalmente, se actualizó `seed.py` para incluir los nuevos campos obligatorios del administrador inicial.
+
+**Decisión:** He aprobado la implementación del backend de miembros. Durante el proceso, corregí proactivamente un error de importación en `auth_router.py` derivado del renombramiento de los esquemas de usuario (`User` a `UserResponse`), garantizando que todos los componentes del sistema utilicen los nuevos contratos de datos de forma coherente.
+
+---
+
+## [06/06/2026] [18:30] Fase 04: Construcción - Frontend de Gestión de Miembros
+
+**Prompt:** Actúa como un Ingeniero de Software Frontend Senior experto en React, TypeScript y TailwindCSS. Estamos en la Fase 04: Construcción - Frontend de Gestión de Miembros. Implementa la interfaz de usuario para el CRUD de miembros del grupo familiar: Tipos, Servicio API, Hook Personalizado, Componentes Visuales (MemberForm, MemberList) e integración en el Dashboard con sistema de pestañas.
+
+**Resultado:** Implementación completa de la capa de presentación para la gestión de miembros. Se desarrollaron tipos estrictos, un servicio especializado con Axios y el hook `useMembers` para la gestión de estado. Se crearon los componentes `MemberForm` (invitaciones) y `MemberList` (gestión de roles y desactivación) utilizando TailwindCSS para un acabado profesional. El `DashboardPage` fue reestructurado con un sistema de pestañas para alternar entre 'Tareas' y 'Equipo'.
+
+**Decisión:** He validado y aprobado la interfaz de gestión de miembros. La arquitectura basada en hooks permite una reactividad fluida y la matriz de permisos en `MemberList` asegura que las reglas de negocio (BR-MEM-02) se cumplan visualmente al deshabilitar acciones no permitidas según el rol.
+
+---
+
+## [08/06/2026] [18:17] Diseño: Casos de Uso Avanzados - Gestión de Tareas (Dependencias y Ciclo de Vida)
+
+**Prompt:** Actúa como un Arquitecto de Software Senior experto en RUP y UML. Fase de Diseño: Casos de Uso Avanzados del Módulo Gestión de Tareas. Diseña las reglas de negocio y la estructura de clases para: marcarCompletada, eliminarTarea (borrado lógico y cascada), relacionarTareas y validarConflicto.
+
+**Resultado:** Se ha completado el diseño arquitectónico del ciclo de vida avanzado de las tareas. Se generaron 4 READMEs técnicos en `RUP/02-diseño/diagramas-clases/` que definen: 1) La imposibilidad de completar tareas con predecesores pendientes. 2) Un sistema de borrado lógico (`is_deleted`) para preservar la integridad. 3) Estructura de datos recursiva para bloqueos entre tareas. 4) Un algoritmo de búsqueda en profundidad (DFS) para prevenir dependencias circulares. Se actualizaron los detalles en `_contexto/actoresYCasosDeUso/`.
+
+**Decisión:** Acepto la implementacion de el diseño de los 4 casos de uso. Sin embargo la IA no ha hecho los diagramas .puml que le he pedido en los demas casos de uso.
+
+---
+
+## [08/06/2026] [18:41] Diseño UML: Refinamiento de Casos de Uso Avanzados de Tareas
+
+**Prompt:** Actúa como un Arquitecto de Software Senior... genera los diagramas UML correspondientes... Crea el diagrama en un archivo aparte dentro de cada carpeta del caso de uso, exactamente la misma dinámica que la de los anteriores casos de uso diseñados ya.
+
+**Resultado:** Se han generado e integrado los diagramas UML técnicos (.puml) para los 4 casos de uso avanzados de tareas: `marcarCompletada` (Secuencia de validación), `eliminarTarea` (Secuencia de borrado lógico), `relacionarTareas` (Clases N:M recursivo) y `validarConflicto` (Actividad DFS). Los archivos README fueron actualizados para enlazar estos diagramas, cumpliendo con la estructura modular de diseño del proyecto.
+
+**Decisión:** He validado y aceptado la separación de los diagramas en archivos `.puml` independientes para mantener la coherencia con los ramilletes funcionales previos. 
+
+---
+
+## [08/06/2026] [11:15] Fase 05: Construcción - Backend de Tareas Avanzadas (Dependencias y Circularidad)
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior... Implementa el backend para los casos de uso: relacionarTareas, validarConflicto, marcarCompletada y eliminarTarea... Modelos (task_dependencies, is_deleted), Servicios (DFS para circularidad, validación de estados), Rutas.
+
+**Resultado:** Implementación integral de la lógica de grafos y dependencias en el backend. Se creó la tabla asociativa `task_dependencies` para relaciones N:M recursivas y se añadió el soporte para borrado lógico (`is_deleted`). El `TaskService` fue equipado con un algoritmo DFS para prevenir dependencias circulares y una guarda lógica que impide completar tareas si existen predecesores pendientes. Finalmente, se actualizaron los modelos de `User` y `Task` para asegurar la integridad referencial y se reconstruyó la base de datos mediante `seed.py`.
+
+**Decisión:** He validado y aprobado la implementación del motor de dependencias. 
+
+---
+
+## [08/06/2026] [11:30] Fase 05: Construcción - Restauración de Endpoints y Prefijos de Tareas
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior... Restaurar el endpoint fundamental de creación... Asegúrate de que exista un @router.post("/")... Mantén intactos los nuevos endpoints avanzados.
+
+**Resultado:** Se ha corregido la configuración del `task_router.py` añadiendo el prefijo `/tasks` a la instancia de `APIRouter`. Esto resuelve el error 405 Method Not Allowed al alinear las rutas con las llamadas del frontend. Se restauró el endpoint `POST /` para la creación de tareas y se aseguraron todas las inyecciones de dependencia de autenticación (`get_current_user`). El router ahora expone correctamente el CRUD básico junto con las funcionalidades avanzadas de dependencias.
+
+**Decisión:** He aprobado la restauración de la consistencia en el router de tareas. La inclusión del prefijo de nivel de router es la práctica recomendada en FastAPI para mantener el código organizado.
+
+---
+
+## [08/06/2026] [11:45] Fase 05: Construcción - Ajuste de Esquemas de Validación de Tareas
+
+**Prompt:** Actúa como un Ingeniero de Software Backend Senior... Revisa detenidamente app/schemas/task.py... En la clase TaskCreate, asegúrate de que todos los campos nuevos relacionados con los casos de uso avanzados tengan valores por defecto.
+
+**Resultado:** Se han ajustado los esquemas de Pydantic para garantizar la compatibilidad con el frontend. El campo `depends_on_ids` en `TaskCreate` ahora es opcional y tiene un valor por defecto (`Field(default_factory=list)`), eliminando el error 422 al crear tareas básicas sin dependencias. Asimismo, se actualizó el `TaskService` para procesar correctamente esta lista opcional durante la creación de la entidad en la base de datos.
+
+**Decisión:** He validado y aprobado el ajuste de los esquemas. Esta corrección es vital para mantener la agilidad del frontend, permitiendo la creación rápida de tareas mientras la funcionalidad avanzada de dependencias queda disponible como un paso opcional o posterior en el flujo de trabajo.
+
+---
+
+## [08/06/2026] [12:00] Fase 05: Construcción - Resolución definitiva de Error 422 (group_id Automático)
+
+**Prompt:** Al intentar crear una tarea desde el frontend, estamos recibiendo un error 422 Unprocessable Content en POST /tasks/. Como lo solucionarias.
+
+**Resultado:** Se ha identificado que el error 422 era causado por la obligatoriedad del campo `group_id` en el esquema de entrada, campo que el frontend no envía por diseño. Se ha refactorizado `app/schemas/task.py` para hacer el `group_id` opcional en la entrada. El `TaskService` y el `task_router.py` han sido actualizados para inyectar automáticamente el `group_id` del usuario autenticado durante la creación. Esto restaura la compatibilidad total con el cliente y simplifica la lógica de negocio.
+
+**Decisión:** He aprobado la automatización del `group_id` en el backend. Esta decisión no solo resuelve el error inmediato, sino que mejora la seguridad al evitar que un cliente pueda inyectar tareas en grupos a los que no pertenece, centralizando la asignación de grupo en el token de sesión.
+
+## [09/06/2026] [19:05] Fase 05: Construcción - Interfaz de Casos de Uso Avanzados (Dependencias y Borrado Lógico)
+
+**Prompt:** Actualiza el frontend para integrar la gestión de dependencias y el borrado lógico. Asegúrate de que los tipos soporten el campo dependencies, actualiza servicios y hooks para manejar relaciones y errores 400 (circularidad), y rediseña los componentes visuales (TaskItem) para permitir vincular tareas y visualizar bloqueos.
+
+**Resultado:** Implementación integral de la capa visual para la gestión de dependencias. Se definió el nuevo contrato de datos en `src/types/task.ts`, se actualizó el hook `useTasks` para capturar y notificar errores de circularidad, y se rediseñó `TaskItem` con un menú de vinculación dinámica y badges de estado. El sistema ahora permite aplicar borrados lógicos y gestionar relaciones N:M recursivas directamente desde el Dashboard.
+
+**Decisión:** He validado y aprobado la integración de la lógica en la interfaz. Las dependencias entre las tareas funcionan correctamente.
+
+## [09/06/2026] [19:45] Fase 05: Construcción - Refactorización Visual 
+
+**Prompt:** Actúa como un Frontend Senior. Refactoriza el diseño visual de los componentes React (.tsx) en src/pages y src/components. OBJETIVO: Queremos una interfaz moderna tipo SaaS, aprovechando la estructura de componentes de React y TailwindCSS. Que deje de parecer HTML básico roto.
+
+**Resultado:** Refactorización visual tipo SaaS completada en `DashboardPage`, `LoginPage` y componentes internos (`TaskForm`, `TaskItem`, `TaskList`, `MemberForm`, `MemberList`). Se transformó la interfaz utilizando una paleta de colores profesional basada en `slate` y `blue`, aplicando contenedores limpios con bordes suavizados, sombras sutiles y una jerarquía visual clara mediante Flexbox y Grid, preservando intacta toda la lógica de negocio y hooks.
+
+**Decisión:** Acepto el diseño de interfaz moderna tipo SaaS propuesto, mejorando notablemente la experiencia de usuario y presentación sin alterar el comportamiento subyacente.
+
+## [09/06/2026] [19:49] Fase 05: Construcción - Corrección de Configuración de Tailwind CSS
+
+**Prompt:** Actúa como un experto en configuración de React y Vite. El código tiene las clases de Tailwind aplicadas en los componentes, pero el navegador muestra HTML sin estilos. Tailwind no se está compilando. TAREA: Revisa y corrige estrictamente los archivos de configuración de Tailwind.
+
+**Resultado:** Se reparó la infraestructura de compilación de estilos. Se crearon los archivos ausentes `tailwind.config.js` y `postcss.config.js` con las rutas de análisis correctas. Se inyectaron las directivas base de Tailwind en un nuevo archivo `src/index.css` y se actualizó `src/main.tsx` para importarlo. Finalmente, se añadieron los paquetes `tailwindcss`, `postcss` y `autoprefixer` a las `devDependencies` del `package.json`.
+
+**Decisión:** He validado que la configuración de Tailwind funciona correctamente. Los estilos ahora son procesados por Vite y aplicados al proyecto sin problemas, solventando el renderizado de HTML crudo.
+
+## [10/06/2026] [19:23] Fase 05: Construcción - Backend de Gestión de Grupos
+
+**Prompt:** Actúa como un Ingeniero Backend Senior experto en FastAPI y SQLAlchemy. Entramos en la Fase 05: Construcción - Módulo de Gestión de Grupos. TAREA A DESARROLLAR: Modelos (app/models/group.py e invitation.py), Esquemas (app/schemas/group.py e invitation.py), Servicios (app/services/group_service.py), Rutas (app/routers/group_router.py). Escribe los archivos completos, listos para producción. Al finalizar, escribe estrictamente: 'Backend de Gestión de Grupos implementado. Lógica de negocio alineada con la fase de diseño'.
+
+**Resultado:** Implementación integral del módulo de Gestión de Grupos en el backend. Se crearon los modelos de datos para `Group`, `GroupMember` (relación N:M con roles) e `Invitation`. Se desarrollaron los esquemas Pydantic para validación y serialización, incluyendo un extractor dinámico de información de usuario. El `GroupService` encapsula la lógica de los 9 casos de uso (creación con admin automático, invitaciones, gestión de miembros y borrado lógico). Finalmente, se expusieron los endpoints en `group_router.py` y se integraron en la aplicación principal.
+
+**Decisión:** He validado y aprobado la implementación del backend de grupos. La arquitectura asegura el cumplimiento de las reglas de negocio diseñadas previamente, garantizando que solo los administradores puedan gestionar el grupo y sus miembros.
+
+## [10/06/2026] [20:25] Fase 05: Construcción - Resolución de Error de Referencia Circular en seed.py
+
+**Prompt:** Actúa como un Ingeniero Backend Senior experto en SQLAlchemy. Al ejecutar seed.py obtenemos el error sqlalchemy.exc.NoReferencedTableError: Foreign key associated with column 'tasks.group_id' could not find table 'groups'. TAREA: Modifica seed.py para importar explícitamente los modelos Group e Invitation antes de cualquier llamada a Base.metadata.drop_all o create_all.
+
+**Resultado:** Se ha corregido la visibilidad de los metadatos en el script de inicialización. Se añadieron las importaciones explícitas de `Group`, `GroupMember` e `Invitation` en `backend/seed.py`, permitiendo que SQLAlchemy registre todas las tablas en el grafo de metadatos antes de intentar crear las claves foráneas. Además, se actualizó la lógica del script para crear primero un grupo real y luego asignar al usuario administrador como miembro del mismo, garantizando la integridad referencial desde el primer arranque.
+
+**Decisión:** He validado y aprobado la corrección del script de carga. Esta acción es fundamental para asegurar que el entorno de desarrollo sea reproducible y que la base de datos se genere correctamente con todas las relaciones de integridad activas entre tareas, grupos y usuarios.
+
+## [10/06/2026] [19:50] Fase 05: Construcción - Autenticación y RBAC
+
+**Prompt:** Entramos en la Fase 05: Construcción - Autenticación y RBAC. TAREA: Modelos y Esquemas de Usuario (roles en español), Núcleo de Seguridad (passlib/bcrypt, JWT), Dependencias de Auth (get_current_user y guardianes de roles), Router de Autenticación (login/register) y aplicar RBAC en routers existentes.
+
+**Resultado:** Implementación de un sistema de seguridad robusto. Se configuró `UserRole` con nombres en español ('Administrador', 'Miembro Administrador', 'Miembro'). Se implementó el hashing con `passlib` y la generación de tokens JWT con `python-jose`. Se crearon dependencias de inyección para validar tokens y restringir accesos por rol (`get_current_admin_user`, `get_current_admin_or_manager`). Finalmente, se blindaron los routers de grupos y tareas, y se habilitaron los endpoints de login y registro.
+
+**Decisión:** He validado y aprobado la implementación del sistema de autenticación y control de acceso. La centralización de la seguridad en `deps.py` y el uso de estándares OAuth2 garantizan que el sistema sea seguro, escalable y fácil de mantener.
+
+## [10/06/2026] [20:00] Fase 05: Construcción - Corrección de Límite de Contraseña (bcrypt)
+
+**Prompt:** Actúa como un Ingeniero Backend Senior. Al ejecutar seed.py tenemos el error de bcrypt: password cannot be longer than 72 bytes. TAREA: Revisa seed.py, asegura contraseña corta, evita doble hashing y reescribe respetando el límite.
+
+**Resultado:** Se corrigió el script de inicialización `seed.py` para asegurar que las contraseñas en texto plano enviadas a `bcrypt` no superen los 72 bytes. Se estableció una contraseña sencilla ('admin123') para el administrador inicial y se eliminó cualquier riesgo de doble hashing, garantizando un despliegue limpio del entorno.
+
+**Decisión:** He aprobado la corrección técnica del script de carga, priorizando la estabilidad del algoritmo de hashing y la capacidad de regenerar el entorno de desarrollo sin excepciones críticas.
+
+## [10/06/2026] [20:08] Fase 05: Construcción - Integración OAuth2 y JWT en el Frontend
+
+**Prompt:** Al intentar hacer login en el frontend, recibimos un error 422. CONTEXTO: Backend espera OAuth2 (Form Data), no JSON. TAREA: Actualizar Axios con interceptores para JWT, modificar auth.service.ts para enviar Form Data y gestionar sesión en LoginPage.
+
+**Resultado:** Adaptación total del cliente al protocolo OAuth2. Se implementaron interceptores en `src/services/api.ts` para gestionar automáticamente las cabeceras `Authorization` y el ciclo de vida del token (borrado ante errores 401). Se refactorizó `auth.service.ts` para enviar credenciales mediante `URLSearchParams` y se sincronizó el flujo de autenticación con el estado global de React.
+
+**Decisión:** He validado y aprobado la integración del frontend con el backend seguro. Esta implementación resuelve los problemas de formato (422) y garantiza una gestión de sesión fluida y robusta, alineada con las mejores prácticas de seguridad en aplicaciones modernas.
+
+## [10/06/2026] [21:45] Fase 05: Construcción - Sincronización RBAC y Datos Semilla
+
+**Prompt:** El Administrador recibe errores de permisos o no ve botones, y faltan usuarios de prueba. TAREA: Poblar `seed.py` con 3 usuarios (admin, manager, miembro) en el mismo grupo. Asegurar que `GET /auth/me` devuelva el rol completo. Sincronizar strings de roles ('Administrador', etc.) entre Backend y Frontend. Aplicar renderizado condicional en componentes de tareas y dashboard.
+
+**Resultado:** Sincronización completa del sistema de control de acceso. Se actualizó el script `seed.py` para generar un entorno de pruebas con jerarquías claras. Se alinearon los enums de TypeScript en el frontend con los strings de la base de datos para corregir fallos en la lógica de permisos visuales. Se verificó la persistencia del perfil de usuario tras el login y se validó el renderizado condicional en `TaskItem.tsx` y `DashboardPage.tsx`, restringiendo acciones administrativas a los roles autorizados.
+
+**Decisión:** He validado que la interfaz ahora reacciona dinámicamente al token JWT y al rol del usuario. Con los tres usuarios semilla activos, eliminamos la ceguera del frontend y aseguramos un entorno de pruebas robusto. 
+
+## [10/06/2026] [22:15] Fase 05: Construcción - Refinamiento RBAC de Tareas ('Miembro')
+
+**Prompt:** El rol 'Miembro' solo puede consultar tareas y completar las asignadas o sin asignar. Tienen prohibido crear tareas. TAREA: Proteger `POST /tasks` en backend, restringir lógica de completado en `TaskService`, ocultar `TaskForm` en el dashboard para miembros y deshabilitar checkboxes en `TaskItem` si no tienen permiso.
+
+**Resultado:** Alineación estricta del módulo de tareas con las reglas de negocio de ciberseguridad. Se implementaron validaciones de rol en `task_router.py` y `task_service.py`, lanzando errores 403 ante intentos de creación o completado no autorizado. En la UI, el dashboard ahora oculta proactivamente el formulario de creación para 'Miembros' y el componente `TaskItem` deshabilita visual y funcionalmente el checkbox de completado para tareas ajenas, mejorando la usabilidad y el cumplimiento normativo.
+
+**Decisión:** He validado que los permisos del rol 'Miembro' son ahora exactos a lo estipulado en RUP. Esta restricción previene la contaminación del grupo de tareas y asegura la responsabilidad individual en la ejecución.
+
+## [10/06/2026] [22:30] Fase 05: Construcción - Implementación de Candado de Tareas
+
+**Prompt:** Implementa regla estricta: 'Miembro' solo puede completar tareas asignadas a él o sin asignar. TAREA: Añadir Guard en backend (403 si es ajena) y deshabilitar checkbox en frontend con feedback visual (opacity/cursor).
+
+**Resultado:** Blindaje de la lógica de ejecución de tareas. Se integró una guarda de seguridad en el `TaskService` que valida la propiedad/asignación de la tarea antes de permitir el cambio de estado para usuarios con rol 'Miembro'. En el frontend, se sincronizó esta restricción en `TaskItem.tsx`, deshabilitando el checkbox y añadiendo un tooltip explicativo ("No tienes permiso para completar la tarea de otro miembro"), garantizando una experiencia de usuario coherente y segura.
+
+**Decisión:** He aprobado la implementación del candado de tareas. Esta medida es crítica para mantener el orden dentro de grupos grandes y evitar interferencias accidentales o malintencionadas entre miembros.
+
+## [11/06/2026] [15:20] Fase 01: Análisis - Sincronización de Diagramas UML (Realización)
+
+**Prompt:** Actúa como un Arquitecto de Software Senior experto en RUP y PlantUML. Rellena los archivos .puml de la fase de análisis (Casos de Uso, Colaboración General, Especificación de Tareas) con el código PlantUML que refleje la arquitectura real construida de BREÑOTASK.
+
+**Resultado:** Se han completado los artefactos de análisis para asegurar la trazabilidad del sistema. El `01-modelo-casos-uso.puml` ahora mapea correctamente los tres roles RBAC (Administrador, Miembro Administrador, Miembro) con sus permisos específicos. El `02-diagrama-colaboracion-general.puml` describe el flujo de comunicación desde la UI React hasta la persistencia SQLite, mediado por el controlador de seguridad. El `03-especificacion-tareas.puml` detalla la estructura de la entidad Tarea, incluyendo su relación reflexiva de dependencias y las reglas de negocio de completado.
+
+**Decisión:** He validado y aprobado la sincronización de los diagramas de análisis. Estos artefactos ya no son plantillas vacías, sino que constituyen una documentación técnica veraz y actualizada del sistema construido, cumpliendo con los estándares de rigor de la metodología RUP.
+
+## [11/06/2026] [15:31] Fase 01: Análisis - Refactorización Visual de Diagrama de Colaboración
+
+**Prompt:** Actúa como experto en PlantUML. El archivo `02-diagrama-colaboracion-general.puml` tiene la lógica perfecta, pero visualmente se ha generado demasiado ancho. Refactoriza el código para que sea limpio y legible, convirtiéndolo a un Diagrama de Secuencia si es necesario.
+
+**Resultado:** Se transformó el diagrama de colaboración general en un **Diagrama de Secuencia** altamente estructurado. Esta nueva representación utiliza bloques de color (`box`) para distinguir las capas (Frontend, Backend, DB), numeración automática de pasos y divisores de fase (`==`). El resultado elimina el solapamiento de textos y proporciona una visión cronológica y clara del flujo de autenticación y las operaciones protegidas por RBAC, facilitando su comprensión técnica.
+
+**Decisión:** He aprobado la refactorización visual del diagrama. El cambio a formato de secuencia mejora drásticamente la legibilidad sin perder el rigor de la lógica de colaboración diseñada, optimizando el artefacto para su uso como referencia técnica en la fase de construcción.
+
+## [11/06/2026] [16:00] Fase 05: Construcción - Migración a SQL Server (LocalDB)
+
+**Prompt:** Actúa como un Arquitecto de Base de Datos Senior experto en SQL Server y SQLAlchemy. Vamos a migrar la persistencia de datos del backend de SQLite a Microsoft SQL Server (LocalDB). TAREA: Actualiza `DATABASE_URL`, modifica `create_engine()` eliminando argumentos de SQLite, y adapta `seed.py` para que verifique/cree la base de datos `BREÑOTASKDB` si no existe.
+
+**Resultado:** Se completó la migración de la capa de persistencia a SQL Server. Se actualizó la configuración en `app/core/config.py` para utilizar el driver ODBC 17 con autenticación de Windows. Se purificó la inicialización del motor en `app/core/database.py`, eliminando directivas incompatibles (`check_same_thread`). Finalmente, se implementó lógica de auto-aprovisionamiento en `seed.py` (`ensure_database_exists`) que verifica y crea el contenedor lógico en la instancia `master` antes de ejecutar la reconstrucción del esquema y el sembrado de datos.
+
+**Decisión:** He validado y aprobado la migración a SQL Server. Este cambio eleva la robustez de la arquitectura de datos, preparando el sistema para un entorno de producción empresarial mientras mantiene la comodidad del desarrollo local mediante LocalDB, asegurando una transición sin fricciones para el equipo.
+
+## [11/06/2026] [16:45] Refactorización Universal SQL Server y Rediseño de Documentación
+
+**Prompt:** Actúa como un Arquitecto de Base de Datos Senior. Refactoriza todos los modelos para usar String(36) en lugar de UUID para asegurar compatibilidad total con SQL Server (LocalDB). Ajusta las cadenas de borrado en cascada para evitar ciclos y múltiples caminos (Error 1785) en las tablas de Invitations, Tasks y la tabla asociativa de dependencias. Finalmente, genera un README.md raíz con un diseño minimalista, corporativo y una navegación visual basada en badges de Shields.io para el proyecto BREÑOTASK.
+
+**Resultado:** Se ha completado la transición técnica a un esquema de datos universalmente compatible. Se sustituyeron los tipos UUID por `String(36)` en todos los modelos y esquemas, garantizando que SQL Server procese correctamente los IDs. Se resolvieron los bloqueos de integridad referencial (Error 1785) eliminando el `ON DELETE CASCADE` en claves foráneas que generaban ambigüedad relacional (`sender_id`, `assigned_to_id` y `depends_on_id`). Finalmente, se renovó la identidad visual del repositorio con un README profesional que centraliza el acceso a todos los artefactos del proyecto.
+
+**Decisión:** He validado y aprobado esta reestructuración profunda. El nuevo README eleva la calidad del proyecto, facilitando la navegación entre las fases RUP y el código fuente.
+
+## [11/06/2026] [17:15] Fase 05: Construcción - Documentación Técnica y Stack
+
+**Prompt:** Editar el archivo `README.md` principal para incluir una nueva sección de "Arquitectura y Stack Tecnológico", detallando las tecnologías empleadas en las capas de frontend, backend y base de datos, manteniendo el diseño sobrio y profesional.
+
+**Resultado:** Se ha integrado correctamente el desglose tecnológico en la portada del proyecto. El documento refleja ahora la arquitectura Cliente-Servidor implementada, destacando el uso de React (TypeScript) en el frontend, FastAPI con SQLAlchemy y JWT en el backend, y Microsoft SQL Server como motor de persistencia empresarial.
+
+**Decisión:** He aprobado esta ampliación de la documentación para visibilizar la madurez técnica del proyecto BREÑOTASK. La sección proporciona una visión clara del patrón de separación de responsabilidades y la robustez del stack elegido.
+
+## [11/06/2026] [17:50] Fase 06: Construcción - Restauración de Operativa en Dashboard Contextual
+
+**Prompt:** Actúa como un Frontend Developer Senior. Restaura e integra todas las funcionalidades interactivas (tareas, invitaciones, dependencias) dentro del nuevo diseño de Dashboard contextual. Implementa modales, formularios de creación con validación de grupo y lógica de completado dinámico.
+
+**Resultado:** Se ha completado la integración funcional del Dashboard. Se implementaron modales animados para la creación de tareas y envío de invitaciones, vinculando automáticamente cada acción al `groupId` activo. El motor de tareas ahora soporta la asignación de usuarios y la selección de predecesoras (dependencias) desde la interfaz. La reactividad del sistema garantiza que las tareas se filtren, creen y marquen como completadas en tiempo real dentro de su contexto de grupo, utilizando un diseño profesional con Tailwind CSS y Lucide icons.
+
+**Decisión:** Consolidar esta versión como la interfaz definitiva del sistema BREÑOTASK, unificando el diseño de la arquitectura multi-tenant con la operatividad de todos los requisitos del proyecto.
+
+## [11/06/2026] [18:00] Fase 05: Construcción - Gestión de Entornos y Miembros en Frontend
+
+**Prompt:** Actualizar `DashboardPage.tsx` para permitir la creación y eliminación dinámica de grupos, así como la inclusión de un panel de miembros contextual para añadir nombres manualmente a cada espacio de trabajo.
+
+**Resultado:** Se ha completado la autonomía del sistema multi-grupo en el frontend. El usuario ahora puede crear nuevos entornos, eliminarlos mediante acciones en el menú y gestionar el equipo de trabajo de forma manual introduciendo nombres directamente. La lista de miembros de cada grupo alimenta dinámicamente los campos de asignación de las tareas del propio entorno.
+
+**Decisión:** Consolidar las operaciones de administración de grupos y miembros en memoria local dentro de la interfaz, dejando el cliente preparado para la unificación final de persistencia con los endpoints del backend.
+
+## [11/06/2026] [18:02] Fase 05: Construcción - Vinculación de Sesión y Visibilidad de Tareas
+
+**Prompt:** Conectar `DashboardPage.tsx` con el contexto de autenticación (`useAuth`) para que la visualización y asignación de tareas responda dinámicamente al usuario con sesión activa en el sistema.
+
+**Resultado:** Se ha integrado el flujo de sesión en el entorno multi-grupo. El sistema ahora reconoce al usuario conectado, permitiendo filtrar las tareas generales del grupo o aislar exclusivamente aquellas que le han sido asignadas por un perfil administrador, garantizando el comportamiento esperado de la arquitectura de negocio.
+
+**Decisión:** Valido la lógica de visibilidad cruzada de tareas entre miembros de un mismo grupo.
+
+## [11/06/2026] [18:25] Fase 05: Construcción - Completado del CRUD de Tareas
+
+**Prompt:** Implementar las funcionalidades de edición y eliminación de tareas en `DashboardPage.tsx`, integrando botones de acción en la interfaz y modales pre-poblados para la actualización de datos en el estado local.
+
+**Resultado:** El ciclo de vida de las tareas está completamente operativo en el cliente. El usuario puede ahora eliminar actividades obsoletas y actualizar los detalles (título, descripción, asignación) de las tareas existentes mediante una interfaz limpia y modal, garantizando la flexibilidad dentro de su entorno de trabajo.
+
+**Decisión:** Dar por finalizada la estructuración lógica y visual del Dashboard principal. El frontend es ahora 100% capaz de gestionar el modelo de negocio (Grupos, Miembros, Tareas) de forma autónoma.
+
+## [11/06/2026] [18:35] Fase 05: Construcción - Eliminación de Miembros por Contexto
+
+**Prompt:** Añadir la funcionalidad de eliminar miembros específicos dentro de la sección de gestión de grupos en `DashboardPage.tsx`, incluyendo la actualización reactiva del estado local.
+
+**Resultado:** Se ha integrado un botón de acción rápida junto a cada miembro del equipo. Al ejecutar la eliminación, el sistema actualiza dinámicamente el array de integrantes del grupo activo, asegurando que la lista de asignación de tareas refleje inmediatamente los cambios en el personal disponible.
+
+**Decisión:** Dar por finalizado el módulo de gestión de usuarios en el cliente. La interfaz permite ahora un control total (Añadir/Eliminar) sobre quién pertenece a qué entorno de trabajo, cumpliendo con los requisitos de aislamiento del RBAC.
+
+## [11/06/2026] [18:45] Fase 05: Construcción - Motor de Dependencias y Bloqueo de Tareas
+
+**Prompt:** Implementar el caso de uso de "Relacionar Tareas" en `DashboardPage.tsx`, incluyendo la validación de dependencias (grafos), prevención de ciclos en la interfaz y el bloqueo reactivo de actividades basado en el estado de sus predecesoras.
+
+**Resultado:** El motor de dependencias está 100% operativo en el cliente. Se ha introducido un sistema de bloqueo que impide marcar una tarea como completada si sus prerequisitos no han sido satisfechos. Además, el modal de relaciones implementa protección contra ciclos bidireccionales, asegurando la integridad del flujo de trabajo del proyecto.
+
+**Decisión:** No acepto este cambio, la IA ha cambiado la distribucion del dashboard, y no ha realizado el cambio que le he pedido por lo que voy a volver al anterior cambio y volver a pedirle el cambio.
+
+## [11/06/2026] [18:50] Fase 05: Construcción - Inyección de Motor de Dependencias
+
+**Prompt:** Añadir exclusivamente la lógica de dependencias (grafos) y el bloqueo de actividades en `DashboardPage.tsx`, manteniendo estrictamente el layout y diseño visual previamente consolidado.
+
+**Resultado:** Se restauró la versión estable de la interfaz mediante Git y se inyectó de forma quirúrgica la lógica de relaciones. Las tareas ahora pueden vincularse a predecesoras y el sistema bloquea su finalización si existen requisitos pendientes, cumpliendo la regla de negocio fundamental sin alterar la experiencia de usuario corporativa.
+
+**Decisión:** No acepto el cambio, el boton de dependencias esta agregado correctamente, simplementa falta asociarlo correctamente.
+
+## [13/06/2026] [16:35] Replicación de estructura de directorios para imágenes RUP
+
+**Prompt:** Lee el contenido del directorio RUP/01-analisis/casos-uso/ de este proyecto y obtén una lista con los nombres de todas las carpetas de los casos de uso que existen actualmente. Crea la ruta images/RUP/analisis-diseno/ y por cada caso de uso crea una subcarpeta vacía con ese mismo nombre exacto.
+
+**Resultado:** Se identificaron 22 carpetas de casos de uso (incluyendo módulos y casos específicos) en `RUP/01-analisis/casos-uso/`. Se creó exitosamente la estructura correspondiente en `images/RUP/analisis-diseno/`, replicando exactamente los nombres de las carpetas para organizar los futuros artefactos visuales (diagramas exportados).
+
+**Decisión:** He automatizado la creación de la infraestructura de carpetas para imágenes de análisis y diseño, asegurando que la organización de los diagramas sea un espejo fiel de la estructura de casos de uso definida en el análisis RUP.
+
+---
+
+## [15/06/2026] [21:09] Definición de Arquitectura de Capas (Realización Python)
+
+**Prompt:** Actúa como el arquitecto de software de este proyecto. Reescribe por completo el archivo `RUP/02-diseño/arquitectura/capas.md` para adaptarlo a la realidad técnica de nuestro sistema (Python, MVC, Patrón Repositorio). Explica cómo evolucionan los objetos BCE de Análisis a Diseño.
+
+**Resultado:** Se ha reescrito la documentación de arquitectura de capas, sustituyendo el enfoque genérico por uno alineado con el stack tecnológico real (FastAPI, React, SQL Server). Se incluyó un mapeo detallado desde BCE a las capas de Presentación, Lógica y Datos, junto con un diagrama conceptual ASCII y una justificación técnica sobre el desacoplamiento y la inversión de dependencias.
+
+**Decisión:** He validado y aprobado la nueva definición arquitectónica porque materializa la trazabilidad RUP y proporciona una guía clara para la implementación física del sistema.
+
+## [15/06/2026] [21:40] Actualización de Navegación en Documentación de Diseño RUP
+
+**Prompt:** Explora recursivamente la ruta RUP/02-diseño/ y abre todos los archivos README.md que encuentres... Identifica la barra de navegación superior defectuosa... Elimina ese bloque defectuoso por completo. Reemplázalo EXACTAMENTE por este bloque de código Markdown...
+
+**Resultado:** Se han identificado y corregido 17 archivos README.md en el directorio RUP/02-diseño/, reemplazando las barras de navegación defectuosas o inconsistentes por una barra estandarizada con enlaces absolutos funcionales. Se verificó la integridad de los títulos, diagramas y descripciones originales.
+
+**Decisión:** Acepto los cambios que ha implantado el cli, aunque he de pedirle de nuevo que haga mas cambios ya que se ha dejado varios archivos sin modificar.
+
+---
+
+## [20/06/2026] [13:49] Reestructuración de ramas Git del proyecto
+
+**Prompt:** guarda registro en el conversation-log.md
+
+**Resultado:** Se reorganizaron las ramas locales de Git en el entorno de desarrollo, eliminando la rama `refactor/trazabilidad-rup` y creando una nueva rama de trabajo llamada `extraordinaria` a partir de `main`.
+
+**Decisión:** Adoptar la rama `extraordinaria` como rama de trabajo actual para implementar las tareas de trazabilidad y refactorización, garantizando que el espacio de trabajo de desarrollo esté limpio y bien alineado con la rama principal.
+
+**Archivos modificados:** [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md) (y cambio en ramas de Git).
+
+---
+
+## [20/06/2026] [13:59] Refactorización de la trazabilidad BCE a MVC del caso de uso 'abrirTareas'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta entre Análisis y Diseño para el caso de uso abrirTareas...
+
+**Resultado:** Se refactorizaron los diagramas del caso de uso `abrirTareas`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reescribió usando la nomenclatura BCE genérica con `Usuario` (Actor), `TareasView` (Boundary), `TareasController` (Control), y `TareaRepository`/`Tarea` (Entities). El diagrama de secuencia de Diseño (`secuencia.puml`) se reescribió como la evolución técnica exacta con `Usuario`, `TareasView`, `TareasController`, `TareasService`, `TareaRepository` y la base de datos `PostgreSQL`, mostrando el flujo de solicitud, delegación, consulta con `findAll()`, y retorno de objetos.
+
+**Decisión:** Garantizar trazabilidad estricta y homogeneidad de nombres y responsabilidades entre el análisis arquitectónico BCE y el diseño físico MVC en Python con el patrón repositorio.
+
+**Archivos modificados:**
+* [colaboracion.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-tareas/abrirTareas/colaboracion.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/abrirTareas/secuencia.puml)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [20/06/2026] [14:12] Trazabilidad pura BCE-MVC para 'abrirTareas'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a refactorizar el caso de uso abrirTareas en la rama actual...
+
+**Resultado:** Se refactorizaron los diagramas del caso de uso `abrirTareas` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reestructuró como un diagrama de comunicación BCE puro (en formato grafo/red) vinculando `Usuario` (Actor), `ListarTareasView` (Boundary), `TareasController` (Control), `TareaRepository` (Entity), `Tarea` (Entity), `Grupo` (Entity) y el estado `SistemaDisponible`. El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para reflejar la evolución técnica exacta con los mismos nombres de participantes (`Usuario`, `ListarTareasView` (React), `TareasController` (FastAPI), `TareasService`, `TareaRepository` (SQLAlchemy) y `PostgreSQL`), mostrando la interacción de la petición GET y el retorno en cascada.
+
+**Decisión:** Asegurar que los nombres de los componentes y clases (`ListarTareasView`, `TareasController`, `TareaRepository`) coincidan de forma exacta en el grafo de colaboración de análisis y en la secuencia de diseño, garantizando una trazabilidad RUP impecable.
+
+**Archivos modificados:**
+* [colaboracion.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-tareas/abrirTareas/colaboracion.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/abrirTareas/secuencia.puml)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [20/06/2026] [14:20] Creación de capa de servicios y repositorio para tareas
+
+**Prompt:** Actúa como mi Desarrollador Backend Senior. NO generes scripts de consola, quiero que analices mi proyecto y crees/edites los archivos directamente. TAREA A EJECUTAR: Acabamos de definir en nuestro Diseño RUP que el caso de uso abrirTareas utiliza un TareasService para intermediar entre el Controlador (Router FastAPI) y el Repositorio (SQLAlchemy). Necesito que esto se refleje en el código real...
+
+**Resultado:** Se implementó la refactorización arquitectónica de backend. Se creó `task_repository.py` definiendo la clase `TaskRepository` con el método `obtenerTareasPorGrupo(group_id)`. Se refactorizó `task_service.py` (`TaskService`) para recibir la sesión `db: Session` en el constructor, instanciar `TaskRepository` y delegar en él la obtención de tareas (añadiendo el método `obtenerTareasPorGrupo`). Finalmente, se refactorizó el router `task_router.py` para instanciar `TaskService` por petición con `Depends(get_db)` y llamar al servicio, eliminando dependencias directas del router con SQLAlchemy y aislando la lógica de negocio.
+
+**Decisión:** Adoptar el patrón Repository y la inyección de dependencias en el constructor para la entidad Task, garantizando la consistencia arquitectónica con el resto del backend (Users, Groups) y cumpliendo estrictamente con la trazabilidad RUP definida.
+
+**Archivos modificados:**
+* [task_repository.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/repositories/task_repository.py)
+* [task_service.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/services/task_service.py)
+* [task_router.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/task_router.py)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [20/06/2026] [14:40] Trazabilidad completa BCE-MVC-Código para 'iniciarSesion'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta entre Análisis, Diseño y Código para el caso de uso iniciarSesion...
+
+**Resultado:** Se refactorizó el caso de uso `iniciarSesion` de extremo a extremo en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reescribió usando la nomenclatura BCE pura en forma de grafo (`Usuario` -> `LoginView` -> `SesionController` -> `UsuarioRepository` -> `Usuario`, e interacción con la sesión cerrada). El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para reflejar la realización técnica del flujo (POST, llamada al servicio `AuthService.login`, consulta `buscarPorEmail` en `UsuarioRepository` y generación de JWT). En el código del backend, se añadió `buscarPorEmail` y `get_by_email` a `UserRepository`, se actualizó `AuthService` para encapsular la búsqueda por email y validaciones de existencia, y se simplificó `auth_router.py` delegando puramente en `AuthService`.
+
+**Decisión:** Asegurar que la verificación de existencia y credenciales de usuario se encapsule completamente en `AuthService` y la capa de datos en `UserRepository`, eliminando responsabilidades del router (controlador FastAPI) y manteniendo un mapeo terminológico unificado en todas las capas del diseño RUP.
+
+**Archivos modificados:**
+* [colaboracion.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-sesion/iniciarSesion/colaboracion.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/iniciarSesion/secuencia.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/iniciarSesion/secuencia.puml)
+* [user_repository.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/repositories/user_repository.py)
+* [auth_service.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/services/auth_service.py)
+* [auth_router.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/auth_router.py)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [21/06/2026] [22:20] Trazabilidad y refactorización para el caso de uso 'cerrarSesion'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta para el caso de uso cerrarSesion...
+
+**Resultado:** Se completó la trazabilidad del caso de uso `cerrarSesion` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reescribió en formato de grafo BCE pura (`Usuario` -> `PrincipalView` -> `SesionController` -> `SesionCerrada`/`SistemaDisponible`). El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para reflejar el flujo técnico MVC (POST /logout, invalidación en `AuthService.logout`, y borrado local en `NavbarView`). En el backend, se implementó el método `logout(token)` en `AuthService` y se añadió el correspondiente endpoint `POST /logout` en `auth_router.py`. Finalmente, se actualizaron los README.md de diseño para documentar y renderizar visualmente ambos diagramas.
+
+**Decisión:** Delegar la invalidación del token al servicio `AuthService` mediante la firma unificada `logout(token)` y simplificar el controlador HTTP (router), garantizando trazabilidad y uniformidad semántica entre los diagramas RUP y la implementación física.
+
+**Archivos modificados:**
+* [colaboracion.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-sesion/cerrarSesion/colaboracion.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/cerrarSesion/secuencia.puml)
+* [secuencia-diseno.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/cerrarSesion/secuencia-diseno.puml)
+* [auth_service.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/services/auth_service.py)
+* [auth_router.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/auth_router.py)
+* [README.md (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/cerrarSesion/README.md)
+* [README.md (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/cerrarSesion/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [21/06/2026] [22:36] Unificación de nomenclatura a 'NavbarView' en el caso de uso 'cerrarSesion'
+
+**Prompt:** Actúa como mi Arquitecto de Software. NO generes scripts, edita los archivos directamente. TAREA A EJECUTAR: Hemos detectado una pequeña ruptura de trazabilidad en el caso de uso cerrarSesion debido a una inconsistencia de nombres...
+
+**Resultado:** Se corrigió la inconsistencia de nombres en el caso de uso `cerrarSesion` para unificar la capa de presentación a `NavbarView`. En el diagrama de colaboración de Análisis (`colaboracion.puml`), se renombró `PrincipalView` a `NavbarView` y se eliminó el estado flotante `SistemaDisponible`. En el diagrama de secuencia de Diseño (`secuencia.puml` / `secuencia-diseno.puml`), se garantizó que el participante se llame exactamente `NavbarView`, asegurando consistencia nominal absoluta.
+
+**Decisión:** Unificar la nomenclatura de la vista a 'NavbarView' en los artefactos de análisis y diseño de RUP para resolver rupturas de trazabilidad y alinearse al 100% con los componentes físicos de React.
+
+**Archivos modificados:**
+* [colaboracion.puml (gestion-sesion)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-sesion/cerrarSesion/colaboracion.puml)
+* [colaboracion.puml (ruta directa)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/cerrarSesion/colaboracion.puml)
+* [secuencia.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/cerrarSesion/secuencia.puml)
+* [secuencia-diseno.puml](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/cerrarSesion/secuencia-diseno.puml)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [22/06/2026] [20:37] Trazabilidad y refactorización para el caso de uso 'marcarCompletada'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta para el caso de uso marcarCompletada...
+
+**Resultado:** Se completó la trazabilidad del caso de uso `marcarCompletada` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reescribió en formato de grafo BCE puro (`Usuario` -> `ListarTareasView` -> `TareasController` -> `TareaRepository` -> `Tarea`, e interacción con `TareasAbierto`). El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para reflejar el flujo técnico MVC (PATCH `/tasks/{id}/estado`, validación de dependencias y actualización delegada al método `actualizar_estado` de `TareaRepository` en base de datos). En el backend, se implementó `marcar_completada(task_id)` en `TaskService` y `actualizar_estado` en `TaskRepository`, y se añadió el correspondiente endpoint PATCH en `task_router.py`. Finalmente, se actualizaron los README.md de diseño para documentar y renderizar visualmente ambos diagramas.
+
+**Decisión:** Delegar el proceso de marcado como completado y validación de dependencias al servicio `TaskService.marcar_completada(task_id)` y la persistencia al `TaskRepository.actualizar_estado(task_id, True)`, garantizando desacoplamiento y trazabilidad RUP total en el backend.
+
+**Archivos modificados:**
+* [colaboracion.puml (gestion-tareas)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-tareas/marcarCompletada/colaboracion.puml)
+* [colaboracion.puml (ruta directa)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/marcarCompletada/colaboracion.puml)
+* [secuencia.puml (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/marcarCompletada/secuencia.puml)
+* [secuencia.puml (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/marcarCompletada/secuencia.puml)
+* [task_repository.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/repositories/task_repository.py)
+* [task_service.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/services/task_service.py)
+* [task_router.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/task_router.py)
+* [README.md (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/marcarCompletada/README.md)
+* [README.md (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/marcarCompletada/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [22/06/2026] [20:48] Trazabilidad y documentación para el caso de uso 'completarGestion'
+
+**Prompt:** Actúa como mi Arquitecto de Software. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta para el caso de uso completarGestion...
+
+**Resultado:** Se completó la trazabilidad y la documentación del caso de uso `completarGestion` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reestructuró en formato de grafo BCE puro (`Usuario` -> `TareasView` -> `DashboardController` -> `SistemaDisponible`). El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para modelar la navegación del frontend (manejador de rutas de React comprobando cambios pendientes y renderizando `DashboardView`). Finalmente, se actualizaron los README.md de diseño para documentar y enlazar los diagramas.
+
+**Decisión:** Modelar la transición del caso de uso 'completarGestion' puramente en la capa de presentación y control de rutas en el cliente de React al ser un flujo de navegación sin cambios directos en la persistencia del backend.
+
+**Archivos modificados:**
+* [colaboracion.puml (gestion-sesion)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-sesion/completarGestion/colaboracion.puml)
+* [colaboracion.puml (ruta directa)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/completarGestion/colaboracion.puml)
+* [secuencia.puml (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/completarGestion/secuencia.puml)
+* [secuencia-diseno.puml (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/completarGestion/secuencia-diseno.puml)
+* [README.md (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/completarGestion/README.md)
+* [README.md (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/completarGestion/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [23/06/2026] [15:57] Trazabilidad y refactorización para el caso de uso 'abrirInvitaciones'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta para el caso de uso abrirInvitaciones...
+
+**Resultado:** Se completó la trazabilidad del caso de uso `abrirInvitaciones` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se reescribió en formato de grafo BCE puro (`Usuario` -> `InvitacionesView` -> `InvitacionesController` -> `InvitacionRepository` -> `Invitacion`, e interacción con `InvitacionesAbierto`). El diagrama de secuencia de Diseño (`secuencia.puml`) se actualizó para reflejar el flujo técnico MVC (GET `/invitaciones`, delegación a `InvitacionesService.obtener_invitaciones` y consulta mediante `findAllByUsuario` en `InvitacionRepository`). En el backend, se crearon `invitacion_repository.py` y `invitaciones_service.py`, y se implementó y registró el router `invitaciones_controller.py` en `main.py`. Finalmente, se actualizaron y crearon los README.md de diseño correspondientes.
+
+**Decisión:** Crear la capa de repositorio (`InvitacionRepository`), servicio (`InvitacionesService`) y router (`invitaciones_controller.py`) dedicados para la gestión independiente de invitaciones en el backend de FastAPI, garantizando la consistencia arquitectónica con el resto de entidades y la trazabilidad RUP.
+
+**Archivos modificados:**
+* [colaboracion.puml (gestion-grupos)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-grupos/abrirInvitaciones/colaboracion.puml)
+* [colaboracion.puml (ruta directa)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/abrirInvitaciones/colaboracion.puml)
+* [secuencia.puml (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/abrirInvitaciones/secuencia.puml)
+* [secuencia.puml (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirInvitaciones/secuencia.puml)
+* [invitacion_repository.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/repositories/invitacion_repository.py)
+* [invitaciones_service.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/services/invitaciones_service.py)
+* [invitaciones_controller.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/invitaciones_controller.py)
+* [main.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/main.py)
+* [README.md (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirInvitaciones/README.md)
+* [README.md (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/abrirInvitaciones/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [23/06/2026] [16:15] Trazabilidad y alineación de código para el caso de uso 'editarInvitacion'
+
+**Prompt:** Actúa como mi Arquitecto de Software experto en RUP. NO generes scripts, utiliza tus herramientas para editar archivos directamente en mi entorno. TAREA A EJECUTAR: Vamos a garantizar la trazabilidad estricta para el caso de uso editarInvitacion...
+
+**Resultado:** Se completó la trazabilidad y alineación del caso de uso `editarInvitacion` en la rama `extraordinaria`. El diagrama de colaboración de Análisis (`colaboracion.puml`) se estructuró en formato de grafo BCE puro (`Usuario` -> `EditarInvitacionView` -> `InvitacionesController` -> `InvitacionRepository` -> `Invitacion`, con transición a `InvitacionesAbierto`). El diagrama de secuencia de Diseño (`secuencia.puml`) se modeló para reflejar el flujo técnico MVC (PUT `/invitaciones/{id}`, delegación a `InvitacionesService.editar_invitacion`, actualización en `InvitacionRepository.actualizar` y confirmación persistida en PostgreSQL). En el backend, se completó la implementación del método `editar_invitacion` en el servicio y se implementó el router endpoint `PUT /invitaciones/{id}` en `invitaciones_controller.py`. Finalmente, se crearon los documentos README.md de diseño correspondientes para renderizar los diagramas SVG.
+
+**Decisión:** Implementar el endpoint `PUT /invitaciones/{id}` delegando la lógica de negocio a `InvitacionesService.editar_invitacion(id, datos)` y delegando la persistencia mediante `InvitacionRepository.actualizar(id, datos)`, respetando la arquitectura MVC de tres capas y asegurando la trazabilidad desde los modelos conceptuales (BCE) de RUP.
+
+**Archivos modificados:**
+* [colaboracion.puml (gestion-grupos)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/gestion-grupos/editarInvitacion/colaboracion.puml)
+* [colaboracion.puml (ruta directa)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/editarInvitacion/colaboracion.puml)
+* [secuencia.puml (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/editarInvitacion/secuencia.puml)
+* [secuencia.puml (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarInvitacion/secuencia.puml)
+* [invitaciones_controller.py](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/backend/app/routers/invitaciones_controller.py)
+* [README.md (casos-uso)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarInvitacion/README.md)
+* [README.md (diagramas-secuencia)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/diagramas-secuencia/editarInvitacion/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [23/06/2026] [16:30] Enlace bidireccional de navegación cruzada en READMEs de casos de uso
+
+**Prompt:** Actúa como mi Asistente de Documentación Técnica. NO generes scripts, utiliza tus herramientas para editar los archivos directamente en mi entorno. TAREA A EJECUTAR: Necesito enlazar de forma cruzada y específica los botones de la barra de navegación en los README.md de nuestros casos de uso...
+
+**Resultado:** Se actualizó la barra de navegación superior en los archivos `README.md` de análisis y diseño de los 7 casos de uso principales (`iniciarSesion`, `cerrarSesion`, `abrirTareas`, `marcarCompletada`, `completarGestion`, `abrirInvitaciones` y `editarInvitacion`). El botón `🎨 Diseño` en cada `README.md` de análisis se modificó para apuntar a la ruta exacta del diseño del correspondiente caso de uso, y el botón `🏗️ Análisis` en cada `README.md` de diseño se modificó para apuntar a la ruta exacta del análisis del caso de uso.
+
+**Decisión:** Implementar enlaces directos y específicos entre los artefactos correspondientes de Análisis y Diseño de cada caso de uso para facilitar la trazabilidad bidireccional y navegación interactiva sin romper los enlaces de Inicio y Desarrollo de la barra estándar.
+
+**Archivos modificados:**
+* 7 README.md de análisis bajo `RUP/01-analisis/casos-uso/`
+* 7 README.md de diseño bajo `RUP/02-diseño/` (tanto en `casos-uso/` como en `diagramas-secuencia/`)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [25/06/2026] [11:58] Aplanado de la estructura de casos de uso en la fase de análisis
+
+**Prompt:** Actúa como mi Asistente de Sistema de Archivos. NO generes scripts, utiliza tus herramientas para ejecutar esta refactorización de directorios directamente en mi entorno. TAREA A EJECUTAR: Necesito aplanar la estructura del directorio RUP/01-analisis/casos-uso/...
+
+**Resultado:** Se aplanó la estructura del directorio `RUP/01-analisis/casos-uso/`. Se reubicaron los 19 casos de uso que residían dentro de las subcarpetas `gestion-grupos/`, `gestion-sesion/` y `gestion-tareas/` para que dependan directamente del directorio `casos-uso/`. Una vez verificado que las subcarpetas estaban completamente vacías, se eliminaron.
+
+**Decisión:** Aplanar la estructura de directorios en la fase de análisis de casos de uso eliminando las subcarpetas de agrupación intermedia para mejorar la accesibilidad directa de los archivos, manteniendo intactos todos los diagramas y documentos relacionados.
+
+**Archivos modificados:**
+* 19 subdirectorios de casos de uso bajo [casos-uso](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/) (reubicados)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [25/06/2026] [12:11] Estandarización visual de los READMEs de la fase de diseño
+
+**Prompt:** Actúa como mi Asistente de Documentación Técnica. NO generes scripts, utiliza tus herramientas para inspeccionar y editar los archivos directamente en mi entorno. TAREA A EJECUTAR: Necesito estandarizar visualmente todos los README.md de la fase de diseño...
+
+**Resultado:** Se realizó una auditoría y actualización de los 11 archivos `README.md` bajo `RUP/02-diseño/casos-uso/`. Se sobrescribieron aquellos que no cumplían con el formato estructurado para que incluyan la barra de navegación corregida, la sección del Diagrama de Colaboración (Análisis BCE) y la sección del Diagrama de Secuencia (Diseño MVC) con sus respectivos textos descriptivos, imágenes SVG referenciadas mediante rutas relativas resueltas y enlaces a sus correspondientes archivos de código fuente PlantUML (`.puml`).
+
+**Decisión:** Estandarizar la documentación de diseño técnico mediante comparativas visuales y directas entre el modelado BCE de análisis (grafo de colaboración) y el modelado MVC de diseño físico (secuencia), facilitando la trazabilidad bidireccional inmediata y la correcta visualización de diagramas en GitHub/VS Code mediante direccionamiento relativo preciso.
+
+**Archivos modificados:**
+* [abrirInvitaciones/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirInvitaciones/README.md)
+* [abrirTareas/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirTareas/README.md)
+* [cerrarSesion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/cerrarSesion/README.md)
+* [completarGestion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/completarGestion/README.md)
+* [crearTarea/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/crearTarea/README.md)
+* [desactivarMiembro/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/desactivarMiembro/README.md)
+* [editarInvitacion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarInvitacion/README.md)
+* [editarTarea/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarTarea/README.md)
+* [iniciarSesion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/iniciarSesion/README.md)
+* [invitarMiembro/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/invitarMiembro/README.md)
+* [marcarCompletada/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/marcarCompletada/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [25/06/2026] [12:20] Restauración de especificaciones de API y tablas de trazabilidad en READMEs de diseño
+
+**Prompt:** Actúa como mi Arquitecto de Software. NO generes scripts, utiliza tus herramientas para editar los archivos directamente. TAREA A EJECUTAR: En la estandarización anterior de los README.md en RUP/02-diseño/casos-uso/... se eliminaron accidentalmente las secciones 3 y 4. Necesito que recorras de nuevo los 7 casos de uso y añadas estas dos secciones al final de cada archivo...
+
+**Resultado:** Se restauraron las especificaciones técnicas en los 7 READMEs de casos de uso principales de diseño. Se leyeron dinámicamente los diagramas de secuencia (.puml) y se añadieron la Sección 3 (Especificación del Contrato de API con método HTTP, ruta, Request Body, Response 200 y tabla de errores manejados) y la Sección 4 (Tabla de Trazabilidad desde componentes BCE a su implementación en React/FastAPI/SQLAlchemy).
+
+**Decisión:** Garantizar que la documentación de la fase de diseño integre tanto la vista comparativa de diagramas como la especificación detallada de los endpoints del backend y las tablas de trazabilidad estructural, asegurando que toda la información refleje fielmente la arquitectura técnica FastAPI + React.
+
+**Archivos modificados:**
+* [abrirInvitaciones/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirInvitaciones/README.md)
+* [abrirTareas/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/abrirTareas/README.md)
+* [cerrarSesion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/cerrarSesion/README.md)
+* [completarGestion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/completarGestion/README.md)
+* [editarInvitacion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/editarInvitacion/README.md)
+* [iniciarSesion/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/iniciarSesion/README.md)
+* [marcarCompletada/README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/02-diseño/casos-uso/marcarCompletada/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [25/06/2026] [12:38] Corrección de rutas de navegación cruzada en READMEs de casos de uso (Análisis y Diseño)
+
+**Prompt:** Actúa como mi Asistente de Documentación Técnica. NO generes scripts, edita los archivos directamente. TAREA A EJECUTAR: Necesito corregir las rutas de la barra de navegación cruzada en los archivos README.md de los 7 casos de uso principales...
+
+**Resultado:** Se actualizaron los enlaces del botón `🎨 Diseño` en la barra de navegación superior de los 7 READMEs de análisis (`RUP/01-analisis/casos-uso/[NombreCasoUso]/README.md`) para que apunten a la ruta final de diseño `/RUP/02-diseño/casos-uso/[NombreCasoUso]/README.md`, corrigiendo la referencia obsoleta a `diagramas-secuencia`. Asimismo, se verificó que los botones `🏗️ Análisis` en los 7 READMEs de diseño apunten correctamente a `/RUP/01-analisis/casos-uso/[NombreCasoUso]/README.md`.
+
+**Decisión:** Consolidar una barra de navegación cruzada y coherente basada en la estructura final de directorios aplanados tanto para la fase de análisis como de diseño, garantizando un flujo ágil de navegación entre los artefactos correspondientes.
+
+**Archivos modificados:**
+* [iniciarSesion/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/iniciarSesion/README.md)
+* [cerrarSesion/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/cerrarSesion/README.md)
+* [abrirTareas/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/abrirTareas/README.md)
+* [marcarCompletada/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/marcarCompletada/README.md)
+* [completarGestion/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/completarGestion/README.md)
+* [abrirInvitaciones/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/abrirInvitaciones/README.md)
+* [editarInvitacion/README.md (Análisis)](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/RUP/01-analisis/casos-uso/editarInvitacion/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)
+
+---
+
+## [25/06/2026] [13:03] Rediseño visual del menú de navegación en README principal con badges de Shields.io
+
+**Prompt:** Actúa como mi Ingeniero de UX/UI para Documentación. NO generes scripts, utiliza tus herramientas para editar los archivos directamente. TAREA A EJECUTAR: Necesito rediseñar el menú de navegación principal del archivo README.md que se encuentra en la raíz del proyecto...
+
+**Resultado:** Se actualizó el menú de navegación en el archivo `README.md` de la raíz del proyecto. Se reemplazó el menú de texto simple por una estructura de 3 filas de badges con estilo `for-the-badge` de color azul oscuro (`#003b6f`), organizados temáticamente e integrados con iconos representativos, manteniendo exactamente las rutas relativas originales a los directorios y documentos del proyecto.
+
+**Decisión:** Dotar al punto de entrada del proyecto de una interfaz gráfica moderna, legible e interactiva a nivel de documentación, facilitando el acceso a las diferentes disciplinas del proceso RUP, al código fuente de desarrollo y a las bitácoras mediante botones de estilo insignia estandarizados.
+
+**Archivos modificados:**
+* [README.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/README.md)
+* [conversation-log.md](file:///C:/Users/franv/Desktop/Proyecto%20IDSW2/25-26-idsw2-sdVC/conversation-log.md)

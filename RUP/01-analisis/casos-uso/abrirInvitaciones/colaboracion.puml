@@ -1,0 +1,18 @@
+@startuml abrirInvitaciones-analisis
+skinparam linetype polyline
+left to right direction
+
+actor Usuario
+boundary InvitacionesView
+control InvitacionesController
+entity InvitacionRepository
+entity "Invitacion" as EntidadInvitacion
+rectangle ":Invitaciones Abierto" as InvitacionesAbierto #C5E0B4
+
+Usuario --> InvitacionesView : 1: abrirInvitaciones()
+InvitacionesView --> InvitacionesController : 2: listarInvitaciones(usuario)
+InvitacionesController --> InvitacionRepository : 3: obtenerInvitaciones(usuario)
+InvitacionRepository -- EntidadInvitacion
+InvitacionesView --> InvitacionesAbierto : 4: actualizaEstado()
+
+@enduml

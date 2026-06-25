@@ -1,0 +1,23 @@
+@startuml validarConflicto-analisis
+skinparam linetype polyline
+
+actor Usuario
+package validarConflicto as "validarConflicto()" {
+    rectangle #629EF9 DetalleTareaView
+    rectangle #b5bd68 TareasController
+    rectangle #F2AC4E TareaRepository
+    rectangle #F2AC4E Tarea
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> DetalleTareaView: 1: validarHorario(datosTemporales)
+
+DetalleTareaView -d-> TareasController: 2: verificarConflictos(id, datosTemporales)
+
+TareasController --> TareaRepository: 3: buscarSolapamientos(id, datosTemporales)
+
+TareaRepository -- Tarea
+
+DetalleTareaView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

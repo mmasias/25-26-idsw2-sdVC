@@ -1,0 +1,24 @@
+@startuml relacionarTareas-analisis
+skinparam linetype polyline
+
+actor Usuario
+package relacionarTareas as "relacionarTareas()" {
+    rectangle #629EF9 RelacionarTareasView
+    rectangle #b5bd68 TareasController
+    rectangle #F2AC4E TareaRepository
+    rectangle #F2AC4E RelacionRepository
+    rectangle #F2AC4E Tarea
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> RelacionarTareasView: 1: relacionarTareas(tarea)
+
+RelacionarTareasView -d-> TareasController: 2: establecerVinculo(id1, id2, tipo)
+
+TareasController --> RelacionRepository: 3: crearRelacion(id1, id2, tipo)
+
+RelacionRepository -- Tarea
+
+RelacionarTareasView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

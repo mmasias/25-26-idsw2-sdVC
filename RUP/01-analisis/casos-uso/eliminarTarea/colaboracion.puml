@@ -1,0 +1,23 @@
+@startuml eliminarTarea-analisis
+skinparam linetype polyline
+
+actor Usuario
+package eliminarTarea as "eliminarTarea()" {
+    rectangle #629EF9 ListarTareasView
+    rectangle #b5bd68 TareasController
+    rectangle #F2AC4E TareaRepository
+    rectangle #F2AC4E Tarea
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> ListarTareasView: 1: eliminarTarea(tarea)
+
+ListarTareasView -d-> TareasController: 2: procesarEliminacion(idTarea)
+
+TareasController --> TareaRepository: 3: eliminarTarea(idTarea)
+
+TareaRepository -- Tarea
+
+ListarTareasView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml

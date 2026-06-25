@@ -1,0 +1,23 @@
+@startuml eliminarMiembro-analisis
+skinparam linetype polyline
+
+actor Usuario
+package eliminarMiembro as "eliminarMiembro()" {
+    rectangle #629EF9 GestionarMiembrosView
+    rectangle #b5bd68 MembresiasController
+    rectangle #F2AC4E MiembroRepository
+    rectangle #F2AC4E MiembroGrupo
+}
+rectangle #CDEBA5 ":Sistema Disponible" as SistemaDisponible
+
+SistemaDisponible -r-> GestionarMiembrosView: 1: expulsarMiembro(miembro)
+
+GestionarMiembrosView -d-> MembresiasController: 2: procesarExpulsion(idMiembro)
+
+MembresiasController --> MiembroRepository: 3: eliminarMembresia(idMiembro)
+
+MiembroRepository -- MiembroGrupo
+
+GestionarMiembrosView -r-> SistemaDisponible: 4: sistemaDisponible(usuario)
+
+@enduml
