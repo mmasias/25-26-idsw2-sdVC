@@ -1,0 +1,20 @@
+﻿@startuml abrirTareas-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "abrirTareas()" {
+    rectangle #629EF9 AbrirTareasView
+    rectangle #b5bd68 AbrirTareasController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> AbrirTareasView: abrirTareas()
+AbrirTareasView --> AbrirTareasController: coordinarCasoUso()
+AbrirTareasController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+AbrirTareasView --> EstadoDestino: presentaResultado()
+
+@enduml

@@ -1,0 +1,20 @@
+﻿@startuml configurarRecordatorio-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "configurarRecordatorio()" {
+    rectangle #629EF9 ConfigurarRecordatorioView
+    rectangle #b5bd68 ConfigurarRecordatorioController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> ConfigurarRecordatorioView: configurarRecordatorio()
+ConfigurarRecordatorioView --> ConfigurarRecordatorioController: coordinarCasoUso()
+ConfigurarRecordatorioController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+ConfigurarRecordatorioView --> EstadoDestino: presentaResultado()
+
+@enduml

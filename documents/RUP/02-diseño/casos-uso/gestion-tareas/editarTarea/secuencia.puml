@@ -1,0 +1,25 @@
+@startuml editarTarea-diseno-secuencia
+title Diseno conceptual: editarTarea()
+
+actor "Actor SdR" as Actor
+participant "Interfaz" as Interfaz
+participant "CoordinadorEditarTarea" as Coordinador
+participant "ServicioAplicacion" as ServicioAplicacion
+participant "ServicioDominio" as ServicioDominio
+participant "EstadoAplicacion" as EstadoAplicacion
+database "PersistenciaConceptual" as Persistencia
+
+Actor -> Interfaz : 1: solicita editarTarea()
+Interfaz -> Coordinador : 2: coordinarCasoUso()
+Coordinador -> ServicioAplicacion : 3: coordinar responsabilidad de aplicacion
+ServicioAplicacion -> ServicioDominio : 4: consultarOModificarDominio()
+ServicioDominio -> Persistencia : 5: acceder a persistencia conceptual
+Persistencia -> EstadoAplicacion : 6: usa estado de aplicacion
+EstadoAplicacion --> Persistencia : 7: resultado
+Persistencia --> ServicioDominio : 8: resultado
+ServicioDominio --> ServicioAplicacion : 9: resultado de dominio
+ServicioAplicacion --> Coordinador : 10: resultado
+Coordinador --> Interfaz : 11: respuesta
+Interfaz --> Actor : 12: presenta resultado
+
+@enduml

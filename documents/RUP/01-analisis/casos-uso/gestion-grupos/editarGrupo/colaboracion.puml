@@ -1,0 +1,20 @@
+﻿@startuml editarGrupo-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "editarGrupo()" {
+    rectangle #629EF9 EditarGrupoView
+    rectangle #b5bd68 EditarGrupoController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> EditarGrupoView: editarGrupo()
+EditarGrupoView --> EditarGrupoController: coordinarCasoUso()
+EditarGrupoController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+EditarGrupoView --> EstadoDestino: presentaResultado()
+
+@enduml

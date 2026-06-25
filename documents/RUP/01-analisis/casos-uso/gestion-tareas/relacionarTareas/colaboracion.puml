@@ -1,0 +1,20 @@
+﻿@startuml relacionarTareas-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "relacionarTareas()" {
+    rectangle #629EF9 RelacionarTareasView
+    rectangle #b5bd68 RelacionarTareasController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> RelacionarTareasView: relacionarTareas()
+RelacionarTareasView --> RelacionarTareasController: coordinarCasoUso()
+RelacionarTareasController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+RelacionarTareasView --> EstadoDestino: presentaResultado()
+
+@enduml

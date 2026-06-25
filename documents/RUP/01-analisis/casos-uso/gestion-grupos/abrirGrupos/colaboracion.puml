@@ -1,0 +1,20 @@
+﻿@startuml abrirGrupos-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "abrirGrupos()" {
+    rectangle #629EF9 AbrirGruposView
+    rectangle #b5bd68 AbrirGruposController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> AbrirGruposView: abrirGrupos()
+AbrirGruposView --> AbrirGruposController: coordinarCasoUso()
+AbrirGruposController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+AbrirGruposView --> EstadoDestino: presentaResultado()
+
+@enduml

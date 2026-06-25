@@ -1,0 +1,20 @@
+﻿@startuml establecerHorario-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "establecerHorario()" {
+    rectangle #629EF9 EstablecerHorarioView
+    rectangle #b5bd68 EstablecerHorarioController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> EstablecerHorarioView: establecerHorario()
+EstablecerHorarioView --> EstablecerHorarioController: coordinarCasoUso()
+EstablecerHorarioController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+EstablecerHorarioView --> EstadoDestino: presentaResultado()
+
+@enduml

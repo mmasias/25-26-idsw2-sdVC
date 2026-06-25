@@ -1,0 +1,20 @@
+﻿@startuml cerrarSesion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "cerrarSesion()" {
+    rectangle #629EF9 CerrarSesionView
+    rectangle #b5bd68 CerrarSesionController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> CerrarSesionView: cerrarSesion()
+CerrarSesionView --> CerrarSesionController: coordinarCasoUso()
+CerrarSesionController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+CerrarSesionView --> EstadoDestino: presentaResultado()
+
+@enduml

@@ -1,0 +1,43 @@
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from database import init_db
+from routes.auth import router as auth_router
+from routes.groups import router as groups_router
+from routes.tasks import router as tasks_router
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(
+    title="BreñoTask API",
+    description="Iteraciones iniciales: sesion, navegacion y grupos propios.",
+    version="0.1.0",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(auth_router, prefix="/api/auth", tags=["auth"])
+app.include_router(groups_router, prefix="/api/groups", tags=["groups"])
+app.include_router(tasks_router, prefix="/api/tasks", tags=["tasks"])
+
+
+@app.get("/api/health")
+def health_check():
+    return {"estado": "ok", "modulos": ["gestion-sesion-navegacion", "gestion-grupos-usuarios", "gestion-tareas"]}

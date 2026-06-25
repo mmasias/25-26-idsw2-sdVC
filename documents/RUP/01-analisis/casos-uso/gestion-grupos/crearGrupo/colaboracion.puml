@@ -1,0 +1,20 @@
+﻿@startuml crearGrupo-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "crearGrupo()" {
+    rectangle #629EF9 CrearGrupoView
+    rectangle #b5bd68 CrearGrupoController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> CrearGrupoView: crearGrupo()
+CrearGrupoView --> CrearGrupoController: coordinarCasoUso()
+CrearGrupoController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+CrearGrupoView --> EstadoDestino: presentaResultado()
+
+@enduml

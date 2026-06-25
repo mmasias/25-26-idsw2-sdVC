@@ -1,0 +1,73 @@
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000/api";
+
+
+async function request(path, options = {}) {
+  const { headers, ...requestOptions } = options;
+
+  const response = await fetch(`${API_URL}${path}`, {
+    ...requestOptions,
+    headers: {
+      "Content-Type": "application/json",
+      ...(headers ?? {}),
+    },
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    const message = body?.detail?.message ?? "No se pudo completar la operacion.";
+    throw new Error(message);
+  }
+
+  return response.json();
+}
+
+
+export function getTasks(token) {
+  return request("/tasks", {
+    headers: {
+      "X-Session-Token": token,
+    },
+  });
+}
+
+
+export function createTask(token, task) {
+  return request("/tasks", {
+    body: JSON.stringify(task),
+    headers: {
+      "X-Session-Token": token,
+    },
+    method: "POST",
+  });
+}
+
+
+export function updateTask(token, taskId, task) {
+  return request(`/tasks/${taskId}`, {
+    body: JSON.stringify(task),
+    headers: {
+      "X-Session-Token": token,
+    },
+    method: "PATCH",
+  });
+}
+
+
+export function deleteTask(token, taskId) {
+  return request(`/tasks/${taskId}`, {
+    headers: {
+      "X-Session-Token": token,
+    },
+    method: "DELETE",
+  });
+}
+
+
+export function completeTask(token, taskId) {
+  return request(`/tasks/${taskId}/complete`, {
+    headers: {
+      "X-Session-Token": token,
+    },
+    method: "PATCH",
+  });
+}

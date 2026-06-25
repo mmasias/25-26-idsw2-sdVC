@@ -1,0 +1,20 @@
+﻿@startuml abrirInvitaciones-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "abrirInvitaciones()" {
+    rectangle #629EF9 AbrirInvitacionesView
+    rectangle #b5bd68 AbrirInvitacionesController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> AbrirInvitacionesView: abrirInvitaciones()
+AbrirInvitacionesView --> AbrirInvitacionesController: coordinarCasoUso()
+AbrirInvitacionesController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+AbrirInvitacionesView --> EstadoDestino: presentaResultado()
+
+@enduml

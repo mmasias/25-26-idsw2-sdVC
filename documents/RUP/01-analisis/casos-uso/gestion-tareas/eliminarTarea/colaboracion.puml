@@ -1,0 +1,20 @@
+﻿@startuml eliminarTarea-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "eliminarTarea()" {
+    rectangle #629EF9 EliminarTareaView
+    rectangle #b5bd68 EliminarTareaController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> EliminarTareaView: eliminarTarea()
+EliminarTareaView --> EliminarTareaController: coordinarCasoUso()
+EliminarTareaController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+EliminarTareaView --> EstadoDestino: presentaResultado()
+
+@enduml

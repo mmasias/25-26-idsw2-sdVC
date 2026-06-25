@@ -1,0 +1,20 @@
+﻿@startuml definirLocalizacion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "definirLocalizacion()" {
+    rectangle #629EF9 DefinirLocalizacionView
+    rectangle #b5bd68 DefinirLocalizacionController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> DefinirLocalizacionView: definirLocalizacion()
+DefinirLocalizacionView --> DefinirLocalizacionController: coordinarCasoUso()
+DefinirLocalizacionController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+DefinirLocalizacionView --> EstadoDestino: presentaResultado()
+
+@enduml

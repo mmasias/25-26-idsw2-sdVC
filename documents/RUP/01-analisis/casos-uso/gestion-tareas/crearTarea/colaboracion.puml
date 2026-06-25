@@ -1,0 +1,20 @@
+﻿@startuml crearTarea-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "crearTarea()" {
+    rectangle #629EF9 CrearTareaView
+    rectangle #b5bd68 CrearTareaController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> CrearTareaView: crearTarea()
+CrearTareaView --> CrearTareaController: coordinarCasoUso()
+CrearTareaController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+CrearTareaView --> EstadoDestino: presentaResultado()
+
+@enduml

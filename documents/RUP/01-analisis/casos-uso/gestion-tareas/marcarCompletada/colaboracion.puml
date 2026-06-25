@@ -1,0 +1,20 @@
+﻿@startuml marcarCompletada-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Estado origen SdR" as EstadoOrigen
+rectangle #CDEBA5 ":Estado destino SdR" as EstadoDestino
+
+package "marcarCompletada()" {
+    rectangle #629EF9 MarcarCompletadaView
+    rectangle #b5bd68 MarcarCompletadaController
+    rectangle #F2AC4E RepositorioDominio
+    rectangle #F2AC4E EntidadDominio
+}
+
+EstadoOrigen --> MarcarCompletadaView: marcarCompletada()
+MarcarCompletadaView --> MarcarCompletadaController: coordinarCasoUso()
+MarcarCompletadaController --> RepositorioDominio: consultarOModificarDominio()
+RepositorioDominio -- EntidadDominio
+MarcarCompletadaView --> EstadoDestino: presentaResultado()
+
+@enduml
