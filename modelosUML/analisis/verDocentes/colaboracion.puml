@@ -1,0 +1,19 @@
+@startuml verDocente-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SISTEMA_DISPONIBLE" as SISTEMADISPONIBLE
+package verDocente as "verDocente()" {
+    rectangle #629EF9 DocentesView
+    rectangle #b5bd68 DocentesController
+}
+
+rectangle #CDEBA5 ":DOCENTES_ABIERTO" as DOCENTESABIERTO
+
+SISTEMADISPONIBLE -r-> DocentesView: verDocente(Page, Limit)
+
+DocentesView -d-> DocentesController: listarDocentes(Filtros)
+
+DocentesView ..> SISTEMADISPONIBLE: cancelar()
+DocentesView ..r.> DOCENTESABIERTO: docentesCargados()
+
+@enduml

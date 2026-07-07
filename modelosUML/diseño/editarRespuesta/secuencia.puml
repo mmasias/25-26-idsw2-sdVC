@@ -1,0 +1,80 @@
+@startuml
+title Diagrama de Secuencia - Editar Respuesta (NestJS + Vue 3)
+
+actor "Usuario (Docente)" as User
+participant "PreguntasForm\n(Formulario con tabs)" as ParentForm
+participant "RespuestasView\n(Listado)" as List
+participant "RespuestasForm\n(Formulario)" as Form
+participant "RespuestasController" as Controller
+participant "RespuestasService" as Service
+participant "PrismaService" as Prisma
+participant "Base de Datos\n(SQLite/PostgreSQL)" as DB
+
+note over ParentForm : Modo edición: [Datos] [Respuestas] (activo)\ntodos los tabs activos
+
+User -> ParentForm: Hace clic en "Editar"\nsobre una respuesta
+activate ParentForm
+
+ParentForm -> List: Navega a vista\nde respuestas
+activate List
+
+List -> Form: Abre modal de\nedición
+activate Form
+
+Form -> Controller: GET /api/respuestas/:id
+activate Controller
+
+Controller -> Service: findOne(id)
+activate Service
+
+Service -> Prisma: respuesta.findUnique({ where: { id } })
+activate Prisma
+Prisma -> DB: SELECT Respuesta WHERE id=?
+activate DB
+DB --> Prisma: respuesta | null
+deactivate DB
+Prisma --> Service: respuesta
+deactivate Prisma
+
+alt No encontrada
+  Service --> Controller: throw NotFoundException
+  Controller --> Form: 404 Not Found
+  Form --> User: "Respuesta\nno encontrada"
+else Encontrada
+  Service --> Controller: respuesta
+  deactivate Service
+  Controller --> Form: 200 OK\n{ respuesta }
+  deactivate Controller
+
+  Form --> User: Muestra formulario\ncon datos actuales
+
+  User -> Form: Modifica campos\ny confirma
+  Form -> Controller: PATCH /api/respuestas/:id\n{ texto, esCorrecta }
+  activate Controller
+
+  Controller -> Service: update(id, updateDto)
+  activate Service
+
+  Service -> Prisma: respuesta.update({ where: { id }, data })
+  activate Prisma
+  Prisma -> DB: UPDATE Respuesta WHERE id=?
+  activate DB
+  DB --> Prisma: respuesta actualizada
+  deactivate DB
+  Prisma --> Service: respuesta
+  deactivate Prisma
+
+  Service --> Controller: respuesta actualizada
+  deactivate Service
+  Controller --> Form: 200 OK\n{ respuesta }
+  deactivate Controller
+
+  Form --> List: Cierra modal y\nnotifica éxito
+  deactivate Form
+  List --> User: Muestra listado\nactualizado
+end
+
+deactivate List
+deactivate ParentForm
+
+@enduml

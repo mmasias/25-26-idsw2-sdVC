@@ -1,0 +1,19 @@
+@startuml crearDocente-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":DOCENTES_ABIERTO" as DOCENTESABIERTO
+package crearDocente as "crearDocente()" {
+    rectangle #629EF9 CrearDocenteView
+    rectangle #b5bd68 DocentesController
+}
+
+rectangle #CDEBA5 ":DOCENTE_ABIERTO" as DOCENTEABIERTO
+
+DOCENTESABIERTO -r-> CrearDocenteView: crearDocente(DatosDocente)
+
+CrearDocenteView -d-> DocentesController: guardarDocente(CreateDocenteDto)
+
+CrearDocenteView ..> DOCENTESABIERTO: cancelar()
+CrearDocenteView ..r.> DOCENTEABIERTO: docenteCreado()
+
+@enduml

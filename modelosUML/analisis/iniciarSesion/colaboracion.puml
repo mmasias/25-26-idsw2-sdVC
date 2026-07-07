@@ -1,0 +1,19 @@
+@startuml iniciarSesion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SESION_CERRADA" as SESIONCERRADA
+package iniciarSesion as "iniciarSesion()" {
+    rectangle #629EF9 LoginView
+    rectangle #b5bd68 AuthController
+}
+
+rectangle #CDEBA5 ":SISTEMA_DISPONIBLE" as SISTEMADISPONIBLE
+
+SESIONCERRADA -r-> LoginView: iniciarSesion(Email, Password)
+
+LoginView -d-> AuthController: verificarCredenciales(Email, Password)
+
+LoginView ..> SESIONCERRADA: cancelar()
+LoginView ..r.> SISTEMADISPONIBLE: credencialesValidas()
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml editarDocente-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":DOCENTE_ABIERTO" as DOCENTEABIERTO
+package editarDocente as "editarDocente()" {
+    rectangle #629EF9 EditarDocenteView
+    rectangle #b5bd68 DocentesController
+}
+
+rectangle #CDEBA5 ":DOCENTES_ABIERTO" as DOCENTESABIERTO
+
+DOCENTEABIERTO -r-> EditarDocenteView: editarDocente(Id)
+
+EditarDocenteView -d-> DocentesController: actualizarDocente(UpdateDocenteDto)
+
+EditarDocenteView ..> DOCENTEABIERTO: cancelar()
+EditarDocenteView ..r.> DOCENTESABIERTO: docenteActualizado()
+
+@enduml

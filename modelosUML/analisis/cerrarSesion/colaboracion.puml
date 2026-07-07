@@ -1,0 +1,19 @@
+@startuml cerrarSesion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SISTEMA_DISPONIBLE" as SISTEMADISPONIBLE
+package cerrarSesion as "cerrarSesion()" {
+    rectangle #629EF9 CerrarSesionView
+    rectangle #b5bd68 AuthController
+}
+
+rectangle #CDEBA5 ":SESION_CERRADA" as SESIONCERRADA
+
+SISTEMADISPONIBLE -r-> CerrarSesionView: cerrarSesion(Usuario)
+
+CerrarSesionView -d-> AuthController: confirmarCierre(Usuario)
+
+CerrarSesionView ..> SISTEMADISPONIBLE: cancelarCierre()
+CerrarSesionView ..r.> SESIONCERRADA: confirmarCierre()
+
+@enduml

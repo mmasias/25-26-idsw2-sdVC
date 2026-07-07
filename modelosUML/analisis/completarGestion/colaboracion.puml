@@ -1,0 +1,19 @@
+@startuml completarGestion-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":SISTEMA_DISPONIBLE" as SISTEMADISPONIBLE
+package completarGestion as "completarGestion()" {
+    rectangle #629EF9 DashboardView
+    rectangle #b5bd68 AuthStore
+}
+
+rectangle #CDEBA5 ":SISTEMA_DISPONIBLE" as SISTEMADISPONIBLE2
+
+SISTEMADISPONIBLE -r-> DashboardView: completarGestion(Rol)
+
+DashboardView -d-> AuthStore: obtenerOpciones(Rol)
+
+DashboardView ..> SISTEMADISPONIBLE: cancelar()
+DashboardView ..r.> SISTEMADISPONIBLE2: opcionSeleccionada()
+
+@enduml

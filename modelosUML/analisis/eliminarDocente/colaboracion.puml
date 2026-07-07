@@ -1,0 +1,19 @@
+@startuml eliminarDocente-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":DOCENTES_ABIERTO" as DOCENTESABIERTO
+package eliminarDocente as "eliminarDocente()" {
+    rectangle #629EF9 EliminarDocenteView
+    rectangle #b5bd68 DocentesController
+}
+
+rectangle #CDEBA5 ":DOCENTES_ABIERTO" as DOCENTESABIERTO2
+
+DOCENTESABIERTO -r-> EliminarDocenteView: eliminarDocente(Id)
+
+EliminarDocenteView -d-> DocentesController: confirmarEliminacion(Id)
+
+EliminarDocenteView ..> DOCENTESABIERTO: cancelar()
+EliminarDocenteView ..r.> DOCENTESABIERTO2: docenteEliminado()
+
+@enduml

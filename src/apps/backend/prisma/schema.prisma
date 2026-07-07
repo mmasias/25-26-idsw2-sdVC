@@ -1,0 +1,194 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Grado {
+  id          Int          @id @default(autoincrement())
+  titulo      String
+  codigo      String       @unique
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  alumnos     Alumno[]
+  asignaturas Asignatura[]
+}
+
+model Asignatura {
+  id             Int                 @id @default(autoincrement())
+  titulo         String
+  codigo         String
+  cursoAcademico String
+  gradoId        Int
+  profesorId     Int?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  alumnos        AlumnoAsignatura[]
+  grado          Grado               @relation(fields: [gradoId], references: [id])
+  profesor       Profesor?           @relation(fields: [profesorId], references: [id])
+  baterias       BateriaDePreguntas[]
+  examenes       Examen[]
+
+  @@unique([codigo, cursoAcademico])
+  @@index([gradoId], map: "Asignatura_gradoId_fkey")
+  @@index([profesorId], map: "Asignatura_profesorId_fkey")
+}
+
+model Profesor {
+  id          Int          @id @default(autoincrement())
+  nombre      String
+  apellidos   String
+  dni         String       @unique
+  email       String       @unique
+  password    String
+  rol         Rol          @default(DOCENTE)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  asignaturas Asignatura[]
+}
+
+model Alumno {
+  id          Int                @id @default(autoincrement())
+  nombre      String
+  apellidos   String
+  dni         String             @unique
+  email       String             @unique
+  gradoId     Int
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  grado       Grado              @relation(fields: [gradoId], references: [id])
+  asignaturas AlumnoAsignatura[]
+  examenes    AlumnoExamen[]
+
+  @@index([gradoId], map: "Alumno_gradoId_fkey")
+}
+
+model AlumnoAsignatura {
+  alumnoId     Int
+  asignaturaId Int
+  alumno       Alumno     @relation(fields: [alumnoId], references: [id])
+  asignatura   Asignatura @relation(fields: [asignaturaId], references: [id])
+
+  @@id([alumnoId, asignaturaId])
+  @@index([asignaturaId], map: "AlumnoAsignatura_asignaturaId_fkey")
+}
+
+model BateriaDePreguntas {
+  id            Int                        @id @default(autoincrement())
+  nombre        String
+  asignaturaId  Int
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @updatedAt
+  asignatura    Asignatura                 @relation(fields: [asignaturaId], references: [id])
+  preguntas     BateriaDePreguntas_Pregunta[]
+}
+
+model Pregunta {
+  id         Int                        @id @default(autoincrement())
+  enunciado  String
+  tema       String
+  dificultad Dificultad
+  estado     EstadoPregunta             @default(EN_CONSTRUCCION)
+  createdAt  DateTime                   @default(now())
+  updatedAt  DateTime                   @updatedAt
+  examenes   ExamenPregunta[]
+  baterias   BateriaDePreguntas_Pregunta[]
+  respuestas Respuesta[]
+}
+
+model BateriaDePreguntas_Pregunta {
+  bateriaId  Int
+  bateria    BateriaDePreguntas @relation(fields: [bateriaId], references: [id])
+  preguntaId Int
+  pregunta   Pregunta           @relation(fields: [preguntaId], references: [id])
+
+  @@id([bateriaId, preguntaId])
+  @@index([preguntaId], map: "BateriaDePreguntas_Pregunta_preguntaId_fkey")
+}
+
+model Respuesta {
+  id         Int      @id @default(autoincrement())
+  opcion     String
+  esCorrecta Boolean
+  preguntaId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  pregunta   Pregunta @relation(fields: [preguntaId], references: [id])
+
+  @@index([preguntaId], map: "Respuesta_preguntaId_fkey")
+}
+
+model Examen {
+  id              Int              @id @default(autoincrement())
+  evaluacion      Evaluacion
+  claveCorreccion String?
+  estado          EstadoExamen     @default(GENERADO)
+  asignaturaId    Int
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  alumnos         AlumnoExamen[]
+  asignatura      Asignatura       @relation(fields: [asignaturaId], references: [id])
+  preguntas       ExamenPregunta[]
+
+  @@index([asignaturaId], map: "Examen_asignaturaId_fkey")
+}
+
+model ExamenPregunta {
+  examenId   Int
+  preguntaId Int
+  examen     Examen   @relation(fields: [examenId], references: [id])
+  pregunta   Pregunta @relation(fields: [preguntaId], references: [id])
+
+  @@id([examenId, preguntaId])
+  @@index([preguntaId], map: "ExamenPregunta_preguntaId_fkey")
+}
+
+model AlumnoExamen {
+  alumnoId       Int
+  examenId       Int
+  hashAsignacion String?  @unique
+  respuestas     String?
+  nota           Float?
+  pdfUrl         String?
+  createdAt      DateTime @default(now())
+  alumno         Alumno   @relation(fields: [alumnoId], references: [id])
+  examen         Examen   @relation(fields: [examenId], references: [id])
+
+  @@id([alumnoId, examenId])
+  @@index([examenId], map: "AlumnoExamen_examenId_fkey")
+}
+
+enum Dificultad {
+  BAJA
+  MEDIA
+  ALTA
+}
+
+enum Evaluacion {
+  PARCIAL_1
+  PARCIAL_2
+  PARCIAL_3
+  EXAMEN_FINAL
+  EXAMEN_EXTRAORDINARIO
+}
+
+enum EstadoExamen {
+  GENERADO
+  ASIGNADO
+  RESUELTO
+  CORREGIDO
+}
+
+enum EstadoPregunta {
+  EN_CONSTRUCCION
+  HABILITADA
+  INHABILITADA
+}
+
+enum Rol {
+  DOCENTE
+  ADMIN
+}

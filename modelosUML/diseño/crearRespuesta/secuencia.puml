@@ -1,0 +1,71 @@
+@startuml
+title Diagrama de Secuencia - Crear Respuesta (NestJS + Vue 3)
+
+actor "Usuario (Docente)" as User
+participant "PreguntasForm\n(Formulario con tabs)" as ParentForm
+participant "RespuestasView\n(Listado)" as List
+participant "RespuestasForm\n(Formulario)" as Form
+participant "RespuestasController" as Controller
+participant "RespuestasService" as Service
+participant "PrismaService" as Prisma
+participant "Base de Datos\n(SQLite/PostgreSQL)" as DB
+
+note over ParentForm : Modo edición: [Datos] [Respuestas] (activo)\ntodos los tabs activos
+
+User -> ParentForm: Cambia al tab\n[Respuestas]
+activate ParentForm
+
+ParentForm -> List: Carga listado\nde respuestas
+activate List
+
+List -> Form: Abre modal de\nnueva respuesta
+activate Form
+Form --> User: Muestra formulario\n(campo texto) para la\nrespuesta
+
+User -> Form: Rellena respuesta\ny confirma
+Form -> Form: Valida campos
+
+Form -> Controller: POST /api/respuestas\n{ preguntaId, texto, esCorrecta }
+activate Controller
+
+Controller -> Service: create(createRespuestaDto)
+activate Service
+
+== Validar límite de 5 respuestas ==
+Service -> Prisma: respuesta.count({ where: { preguntaId } })
+activate Prisma
+Prisma -> DB: SELECT COUNT Respuesta WHERE preguntaId=?
+activate DB
+DB --> Prisma: count
+deactivate DB
+Prisma --> Service: count
+deactivate Prisma
+
+alt count >= 5
+  Service --> Controller: throw BadRequestException\n"Máximo 5 respuestas"
+  Controller --> Form: 400 Bad Request
+  Form --> User: Muestra "Máximo\n5 respuestas por pregunta"
+else count < 5
+  Service -> Prisma: respuesta.create({ data })
+  activate Prisma
+  Prisma -> DB: INSERT INTO Respuesta
+  activate DB
+  DB --> Prisma: respuesta creada
+  deactivate DB
+  Prisma --> Service: respuesta
+  deactivate Prisma
+
+  Service --> Controller: respuesta creada
+  deactivate Service
+  Controller --> Form: 201 Created\n{ respuesta }
+  deactivate Controller
+
+  Form --> List: Cierra modal y\nnotifica éxito
+  deactivate Form
+  List --> User: Muestra listado\nactualizado
+end
+
+deactivate List
+deactivate ParentForm
+
+@enduml
