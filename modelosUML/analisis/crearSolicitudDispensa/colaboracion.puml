@@ -1,0 +1,17 @@
+﻿@startuml crearSolicitudDispensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Dispensas Abierto" as DispensasAbierto
+
+package crearSolicitudDispensa as "crearSolicitudDispensa()" {
+    rectangle #629EF9 CrearSolicitudDispensaView
+    rectangle #b5bd68 DispensaController
+    rectangle #F2AC4E DispensaRepository
+    rectangle #F2AC4E Dispensa
+}
+
+DispensasAbierto -r-> CrearSolicitudDispensaView: crearSolicitudDispensa()
+CrearSolicitudDispensaView -d-> DispensaController: crearSolicitudDispensa(asignatura, motivo, dias, franjaHoraria, asignaturaSolapada, justificacion)
+DispensaController --> DispensaRepository: create(asignatura, motivo, dias, franjaHoraria, asignaturaSolapada, justificacion)
+DispensaRepository -- Dispensa
+@enduml

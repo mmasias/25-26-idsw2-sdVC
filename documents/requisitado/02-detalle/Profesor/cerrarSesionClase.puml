@@ -1,0 +1,32 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "cerrarSesionClase()" as cerrarSesionClase {
+    state " " as Paso1
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> solicita cerrar la sesión actual
+    end note
+
+    Paso1 -[#green]-> [*]
+    note on link
+      <b>Sistema</b> permite mostrar la hora de finalización
+      y marca la sesión como concluida
+    end note
+}
+
+state "ASISTENCIAS_ABIERTO" as ASISTENCIAS_ABIERTO
+
+cerrarSesionClase -[#blue]---> ASISTENCIAS_ABIERTO
+note right on link
+  abrirAsistencias()
+end note
+
+@enduml

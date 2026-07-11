@@ -1,0 +1,17 @@
+﻿@startuml cerrarSesionClase-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sesion Clase Abierta" as SesionClaseAbierta
+
+package cerrarSesionClase as "cerrarSesionClase()" {
+    rectangle #629EF9 CerrarSesionClaseView
+    rectangle #b5bd68 SesionClaseController
+    rectangle #F2AC4E SesionClaseRepository
+    rectangle #F2AC4E SesionDeClase
+}
+
+SesionClaseAbierta -r-> CerrarSesionClaseView: cerrarSesionClase()
+CerrarSesionClaseView -d-> SesionClaseController: cerrarSesionClase(sesionId)
+SesionClaseController --> SesionClaseRepository: actualizarEstado(CERRADA)
+SesionClaseRepository -- SesionDeClase
+@enduml

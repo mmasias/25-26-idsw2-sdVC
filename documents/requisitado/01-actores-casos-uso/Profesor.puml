@@ -1,0 +1,37 @@
+@startuml
+Title Casos de Uso: Profesor
+left to right direction
+skinparam style strictuml
+
+actor Profesor
+
+package "Módulo Alumnos " {
+    usecase "Abrir alumnos" as AlumnosAbrir
+    usecase "Consultar alumno" as AlumnosConsultar
+}
+
+package "Módulo Asistencias" {
+    usecase "Crear sesión de clase" as AsistenciasCrearSesion
+    usecase "Editar sesión de clase" as AsistenciasEditarSesion
+    usecase "Registrar toma de asistencia" as AsistenciasRegistrarToma
+    usecase "Cerrar sesión de clase" as AsistenciasCerrarSesion
+    usecase "Exportar historial de asistencias" as AsistenciasExportarHistorial
+}
+
+package "Módulo Dispensas" {
+    usecase "Abrir dispensas" as DispensasAbrir
+    usecase "Consultar solicitud de dispensa" as DispensasConsultar
+}
+
+Profesor --> AlumnosAbrir
+Profesor --> AlumnosConsultar
+
+Profesor --> AsistenciasCrearSesion
+Profesor --> AsistenciasEditarSesion
+Profesor --> AsistenciasRegistrarToma
+Profesor --> AsistenciasCerrarSesion
+Profesor --> AsistenciasExportarHistorial
+
+Profesor --> DispensasAbrir
+Profesor --> DispensasConsultar
+@enduml

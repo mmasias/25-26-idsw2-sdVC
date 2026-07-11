@@ -1,1 +1,3 @@
-Carpeta con los códigos fuentes en plantUML de los diagramas presentados.
+# Modelos UML
+
+Fuentes PlantUML (`.puml`) de todos los diagramas del proyecto.

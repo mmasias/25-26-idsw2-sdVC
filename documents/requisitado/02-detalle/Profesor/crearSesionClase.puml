@@ -1,0 +1,48 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "crearSesionClase()" as crearSesionClase {
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> solicita crear una nueva sesión de clase
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite introducir los datos de la sesión
+      <b>Profesor</b> introduce la información requerida:
+      • Asignatura y Fecha de Sesión
+      • Hora de Inicio, Hora de Fin y Tipo de Sesión
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Sistema</b> permite mostrar el resumen de la nueva clase
+      <b>Profesor</b> solicita iniciar la sesión
+      • Permite solicitar cancelar creación
+    end note
+}
+
+state "SESION_CLASE_ABIERTA" as SESION_CLASE_ABIERTA
+state "ASISTENCIAS_ABIERTO" as ASISTENCIAS_ABIERTO
+
+crearSesionClase -[#green]---> SESION_CLASE_ABIERTA
+note right on link
+  registrarTomaAsistencia()
+end note
+
+crearSesionClase -[#blue]---> ASISTENCIAS_ABIERTO
+note right on link
+  abrirAsistencias()
+end note
+
+@enduml

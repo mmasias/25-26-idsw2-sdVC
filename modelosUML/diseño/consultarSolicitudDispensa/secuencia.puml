@@ -1,0 +1,63 @@
+@startuml consultarSolicitudDispensa-diseno-secuencia
+
+title Diagrama de Secuencia - Consultar Solicitud de Dispensa (Vue 3 + Express + Prisma)
+
+actor "Usuario" as Usuario
+participant "Frontend\n(Vue 3)" as Frontend
+participant "DispensaController" as Controller
+participant "DispensaService" as Service
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Usuario -> Frontend : accede a consultar solicitudes de dispensa
+activate Frontend
+
+Frontend -> Controller : GET /api/dispensas
+activate Controller
+
+note over Controller
+  Filtra según rol del usuario:
+  • Alumno → sus propias dispensas
+  • Profesor → dispensas de sus alumnos
+  • Secretaria → todas las dispensas
+  • DirectorDeGrado → dispensas de su grado
+end note
+
+Controller -> Service : getDispensas(usuarioId, rol)
+activate Service
+
+Service -> DB : SELECT * FROM Dispensa\n(con filtros según rol)
+activate DB
+DB --> Service : dispensas : Dispensa[]
+deactivate DB
+
+Service --> Controller : dispensas : Dispensa[]
+deactivate Service
+
+Controller --> Frontend : 200 OK { dispensas }
+deactivate Controller
+
+Frontend --> Usuario : muestra lista de solicitudes
+
+Usuario -> Frontend : selecciona una solicitud (dispensaId)
+
+Frontend -> Controller : GET /api/dispensas/:dispensaId
+activate Controller
+
+Controller -> Service : getDispensa(dispensaId)
+activate Service
+
+Service -> DB : SELECT * FROM Dispensa WHERE id = ?
+activate DB
+DB --> Service : dispensa : Dispensa
+deactivate DB
+
+Service --> Controller : dispensa : Dispensa
+deactivate Service
+
+Controller --> Frontend : 200 OK { dispensa }
+deactivate Controller
+
+Frontend --> Usuario : muestra detalle de la solicitud
+deactivate Frontend
+
+@enduml

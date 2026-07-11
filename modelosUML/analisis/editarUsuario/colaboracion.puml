@@ -1,0 +1,19 @@
+﻿@startuml editarUsuario-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Usuario Detalle Abierto" as UsuarioDetalleAbierto
+
+package editarUsuario as "editarUsuario()" {
+    rectangle #629EF9 EditarUsuarioView
+    rectangle #b5bd68 UsuarioController
+    rectangle #F2AC4E UsuarioRepository
+    rectangle #F2AC4E Usuario
+}
+
+UsuarioDetalleAbierto -r-> EditarUsuarioView: editarUsuario()
+EditarUsuarioView -d-> UsuarioController: obtenerUsuario(usuarioId)
+UsuarioController --> UsuarioRepository: findById(usuarioId)
+UsuarioRepository -- Usuario
+EditarUsuarioView -d-> UsuarioController: editarUsuario(usuarioId, nombres, apellidos, correo, rol, estado)
+UsuarioController --> UsuarioRepository: update(usuarioId, datos)
+@enduml

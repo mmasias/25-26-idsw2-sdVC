@@ -1,0 +1,24 @@
+﻿@startuml editarSesionClase-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Sesion Clase Abierta" as SesionClaseAbierta
+
+package editarSesionClase as "editarSesionClase()" {
+    rectangle #629EF9 EditarSesionClaseView
+    rectangle #b5bd68 SesionClaseController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E SesionClaseRepository
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E SesionDeClase
+}
+
+SesionClaseAbierta -r-> EditarSesionClaseView: editarSesionClase()
+EditarSesionClaseView -d-> SesionClaseController: obtenerSesion(sesionId)
+SesionClaseController --> SesionClaseRepository: findById(sesionId)
+SesionClaseRepository -- SesionDeClase
+EditarSesionClaseView -d-> SesionClaseController: cargarAsignaturas(profesorId)
+SesionClaseController --> AsignaturaRepository: findByProfesor(profesorId)
+AsignaturaRepository -- Asignatura
+EditarSesionClaseView -d-> SesionClaseController: editarSesionClase(sesionId, asignaturaId, fecha, horaInicio, horaFin, tipo)
+SesionClaseController --> SesionClaseRepository: update(sesionId, datos)
+@enduml

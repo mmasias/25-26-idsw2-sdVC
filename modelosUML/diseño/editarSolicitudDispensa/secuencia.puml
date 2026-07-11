@@ -1,0 +1,60 @@
+@startuml editarSolicitudDispensa-diseno-secuencia
+
+title Diagrama de Secuencia - Editar Solicitud de Dispensa (Vue 3 + Express + Prisma)
+
+actor "Usuario" as Usuario
+participant "Frontend\n(Vue 3)" as Frontend
+participant "DispensaController" as Controller
+participant "DispensaService" as Service
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Usuario -> Frontend : accede a editar solicitud de dispensa (dispensaId)
+activate Frontend
+
+Frontend -> Controller : GET /api/dispensas/:dispensaId
+activate Controller
+
+Controller -> Service : getDispensa(dispensaId)
+activate Service
+
+Service -> DB : SELECT * FROM Dispensa WHERE id = ?
+activate DB
+DB --> Service : dispensa : Dispensa
+deactivate DB
+
+Service --> Controller : dispensa : Dispensa
+deactivate Service
+
+Controller --> Frontend : 200 OK { dispensa }
+deactivate Controller
+
+Frontend --> Usuario : muestra formulario con datos actuales
+
+note over Usuario
+  Alumno / Secretaria: edita motivo y documentación
+  DirectorDeGrado: edita estado y observaciones
+end note
+
+Usuario -> Frontend : modifica datos y confirma
+
+Frontend -> Controller : PUT /api/dispensas/:dispensaId\n{ datos }
+activate Controller
+
+Controller -> Service : editarSolicitudDispensa(dispensaId, datos)
+activate Service
+
+Service -> DB : UPDATE Dispensa SET ...\nWHERE id = ?
+activate DB
+DB --> Service : dispensa : Dispensa
+deactivate DB
+
+Service --> Controller : dispensa : Dispensa
+deactivate Service
+
+Controller --> Frontend : 200 OK { dispensa }
+deactivate Controller
+
+Frontend --> Usuario : solicitud actualizada correctamente
+deactivate Frontend
+
+@enduml

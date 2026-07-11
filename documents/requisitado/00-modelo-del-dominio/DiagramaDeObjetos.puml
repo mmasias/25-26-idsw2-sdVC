@@ -1,0 +1,58 @@
+@startuml
+title Diagrama de Objetos
+skinparam style strictuml
+
+' --- INSTANCIACIÓN DE OBJETOS ---
+
+object "alumno1:Alumno" as alumno1 {
+    nombre = "Pedro Perez"
+    codigo = "A001"
+}
+
+object "matricula1:Matricula" as matricula1 {
+    fecha = "2024-09-01"
+    estado = "Vigente"
+}
+
+object "grado1:Grado" as grado1 {
+    nombre = "Ingeniería Informática"
+    codigo = "GII"
+}
+
+object "asignatura1:Asignatura" as asignatura1 {
+    nombre = "Lenguajes de Programación"
+    codigo = "LP101"
+    creditos = 6
+}
+
+object "sesion1:SesionDeClase" as sesion1 {
+    fecha = "2024-11-15"
+    hora = "10:00"
+    aula = "A-301"
+    estado = "Programada"
+}
+
+object "asistencia1:Asistencia" as asistencia1 {
+    fecha = "2024-11-15"
+    presente = true
+}
+
+object "dispensa1:Dispensa" as dispensa1 {
+    motivo = "Clases Solapadas"
+    fechaSolicitud = "2024-11-14"
+    estado = "Aprobada"
+}
+
+' --- RELACIONES EN UN ESCENARIO CONCRETO ---
+
+alumno1 --> matricula1 : Realiza
+alumno1 --> dispensa1 : Solicita
+
+matricula1 --> grado1 : Pertenece a
+
+asignatura1 --> grado1 : Pertenece a
+asignatura1 *-- sesion1 : Tiene
+
+sesion1 *-- asistencia1 : Registra
+dispensa1 --> sesion1 : Exime de
+@enduml

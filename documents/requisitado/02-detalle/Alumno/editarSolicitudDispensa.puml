@@ -1,0 +1,49 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "editarSolicitudDispensa()" as editarSolicitudDispensa {
+
+    ' Estados anónimos vacíos para simular los pasos
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Alumno</b> solicita editar la solicitud de dispensa
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite mostrar los datos actuales de la solicitud
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Alumno</b> proporciona datos actualizados
+      • Asignatura, Tipo/Motivo, Día(s), Franja horaria
+      • Asignatura solapada, Justificación, Documento adjunto
+      <b>Sistema</b> permite editar la solicitud
+      • Permite solicitar guardar cambios
+      • Permite solicitar cerrar solicitud
+    end note
+}
+
+state "DISPENSAS_ABIERTO" as DISPENSAS_ABIERTO
+
+editarSolicitudDispensa -[#green]---> DISPENSAS_ABIERTO
+note right on link
+  abrirDispensas()
+end note
+
+editarSolicitudDispensa -[#blue]---> DISPENSAS_ABIERTO
+note right on link
+  cancelar edición
+end note
+
+@enduml

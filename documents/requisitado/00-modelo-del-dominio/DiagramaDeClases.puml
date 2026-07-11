@@ -1,0 +1,23 @@
+@startuml
+title Modelo de dominio
+skinparam style strictuml
+
+class Alumno
+class Matricula
+class Asignatura
+class Dispensa
+class Asistencia
+class SesionDeClase
+class Grado
+
+Alumno --> Matricula : Tiene
+Alumno --> Dispensa : Solicita
+
+Matricula --> Grado : Pertenece a
+
+Asignatura --> Grado : Pertenece a
+Asignatura *-- SesionDeClase : Tiene
+
+SesionDeClase *-- Asistencia : Registra
+Dispensa --> SesionDeClase : Exime de
+@enduml

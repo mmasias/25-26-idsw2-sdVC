@@ -1,0 +1,60 @@
+@startuml crearSolicitudDispensa-diseno-secuencia
+
+title Diagrama de Secuencia - Crear Solicitud de Dispensa (Vue 3 + Express + Prisma)
+
+actor "Usuario" as Usuario
+participant "Frontend\n(Vue 3)" as Frontend
+participant "DispensaController" as Controller
+participant "DispensaService" as Service
+database "Base de Datos\n(PostgreSQL)" as DB
+
+Usuario -> Frontend : accede a crear solicitud de dispensa
+activate Frontend
+
+Frontend -> Controller : GET /api/dispensas/datos
+activate Controller
+
+Controller -> Service : getDatosCrearDispensa(usuarioId, rol)
+activate Service
+
+Service -> DB : SELECT * FROM Asignatura\n(y Alumno si rol=Secretaria)
+activate DB
+DB --> Service : datos
+deactivate DB
+
+Service --> Controller : datos
+deactivate Service
+
+Controller --> Frontend : 200 OK { datos }
+deactivate Controller
+
+Frontend --> Usuario : muestra formulario
+
+note over Usuario
+  Alumno: selecciona asignatura propia
+  Secretaria: selecciona alumno y asignatura
+end note
+
+Usuario -> Frontend : rellena datos y envía\n(alumnoId, asignaturaId, periodo, horario, motivo)
+
+Frontend -> Controller : POST /api/dispensas\n{ alumnoId, asignaturaId, periodo, horario, motivo }
+activate Controller
+
+Controller -> Service : crearSolicitudDispensa(alumnoId, asignaturaId, periodo, horario, motivo)
+activate Service
+
+Service -> DB : INSERT INTO Dispensa\n(alumnoId, asignaturaId, periodo, horario, motivo,\nestado='PENDIENTE')
+activate DB
+DB --> Service : dispensa : Dispensa
+deactivate DB
+
+Service --> Controller : dispensa : Dispensa
+deactivate Service
+
+Controller --> Frontend : 201 Created { dispensa }
+deactivate Controller
+
+Frontend --> Usuario : solicitud creada correctamente
+deactivate Frontend
+
+@enduml

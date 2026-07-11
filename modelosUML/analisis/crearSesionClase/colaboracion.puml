@@ -1,0 +1,22 @@
+﻿@startuml crearSesionClase-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Asistencias Abierto" as AsistenciasAbierto
+
+package crearSesionClase as "crearSesionClase()" {
+    rectangle #629EF9 CrearSesionClaseView
+    rectangle #b5bd68 SesionClaseController
+    rectangle #F2AC4E AsignaturaRepository
+    rectangle #F2AC4E SesionClaseRepository
+    rectangle #F2AC4E Asignatura
+    rectangle #F2AC4E SesionDeClase
+}
+
+AsistenciasAbierto -r-> CrearSesionClaseView: crearSesionClase()
+CrearSesionClaseView -d-> SesionClaseController: cargarAsignaturas(profesorId)
+SesionClaseController --> AsignaturaRepository: findByProfesor(profesorId)
+AsignaturaRepository -- Asignatura
+CrearSesionClaseView -d-> SesionClaseController: crearSesionClase(asignaturaId, fecha, horaInicio, horaFin, tipo)
+SesionClaseController --> SesionClaseRepository: create(asignaturaId, fecha, horaInicio, horaFin, tipo)
+SesionClaseRepository -- SesionDeClase
+@enduml

@@ -1,0 +1,19 @@
+﻿@startuml editarSolicitudDispensa-analisis
+skinparam linetype polyline
+
+rectangle #CDEBA5 ":Solicitud Dispensa Abierta" as SolicitudDispensaAbierta
+
+package editarSolicitudDispensa as "editarSolicitudDispensa()" {
+    rectangle #629EF9 EditarSolicitudDispensaView
+    rectangle #b5bd68 DispensaController
+    rectangle #F2AC4E DispensaRepository
+    rectangle #F2AC4E Dispensa
+}
+
+SolicitudDispensaAbierta -r-> EditarSolicitudDispensaView: editarSolicitudDispensa()
+EditarSolicitudDispensaView -d-> DispensaController: obtenerDispensa(dispensaId)
+DispensaController --> DispensaRepository: findById(dispensaId)
+DispensaRepository -- Dispensa
+EditarSolicitudDispensaView -d-> DispensaController: editarSolicitudDispensa(dispensaId, datos)
+DispensaController --> DispensaRepository: update(dispensaId, datos)
+@enduml

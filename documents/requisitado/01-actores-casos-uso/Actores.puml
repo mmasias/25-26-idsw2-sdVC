@@ -1,0 +1,49 @@
+@startuml Actores
+title Actores del Sistema
+skinparam style strictuml
+
+left to right direction
+
+actor Alumno
+actor Profesor
+actor DirectorDeGrado as Director
+actor SecretariaAcademica as Secretaria
+actor Administrador as Admin
+
+' Única relación de herencia válida en el negocio
+Profesor <|-- Director
+
+note right of Alumno
+  **Alumno:**
+  Solicita y consulta sus 
+  propias solicitudes de dispensa.
+end note
+
+note right of Profesor
+  **Profesor:**
+  Gestiona sesiones de clase,
+  registra toma de asistencia y 
+  consulta expedientes de alumnos.
+end note
+
+note right of Director
+  **Director de Grado:**
+  Hereda las funciones del Profesor.
+  Revisa, evalúa y guarda la decisión 
+  final sobre las dispensas.
+end note
+
+note right of Secretaria
+  **Secretaría Académica:**
+  Importa y gestiona matrículas,
+  alumnos y dispensas. Ejecuta el
+  cierre del ciclo académico.
+end note
+
+note right of Admin
+  **Administrador:**
+  Gestiona el ciclo de vida de los
+  usuarios, asignación de roles y la
+  configuración global del sistema.
+end note
+@enduml
