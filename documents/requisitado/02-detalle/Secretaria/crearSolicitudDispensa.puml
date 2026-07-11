@@ -1,0 +1,49 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "crearSolicitudDispensa()" as crearSolicitudDispensa {
+   
+    state " " as Paso1
+    state " " as Paso2
+   
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Secretaría</b> solicita crear solicitud de dispensa
+    end note
+   
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite introducir datos de la solicitud:
+      • Alumno Solicitante y Asignatura de la dispensa
+      • Tipo/Motivo, Día(s) y Franja horaria afectada
+      • Asignatura solapada, Justificación y Documento adjunto
+    end note
+   
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Secretaría</b> introduce datos de la solicitud
+      <b>Sistema</b> permite crear solicitud
+      • Permite solicitar confirmar creación
+      • Permite solicitar cancelar operación
+    end note
+}
+
+state "SOLICITUD_DISPENSA_ABIERTA" as SOLICITUD_DISPENSA_ABIERTA
+state "DISPENSAS_ABIERTO" as DISPENSAS_ABIERTO
+
+crearSolicitudDispensa -[#green]---> SOLICITUD_DISPENSA_ABIERTA
+note right on link
+  editarSolicitudDispensa()
+end note
+
+crearSolicitudDispensa -[#blue]---> DISPENSAS_ABIERTO
+note right on link
+  cancelar operación
+end note
+@enduml

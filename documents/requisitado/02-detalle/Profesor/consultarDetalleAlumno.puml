@@ -1,0 +1,42 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "consultarDetalleAlumno()" as consultarDetalleAlumno {
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> solicita consultar el detalle de un alumno específico
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite mostrar la ficha completa del alumno:
+      • Nombres Completos y Asignatura Actual
+      • Porcentaje de Asistencia y Faltas Injustificadas
+      • Sesiones Dispensadas
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Profesor</b> revisa la información del alumno
+      <b>Sistema</b> permite mantener los datos en pantalla
+      • Permite solicitar volver al listado
+    end note
+}
+
+state "ALUMNOS_ABIERTO" as ALUMNOS_ABIERTO
+
+consultarDetalleAlumno -[#blue]---> ALUMNOS_ABIERTO
+note right on link
+  abrirAlumnos()
+end note
+
+@enduml

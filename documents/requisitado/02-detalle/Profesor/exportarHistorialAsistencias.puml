@@ -1,0 +1,41 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "exportarHistorialAsistencias()" as exportarHistorialAsistencias {
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> solicita descargar el registro de asistencias
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite configurar los parámetros:
+      • Asignatura y Rango de Fechas
+      • Formato de Archivo (Excel, PDF)
+      <b>Profesor</b> solicita la generación
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Sistema</b> procesa los datos y genera el archivo
+      <b>Profesor</b> solicita descargar el archivo
+    end note
+}
+
+state "ASISTENCIAS_ABIERTO" as ASISTENCIAS_ABIERTO
+
+exportarHistorialAsistencias -[#blue]---> ASISTENCIAS_ABIERTO
+note right on link
+  abrirAsistencias()
+end note
+
+@enduml

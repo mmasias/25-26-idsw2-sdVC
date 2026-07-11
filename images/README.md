@@ -1,6 +1,3 @@
-Carpeta para incluir las imágenes que considere oportunas.
+# Imágenes SVG
 
-# FORMATO
-
-- .svg para diagramas
-- .png para imágenes
+SVGs exportados de los diagramas PlantUML.

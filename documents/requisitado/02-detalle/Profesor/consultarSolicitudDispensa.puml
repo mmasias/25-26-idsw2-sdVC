@@ -1,0 +1,41 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "consultarSolicitudDispensa()" as consultarSolicitudDispensa {
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> solicita consultar el detalle de una solicitud específica
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite mostrar todos los datos de la solicitud:
+      • Alumno solicitante y motivo
+      • Estado actual y documentación adjunta
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Profesor</b> revisa la información de la solicitud
+      <b>Sistema</b> permite mantener los datos en pantalla
+      • Permite solicitar cerrar solicitud y volver
+    end note
+}
+
+state "DISPENSAS_ABIERTO" as DISPENSAS_ABIERTO
+
+consultarSolicitudDispensa -[#blue]---> DISPENSAS_ABIERTO
+note right on link
+  abrirDispensas()
+end note
+
+@enduml

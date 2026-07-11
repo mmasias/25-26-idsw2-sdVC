@@ -1,0 +1,42 @@
+@startuml
+skinparam nodesep 60
+skinparam ranksep 60
+skinparam linetype polyline
+skinparam NoteBackgroundColor lightyellow
+skinparam NoteBorderColor gray
+skinparam StateBackgroundColor #F5F5F5
+skinparam StateBorderColor gray
+
+state "editarSesionClase()" as editarSesionClase {
+    state " " as Paso1
+    state " " as Paso2
+
+    [*] -[#green]-> Paso1
+    note on link
+      <b>Profesor</b> se encuentra en una sesión activa
+      y solicita modificar los detalles de la clase
+    end note
+
+    Paso1 -[#green]-> Paso2
+    note on link
+      <b>Sistema</b> permite introducir los nuevos datos
+      <b>Profesor</b> introduce las modificaciones:
+      • Asignatura y Fecha de Sesión
+      • Hora de Inicio, Hora de Fin y Tipo de Sesión
+    end note
+
+    Paso2 -[#green]-> [*]
+    note on link
+      <b>Sistema</b> permite mostrar los cambios para confirmación
+      <b>Profesor</b> solicita guardar los cambios
+    end note
+}
+
+state "SESION_CLASE_ABIERTA" as SESION_CLASE_ABIERTA
+
+editarSesionClase -[#blue]---> SESION_CLASE_ABIERTA
+note right on link
+  cerrarSesiónClase()
+end note
+
+@enduml

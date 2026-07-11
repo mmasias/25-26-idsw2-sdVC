@@ -1,0 +1,21 @@
+@startuml DiagramaDeCasosDeUsoDirectorDeGrado
+Title Casos de Uso: Director de Grado
+left to right direction
+skinparam style strictuml
+
+actor Profesor
+actor DirectorDeGrado
+
+' Herencia operativa: El Director hereda los casos de uso del Profesor
+Profesor <|-- DirectorDeGrado
+
+package "Módulo Dispensas" {
+    usecase "Abrir dispensas" as AbrirDispensas
+    usecase "Consultar solicitudes de dispensa" as ConsultarSolicitudesDispensa
+    usecase "Editar solicitud de dispensa" as EditarSolicitudDispensa
+}
+
+DirectorDeGrado --> AbrirDispensas
+DirectorDeGrado --> ConsultarSolicitudesDispensa
+DirectorDeGrado --> EditarSolicitudDispensa
+@enduml
