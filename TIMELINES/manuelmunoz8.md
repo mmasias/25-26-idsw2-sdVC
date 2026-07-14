@@ -1,7 +1,7 @@
 # Timeline - manuelmunoz8
 
 > Repo: [manuelmunoz8/25-26-idsw2-sdVC](https://github.com/manuelmunoz8/25-26-idsw2-sdVC)
-> Commits: 74 | Días activos: 11 | Sesiones log: 9
+> Commits: 99 | Días activos: 5 | Sesiones log: 9
 
 ## Patrón observado
 
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Commits propios | 74 (24 feat / 39 fix / 11 other) |
-| Ratio fix/feat | 1.62 |
-| Días activos | 11 |
+| Commits propios | 99 (30 feat / 50 fix / 19 other) |
+| Ratio fix/feat | 1.66 |
+| Días activos | 5 |
 | Sesiones documentadas | 9 |
 | Sesiones sin fecha en log | 9 |
 
@@ -23,219 +23,176 @@ gantt
     dateFormat YYYY-MM-DD
     axisFormat %d/%m
     section Artefactos
-        Inicio       :milestone, 2026-05-19, 0d
-        UML          :done, 2026-05-30, 2026-06-12
-        Analisis     :done, 2026-05-30, 2026-06-12
-        Diseno       :done, 2026-05-30, 2026-06-12
-        Desarrollo   :done, 2026-05-30, 2026-06-12
-        Codigo       :done, 2026-05-30, 2026-06-12
+        Inicio       :milestone, 2026-06-12, 0d
+        UML          :done, 2026-05-19, 2026-07-14
+        Analisis     :done, 2026-05-30, 2026-07-14
+        Diseno       :done, 2026-05-30, 2026-07-14
+        Desarrollo   :done, 2026-05-30, 2026-07-14
+        Codigo       :done, 2026-06-03, 2026-07-14
 ```
 
 ## Trazabilidad por caso de uso
 
 <div align="center">
 
-| Caso de uso | D12 |
-|---|:---:|
-| `casosDeUsos` | AD |
-| `imagenes` | A |
+| Caso de uso | D-12 | D32 |
+|---|:---:|:---:|
+| `casosDeUsos` | AD |   |
+| `imagenes` | A | D |
 
 </div>
 
 ---
 
-## Día 3 · 2026-05-21
+## Día 1 · 2026-06-12
 
-### Commits (1: 0 feat / 0 fix)
+### Commits (3: 1 feat / 2 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 13:17 | [QUE_HACE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c0274187926a7d042b97ebceda22785bb93d09f4) |
+| 23:12 | [fix: index.ts importaciones fix](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/cfb87ce8ff3feb8db1fc9f1f36eb559126a3397e) |
+| 23:09 | [fix: rutas relativas de importaciones](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/bd2b850c1275e06248662919a628ccf7ecc1ea87) |
+| 23:09 | [feat: ignorar modulos de dtos copiados en compilacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4579740901fdaff56bed089a325c2973b1731634) |
 
 > ⚠️ Commits sin entrada en log
 
 ---
 
-## Día 7 · 2026-05-25
+## Día 2 · 2026-06-13
 
-### Commits (15: 8 feat / 6 fix)
+### Commits (26: 8 feat / 18 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 20:46 | [fix: Problemas de url con bases de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9344708ba17a13232908a34a05a50d64f056436c) |
-| 20:13 | [fix: error de sintaxis](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/46409e39600e5002315ac92bae8111a902dd1520) |
-| 20:08 | [fix: conflictos entre modules y servicio de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/23bc14430440b7f62b46452e6b60e9f3bb227f56) |
-| 20:03 | [feat: scaffolding para servicios externos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/81d3bd33a075152e938d97c5f706c1529ddbf990) |
-| 20:03 | [feat: update de decisinoes de arquitectura](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e42af77f8da18b93ba47e1d91e2eca106c87e5bd) |
-| 20:02 | [fix: eliminacion de duplicado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/889781a58ca2227c430ba6d6601765999fc73beb) |
-| 19:59 | [feat: configuracion para github pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/10c5419455812bff8cb38daf5a5fb0a66d5dc1f5) |
-| 19:31 | [Configure GitHub Actions for frontend deployment](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/72d806aa4a50d72ea89d7911899b636906d4b116) |
-| 18:49 | [fix: corregir hora en logs de conversacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/cb86531d2ebc31e3b1b358f1ea767cd6c13ae25e) |
-| 18:40 | [feat: agregacion de referencias a .md dentro de conversation log](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/87e6a79a525743773c87d8b7fc29c844326a4a0d) |
-| 16:25 | [fix: Hora de logs](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9a3edcc5cf04151ece73984e66a41b812c4a3483) |
-| 16:22 | [feat: arreglo del formato de conversation-log](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/df50fbea5b7c092777779f14d80354389658dcfd) |
-| 16:21 | [feat: eleccion de tecnologias para frontend y backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f9031a74424ebebbc20b3b4b8c213aa65e47a615) |
-| 15:51 | [feat: Creacion de reglas para gemini CLI](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c3c5ed12ef89919a726a954df6e141dfd0903984) |
-| 15:47 | [feat: agregacion del modelo del domino](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c77ec85f69a5a0b21be623c4e4163c3a987a52d9) |
+| 00:33 | [fix: logs de cookie a token](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/728847a31c84d25112d8215df0e2b740d5f253e8) |
+| 00:21 | [fix: Cambio de metodo de authenticacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2ebd91fcb15a8c7c23e7629a9d35868d1e2cac83) |
+| 23:57 | [fix: envio de cookies al servicio de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/28e97e7124a210fadd7f729088456d92c4d76425) |
+| 23:53 | [fix: errores de tipado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1c7964137cc54406257a404cae56d56eab113c0e) |
+| 23:50 | [feat: logs para ver peticiones al server](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f6a414b30abc9cd5d78ec0d5a3aae4447f9e96b5) |
+| 23:44 | [fix: isolacion de request de cors a solo cloudflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f86583ddcbb1c2e5d086fcdd7fff4a85c40f2d82) |
+| 23:17 | [fix: dependencia circular](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9b34fb2cb447095f904f2e1aa8577c4f00a9bdfc) |
+| 23:03 | [fix: autenticacion de usuario para validar solicitudes de eliminacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/bd791a845bcaedfd1899e864046757185c6e7362) |
+| 22:48 | [feat: logs para peticiones get](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/88fe800363c97440c209e26728e924e5dc925b1a) |
+| 22:38 | [feat: logs para ver funcionamiento de API](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2b0ed5722501618bd21a744fbc6ee25390b265b5) |
+| 22:32 | [fix: acceso a campos para solicitudes de eliminacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5804242d1611e3e8cabc4bb7762eb31d72f52ef8) |
+| 21:58 | [fix: rutas de peticiones a API](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f7cfdceb6b82a2591a25d31d570d9f21d4b4c4d2) |
+| 21:11 | [feat: solicitar eliminacion de perfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a9f0ef0d035929d09a06badb735aaef6414e0ce0) |
+| 21:00 | [fix: guardado de campo department en DB](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c3834ceeba975af2500715d7643f207e81b30ad8) |
+| 20:26 | [fix: eliminacion de archivos estaticos de .d.ts](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/b24cb2a1cce9f99e35474c6b54a13e2c21af9999) |
+| 20:02 | [fix: eliminacion de conflictos de dtos en render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a899186055cfc6321f1f806f204e93371b3159a3) |
+| 19:51 | [fix(backend): improve prebuild script to ensure DTO synchronization](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/028ef9f45b8a6f6674200dd2753308b94cafa02e) |
+| 19:46 | [fix: campo de departamento para creacion de usuarios](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/36c57914323c8298b8f05c7396374598ede7f06d) |
+| 19:35 | [fix(shared): export CreateUserDto in shared index](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8e1587de13583ddf4205a065818370b507981500) |
+| 19:13 | [feat: Dto para crear usuarios](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/dd246b69cd7f230ecd0391a36f0e49f3ccdf83f0) |
+| 19:04 | [fix: mensaje de error con correos duplicados](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0ce4d89d0e5becc6c59efe020835a14f448df7ba) |
+| 14:27 | [feat: campo para elegir tipo de usuario a crear](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ba407b1703f4697a3a596388b6d8d0899ff74af3) |
+| 13:51 | [fix: eliminacion de duplicado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/b93c4251cca569892a418b038f875802d30bf67e) |
+| 13:43 | [feat: creacion de investigador](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f92b07d20737240b0b652ab36d19b4ffa5c94593) |
+| 13:26 | [feat: Mensajes de errores al no encontrar investigador](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c9840d1f73cd27bc03181980ab5eeca128dcb390) |
+| 12:56 | [fix: filtro para obtener investigadores](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4881cdf143d6b980ecd01193da9e98b3f1f8113a) |
 
 > ⚠️ Commits sin entrada en log
 
 ---
 
-## Día 8 · 2026-05-26
+## Día 3 · 2026-06-14
 
-### Commits (11: 2 feat / 9 fix)
+### Commits (44: 16 feat / 27 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 21:58 | [fix: point SPA fallback to root to avoid .html stripping loop](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2370176f7d1f49da70885373ddcacba943e5a6c8) |
-| 21:53 | [fix: disable html_handling to resolve infinite loop in Workers Assets](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ba9f4e856aa05d20c3078714a273a0c4ee90d566) |
-| 21:47 | [fix: break infinite loop in _redirects for Workers Assets](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/db788b682c72ec66e1e4e264c94f5e93e5e03755) |
-| 21:36 | [fix: resolve infinite loop in _redirects for cloudflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/cb1f77d18c07b34e476bde3e920f4c7dbe31bdd7) |
-| 21:30 | [feat: add wrangler.jsonc for automated cloudflare deployment](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ee3d735a65235e06e5da24d3f4e4972615a79e93) |
-| 21:24 | [fix: modernize tsconfig to avoid TS 7.0 deprecations](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/803705e1cd9e900b4b7077c103e5337130b71a0f) |
-| 21:18 | [fix:  sync frontend lockfile for cloudflare deploy](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/cb880caf4f6544707765749df598c7171eed340a) |
-| 21:01 | [feat: interfaz para cloudfare pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e5c6e26f16c52b78cbe8268336e151ce49d23057) |
-| 21:01 | [fix: incompatibilidad de URI entre Render y Supabase](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5dc1e86548fb8551e020ed073e2a937b481e2df0) |
-| 20:01 | [fix: connecion de base de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2dbe30e5aea12beb00265cdedbc6126f5acb719c) |
-| 19:42 | [fix: migracion a servicio de claudefare pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2270e36da9cc108be2e1cf7d0648b2394a3ef2df) |
+| 00:44 | [fix: importacion faltante](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/bb28fa88ae41cc118e2bb6ab2f91c3c26136f3e2) |
+| 00:40 | [feat: funcionalidad de eliminacion de recompensa](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/763700acf26f761f053ba75b2621541f61d7cd8a) |
+| 00:31 | [feat: funcionalidad de editar recompensa](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0db69dc823625b3692ed567e91ba663762038eb8) |
+| 00:21 | [fix: unificacion de campos con el backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d2b749f777c4fe7ac6af9b321c0a9cfb210bf654) |
+| 00:11 | [fix: fallos en despliegues](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/07e03f512f7d65ea4706a72fd374e3f483a43e95) |
+| 00:07 | [feat: creacion de recompensas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/53b18e6360ed8bb68bf37b4e6f2fc03a5cb852e2) |
+| 23:56 | [fix: campo de department en dto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1b342eebbf4213cc272a4396e7d2f81f70190b4e) |
+| 23:48 | [fix: campo de departamento no se guardaba](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e3afa1474509425ae6f7226b647f5e02369f6734) |
+| 23:36 | [fix: refactor de funcion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8519b3dd7ab832b0a9402e765435c5e5118eeb42) |
+| 23:32 | [prueba de renderizado de informacion de publicacion de usuario](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3f909b1dfb0b8453a58a8020f14b12fafe368021) |
+| 23:21 | [fix: renderizado de publicaciones](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/66c964aa96d579bcee79d098c8039cbe67945cd4) |
+| 23:08 | [fix: acceso a campos de respuesta de API](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3dd1e3daaa5bec9e0a1ef734698a003e158a783f) |
+| 23:02 | [fix: error de renderizado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/902e9cc72e41f51e80abc9f1209d453859e27102) |
+| 22:53 | [fix: errores de hooks](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ccb90f71079ebcb0b7ab12b19dc4afb38d6d3619) |
+| 22:44 | [fix: uso de servicios y tipado de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a4889119412472228bee4339385bead143924277) |
+| 22:34 | [fix: hook para id de author al crear publicacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6d5d92b9742bf8c301108e602a8a233da364deb2) |
+| 22:22 | [fix: dependencias no reconocidas por render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/91478443f582b2e21c7887c01dda6ca35c8d68ef) |
+| 22:15 | [feat: gestion de publicaciones](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/7690cb73e586b0b45782e1825c4bb9aa7a8d430c) |
+| 18:09 | [fix: soft delete en entregables](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/57974863fc1cb2de8a5d9f5e83a66ad19d991b60) |
+| 17:53 | [fix: llamada de API a entregables de proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/b2ecec0b9d5bcf57085b0bc334eab16a31efc76e) |
+| 16:41 | [feat: edicion de entregables](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/464daca7ddb9910a90d6c0e6993818cdf6e0f547) |
+| 16:29 | [feat: creacion de entregables](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e61b98b6f0d9f4cfaca383cd227085aaa95011d6) |
+| 16:13 | [fix: dependencias no reconocidas por render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8dd84d9c1fb0d02660f726f3c0aca9eb41417d70) |
+| 15:52 | [feat: manejo de entregables](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0f6a478b630fe83cbd8aec288cf18d11cb04352b) |
+| 15:39 | [fix: cambio de aviso al completarse edicion de proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5b2cf1eeba24c1e12ccef8e71fccd6b0740bbfc5) |
+| 15:31 | [fix: cambio de metodo PUT a PATCH](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2b5467a849c37098edae8d07aa19447599ba22a3) |
+| 15:20 | [fix: importacion de patch](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/480344ac99f2573826101189757b4f1daefc4b00) |
+| 15:17 | [fix: error de sintaxis](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ffed7d8742cd6f4fa48df8f483e22dd786026809) |
+| 15:13 | [feat: funcionalidad de eliminar investigador de un proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0ea63d0f6347b76bfecb08eff1b6c5c54ba0a028) |
+| 15:06 | [feat: agregar investigador a proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0db28edd50885bd3b59cf9d116acf2c7070f622f) |
+| 14:46 | [feat: editarProyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d84536bf69d73b88a2c41802d8d8c51806f79e31) |
+| 14:34 | [fix: eliminacion de ID de proyectos en UI](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2e5ca4806906ae3336664af3792f749751aec268) |
+| 14:18 | [fix: soft delete y eliminacion de campo de id en page de proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/275f7990d338147b8fd4ade434d49b8bc1eaca97) |
+| 14:05 | [feat: funcionalidad de abrir proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/63c0bae16c77901d0eccd49956946254eec2d2b6) |
+| 13:53 | [fix: dependencias necesarias para testing](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4de7146176a23349bdb2831cdf648810b2df4377) |
+| 13:49 | [fix: funcionalidades faltantes](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e71f1c755cc38ca0352abb4c5d88cce6141852b3) |
+| 13:14 | [feat: funcionalidad de creacion de nuevo proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d88a6862388a9c023aa67224bcbd98fbe2fa972b) |
+| 10:59 | [fix: dependencias no reconociadas por render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c72daf35937708e35c5b64eab277f0b6b1fc41df) |
+| 03:49 | [feat: implementacion de role guard](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f9c77805742ecd052eee6e25874cd2b6ab0de1d1) |
+| 03:48 | [feat(backend): implement RolesGuard and protect project creation](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/27e9b5891a9ee5a37e29fca6cd3eebc526372adc) |
+| 02:56 | [feat: soft delete](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a2f398b1adb7da263936aa46ec8a1ef4198269f0) |
+| 02:52 | [feat(backend): implement soft delete and coordinator approval workflow](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/853e42b391548b10f9577ff5571858f32446e723) |
+| 02:26 | [fix: eliminacion de consumo de API de grants](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f2ec0bf93b88ad785866b1f3ba3baa98637ad785) |
+| 02:19 | [fix: unificacion de guardado de token](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0c097bafcab50e00ff12b719b488326b9797977f) |
 
 > ⚠️ Commits sin entrada en log
 
 ---
 
-## Día 10 · 2026-05-28
+## Día 32 · 2026-07-13
 
-### Commits (11: 5 feat / 6 fix)
+### Commits (2: 1 feat / 1 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 01:48 | [feat: definicion de llamadas a API y servicios externos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/e7eedacaf78b9afa1f77c509d22280d147c5f955) |
-| 01:10 | [fix: especificado de entidades en diagramas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d403ebaebc4ccef858f503faad4a10e10964b97) |
-| 00:49 | [feat: Diagramas de colaboracion de P2](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5d1777e2b00dd7d4c67a751246814b0832a0a8d5) |
-| 00:34 | [feat: Diagramas de colaboracion de casos de usos P1](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a7889430ae413361787c91d648051c76d34265ed) |
-| 00:31 | [feat: P1 Núcleo funcional](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3a4444eb17f42979fe17d44a5aa577cade367835) |
-| 00:27 | [fix: estructura de logs](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/97bec1f8b79ffaa0feb8ec6f75b56d90441cc1e3) |
-| 00:13 | [feat: Diagrama de colaboracion de primer nivel de priorizacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/ce914cbd76b3650bbd1eb852afa091693a54fc7f) |
-| 00:06 | [fix: estructura del proyecto](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/957fb34868c79d67b1ecfe40c20b94bb54503272) |
-| 23:46 | [fix: reglas de logs de gemini](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d8a672258d76081d56e392ae1f472139d7e24169) |
-| 23:24 | [fix: estructura y logs de arreglo de carpetas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6a8eee852c1d5ee8d2a8a99b66c68808836dfba3) |
-| 23:22 | [fix: estructura de requisitado en documentacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c458feca3b6c71b528307aa210fb8cf915ab340c) |
+| 15:49 | [fix: unificacion de codigo con diagramas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/430a03a9fea7710267370ab9e9fe5953ec29eff8) |
+| 02:07 | [feat: unificacion de diseño](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/7a9ef63b213820f086ef9158285c6f686fdf59bf) |
 
 > ⚠️ Commits sin entrada en log
 
 ---
 
-## Día 11 · 2026-05-29
+## Día 33 · 2026-07-14
 
-### Commits (1: 1 feat / 0 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 18:32 | [feat: Actualizacion del README.md](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0121f815c428387fb6bbbefe57eb1fd8d7148e91) |
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 12 · 2026-05-30
-
-### Commits (8: 3 feat / 3 fix)
+### Commits (24: 4 feat / 2 fix)
 
 | Hora | Mensaje |
 |---|---|
-| 01:19 | [prueba despligue](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/63a916a2823cb6bcafaa993917e55443a2c1a975) |
-| 01:16 | [feat: creacion de README en RUP/03-desarrollo](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c61da5f167dfcd8616c3afbaadd8d5241fd6a868) |
-| 01:15 | [update gitignore](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/dfd7b597b020b6b77fd52713143ebbbcc9fdec45) |
-| 01:15 | [fix: configuracion de logs para cloudfare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/759ad393f224535eed9b09bb18dd305af9d08c05) |
-| 00:53 | [fix: acceso de cloudfare a index.html](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/33a7081e9bc4f406b74cdaca0c34b7904b9d31d7) |
-| 00:30 | [fix: codigo fuente hacia carpeta src](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5da0fcece4c535109eae45b179013ba0ac56c730) |
-| 00:30 | [feat: diagramas de secuencia](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a1274df02d01559ef7486564f22ab58a1498f4e) |
-| 15:01 | [feat: Creacion de analisis en carpeta RUP](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/d9a81978a15515256a1e9f52a0c9e2e895826485) |
-
-**Artefactos nuevos:** 🔌 📐 🔍 🧩 ⚙️ 
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 13 · 2026-05-31
-
-### Commits (5: 2 feat / 3 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 14:53 | [fix: errores de implementacion de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/223a233299d30fe5b7564458c9301567089b1622) |
-| 14:43 | [feat: manejo de convocatorias y usuario de tipo coordinador](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6951907cbc739259db011b30eb9a53882ca60238) |
-| 14:25 | [feat: implementacion de diseño base a clouflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f16248054d6167622dbda26be96ea0f8113872f8) |
-| 14:09 | [fix: eliminacion de _redirects](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/79c3b6232e791f1e9319b69548887b01aa8df039) |
-| 02:18 | [fix: configuracion necesaria para pages](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4a8c6ed75531ee23d878667fc7daa2d6da16deeb) |
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 15 · 2026-06-02
-
-### Commits (1: 0 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 19:19 | [fix: nombres de metodos en diseñado](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3464a92fad6e116373070d7bd053fb81af3b5cc3) |
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 16 · 2026-06-03
-
-### Commits (18: 3 feat / 8 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 01:34 | [Prueba 8](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f7105bc15db4fbd106b8cc8df8d44128a397861a) |
-| 01:24 | [Prueba 7](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/19b873aa5f25c7650251c6448765c9a7e87c0cb1) |
-| 01:18 | [Prueba 6](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/61210057a3cda02bdd0b11086ceddb0e799c8e06) |
-| 01:09 | [Prubas 5 de URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1dd165308309043c9a2fcb2d3655cb0b0d8f539a) |
-| 00:58 | [Pruebas de URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/80abcc845d7fd3a8e1acace00397fb9c8666f1d4) |
-| 00:24 | [fix: rutas de api de backend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/dbb5986f60231c0ac6738622cb60a9739ac588b3) |
-| 00:14 | [Prueba 2](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2ac357f41ff7a8006e5a5570156be31db2341edb) |
-| 00:01 | [Prueba para URL de render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4b95d327ea519b90886eaef14f100c4e2b093e0d) |
-| 22:51 | [fix: modulo faltante para render](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8e70f3d150cd9a65cf7c7bfb88566762121933e2) |
-| 22:27 | [fix: validacion de cookies en el frontend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/388850129309b6488f351b41f5d7c730fe50dd97) |
-| 21:59 | [fix: acceder al ultimo deploy de cloudflare](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/b37b525737033c3d0599405861a601392446d455) |
-| 21:31 | [fix: errores de envio de datos al frontend](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/fa6090dbbc8551d0ff48a45d6831823400c69389) |
-| 21:18 | [fix: Desactivacion de sincronizacion entre render y supabase](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5895869886e0bf534c0de93b511aa229e217e0ce) |
-| 21:07 | [fix: cambio de tipo de campo en base de datos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/bac266a03822f897ab0fa94014c5bcb06501b522) |
-| 20:57 | [feat: implementacion de JWT](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5d08a2ea00f971e8a20af3644e9293ae438d253f) |
-| 19:37 | [feat: seguridad XSS e inyecciones SQL](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d3e8ff93101354886bb5b4140021a1c8d12c75e) |
-| 19:23 | [fix: clases abstractas de controladores](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2d8a43a03ac0018ca3586bc90a6a31e9fe17eb4c) |
-| 18:55 | [feat: implementacion de llamadas a API para login](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9708ea766a297781cd43b437033b691fdd592d9a) |
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 18 · 2026-06-05
-
-### Commits (2: 0 feat / 2 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 10:27 | [fix: Re agregar REACT_APP_API_URL a wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/1deb9230005a83d57094cca07d7ef0c89f4a0875) |
-| 10:14 | [fix: Eliminacion de vars en wrangler.jsonc](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2e19a85807c958483be1cfca6a2f72058f9852dd) |
-
-> ⚠️ Commits sin entrada en log
-
----
-
-## Día 22 · 2026-06-09
-
-### Commits (1: 0 feat / 1 fix)
-
-| Hora | Mensaje |
-|---|---|
-| 18:54 | [fix: codificacion de caractares especiales](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/daad15b2faf5e8e253fcabab1c2880c69689badb) |
+| 12:24 | [Update SVG for abrirSolicitudEliminacionPerfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/5f2e20c170d2d31dc54cb30252f8ef34f39bdf14) |
+| 12:23 | [Remove unused participant from UML diagram](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/005547b8a60c74e037708bb956f9c101bccd6c7d) |
+| 12:21 | [Update SVG diagram for abrirSolicitudesEliminacionPerfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/4fd6d6236c3d115ddf5284275c802706ba7c70ac) |
+| 12:21 | [Update SVG diagram for abrirSolicitudEliminacionPerfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2576ab385f800c6b7afaaf5c2763e9758d10a8e7) |
+| 12:20 | [Remove unused participant from UML diagram](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3b250c5fc84eca9828f29d5d8614db1a3bee52db) |
+| 12:19 | [Add actor and update sequence for deletion requests](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9d3cb4e08035f8e623a7e815b708e23ffc7b9a17) |
+| 12:16 | [Change diagram type from DESCRIPTION to SEQUENCE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/c67d7fb96ea7f6b61e65291bb435f9cd63ee4cc4) |
+| 12:15 | [Add actor and update sequence for abrirSolicitudEliminacionPerfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/f64144e8c35f47a966f9167bc2db8abdae20f072) |
+| 12:08 | [Update abrirRecompensas](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8035a38f37271242e4f7188af140acda721368c3) |
+| 12:00 | [Update SVG diagram for abrirRecompensa](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/a7670df0f3e6413f40e67d521b84d1a6f691c0d4) |
+| 11:58 | [Update SVG diagram for abrirPublicaciones](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/7688aae0eb6c3cd418df12f9f097cecbf32f7d45) |
+| 11:55 | [Change diagram type to SEQUENCE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/0a28a88895012787db72b975aad397657a61236c) |
+| 11:52 | [Update SVG diagram for abrirProyectos](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/8a8ad3e34f4c6ff04413b4ae7ba443a0a0a5eb19) |
+| 11:49 | [Change SVG diagram type to SEQUENCE](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6796b420097ed5b1ebc420b4066feb686b296661) |
+| 11:48 | [Add abrirPanelPrincipal.svg diagram](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/9f09675dd21b4e2351e83bd3e893692c4984a975) |
+| 11:46 | [Rename abrirOpcionesPerfil to abrirOpcionesPerfil.svg](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/930488dcac0c9f38341b22002420ddb978af79fd) |
+| 11:46 | [Add SVG diagram for abrirOpcionesPerfil](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/6c91e09cb42c785be5f1075183a78619cad530af) |
+| 11:43 | [fix: creacion de carpetas faltantes](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/aea286eb259f9508e19f9571be4c8841857baa54) |
+| 11:30 | [Change diagram type in abrirOpcionesCargaTrabajo.svg](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2e1c0fdcb286452dc171a1e38df79aff0a9eaecc) |
+| 11:29 | [Update SVG diagram for abrirMisPublicaciones](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/3fcd5cc930308a7bb9f42931a4bed074b0f06072) |
+| 11:27 | [Update SVG diagram for abrirMiPublicacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/2527600219695286e87c3453a90fa4d48b967d27) |
+| 11:25 | [fix: carpeta de imagen de abrirMiPublicacion](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/eb51479a3f9cca0c5a52d248f1a8b0fabe1dbe49) |
+| 11:22 | [Change diagram type in abrirInvestigadores.svg](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/911da75e4020c981645e921fe142793ba29ec1ab) |
+| 11:19 | [Update SVG diagram for abrirInvestigador](https://github.com/manuelmunoz8/25-26-idsw2-sdVC/commit/7700f0393b21ecd3f582f1686d33bd0d5f9f9faf) |
 
 > ⚠️ Commits sin entrada en log
 
