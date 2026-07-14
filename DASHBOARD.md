@@ -1,7 +1,7 @@
 <!-- monitor-format: v84f93cc4 -->
 # Dashboard de seguimiento - 25-26-idsw2-sdVC
 
-> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-06-16 09:40:03 CEST | 27 días totales
+> Inicio de actividad: 2026-05-20 | Dashboard generado: 2026-07-14 14:16:46 CEST | 55 días totales
 
 ## Leyenda
 
@@ -19,7 +19,7 @@
 
 ## Tabla
 
-<sub>Ultimas actualizaciones: [marcosgutierrez6](https://github.com/marcosgutierrez6/25-26-idsw2-sdVC), [eirik-rosete](https://github.com/eirik-rosete/25-26-idsw2-sdVC), [miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC), [alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC), [Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC)</sub>
+<sub>Ultimas actualizaciones: [eirik-rosete](https://github.com/eirik-rosete/25-26-idsw2-sdVC), [miguelrivasmorantes-devu](https://github.com/miguelrivasmorantes-devu/25-26-idsw2-sdVC), [alejandrofondo](https://github.com/alejandrofondo/25-26-idsw2-sdVC), [Andecochea](https://github.com/Andecochea/25-26-idsw2-sdVC), [Camila-Lesly](https://github.com/Camila-Lesly/25-26-idsw2-sdVC)</sub>
 
 | Alumno | Último commit | Días | Gap | 💡 | 💬 | 📄 | 📐 | 🔍 | 🧩 | ⚙️ | 🔌 | SHA |
 |---|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
