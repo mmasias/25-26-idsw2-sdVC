@@ -1,0 +1,40 @@
+@startuml editarPerfil
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Sesion" as Sesion
+participant "UsuarioRepository\n(TypeORM)" as Repository
+
+' Interacción puramente en el Frontend
+Investigador -> View: editarPerfil()
+View --> Investigador: mostrarEdicion(Perfil)
+
+' Flujo de Red (Guardar Cambios)
+Investigador -> View: guardarCambiosPerfil(perfilEditado)
+activate View
+
+View -> Controller: guardarCambios(perfilEditado)
+activate Controller
+
+' Validación de seguridad para saber quién está editando
+Controller -> Sesion: getUsuarioActual()
+activate Sesion
+Sesion --> Controller: usuarioId
+deactivate Sesion
+
+Controller -> Repository: actualizar(usuarioId, perfilEditado)
+activate Repository
+
+Repository --> Controller: PerfilActualizado
+deactivate Repository
+
+Controller --> View: PerfilActualizado
+deactivate Controller
+
+View --> Investigador: mostrarDetalle(PerfilActualizado)
+deactivate View
+@enduml

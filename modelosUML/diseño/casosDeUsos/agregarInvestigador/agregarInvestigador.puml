@@ -1,0 +1,47 @@
+@startuml agregarInvestigador-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "InvestigadorRepository\n(TypeORM)" as RepoInv
+participant "ProyectoRepository\n(TypeORM)" as RepoProy
+
+Coordinador -> View: buscarInvestigadores(criterio)
+activate View
+
+View -> Controller: buscarInvestigadores(criterio)
+activate Controller
+
+Controller -> RepoInv: buscarInvestigadores(criterio)
+activate RepoInv
+
+RepoInv --> Controller: List<Investigador>
+deactivate RepoInv
+
+Controller --> View: List<Investigador>
+deactivate Controller
+
+View --> Coordinador: mostrarLista(List<Investigador>)
+
+
+Coordinador -> View: agregarInvestigador(proyectoId, investigadorId)
+
+View -> Controller: asignarInvestigador(proyectoId, investigadorId)
+activate Controller
+
+Controller -> RepoProy: asignarInvestigador(proyectoId, investigadorId)
+activate RepoProy
+
+RepoProy --> Controller: InvestigadorAsignado
+deactivate RepoProy
+
+Controller --> View: InvestigadorAsignado
+deactivate Controller
+
+View --> Coordinador: mostrarDetalle(InvestigadorAsignado)
+deactivate View
+
+@enduml

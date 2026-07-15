@@ -1,0 +1,28 @@
+@startuml eliminarProyecto
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "ProyectoRepository\n(TypeORM)" as Repo
+
+Coordinador -> View: eliminarProyecto(proyectoId)
+activate View
+
+View -> Controller: eliminarProyecto(proyectoId)
+activate Controller
+
+Controller -> Repo: eliminarProyecto(proyectoId)
+activate Repo
+
+Repo --> Controller: ProyectoEliminado
+deactivate Repo
+
+Controller --> View: ProyectoEliminado
+deactivate Controller
+
+View --> Coordinador: mostrarDetalle(ProyectoEliminado)
+deactivate View
+@enduml

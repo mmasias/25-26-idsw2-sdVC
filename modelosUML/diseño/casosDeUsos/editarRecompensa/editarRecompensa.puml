@@ -1,0 +1,28 @@
+@startuml editarRecompensa
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "RecompensaRepository\n(TypeORM)" as Repo
+
+Coordinador -> View: editarRecompensa(recompensaEditada)
+activate View
+
+View -> Controller: editarRecompensa(recompensaEditada)
+activate Controller
+
+Controller -> Repo: editarRecompensa(recompensaEditada)
+activate Repo
+
+Repo --> Controller: RecompensaEditada
+deactivate Repo
+
+Controller --> View: RecompensaEditada
+deactivate Controller
+
+View --> Coordinador: mostrarDetalle(RecompensaEditada)
+deactivate View
+@enduml

@@ -1,0 +1,35 @@
+@startuml crearInvestigador
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Investigador\n(Entidad)" as Entidad
+participant "InvestigadorRepository\n(TypeORM)" as Repository
+
+Coordinador -> View: crearInvestigador(Investigador)
+activate View
+
+View -> Controller: crearInvestigador(Investigador)
+activate Controller
+
+Controller -> Entidad: <<create>>
+activate Entidad
+
+Entidad --> Controller: nuevoInvestigador
+deactivate Entidad
+
+Controller -> Repository: guardarInvestigador(nuevoInvestigador)
+activate Repository
+
+Repository --> Controller: Investigador
+deactivate Repository
+
+Controller --> View: Investigador
+deactivate Controller
+
+View --> Coordinador: mostrarDetalle(Investigador)
+deactivate View
+@enduml

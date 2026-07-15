@@ -1,0 +1,287 @@
+# Registro de Decisiones - Backend
+## [00:35] (15/06/2026) Borrado Lógico en Módulo de Recompensas
+
+**Decisión:** Implementar borrado lógico (`isDeleted: true`) en lugar de eliminación física en la base de datos para las recompensas.
+**Motivo:** Mantener la consistencia operativa en todo el backend. Los módulos de Proyectos, Publicaciones y Entregables ya utilizan borrado lógico para auditoría y recuperación, por lo que las recompensas deben seguir la misma convención.
+**Impacto:** Los servicios ahora deben filtrar explícitamente los registros donde `isDeleted: false` en todas las operaciones de consulta, asegurando que los usuarios no vean elementos eliminados.
+
+---
+
+## [00:26] (15/06/2026) Validación de Existencia y Seguridad en Edición de Recompensas
+
+**Decisión:** Utilizar el método `update` heredado de `BaseService` para la edición de recompensas, asegurando una validación previa de existencia.
+**Motivo:** Garantizar que no se intenten actualizar registros inexistentes, retornando un `404 Not Found` en lugar de un error de base de datos. La seguridad se centraliza en el controlador para mantener la lógica de negocio desacoplada de los roles.
+**Impacto:** Flujo de actualización robusto, seguro y consistente con el resto de la API.
+
+---
+
+## [00:26] (15/06/2026) Centralización de Atributos de Carga de Trabajo en Entidad User
+
+**Decisión:** Incluir `teachingHours`, `researchHours` y `academicHours` directamente en la entidad `User` en lugar de crear una entidad separada.
+**Motivo:** Estas horas son atributos fundamentales del perfil del investigador. Mantenerlas en la tabla `users` reduce la complejidad de los JOINs y facilita la gestión de perfiles, alineándose con la simplicidad requerida por el análisis RUP.
+**Impacto:** Los servicios que consultan perfiles de usuario tienen acceso inmediato a la carga de trabajo sin peticiones adicionales a la base de datos.
+
+---
+
+## [00:06] (15/06/2026) Implementación de Seguridad y RBAC en Módulo de Recompensas
+
+**Decisión:** Restringir operaciones de escritura en `RewardsController` exclusivamente al rol 'coordinador' mediante `@Roles('coordinador')` y `RolesGuard`.
+**Motivo:** Las recompensas son recursos sensibles que deben ser gestionados únicamente por personal con autoridad (Coordinadores). Los investigadores deben poder ver las recompensas disponibles pero no modificarlas.
+**Impacto:** Garantiza la integridad del catálogo de recompensas y cumple con los requisitos de seguridad del sistema.
+
+---
+
+## [23:41] (14/06/2026) Implementación de Soft Delete en Publicaciones
+
+**Decisión:** Implementar borrado lógico mediante un campo `isDeleted` de tipo booleano en la entidad `Publication` y actualizar la lógica del servicio para manejar este estado.
+**Motivo:** Garantizar la integridad de los datos, permitir auditorías históricas y mantener la consistencia con el comportamiento de eliminación y la convención técnica de otros módulos (Proyectos, Entregables y Usuarios).
+**Impacto:** Las publicaciones eliminadas ya no se borran físicamente de la base de datos, sino que se marcan como `isDeleted: true`. Se requiere filtrado manual en las consultas del servicio para excluir estos registros.
+
+---
+
+## [19:00] (14/06/2026) Fix Dependency Injection en DeliverablesModule
+
+**Decisión:** Importar `AuthModule` dentro de `DeliverablesModule` para resolver problemas de inyección de dependencias con `JwtAuthGuard`.
+**Motivo:** `DeliverablesModule` utilizaba `JwtAuthGuard`, la cual depende de `AuthService`. Al no estar `AuthService` (proporcionado por `AuthModule`) en el alcance de `DeliverablesModule`, NestJS fallaba al instanciar el guard.
+**Impacto:** Permite la correcta instanciación de los guardias de autenticación en las rutas protegidas del módulo de entregables.
+
+---
+
+## [20:30] (14/06/2026) Fix Dependency Injection en PublicationsModule
+
+**Decisión:** Importar `AuthModule` dentro de `PublicationsModule` para resolver problemas de inyección de dependencias con `JwtAuthGuard`.
+**Motivo:** `PublicationsModule` utilizaba `JwtAuthGuard`, la cual depende de `AuthService`. Al no estar `AuthService` (proporcionado por `AuthModule`) en el alcance de `PublicationsModule`, NestJS fallaba al instanciar el guard.
+**Impacto:** Permite la correcta instanciación de los guardias de autenticación en las rutas protegidas del módulo de publicaciones.
+
+---
+
+## [19:45] (14/06/2026) Seguridad y Autoría en Publicaciones
+
+**Decisión:** Validar la propiedad del autor en el servicio para operaciones de edición y eliminación, y asignar el autor automáticamente desde la sesión.
+**Motivo:** Evitar acceso no autorizado a publicaciones ajenas y asegurar que todas las publicaciones tengan un autor legítimo sin depender de la entrada del usuario.
+**Impacto:** Mejora la seguridad de los datos de publicaciones y refuerza la trazabilidad del autor.
+
+---
+
+## [19:30] (14/06/2026) Implementación de Soft Delete en Entregables
+
+**Decisión:** Implementar borrado lógico mediante el campo `isDeleted` en la entidad `Deliverable` y actualizar los métodos de consulta y eliminación en `DeliverablesService` y `DeliverablesController`.
+**Motivo:** Mantener la consistencia con el módulo de Proyectos y permitir la auditoría de entregables eliminados accidentalmente.
+**Impacto:** Operación de eliminación segura y recuperable.
+
+---
+
+## [19:15] (14/06/2026) Auditoría en Edición de Entregables
+
+**Decisión:** Registrar automáticamente la fecha de aprobación (`approvedAt`) al actualizar el estado de un entregable a 'approved'.
+**Motivo:** Mejorar la capacidad de auditoría del ciclo de vida del entregable, permitiendo rastrear cuándo fue aprobado exactamente.
+**Impacto:** Registro transparente del estado del entregable.
+
+---
+
+## [18:30] (14/06/2026) Gestión de Entregables y Integridad Referencial
+
+**Decisión:** Configurar eliminación en cascada (`onDelete: 'CASCADE'`) entre `Project` y `Deliverable` y aplicar validación de fechas a nivel de servicio.
+**Motivo:** Asegurar que los entregables se eliminen automáticamente al borrar un proyecto. Validar fechas en el servicio garantiza que no se puedan crear o actualizar entregables fuera del periodo de vida del proyecto.
+**Impacto:** Mantiene la integridad de los datos y asegura la coherencia lógica de las fechas de entrega.
+
+---
+
+## [17:45] (14/06/2026) Desvinculación de Investigadores de Proyectos
+
+**Decisión:** Implementar la desvinculación mediante el endpoint `DELETE /projects/:id/investigators/:investigatorId` con validación previa de la existencia de la relación.
+**Motivo:** Asegurar que solo se intenten eliminar relaciones existentes. Proporcionar un error claro (`NotFoundException`) si el investigador no está en el proyecto, mejorando la usabilidad y depuración de la API.
+**Impacto:** Operación segura y robusta sobre la tabla intermedia de la relación ManyToMany.
+
+---
+
+## [17:15] (14/06/2026) Vinculación de Investigadores a Proyectos
+...
+
+**Decisión:** Utilizar el endpoint `POST /projects/:id/investigators` recibiendo `investigatorId` en el cuerpo, reutilizando la lógica ManyToMany existente.
+**Motivo:** Cumplir con la ruta especificada y asegurar la consistencia en la gestión de relaciones.
+**Impacto:** Permite gestionar los investigadores vinculados a un proyecto asegurando integridad y evitando duplicados en la relación.
+
+---
+
+## [16:00] (14/06/2026) Edición de Proyectos y Autorización
+...
+
+**Decisión:** Utilizar el método `PATCH` para la actualización de proyectos y validar la propiedad del proyecto (coordinador) en la capa de servicio.
+**Motivo:** `PATCH` es más adecuado para actualizaciones parciales que `PUT`. La validación de permisos en el servicio garantiza que incluso si alguien tiene el rol de 'coordinador', solo pueda editar los proyectos de los que es responsable.
+**Impacto:** Permite modificaciones parciales seguras en la información del proyecto, manteniendo la integridad de la propiedad del mismo.
+
+---
+
+## [15:20] (14/06/2026) Implementación de Soft Delete en Proyectos
+...
+
+**Decisión:** Implementar borrado lógico mediante el campo `isDeleted` en la entidad `Project` y actualizar el servicio y controlador para reflejar este cambio.
+**Motivo:** Garantizar la integridad de los datos, permitir auditorías históricas y facilitar la recuperación de proyectos eliminados por error.
+**Impacto:** Los métodos de consulta ahora excluyen por defecto los registros eliminados lógicamente, y el endpoint de borrado ya no destruye los datos físicamente.
+
+---
+
+## [14:45] (14/06/2026) Relación de Coordinador y Seguridad en Consulta de Proyectos
+...
+
+**Decisión:** Incluir explícitamente la relación `ManyToOne` con `User` (`coordinator`) en `Project` y restringir el acceso a `GET /projects/:id` al rol 'Coordinador'.
+**Motivo:** Se requiere visualizar el responsable del proyecto (coordinador) en la consulta detallada. Además, la información detallada de los proyectos debe estar protegida para acceso exclusivo de coordinadores.
+**Impacto:** Mejora la calidad de la información expuesta por la API y garantiza el cumplimiento de los requisitos de seguridad.
+
+---
+
+## [11:55] (14/06/2026) Exclusión de archivos de test del proceso de build
+
+**Decisión:** Excluir explícitamente los archivos de pruebas (`*.spec.ts`, `*.test.ts`) en la configuración del compilador de TypeScript (`tsconfig.json`).
+...
+
+**Motivo:** Evitar que el proceso de compilación (`tsc` en `npm run build`) intente procesar archivos de test en el entorno de producción. Estos archivos dependen de librerías de test (`@nestjs/testing`, `jest`) que no forman parte de las dependencias de producción, causando fallos en el despliegue de Render.
+**Impacto:** El proceso de build es ahora más limpio y robusto, evitando errores relacionados con dependencias de desarrollo ausentes en producción.
+
+---
+
+## [02:30] (14/06/2026) Creación de Proyectos y Trazabilidad
+
+**Decisión:** Incluir `coordinatorId` obligatorio en la entidad `Project` y automatizar su asignación en el backend a partir de la sesión.
+...
+
+**Motivo:** Asegurar la trazabilidad completa desde la creación del proyecto, vinculando cada proyecto a su coordinador responsable. Automatizar esta asignación evita errores de entrada del usuario y garantiza la integridad de los datos.
+**Impacto:** Los proyectos ahora quedan correctamente vinculados a su coordinador desde el momento de la creación, cumpliendo con los requisitos de negocio de auditoría.
+
+---
+
+## [01:55] (14/06/2026) Fix Dependency Injection in ProjectsModule
+
+**Decisión:** Importar `AuthModule` dentro de `ProjectsModule` para resolver problemas de inyección de dependencias con `JwtAuthGuard`.
+**Motivo:** `ProjectsModule` utilizaba `JwtAuthGuard`, la cual depende de `AuthService`. Al no estar `AuthService` (proporcionado por `AuthModule`) en el alcance de `ProjectsModule`, NestJS fallaba al instanciar el guard.
+**Impacto:** Permite la correcta instanciación de los guardias de autenticación en las rutas protegidas del módulo de proyectos.
+
+---
+
+## [16:35] (14/06/2026) Flujo de Borrado Lógico y Aprobaciones
+
+**Decisión:** Implementar borrado lógico mediante `isDeleted` en lugar de eliminación física y establecer un sistema de aprobación por parte del Coordinador.
+**Motivo:** Requisito de auditoría y gestión de estado. Los perfiles no deben desaparecer instantáneamente para permitir auditorías y evitar errores de borrado accidental, siendo el Coordinador el encargado de autorizar la baja definitiva.
+**Impacto:** Mejora la integridad de los datos y proporciona un control administrativo sobre la baja de investigadores.
+
+---
+
+## [15:05] (13/06/2026) Inclusión de campo 'department' en esquema de Usuario
+
+**Decisión:** Añadir el campo opcional `department` (tipo `string`) en la entidad `User` y actualizar los DTOs correspondientes.
+**Motivo:** Requisito funcional solicitado por el frontend para categorizar investigadores por departamento durante el registro.
+**Impacto:** Permite capturar esta información extra sin romper la compatibilidad con usuarios existentes (al ser opcional).
+
+---
+
+## [14:45] (12/06/2026) Implementación de Endpoint para Creación de Usuarios
+
+**Decisión:** Exponer el método `POST /users` en el `UsersController`, utilizando `CreateUserDto` para la validación de entrada.
+**Motivo:** El sistema requería una vía programática para registrar nuevos investigadores/coordinadores, funcionalidad que no existía anteriormente. Se reutiliza la lógica existente en `UsersService.create`.
+**Impacto:** El frontend ahora puede consumir este endpoint para registrar usuarios. Se mantiene la consistencia arquitectónica delegando la validación y persistencia.
+
+---
+
+## [14:00] (12/06/2026) Alineación de DTOs con Modelos UML de Diseño
+
+**Decisión:** Actualizar los DTOs para incluir campos faltantes (`status`, `visibility` en `CreatePublicationDto`) definidos en los modelos UML de diseño.
+**Motivo:** Garantizar que la API cumpla estrictamente con la especificación técnica definida en los modelos de análisis/diseño para asegurar la integridad del sistema.
+**Impacto:** Los contratos de la API ahora son consistentes con la documentación técnica, mejorando la robustez y trazabilidad del sistema.
+
+---
+
+## [15:30] (10/06/2026) Estandarización de Nomenclatura CRUD y Exports
+
+**Decisión:** Estandarizar todos los métodos de servicio bajo la convención CRUD (findAll, findOne, create, update, remove) y crear archivos `index.ts` en cada módulo para exportar DTOs y Entidades.
+**Motivo:** Mejorar la consistencia del código, facilitar la mantenibilidad y simplificar la integración con el frontend. Al exportar tipos desde archivos `index.ts` centralizados, el frontend tendrá un punto de entrada claro para importar los tipos necesarios.
+**Impacto:** El código es más predecible y el frontend puede importar tipos de forma centralizada sin navegar por múltiples subcarpetas de cada módulo.
+
+---
+
+## [10:30] (31/05/2026) Implementación de la primera rebanada vertical (Proyectos)
+
+
+**Decisión:** Actualizar la contraseña del usuario administrador a `funiber%2Dconnected/2026` e implementar una lógica de conciliación automática en `UsersService`.
+**Motivo:** El frontend ha cambiado la codificación de caracteres especiales (URL encoding), enviando `%2D` en lugar de `-`. Para mantener la compatibilidad sin requerir intervenciones manuales en la base de datos, el backend ahora verifica y actualiza el hash de la contraseña del administrador durante el inicio de la aplicación si detecta una discrepancia.
+**Impacto:** Garantiza que el acceso administrativo sea restaurado inmediatamente tras el próximo despliegue, alineando el backend con el nuevo comportamiento del cliente.
+
+---
+
+**Decisión:** Migrar el almacenamiento del JWT del cuerpo de la respuesta (`access_token`) a una cookie `HttpOnly`.
+**Motivo:** Seguridad mejorada. Al evitar que el token sea accesible por JavaScript (document.cookie), se mitigan los riesgos de ataques XSS. Esto se alinea con la recomendación del equipo de frontend para manejar la persistencia de sesión de forma más robusta.
+**Impacto:** El frontend ya no debe extraer el token de la respuesta JSON, sino confiar en que el navegador manejará la cookie automáticamente en cada petición. Se requiere configurar `FRONTEND_URL` en las variables de entorno de Render para habilitar CORS correctamente.
+
+---
+
+## [21:06] (03/06/2026) Migración de tipos de columna VARCHAR a TEXT
+
+**Decisión:** Cambiar todos los tipos de datos `VARCHAR` por `TEXT` en las entidades de TypeORM.
+**Motivo:** En PostgreSQL, `TEXT` y `VARCHAR` tienen el mismo rendimiento y almacenamiento. `TEXT` es más flexible ante futuros cambios de longitud sin necesidad de migraciones de esquema. Las validaciones de longitud se delegarán a la capa de aplicación (DTOs/Validadores de NestJS).
+**Impacto:** Mejora la mantenibilidad de la base de datos a largo plazo. Al tener `synchronize: true` activo, la base de datos se actualizará automáticamente en el próximo despliegue.
+
+---
+
+## [20:32] (03/06/2026) Implementación de Seguridad en Autenticación (Hashing)
+
+**Decisión:** Adoptar `bcrypt` para el hashing de contraseñas y estandarizar códigos de error en el proceso de login.
+**Motivo:** Seguridad básica de la información. Almacenar contraseñas en texto plano es inaceptable. Se implementa un código de error genérico (`AUTH_INVALID_CREDENTIALS`) para evitar la enumeración de usuarios y cumplir con los requisitos del usuario.
+**Impacto:** Todas las contraseñas nuevas y el usuario por defecto estarán hasheados. El frontend recibirá una estructura de error consistente para manejar fallos de autenticación.
+
+---
+
+## [19:08] (03/06/2026) Abstracción de Código Basada en UML (View-Controller-Repository)
+
+**Decisión:** Definir interfaces y clases abstractas base (`IBaseController`, `IBaseService`, `BaseService`) para los módulos del sistema.
+**Motivo:** Se identificó un patrón repetitivo en los diagramas de secuencia UML (View, Controller, Repository). El uso de abstracciones reduce el código duplicado, evita ambiguedades y asegura que la implementación sea fiel al diseño arquitectónico.
+**Impacto:** Los futuros módulos deberán extender de estas clases base, simplificando la implementación de operaciones CRUD estándar y mejorando la mantenibilidad.
+
+---
+
+## [10:30] (31/05/2026) Implementación de la primera rebanada vertical (Proyectos)
+
+**Decisión:** Implementar el módulo de Proyectos como la primera funcionalidad completa del sistema.
+**Motivo:** Validar el "cableado" completo de la infraestructura (Render + Supabase + Cloudflare Pages) mediante una funcionalidad core que afecte a todas las capas. Proyectos es la entidad central del dominio según el modelo del dominio.
+**Impacto:** Establece el patrón a seguir para el resto de módulos (Deliverables, Publications, etc.).
+
+---
+
+## [19:55] (26/05/2026) Cambio de Instancia de Base de Datos (Supabase)
+
+**Decisión:** Actualizar la URI de conexión para apuntar a la nueva instancia de Supabase.
+**Motivo:** Recreación de la base de datos por parte del usuario, lo que invalidó las credenciales anteriores.
+**Impacto:** Se requiere actualizar la variable `DATABASE_URL` tanto en el entorno local (`.env`) como en el panel de control de Render (Producción).
+
+---
+
+## [20:00] (25/05/2026) Arquitectura Modular y Persistencia con TypeORM
+
+**Decisión:** Adoptar una estructura modular de NestJS y usar TypeORM como ORM principal.
+**Motivo:** TypeORM es el estándar de la industria para NestJS y permite manejar las relaciones complejas del dominio de investigación de forma segura. La estructura modular permite aislar la lógica de Usuarios, Proyectos y Entregables.
+**Impacto:** Facilita el mantenimiento y permite que Render despliegue el código de forma predecible.
+
+---
+
+## [19:15] (25/05/2026) Infraestructura de Producción (Render & Supabase)
+
+**Decisión:** Utilizar Render para el hospedaje del Web Service y Supabase para la base de datos PostgreSQL.
+**Motivo:** Necesidad de un entorno real con persistencia de datos persistente y conectividad externa.
+**Impacto:** El backend requiere configuración de CORS para aceptar peticiones desde GitHub Pages.
+
+---
+
+## [18:45] (25/05/2026) Adopción de Navegación por Enlaces Anclados
+
+**Decisión:** Integrar anclas de sección en las referencias cruzadas de la documentación.
+**Motivo:** Consistencia con el estándar global del proyecto para facilitar la auditoría técnica.
+**Impacto:** Los logs de backend ahora son más accesibles desde el log global.
+
+---
+
+## [16:00] (25/05/2026) Elección del Stack Tecnológico
+
+**Decisión:** Se ha seleccionado Node.js con NestJS y PostgreSQL.
+**Motivo:** Necesidad de una arquitectura modular, tipado fuerte con TypeScript y manejo robusto de relaciones complejas entre Proyectos, Investigadores y Entregables.
+**Impacto:** Permite escalabilidad y una integración fluida con el frontend mediante el uso compartido de interfaces/tipos.
+
+---

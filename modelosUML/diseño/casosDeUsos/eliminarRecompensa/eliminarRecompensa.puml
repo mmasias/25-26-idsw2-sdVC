@@ -1,0 +1,29 @@
+@startuml eliminarRecompensa
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "RecompensaRepository\n(TypeORM)" as Repo
+
+Coordinador -> View : eliminarRecompensa(recompensaId)
+activate View
+
+
+View -> Controller : eliminarRecompensa(recompensaId)
+activate Controller
+
+Controller -> Repo : eliminarRecompensa(recompensaId)
+activate Repo
+
+Repo --> Controller : RecompensaEliminada
+deactivate Repo
+
+Controller --> View : RecompensaEliminada
+deactivate Controller
+
+View --> Coordinador : mostrarDetalle(RecompensaEliminada)
+deactivate View
+@enduml

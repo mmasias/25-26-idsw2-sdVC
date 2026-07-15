@@ -1,0 +1,34 @@
+@startuml responderPublicacion
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Sesion" as Sesion
+participant "Publicacion\n(Entidad)" as Entidad
+participant "PublicacionRepository\n(TypeORM)" as Repo
+
+Investigador -> View : responderPublicacion(publicacionId, respuesta)
+activate View
+
+View -> Controller : responderPublicacion(publicacionId, respuesta)
+activate Controller
+
+Controller -> Sesion : getUsuarioActual()
+activate Sesion
+Sesion --> Controller : usuario
+deactivate Sesion
+
+Controller -> Repo : guardarRespuesta(publicacionId, respuesta)
+activate Repo
+Repo --> Controller : Respuesta
+deactivate Repo
+
+Controller --> View : Respuesta
+deactivate Controller
+
+View --> Investigador : mostrarDetalle(Respuesta)
+deactivate View
+@enduml

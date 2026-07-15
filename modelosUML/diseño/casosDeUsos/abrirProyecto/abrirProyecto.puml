@@ -1,0 +1,28 @@
+@startuml abrirProyecto-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "ProyectoRepository\n(TypeORM)" as Repo
+
+Coordinador -> View : abrirProyecto(proyectoId)
+activate View
+
+View -> Controller : abrirProyecto(proyectoId)
+activate Controller
+
+Controller -> Repo : abrirProyecto(proyectoId)
+activate Repo
+
+Repo --> Controller : Proyecto
+deactivate Repo
+
+Controller --> View : Proyecto
+deactivate Controller
+
+View --> Coordinador : mostrarDetalle(Proyecto)
+deactivate View
+@enduml

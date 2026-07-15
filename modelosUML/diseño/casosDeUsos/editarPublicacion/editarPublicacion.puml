@@ -1,0 +1,33 @@
+@startuml editarPublicacion
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "PublicacionRepository\n(TypeORM)" as Repo
+
+
+Investigador -> View: editarPublicacion()
+View --> Investigador: mostrarEdicion(Publicacion)
+
+
+Investigador -> View: guardarPublicacion(publicacionEditada)
+activate View
+
+View -> Controller: guardarPublicacion(publicacionEditada)
+activate Controller
+
+Controller -> Repo: guardarPublicacion(publicacionEditada)
+activate Repo
+
+Repo --> Controller: PublicacionEditada
+deactivate Repo
+
+Controller --> View: PublicacionEditada
+deactivate Controller
+
+View --> Investigador: mostrarDetalle(PublicacionEditada)
+deactivate View
+@enduml

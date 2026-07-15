@@ -1,0 +1,33 @@
+@startuml abrirPanelPrincipal
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Sesion" as Sesion
+participant "PermisosRepository\n(TypeORM)" as Repo
+
+Investigador -> View : abrirPanelPrincipal()
+activate View
+
+View -> Controller : abrirPanelPrincipal()
+activate Controller
+
+Controller -> Sesion : getUsuarioActual()
+activate Sesion
+Sesion --> Controller : usuario
+deactivate Sesion
+
+Controller -> Repo : obtenerOpciones(usuario)
+activate Repo
+Repo --> Controller : List<Opcion>
+deactivate Repo
+
+Controller --> View : List<Opcion>
+deactivate Controller
+
+View --> Investigador : mostrarPanelPrincipal(List<Opcion>)
+deactivate View
+@enduml

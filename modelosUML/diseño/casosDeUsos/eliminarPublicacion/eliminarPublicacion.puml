@@ -1,0 +1,28 @@
+@startuml eliminarPublicacion
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "PublicacionRepository\n(TypeORM)" as Repo
+
+Investigador -> View : eliminarPublicacion(publicacionId)
+activate View
+
+View -> Controller : eliminarPublicacion(publicacionId)
+activate Controller
+
+Controller -> Repo : eliminar(publicacionId)
+activate Repo
+
+Repo --> Controller : PublicacionEliminada
+deactivate Repo
+
+Controller --> View : PublicacionEliminada
+deactivate Controller
+
+View --> Investigador : mostrarDetalle(PublicacionEliminada)
+deactivate View
+@enduml

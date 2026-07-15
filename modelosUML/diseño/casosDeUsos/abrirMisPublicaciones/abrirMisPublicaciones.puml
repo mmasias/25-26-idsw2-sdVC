@@ -1,0 +1,35 @@
+@startuml abrirMisPublicaciones-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Sesion" as Sesion
+participant "PublicacionRepository\n(TypeORM)" as Repo
+
+Investigador -> View : abrirMisPublicaciones()
+activate View
+
+View -> Controller : abrirMisPublicaciones()
+activate Controller
+
+Controller -> Sesion : getUsuarioActual()
+activate Sesion
+
+Sesion --> Controller : usuario
+deactivate Sesion
+
+Controller -> Repo : obtenerPublicaciones(usuarioId)
+activate Repo
+
+Repo --> Controller : List<Publicacion>
+deactivate Repo
+
+Controller --> View : List<Publicacion>
+deactivate Controller
+
+View --> Investigador : mostrarLista(List<Publicacion>)
+deactivate View
+@enduml

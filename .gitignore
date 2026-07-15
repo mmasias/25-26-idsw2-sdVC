@@ -1,0 +1,20 @@
+# --- General ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Root/Global ---
+*.jar
+*.sh
+node_modules/
+.env
+npm-debug.log*
+build
+dist
+*.map
+*.js
+src/backend/src/dtos/
+*.d.ts

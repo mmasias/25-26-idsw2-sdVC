@@ -1,0 +1,32 @@
+@startuml abrirMiPublicacion-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "PublicacionRepository\n(TypeORM)" as Repository
+
+Investigador -> View: abrirMiPublicacion(publicacionId)
+activate View
+
+View -> Controller: abrirMiPublicacion(publicacionId)
+activate Controller
+
+Controller -> Repository: abrirMiPublicacion(publicacionId)
+activate Repository
+
+Repository --> Controller: Publicacion
+deactivate Repository
+
+Controller --> View: Publicacion
+deactivate Controller
+
+View --> Investigador: mostrarDetalle(Publicacion)
+deactivate View
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml cerrarSesion-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Usuario
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "SesionRepository\n(TypeORM)" as Repo
+participant "Sesion" as Sesion
+
+Usuario -> View: cerrarSesion()
+activate View
+
+View -> Controller: solicitaCerrarSesion(usuarioActual)
+activate Controller
+
+Controller -> Repo: terminarSesion(usuarioActual)
+activate Repo
+
+Repo -> Sesion: cerrarSesion(usuarioActual)
+activate Sesion
+
+Sesion --> Repo: ok
+deactivate Sesion
+
+Repo --> Controller: ok
+deactivate Repo
+
+Controller --> View: ok
+deactivate Controller
+
+View --> Usuario: abrirLogin()
+deactivate View
+
+@enduml

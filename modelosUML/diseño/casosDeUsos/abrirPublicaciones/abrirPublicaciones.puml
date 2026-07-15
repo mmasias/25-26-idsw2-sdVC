@@ -1,0 +1,28 @@
+@startuml listarPublicaciones
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "PublicacionRepository\n(TypeORM)" as Repository
+
+Investigador -> View : abrirPublicaciones()
+activate View
+
+View -> Controller : abrirPublicaciones()
+activate Controller
+
+Controller -> Repository : abrirPublicaciones()
+activate Repository
+
+Repository --> Controller : List<Publicacion>
+deactivate Repository
+
+Controller --> View : List<Publicacion>
+deactivate Controller
+
+View --> Investigador : mostrarLista(List<Publicacion>)
+deactivate View
+@enduml

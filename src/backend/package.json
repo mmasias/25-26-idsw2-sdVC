@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "dist/main.js",
+  "scripts": {
+    "prebuild": "rm -rf src/dtos && mkdir -p src/dtos && cp ../dtos/*.dto.ts ../dtos/index.ts src/dtos/",
+    "build": "tsc",
+    "start": "node dist/main",
+    "start:dev": "tsc-watch --onSuccess \"node dist/main\"",
+    "start:prod": "node dist/main",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^11.1.24",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.24",
+    "@nestjs/jwt": "^11.0.2",
+    "@nestjs/platform-express": "^11.1.24",
+    "@nestjs/typeorm": "^11.0.1",
+    "@types/bcrypt": "^6.0.0",
+    "@types/node": "^25.9.1",
+    "@types/passport-jwt": "^4.0.1",
+    "axios": "^1.16.1",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "cookie-parser": "^1.4.7",
+    "passport-jwt": "^4.0.1",
+    "pg": "^8.21.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typeorm": "^0.3.30",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "tsc-watch": "^7.2.0"
+  }
+}

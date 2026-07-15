@@ -1,0 +1,28 @@
+@startuml abrirSolicitudesEliminacionPerfil-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "SolicitudEliminacionRepository\n(TypeORM)" as Repo
+
+Coordinador -> View: abrirSolicitudesEliminacionPerfil()
+activate View
+
+View -> Controller: abrirSolicitudesEliminacionPerfil()
+activate Controller
+
+Controller -> Repo: abrirSolicitudesEliminacionPerfil()
+activate Repo
+
+Repo --> Controller: List<SolicitudEliminacion>
+deactivate Repo
+
+Controller --> View: List<SolicitudEliminacion>
+deactivate Controller
+
+View --> Coordinador: mostrarLista(List<SolicitudEliminacion>)
+deactivate View
+@enduml

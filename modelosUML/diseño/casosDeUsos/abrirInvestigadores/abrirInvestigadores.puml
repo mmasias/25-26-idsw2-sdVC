@@ -1,0 +1,32 @@
+@startuml abrirInvestigadores-diseño
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam DefaultFontColor black
+skinparam DefaultFontSize 12
+skinparam linetype polyline
+
+actor Usuario
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "InvestigadorRepository\n(TypeORM)" as Repository
+
+Usuario -> View: abrirInvestigadores()
+activate View
+
+View -> Controller: abrirInvestigadores()
+activate Controller
+
+Controller -> Repository: abrirInvestigadores()
+activate Repository
+
+Repository --> Controller: List<Investigador>
+deactivate Repository
+
+Controller --> View: List<Investigador>
+deactivate Controller
+
+View --> Usuario: mostrarLista(List<Investigador>)
+deactivate View
+
+@enduml

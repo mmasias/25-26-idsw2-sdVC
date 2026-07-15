@@ -1,0 +1,42 @@
+@startuml crearPublicacion
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "Sesion" as Sesion
+participant "Publicacion\n(Entidad)" as Entidad
+participant "PublicacionRepository\n(TypeORM)" as Repository
+
+Investigador -> View: crearPublicacion(Publicacion)
+activate View
+
+View -> Controller: crearPublicacion(Publicacion)
+activate Controller
+
+' El controlador recupera el usuario autenticado para asociarlo a la publicación
+Controller -> Sesion: getUsuarioActual()
+activate Sesion
+Sesion --> Controller: usuarioActual
+deactivate Sesion
+
+' Instanciación de la entidad en memoria (Regla de casos "Crear")
+Controller -> Entidad: <<create>>
+activate Entidad
+Entidad --> Controller: nuevaPublicacion
+deactivate Entidad
+
+' Persistencia a través del Repositorio de TypeORM
+Controller -> Repository: guardar(nuevaPublicacion, usuarioId)
+activate Repository
+Repository --> Controller: Publicacion
+deactivate Repository
+
+Controller --> View: Publicacion
+deactivate Controller
+
+View --> Investigador: mostrarDetalle(Publicacion)
+deactivate View
+@enduml

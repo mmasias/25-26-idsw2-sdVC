@@ -1,0 +1,75 @@
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import Layout from './components/Layout';
+import DashboardPage from './pages/DashboardPage';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import DeliverablesPage from './pages/DeliverablesPage';
+import LoginPage from './pages/LoginPage';
+import InvestigatorsPage from './pages/InvestigatorsPage';
+import PublicationsPage from './pages/PublicationsPage';
+import MyPublicationsPage from './pages/MyPublicationsPage';
+import RewardsPage from './pages/RewardsPage';
+import WorkloadPage from './pages/WorkloadPage';
+import ProfilePage from './pages/ProfilePage';
+import ProfileDeletionRequestsPage from './pages/ProfileDeletionRequestsPage';
+import CreatePublicationPage from './pages/CreatePublicationPage';
+import PublicationDetailPage from './pages/PublicationDetailPage';
+import EditRewardPage from './pages/EditRewardPage';
+import EditDeliverablePage from './pages/EditDeliverablePage';
+import CreateDeliverablePage from './pages/CreateDeliverablePage';
+import EditProjectPage from './pages/EditProjectPage';
+import CreateProjectPage from './pages/CreateProjectPage';
+import { AuthProvider, useAuth } from './context/AuthContext';
+
+const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
+};
+
+const RedirectHandler: React.FC = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      navigate('/login');
+    };
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('auth:unauthorized', handleUnauthorized);
+  }, [navigate]);
+  return null;
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <RedirectHandler />
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
+            <Route index element={<DashboardPage />} />
+            <Route path="projects" element={<ProjectsPage />} />
+            <Route path="projects/new" element={<CreateProjectPage />} />
+            <Route path="projects/:id" element={<ProjectDetailPage />} />
+            <Route path="projects/:id/edit" element={<EditProjectPage />} />
+            <Route path="projects/:id/deliverables" element={<DeliverablesPage />} />
+            <Route path="projects/:id/deliverables/new" element={<CreateDeliverablePage />} />
+            <Route path="deliverables/:id/edit" element={<EditDeliverablePage />} />
+            <Route path="investigators" element={<InvestigatorsPage />} />
+            <Route path="publications" element={<PublicationsPage />} />
+            <Route path="publications/:id" element={<PublicationDetailPage />} />
+            <Route path="my-publications" element={<MyPublicationsPage />} />
+            <Route path="my-publications/new" element={<CreatePublicationPage />} />
+            <Route path="rewards" element={<RewardsPage />} />
+            <Route path="rewards/:id/edit" element={<EditRewardPage />} />
+            <Route path="workload" element={<WorkloadPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/deletion-requests" element={<ProfileDeletionRequestsPage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
+
+export default App;

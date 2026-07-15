@@ -1,0 +1,28 @@
+@startuml listarRecompensas
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Investigador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "RecompensaRepository\n(TypeORM)" as Repository
+
+Investigador -> View : abrirRecompensas()
+activate View
+
+View -> Controller : abrirRecompensas()
+activate Controller
+
+Controller -> Repository : abrirRecompensas()
+activate Repository
+
+Repository --> Controller : List<Recompensa>
+deactivate Repository
+
+Controller --> View : List<Recompensa>
+deactivate Controller
+
+View --> Investigador : mostrarLista(List<Recompensa>)
+deactivate View
+@enduml

@@ -1,0 +1,28 @@
+@startuml eliminarInvestigador
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "ProyectoRepository\n(TypeORM)" as Repo
+
+Coordinador -> View: eliminarInvestigador(proyectoId, investigadorId)
+activate View
+
+View -> Controller: eliminarColaborador(proyectoId, investigadorId)
+activate Controller
+
+Controller -> Repo: eliminarColaborador(proyectoId, investigadorId)
+activate Repo
+
+Repo --> Controller: InvestigadorEliminado
+deactivate Repo
+
+Controller --> View: InvestigadorEliminado
+deactivate Controller
+
+View --> Coordinador: mostrarDetalle(InvestigadorEliminado)
+deactivate View
+@enduml

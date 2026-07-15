@@ -1,0 +1,26 @@
+@startuml
+skinparam style strictuml
+actor Investigador
+participant "CloudFlare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "ConvocatoriaRepository\n(TypeORM)" as Repository
+
+Investigador -> View : abrirConvocatoria(convocatoriaId)
+activate View
+
+View -> Controller : obtenerDetalleConvocatoria(convocatoriaId)
+activate Controller
+
+Controller -> Repository : obtenerPorId(convocatoriaId)
+activate Repository
+
+Repository --> Controller : Convocatoria
+deactivate Repository
+
+Controller --> View : Convocatoria
+deactivate Controller
+
+View --> Investigador : mostrarDetalleConvocatoria(Convocatoria)
+deactivate View
+
+@enduml

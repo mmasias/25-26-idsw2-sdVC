@@ -1,0 +1,28 @@
+@startuml editarProyecto
+skinparam style strictuml
+skinparam backgroundColor white
+skinparam shadowing false
+
+actor Coordinador
+participant "Cloudflare\n(React)" as View
+participant "Render\n(NestJS)" as Controller
+participant "ProyectoRepository\n(TypeORM)" as Repo
+
+Coordinador -> View: editarProyecto(proyectoEditado)
+activate View
+
+View -> Controller: editarProyecto(proyectoEditado)
+activate Controller
+
+Controller -> Repo: editarProyecto(proyectoEditado)
+activate Repo
+
+Repo --> Controller: ProyectoActualizado
+deactivate Repo
+
+Controller --> View: ProyectoActualizado
+deactivate Controller
+
+View --> Coordinador: mostrarDetalles(ProyectoActualizado)
+deactivate View
+@enduml
